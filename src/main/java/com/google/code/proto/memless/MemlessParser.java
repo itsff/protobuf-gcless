@@ -1,0 +1,367 @@
+package com.google.code.proto.memless;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class MemlessParser {
+
+	private String packageName;
+	private String outerClassName;
+
+	private List<ProtobufMessage> messages = new ArrayList<ProtobufMessage>();
+	private List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
+
+	private int curIndex = 0;
+	private String[] tokens;
+
+	void process(String file) throws Exception {
+		file = file.replaceAll(";", " ; ");
+		file = file.replaceAll("\\[", " [ ");
+		file = file.replaceAll("\\]", " ] ");
+		file = file.replaceAll(",", " , ");
+		file = file.replaceAll("=", " = ");
+		file = file.replaceAll("\\{", " { ");
+		file = file.replaceAll("\\}", " } ");
+		file = file.replaceAll(" {2,}", " ");
+		tokens = file.split("[ \n\r]");
+
+		String curToken = null;
+		while ((curToken = getNextIgnoreNewLine()) != null) {
+			if (curToken.equals(Tokens.PACKAGE)) {
+				packageName = getNextIgnoreNewLine();
+				if (packageName == null || !Tokens.isIdentifier(packageName)) {
+					throw new Exception("Invalid package definition. Expected package name");
+				}
+				consume(";");
+				continue;
+			}
+			if (curToken.equals(Tokens.MESSAGE)) {
+				String messageName = getNextNotEmpty();
+				if (messageName == null || !Tokens.isIdentifier(messageName)) {
+					throw new Exception("Invalid message name. Invalid symbols found");
+				}
+				ProtobufMessage curMessage = new ProtobufMessage();
+				curMessage.setName(messageName);
+				processInnerMessage(curMessage);
+				messages.add(curMessage);
+				continue;
+			}
+			if( curToken.equals(Tokens.ENUM_TOKEN) ) {
+				String enumName = getNextNotEmpty();
+				if (enumName == null || !Tokens.isIdentifier(enumName)) {
+					throw new Exception("Invalid enum name. Invalid symbols found");
+				}
+				ProtobufEnum curEnum = new ProtobufEnum();
+				curEnum.setName(enumName);
+				processInnerEnum(curEnum);
+				enums.add(curEnum);
+				continue;
+			}
+			if( curToken.equals(Tokens.OPTION) ) {
+				String optionType = getNextIgnoreNewLine();
+				if( optionType != null && optionType.equals(Tokens.JAVA_OUTER_CLASSNAME) ) {
+					consume("=");
+					outerClassName = getNextIgnoreNewLine();
+					outerClassName = outerClassName.replaceAll("\"", "");
+					continue;
+				}
+				System.out.println("Ignoring: " + optionType);
+				continue;
+			}
+			System.out.println("Ignoring: " + curToken);
+		}
+	}
+
+	private void processInnerMessage(ProtobufMessage parentMessage) throws Exception {
+		String curToken = null;
+		int intendtion = 0;
+		while ((curToken = getNextIgnoreNewLine()) != null) {
+			if (curToken.equals(Tokens.BRACE_START)) {
+				intendtion++;
+				continue;
+			}
+			if (curToken.equals(Tokens.BRACE_END)) {
+				intendtion--;
+				if (intendtion == 0) {
+					return;
+				}
+				continue;
+			}
+			if (curToken.equals(Tokens.MESSAGE)) {
+				String messageName = getNextNotEmpty();
+				if (messageName == null || !Tokens.isIdentifier(messageName)) {
+					throw new Exception("Invalid message name. Invalid symbols found");
+				}
+				ProtobufMessage curMessage = new ProtobufMessage();
+				curMessage.setName(messageName);
+				processInnerMessage(curMessage);
+				parentMessage.addNestedMessage(curMessage);
+				continue;
+			}
+			if (curToken.equals(Tokens.OPTIONAL_FIELD)) {
+				String type = getNextNotEmpty();
+				if (type == null || !Tokens.isValidFieldType(type)) {
+					throw new Exception("Invalid field type found: " + type);
+				}
+				if (type.equals("group")) {
+					System.out.println("groups are deprecated and not supported.");
+					consumeTillMessage(Tokens.BRACE_END);
+					continue;
+				}
+				ProtobufField curField = new ProtobufField();
+				curField.setType(type);
+				curField.setNature("optional");
+				String name = getNextNotEmpty();
+				if (name == null || !Tokens.isIdentifier(name)) {
+					throw new Exception("Invalid field name: " + name);
+				}
+				curField.setName(name);
+				consume("=");
+				long tag = consumeLong();
+				if (!Tokens.isValidTag(tag)) {
+					throw new Exception("Invalid tag detected: " + tag);
+				}
+				curField.setTag(tag);
+				parentMessage.addField(curField);
+				String brace = lookAhead(1);
+				if (brace.equals(Tokens.SQUARE_BRACE_START)) {
+					processInnerSquareBraces(curField);
+				}
+				consume(";");
+				continue;
+			}
+			if (curToken.equals(Tokens.REPEATED_FIELD)) {
+				String type = getNextNotEmpty();
+				if (type == null || !Tokens.isValidFieldType(type)) {
+					throw new Exception("Invalid field type found: " + type);
+				}
+				if (type.equals("group")) {
+					System.out.println("groups are deprecated and not supported.");
+					consumeTillMessage(Tokens.BRACE_END);
+					continue;
+				}
+				ProtobufField curField = new ProtobufField();
+				curField.setType(type);
+				curField.setNature("repeated");
+				String name = getNextNotEmpty();
+				if (name == null || !Tokens.isIdentifier(name)) {
+					throw new Exception("Invalid field name: " + name);
+				}
+				curField.setName(name);
+				consume("=");
+				long tag = consumeLong();
+				if (!Tokens.isValidTag(tag)) {
+					throw new Exception("Invalid tag detected: " + tag);
+				}
+				curField.setTag(tag);
+				parentMessage.addField(curField);
+				String brace = lookAhead(1);
+				if (brace.equals(Tokens.SQUARE_BRACE_START)) {
+					processInnerSquareBraces(curField);
+				}
+				consume(";");
+				continue;
+			}
+			if (curToken.equals(Tokens.REQUIRED_FIELD)) {
+				String type = getNextNotEmpty();
+				if (type == null || !Tokens.isValidFieldType(type)) {
+					throw new Exception("Invalid field type found: " + type);
+				}
+				if (type.equals("group")) {
+					System.out.println("groups are deprecated and not supported.");
+					consumeTillMessage(Tokens.BRACE_END);
+					continue;
+				}
+				ProtobufField curField = new ProtobufField();
+				curField.setType(type);
+				curField.setNature("required");
+				String name = getNextNotEmpty();
+				if (name == null || !Tokens.isIdentifier(name)) {
+					throw new Exception("Invalid field name: " + name);
+				}
+				curField.setName(name);
+				consume("=");
+				long tag = consumeLong();
+				if (!Tokens.isValidTag(tag)) {
+					throw new Exception("Invalid tag detected: " + tag);
+				}
+				curField.setTag(tag);
+				parentMessage.addField(curField);
+				String brace = lookAhead(1);
+				if (brace.equals(Tokens.SQUARE_BRACE_START)) {
+					processInnerSquareBraces(curField);
+				}
+				consume(";");
+				continue;
+			}
+			if (curToken.equals(Tokens.ENUM_TOKEN)) {
+				String enumName = getNextNotEmpty();
+				if (enumName == null || !Tokens.isIdentifier(enumName)) {
+					throw new Exception("Invalid enum name. Invalid symbols found");
+				}
+				ProtobufEnum curEnum = new ProtobufEnum();
+				curEnum.setName(enumName);
+				processInnerEnum(curEnum);
+				parentMessage.addEnum(curEnum);
+				continue;
+			}
+			System.out.println("Ignoring: " + curToken);
+		}
+		throw new Exception("Incomplete message: " + parentMessage);
+	}
+
+	private void processInnerEnum(ProtobufEnum pEnum) throws Exception {
+		String curToken = null;
+		int intendtion = 0;
+		while ((curToken = getNextIgnoreNewLine()) != null) {
+			if (curToken.equals(Tokens.BRACE_START)) {
+				intendtion++;
+				continue;
+			}
+			if (curToken.equals(Tokens.BRACE_END)) {
+				intendtion--;
+				if (intendtion == 0) {
+					return;
+				}
+				continue;
+			}
+			if (!Tokens.isIdentifier(curToken)) {
+				throw new Exception("Invalid enum name: " + curToken);
+			}
+			EnumValue curValue = new EnumValue();
+			curValue.setName(curToken);
+			consume("=");
+			long tag = consumeLong();
+			if (!Tokens.isValidTag(tag)) {
+				throw new Exception("Invalid tag detected: " + tag);
+			}
+			curValue.setId(tag);
+			pEnum.addValue(curValue);
+			consume(";");
+		}
+		throw new Exception("incomplete enum: " + pEnum);
+	}
+
+	private void processInnerSquareBraces(ProtobufField fields) throws Exception {
+		String curToken = null;
+		int intendtion = 0;
+		while ((curToken = getNextIgnoreNewLine()) != null) {
+			if (curToken.equals(Tokens.SQUARE_BRACE_START)) {
+				intendtion++;
+				continue;
+			}
+			if (curToken.equals(Tokens.SQUARE_BRACE_END)) {
+				intendtion--;
+				if (intendtion == 0) {
+					return;
+				}
+				continue;
+			}
+			if (curToken.equals(",")) {
+				continue;
+			}
+			if (curToken.equals(Tokens.DEPRECATED)) {
+				consume("=");
+				String value = getNextIgnoreNewLine();
+				if( value != null && value.equals("true") ) {
+					fields.setDeprecated(true);
+				}
+				continue;
+			}
+			if( curToken.equals(Tokens.PACKED) ) {
+				consume("=");
+				String value = getNextIgnoreNewLine();
+				if( value != null && value.equals("true") ) {
+					fields.setPacked(true);
+				}
+				continue;
+			}
+			if( curToken.equals(Tokens.DEFAULT) ) {
+				consume("=");
+				String value = getNextIgnoreNewLine();
+				fields.setDefaults(value);
+				continue;
+			}
+			System.out.println("Ignoring: " + curToken);
+		}
+		throw new Exception("Incomplete square braces");
+	}
+
+	String getPackageName() {
+		return packageName;
+	}
+
+	List<ProtobufMessage> getMessages() {
+		return messages;
+	}
+	
+	List<ProtobufEnum> getEnums() {
+		return enums;
+	}
+	
+	String getOuterClassName() {
+		return outerClassName;
+	}
+
+	private void consume(String expected) throws Exception {
+		String token = getNextNotEmpty();
+		if (token == null || !token.equals(expected)) {
+			throw new Exception("Invalid token found: " + token + " Expected: " + expected);
+		}
+	}
+
+	private long consumeLong() throws Exception {
+		String token = getNextNotEmpty();
+		if (token == null) {
+			throw new Exception("Token not found");
+		}
+		try {
+			return Long.valueOf(token);
+		} catch (Exception e) {
+			throw new Exception("Expected integer. Received: " + token, e);
+		}
+	}
+
+	private String getNextIgnoreNewLine() {
+		String curToken = null;
+		do {
+			curToken = getNext();
+		} while (curToken != null
+				&& (curToken.equals("\n") || curToken.equals("\r") || curToken.equals("\n\r") || curToken.length() == 0));
+		return curToken;
+	}
+
+	private String consumeTillMessage(String str) {
+		String curToken = null;
+		do {
+			curToken = getNextIgnoreNewLine();
+		} while (curToken != null && !curToken.equals(str));
+		return curToken;
+	}
+
+	private String getNext() {
+		if (curIndex == tokens.length) {
+			return null;
+		}
+		String result = tokens[curIndex];
+		curIndex += 1;
+		return result;
+	}
+
+	private String lookAhead(int number) {
+		if (curIndex == tokens.length) {
+			return null;
+		}
+		String result = tokens[number + curIndex - 1];
+		return result;
+	}
+
+	private String getNextNotEmpty() {
+		String curToken = null;
+		do {
+			curToken = getNext();
+		} while (curToken != null && curToken.length() == 0);
+		return curToken;
+	}
+
+}
