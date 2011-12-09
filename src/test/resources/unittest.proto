@@ -11,7 +11,7 @@ package protobuf_memless_unittest;
 // tests for speed unless explicitly testing code size optimization.
 option optimize_for = SPEED;
 
-option java_outer_classname = "UnittestProto";
+//option java_outer_classname = "UnittestProto";
 
 // This proto includes every type of field in both singular and repeated
 // forms.

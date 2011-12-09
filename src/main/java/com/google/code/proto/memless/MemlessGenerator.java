@@ -70,8 +70,7 @@ public class MemlessGenerator {
 			if (parser.getOuterClassName() != null) {
 				w.append(curEnumData);
 			} else {
-				BufferedWriter enumWriter = new BufferedWriter(new FileWriter(new File(output, curEnum.getName()
-						+ ".java")));
+				BufferedWriter enumWriter = new BufferedWriter(new FileWriter(new File(output, curEnum.getName() + ".java")));
 				appendPackage(enumWriter, parser.getPackageName());
 				enumWriter.append(curEnumData);
 				enumWriter.flush();
@@ -80,23 +79,23 @@ public class MemlessGenerator {
 		}
 
 		for (ProtobufMessage curMessage : parser.getMessages()) {
-			String curMessageData = generateMessage(curMessage, parser.getPackageName(), parser.getOuterClassName());
-			String serializerData = generateSerializer(curMessage, parser.getPackageName(), parser.getOuterClassName());
+			String curMessageData = generateMessage(curMessage);
+			String serializerData = generateSerializer(curMessage, parser.getOuterClassName());
 			if (parser.getOuterClassName() != null) {
 				w.append(curMessageData);
 				w.append(serializerData);
 			} else {
-				BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName()
-						+ ".java")));
+				BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + ".java")));
 				appendPackage(messageWriter, parser.getPackageName());
 				messageWriter.append(curMessageData);
 				messageWriter.flush();
 				messageWriter.close();
-				messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Serializer"
-						+ ".java")));
+				messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Serializer" + ".java")));
 				appendPackage(messageWriter, parser.getPackageName());
-				appendImport(w, "java.io.IOException");
-				appendImport(w, "com.google.code.proto.memless.ProtobufOutputStream");
+				if (!curMessage.getFields().isEmpty()) {
+					appendImport(messageWriter, "java.io.IOException");
+					appendImport(messageWriter, "com.google.code.proto.memless.ProtobufOutputStream");
+				}
 				messageWriter.append(serializerData);
 				messageWriter.flush();
 				messageWriter.close();
@@ -111,14 +110,14 @@ public class MemlessGenerator {
 
 	}
 
-	private static String generateSerializer(ProtobufMessage curMessage, String packageName, String outerClassName) {
+	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName) {
 		StringBuilder result = new StringBuilder();
 		if (outerClassName == null) {
 			result.append("public final class ");
 		} else {
 			result.append("public static class ");
 		}
-		String fullMessageType = constructTypeRaw(curMessage.getName(), packageName, outerClassName, curMessage);
+		String fullMessageType = curMessage.getFullyClarifiedName();
 		result.append(curMessage.getName());
 		result.append("Serializer {\npublic static byte[] serialize(");
 		result.append(fullMessageType);
@@ -128,71 +127,40 @@ public class MemlessGenerator {
 		} else {
 			result.append("try {\nassertInitialized(message);\nint totalSize = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
-				if (getJavaType(curField) == null) {
-					result.append("byte[] ");
-					result.append(convertNameToJavabean(curField));
-					result.append("Buffer = null;\n");
-					result.append("if (message.has");
-					result.append(convertNameToJavabean(curField));
-					result.append("()) {\n");
-					result.append(convertNameToJavabean(curField));
-					result.append("Buffer = ");
-					result.append(curField.getType());
-					result.append("Serializer.serialize(message.get");
-					result.append(convertNameToJavabean(curField));
-					result.append("());\ntotalSize += ");
-					result.append(convertNameToJavabean(curField));
-					result.append("Buffer.length;\n");
+				if (curField.isComplexType()) {
+					result.append("byte[] " + curField.getName() + "Buffer = null;\n");//TODO complex type
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					result.append(curField.getName() + "Buffer = " + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "());\n");
+					result.append("totalSize += " + curField.getName() + "Buffer.length;\n");
 					result.append("}\n");
 					continue;
 				}
-				String computeFielValue = "ProtobufOutputStream.compute" + convertNameToJavabean(curField.getType()) + "Size(" + curField.getTag() + ", message.get" + convertNameToJavabean(curField) + "());\n";
+				//TODO create byte[] only once for string
 				if (curField.getNature().equals("repeated")) {
-					result.append("int ");
-					result.append(convertNameToJavabean(curField));
-					result.append("Size = 0;\n");
-					result.append("if (message.has");
-					result.append(convertNameToJavabean(curField));
-					result.append("()) {\n");
-					//TODO create byte[] only once for string
-					if( curField.getType().equals("bytes") ) {
-						result.append(convertNameToJavabean(curField));
-						result.append("Size = ");
-						result.append("message.get");
-						result.append(convertNameToJavabean(curField));
-						result.append("().length;\n");
+					result.append("int " + curField.getBeanName() + "Size = 0;\n");
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					if (curField.getType().equals("bytes")) {
+						result.append(curField.getBeanName() + "Size = message.get" + curField.getBeanName() + "().length;\n");
 					} else {
-						result.append("for(int i=0;i<message.get");
-						result.append(convertNameToJavabean(curField));
-						result.append("().size();i++) {\n");
-						result.append(convertNameToJavabean(curField));
-						result.append("Size += ");
-						result.append("ProtobufOutputStream.compute" + convertNameToJavabean(curField.getType()) + "Size(" + curField.getTag() + ", message.get" + convertNameToJavabean(curField) + "().get(i));\n");
+						result.append("for(int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						result.append(curField.getBeanName() + "Size += ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i));\n");
 						result.append("}\n");
 					}
-					result.append("totalSize += ");
-					result.append(convertNameToJavabean(curField));
-					result.append("Size;\n}\n");
+					result.append("totalSize += " + curField.getBeanName() + "Size;\n}\n");
 				} else {
-					result.append("if (message.has");
-					result.append(convertNameToJavabean(curField));
-					result.append("()) {\n");
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 					result.append("totalSize += ");
-					if( curField.getType().equals("bytes") ) {
-						result.append("message.get");
-						result.append(convertNameToJavabean(curField));
-						result.append("().length;\n");
+					if (curField.getType().equals("bytes")) {
+						result.append("message.get" + curField.getBeanName() + "().length;\n");
 					} else {
-						result.append(computeFielValue);
+						result.append("ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "());\n");
 					}
 					result.append("}\n");
 				}
 			}
 			result.append("final byte[] result = new byte[totalSize];\nint position = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
-				result.append("if (message.has");
-				String javaBeanName = convertNameToJavabean(curField);
-				result.append(javaBeanName);
+				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 //			      if (getPackedInt32List().size() > 0) {
 //			          output.writeRawVarint32(722);
 //			          output.writeRawVarint32(packedInt32MemoizedSerializedSize);
@@ -200,53 +168,44 @@ public class MemlessGenerator {
 //			        for (int element : getPackedInt32List()) {
 //			          output.writeInt32NoTag(element);
 //			        }
-				result.append("()) {\n");
 				if (curField.getNature().equals("repeated")) {
-					result.append("if (message.get");
-					result.append(convertNameToJavabean(curField));
-					if( curField.getType().equals("bytes") ) {
-						result.append("().length != 0) {\nposition = ProtobufOutputStream.writeRawVarint32(");
+					if (curField.getType().equals("bytes")) {
+						result.append("if (message.get" + curField.getBeanName() + "().length != 0) {\n");
 					} else {
-						result.append("().size() > 0 ) {\nposition = ProtobufOutputStream.writeRawVarint32(");
+						result.append("if (message.get" + curField.getBeanName() + "().size() > 0) {\n");
 					}
-					result.append(curField.getTag());
-					result.append(", result, position);\nposition = ProtobufOutputStream.writeRawVarint32(");
-					result.append(convertNameToJavabean(curField));
-					if (getJavaType(curField) == null) {
-						result.append("Buffer.length, result, position);\n}\n");
+					result.append("position = ProtobufOutputStream.writeRawVarint32(" + curField.getTag() + ", result, position);\n");
+					result.append("position = ProtobufOutputStream.writeRawVarint32(");
+					result.append(curField.getName());
+					if (curField.isComplexType()) {
+						result.append("Buffer.length, result, position);\n");
 					} else {
-						result.append("Size, result, position);\n}\n");
+						result.append("Size, result, position);\n");
 					}
-					//TODO for cycle
-					result.append("}\n");
+					if (curField.getType().equals("bytes")) {
+						result.append("position = ProtobufOutputStream.writeRawBytes(" + curField.getName() + "Buffer, result, position);\n");
+					} else {
+						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						if (curField.isComplexType()) {
+							result.append("position = ProtobufOutputStream.writeRawBytes(message.get" + curField.getBeanName() + "().get(i), result, position);\n");
+						} else {
+							result.append("position = ProtobufOutputStream.write" + curField.getStreamBeanType() + "NoTag(message.get" + curField.getBeanName() + "().get(i), result, position);\n");
+						}
+						result.append("}\n");
+					}
+					result.append("}\n}\n");
 				} else {
-					result.append("position = ProtobufOutputStream.write");
-					if (getJavaType(curField) != null) {
-						result.append(convertNameToJavabean(curField.getType()));
-						result.append("(");
-						result.append(curField.getTag());
-						result.append(", message.get");
-						result.append(convertNameToJavabean(curField));
-						result.append("(), result, position);\n}\n");
-					} else {
-						result.append("Bytes");
-						result.append("(");
-						result.append(curField.getTag());
-						result.append(", ");
-						result.append(convertNameToJavabean(curField));
-						result.append("Buffer, result, position);\n}\n");
-					}
+					writeSingleField(curField, result);
 				}
 			}
-			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\nreturn result;\n} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException \" + \"(should never happen).\", e);}\n}\n");
+			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\nreturn result;\n} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
 			result.append("private static void assertInitialized(");
 			result.append(fullMessageType);
 			result.append(" message) {\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				if (curField.getNature().equals("required")) {
-					result.append("if( !message.has");
-					result.append(convertNameToJavabean(curField));
-					result.append("()) {\nthrow new IllegalArgumentException(\"Required field not initialized: ");
+					result.append("if( !message.has" + curField.getBeanName() +"()) {\n");
+					result.append("throw new IllegalArgumentException(\"Required field not initialized: ");
 					result.append(curField.getName());
 					result.append("\");\n}\n");
 				}
@@ -259,7 +218,7 @@ public class MemlessGenerator {
 				newOuterClassname = outerClassName + ".";
 			}
 			newOuterClassname += curMessage.getName();
-			result.append(generateSerializer(innerMessage, packageName, newOuterClassname));
+			result.append(generateSerializer(innerMessage, newOuterClassname));
 		}
 //		for (ProtobufEnum curEnum : curMessage.getEnums()) {
 //			result.append(generateSerializer(curEnum));
@@ -268,32 +227,50 @@ public class MemlessGenerator {
 		return result.toString();
 	}
 
-	private static String generateMessage(ProtobufMessage curMessage, String packageName, String outerClassName) {
+	private static void writeSingleField(ProtobufField curField, StringBuilder result) {
+		result.append("position = ProtobufOutputStream.write");
+		if (!curField.isComplexType()) {
+			result.append(curField.getStreamBeanType());
+			result.append("(");
+			result.append(curField.getTag());
+			result.append(", message.get");
+			result.append(curField.getBeanName());
+			result.append("(), result, position);\n}\n");
+		} else {
+			result.append("Bytes");
+			result.append("(");
+			result.append(curField.getTag());
+			result.append(", ");
+			result.append(curField.getName());
+			result.append("Buffer, result, position);\n}\n");
+		}
+	}
+
+	private static String generateMessage(ProtobufMessage curMessage) {
 		StringBuilder result = new StringBuilder();
 		result.append("public interface ");
 		result.append(curMessage.getName());
 		result.append(" {\n");
 		for (ProtobufField curField : curMessage.getFields()) {
-			String javaBeanName = convertNameToJavabean(curField);
 			if (curField.isDeprecated()) {
 				result.append("@Deprecated\n");
 			}
 			result.append("boolean has");
-			result.append(javaBeanName);
+			result.append(curField.getBeanName());
 			result.append("();\n");
-			String javaType = constructType(curField, packageName, outerClassName, curMessage);
+			String javaType = constructType(curField, curMessage);
 			if (curField.isDeprecated()) {
 				result.append("@Deprecated\n");
 			}
 			result.append(javaType);
 			result.append(" get");
-			result.append(javaBeanName);
+			result.append(curField.getBeanName());
 			result.append("();\n");
 			if (curField.isDeprecated()) {
 				result.append("@Deprecated\n");
 			}
 			result.append("void set");
-			result.append(javaBeanName);
+			result.append(curField.getBeanName());
 			result.append("(");
 			result.append(javaType);
 			result.append(" ");
@@ -301,12 +278,7 @@ public class MemlessGenerator {
 			result.append(");\n");
 		}
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			String newOuterClassname = "";
-			if (outerClassName != null) {
-				newOuterClassname = outerClassName + ".";
-			}
-			newOuterClassname += curMessage.getName();
-			result.append(generateMessage(innerMessage, packageName, newOuterClassname));
+			result.append(generateMessage(innerMessage));
 		}
 		for (ProtobufEnum curEnum : curMessage.getEnums()) {
 			result.append(generateEnum(curEnum));
@@ -362,24 +334,6 @@ public class MemlessGenerator {
 		return result.toString();
 	}
 
-	private static String getFullyClarifiedName(ProtobufMessage parentMessage, String nestedType, String outerClassName) {
-		for (ProtobufMessage curMessage : parentMessage.getNestedMessages()) {
-			if (curMessage.getName().equals(nestedType)) {
-				return outerClassName + "." + nestedType;
-			}
-			String sub = getFullyClarifiedName(curMessage, nestedType, outerClassName + "." + curMessage.getName());
-			if (sub != null) {
-				return sub;
-			}
-		}
-		for (ProtobufEnum curEnum : parentMessage.getEnums()) {
-			if (curEnum.getName().equals(nestedType)) {
-				return outerClassName + "." + nestedType;
-			}
-		}
-		return null;
-	}
-
 	private static void appendPackage(BufferedWriter w, String packageName) throws Exception {
 		if (packageName != null) {
 			w.append("package ");
@@ -394,23 +348,11 @@ public class MemlessGenerator {
 		w.append(";\n");
 	}
 
-	private static String constructType(ProtobufField curField, String packageName, String outerClassName,
-			ProtobufMessage curMessage) {
+	private static String constructType(ProtobufField curField, ProtobufMessage curMessage) {
 		StringBuilder result = new StringBuilder();
-		String javaType = getJavaType(curField);
+		String javaType = curField.getFullyClarifiedJavaType();
 		if (javaType == null) {
-			javaType = "";
-			if (packageName != null) {
-				javaType = packageName + ".";
-			}
-			if (outerClassName != null) {
-				javaType += outerClassName + ".";
-			}
-			javaType += curMessage.getName();
-			String depth = getFullyClarifiedName(curMessage, curField.getType(), javaType);
-			if (depth != null) {
-				javaType = depth;
-			}
+//			java
 			//FIXME import message name is consumed. *_*
 		}
 		if (curField.getNature().equals("repeated") && !curField.getType().equals("bytes")) {
@@ -423,85 +365,36 @@ public class MemlessGenerator {
 		return result.toString();
 	}
 
-	private static String constructTypeRaw(String messageType, String packageName, String outerClassName,
-			ProtobufMessage curMessage) {
-		String javaType = "";
-		if (packageName != null) {
-			javaType = packageName + ".";
-		}
-		if (outerClassName != null) {
-			javaType += outerClassName + ".";
-		}
-		javaType += curMessage.getName();
-		String depth = getFullyClarifiedName(curMessage, messageType, javaType);
-		if (depth != null) {
-			javaType = depth;
-		}
-		return javaType;
-		//FIXME import message name is consumed. *_*
-	}
+//	private static String constructTypeRaw(String messageType, String packageName, String outerClassName,
+//			ProtobufMessage curMessage) {
+//		String javaType = "";
+//		if (packageName != null) {
+//			javaType = packageName + ".";
+//		}
+//		if (outerClassName != null) {
+//			javaType += outerClassName + ".";
+//		}
+//		javaType += curMessage.getName();
+//		String depth = getFullyClarifiedName(curMessage, messageType, javaType);
+//		if (depth != null) {
+//			javaType = depth;
+//		}
+//		return javaType;
+//		//FIXME import message name is consumed. *_*
+//	}
 
-	private static String getJavaType(ProtobufField curField) {
-		if (curField.getType().equals("int32") || curField.getType().equals("uint32")
-				|| curField.getType().equals("sint32") || curField.getType().equals("fixed32")
-				|| curField.getType().equals("sfixed32")) {
-			if (curField.getNature().equals("repeated")) {
-				return "Integer";
-			} else {
-				return "int";
-			}
-		}
-		if (curField.getType().equals("int64") || curField.getType().equals("uint64")
-				|| curField.getType().equals("sint64") || curField.getType().equals("fixed64")
-				|| curField.getType().equals("sfixed64")) {
-			if (curField.getNature().equals("repeated")) {
-				return "Long";
-			} else {
-				return "long";
-			}
-		}
-		if (curField.getType().equals("double")) {
-			if (curField.getNature().equals("repeated")) {
-				return "Double";
-			} else {
-				return "double";
-			}
-		}
-		if (curField.getType().equals("bool")) {
-			if (curField.getNature().equals("repeated")) {
-				return "Boolean";
-			} else {
-				return "boolean";
-			}
-		}
-		if (curField.getType().equals("string")) {
-			return "String";
-		}
-		if (curField.getType().equals("bytes")) {
-			return "byte[]";
-		}
-		if (curField.getType().equals("float")) {
-			if (curField.getNature().equals("repeated")) {
-				return "Float";
-			} else {
-				return "float";
-			}
-		}
-		return null;
-	}
-
-	private static String convertNameToJavabean(ProtobufField curField) {
-		return convertNameToJavabean(curField.getName());
-	}
-
-	private static String convertNameToJavabean(String str) {
-		StringBuilder result = new StringBuilder();
-		result.append(Character.toUpperCase(str.charAt(0)));
-		if (str.length() > 1) {
-			result.append(str.substring(1));
-		}
-		return result.toString();
-	}
+//	private static String convertNameToJavabean(ProtobufField curField) {
+//		return convertNameToJavabean(curField.getName());
+//	}
+//
+//	private static String convertNameToJavabean(String str) {
+//		StringBuilder result = new StringBuilder();
+//		result.append(Character.toUpperCase(str.charAt(0)));
+//		if (str.length() > 1) {
+//			result.append(str.substring(1));
+//		}
+//		return result.toString();
+//	}
 
 //    FOREIGN_FOO(0, 4),
 //    FOREIGN_BAR(1, 5),

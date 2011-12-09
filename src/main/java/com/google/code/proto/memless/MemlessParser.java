@@ -42,24 +42,26 @@ class MemlessParser {
 				}
 				ProtobufMessage curMessage = new ProtobufMessage();
 				curMessage.setName(messageName);
+				curMessage.setFullyClarifiedName(messageName);
 				processInnerMessage(curMessage);
 				messages.add(curMessage);
 				continue;
 			}
-			if( curToken.equals(Tokens.ENUM_TOKEN) ) {
+			if (curToken.equals(Tokens.ENUM_TOKEN)) {
 				String enumName = getNextNotEmpty();
 				if (enumName == null || !Tokens.isIdentifier(enumName)) {
 					throw new Exception("Invalid enum name. Invalid symbols found");
 				}
 				ProtobufEnum curEnum = new ProtobufEnum();
 				curEnum.setName(enumName);
+				curEnum.setFullyClarifiedName(enumName);
 				processInnerEnum(curEnum);
 				enums.add(curEnum);
 				continue;
 			}
-			if( curToken.equals(Tokens.OPTION) ) {
+			if (curToken.equals(Tokens.OPTION)) {
 				String optionType = getNextIgnoreNewLine();
-				if( optionType != null && optionType.equals(Tokens.JAVA_OUTER_CLASSNAME) ) {
+				if (optionType != null && optionType.equals(Tokens.JAVA_OUTER_CLASSNAME)) {
 					consume("=");
 					outerClassName = getNextIgnoreNewLine();
 					outerClassName = outerClassName.replaceAll("\"", "");
@@ -69,6 +71,36 @@ class MemlessParser {
 				continue;
 			}
 			System.out.println("Ignoring: " + curToken);
+		}
+
+		String strToAppend = null;
+		if (packageName != null) {
+			strToAppend = packageName;
+			if (outerClassName != null) {
+				strToAppend += "." + outerClassName;
+			}
+		}
+
+		if (strToAppend != null) {
+			for (ProtobufMessage curMessage : messages) {
+				appendPackageName(curMessage, strToAppend);
+			}
+			for (ProtobufEnum curEnum : enums) {
+				curEnum.setFullyClarifiedName(strToAppend + "." + curEnum.getFullyClarifiedName());
+			}
+		}
+		
+		enrichFieldsInMessage(messages);
+	}
+
+	private void appendPackageName(ProtobufMessage message, String name) {
+		message.setFullyClarifiedName(name + "." + message.getFullyClarifiedName());
+		for (ProtobufMessage curMessage : message.getNestedMessages()) {
+			appendPackageName(curMessage, name);
+		}
+
+		for (ProtobufEnum curEnum : message.getEnums()) {
+			curEnum.setFullyClarifiedName(name + "." + curEnum.getFullyClarifiedName());
 		}
 	}
 
@@ -94,6 +126,7 @@ class MemlessParser {
 				}
 				ProtobufMessage curMessage = new ProtobufMessage();
 				curMessage.setName(messageName);
+				curMessage.setFullyClarifiedName(parentMessage.getFullyClarifiedName() + "." + messageName);
 				processInnerMessage(curMessage);
 				parentMessage.addNestedMessage(curMessage);
 				continue;
@@ -201,6 +234,7 @@ class MemlessParser {
 				}
 				ProtobufEnum curEnum = new ProtobufEnum();
 				curEnum.setName(enumName);
+				curEnum.setFullyClarifiedName(parentMessage.getFullyClarifiedName() + "." + enumName);
 				processInnerEnum(curEnum);
 				parentMessage.addEnum(curEnum);
 				continue;
@@ -263,20 +297,20 @@ class MemlessParser {
 			if (curToken.equals(Tokens.DEPRECATED)) {
 				consume("=");
 				String value = getNextIgnoreNewLine();
-				if( value != null && value.equals("true") ) {
+				if (value != null && value.equals("true")) {
 					fields.setDeprecated(true);
 				}
 				continue;
 			}
-			if( curToken.equals(Tokens.PACKED) ) {
+			if (curToken.equals(Tokens.PACKED)) {
 				consume("=");
 				String value = getNextIgnoreNewLine();
-				if( value != null && value.equals("true") ) {
+				if (value != null && value.equals("true")) {
 					fields.setPacked(true);
 				}
 				continue;
 			}
-			if( curToken.equals(Tokens.DEFAULT) ) {
+			if (curToken.equals(Tokens.DEFAULT)) {
 				consume("=");
 				String value = getNextIgnoreNewLine();
 				fields.setDefaults(value);
@@ -294,11 +328,11 @@ class MemlessParser {
 	List<ProtobufMessage> getMessages() {
 		return messages;
 	}
-	
+
 	List<ProtobufEnum> getEnums() {
 		return enums;
 	}
-	
+
 	String getOuterClassName() {
 		return outerClassName;
 	}
@@ -362,6 +396,135 @@ class MemlessParser {
 			curToken = getNext();
 		} while (curToken != null && curToken.length() == 0);
 		return curToken;
+	}
+
+	private void enrichFieldsInMessage(List<ProtobufMessage> messages) {
+		for (ProtobufMessage curMessage : messages) {
+			if (curMessage.getFields() != null) {
+				for (ProtobufField curField : curMessage.getFields()) {
+					enrichField(curField);
+				}
+			}
+			if (curMessage.getNestedMessages() != null) {
+				enrichFieldsInMessage(curMessage.getNestedMessages());
+			}
+		}
+	}
+
+	private void enrichField(ProtobufField curField) {
+		curField.setBeanName(convertNameToJavabean(curField.getName()));
+		curField.setStreamBeanType(convertNameToJavabean(curField.getType()));
+
+		String javaType = getJavaType(curField);
+		if (javaType != null) {
+			curField.setFullyClarifiedJavaType(javaType);
+			return;
+		}
+		
+		curField.setComplexType(true);
+
+		String complexFieldType = getFullyClarifiedNameBySimpleName(messages, curField.getType());
+		if (complexFieldType != null) {
+			curField.setFullyClarifiedJavaType(complexFieldType);
+			return;
+		}
+
+		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, curField.getType());
+		if (complexFieldType != null) {
+			curField.setFullyClarifiedJavaType(complexFieldType);
+			return;
+		}
+
+		curField.setFullyClarifiedJavaType(curField.getType());
+		System.out.println("unknown field type: " + curField.getType());
+	}
+
+	private static String getFullyClarifiedNameBySimpleName(List<ProtobufMessage> messages, String name) {
+		for (ProtobufMessage curMessage : messages) {
+			if (curMessage.getName().equals(name) || curMessage.getFullyClarifiedName().equals(name)) {
+				return curMessage.getFullyClarifiedName();
+			}
+			if (curMessage.getNestedMessages() != null) {
+				String result = getFullyClarifiedNameBySimpleName(curMessage.getNestedMessages(), name);
+				if (result != null) {
+					return result;
+				}
+			}
+			if (curMessage.getEnums() != null) {
+				String result = getFullyClarifiedNameBySimpleNameFromEnum(curMessage.getEnums(), name);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		return null;
+	}
+
+	private static String getFullyClarifiedNameBySimpleNameFromEnum(List<ProtobufEnum> messages, String name) {
+		for (ProtobufEnum curEnum : messages) {
+			if (curEnum.getName().equals(name) || curEnum.getFullyClarifiedName().equals(name)) {
+				return curEnum.getFullyClarifiedName();
+			}
+		}
+		return null;
+	}
+
+	private static String convertNameToJavabean(String str) {
+		StringBuilder result = new StringBuilder();
+		result.append(Character.toUpperCase(str.charAt(0)));
+		if (str.length() > 1) {
+			result.append(str.substring(1));
+		}
+		return result.toString();
+	}
+
+	private static String getJavaType(ProtobufField curField) {
+		if (curField.getType().equals("int32") || curField.getType().equals("uint32")
+				|| curField.getType().equals("sint32") || curField.getType().equals("fixed32")
+				|| curField.getType().equals("sfixed32")) {
+			if (curField.getNature().equals("repeated")) {
+				return "Integer";
+			} else {
+				return "int";
+			}
+		}
+		if (curField.getType().equals("int64") || curField.getType().equals("uint64")
+				|| curField.getType().equals("sint64") || curField.getType().equals("fixed64")
+				|| curField.getType().equals("sfixed64")) {
+			if (curField.getNature().equals("repeated")) {
+				return "Long";
+			} else {
+				return "long";
+			}
+		}
+		if (curField.getType().equals("double")) {
+			if (curField.getNature().equals("repeated")) {
+				return "Double";
+			} else {
+				return "double";
+			}
+		}
+		if (curField.getType().equals("bool")) {
+			if (curField.getNature().equals("repeated")) {
+				return "Boolean";
+			} else {
+				return "boolean";
+			}
+		}
+		if (curField.getType().equals("string")) {
+			return "String";
+		}
+		if (curField.getType().equals("bytes")) {
+			return "byte[]";
+		}
+		if (curField.getType().equals("float")) {
+			if (curField.getNature().equals("repeated")) {
+				return "Float";
+			} else {
+				return "float";
+			}
+		}
+		return null;
 	}
 
 }

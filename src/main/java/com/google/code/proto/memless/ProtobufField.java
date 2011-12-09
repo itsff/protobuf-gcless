@@ -3,7 +3,11 @@ package com.google.code.proto.memless;
 class ProtobufField {
 
 	private String name;
+	private String beanName;
 	private String type;
+	private String streamBeanType;
+	private String fullyClarifiedJavaType;
+	private boolean complexType = false;
 	private String nature;
 	private long tag;
 	private String defaults;
@@ -11,6 +15,39 @@ class ProtobufField {
 	private boolean isPacked;
 
 	//TODO comments, deprecated &etc
+
+	public String getStreamBeanType() {
+		return streamBeanType;
+	}
+
+	public void setStreamBeanType(String streamBeanType) {
+		this.streamBeanType = streamBeanType;
+	}
+
+	public boolean isComplexType() {
+		return complexType;
+	}
+
+	public void setComplexType(boolean complexType) {
+		this.complexType = complexType;
+	}
+
+	public String getBeanName() {
+		return beanName;
+	}
+
+	public void setBeanName(String beanName) {
+		this.beanName = beanName;
+	}
+
+	public void setFullyClarifiedJavaType(String fullyClarifiedJavaType) {
+		this.fullyClarifiedJavaType = fullyClarifiedJavaType;
+	}
+
+	public String getFullyClarifiedJavaType() {
+		return fullyClarifiedJavaType;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -58,11 +95,11 @@ class ProtobufField {
 	public void setNature(String nature) {
 		this.nature = nature;
 	}
-	
+
 	public String getDefaults() {
 		return defaults;
 	}
-	
+
 	public void setDefaults(String defaults) {
 		this.defaults = defaults;
 	}

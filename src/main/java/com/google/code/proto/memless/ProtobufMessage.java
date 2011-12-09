@@ -6,10 +6,19 @@ import java.util.List;
 final class ProtobufMessage {
 
 	private String name;
+	private String fullyClarifiedName;
 
 	private final List<ProtobufMessage> nestedMessages = new ArrayList<ProtobufMessage>();
 	private final List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
 	private final List<ProtobufField> fields = new ArrayList<ProtobufField>();
+
+	public String getFullyClarifiedName() {
+		return fullyClarifiedName;
+	}
+
+	public void setFullyClarifiedName(String fullyClarifiedName) {
+		this.fullyClarifiedName = fullyClarifiedName;
+	}
 
 	public String getName() {
 		return name;
@@ -30,7 +39,7 @@ final class ProtobufMessage {
 	public void addNestedMessage(ProtobufMessage message) {
 		nestedMessages.add(message);
 	}
-	
+
 	public void addEnum(ProtobufEnum curEnum) {
 		enums.add(curEnum);
 	}
@@ -38,11 +47,11 @@ final class ProtobufMessage {
 	public void addField(ProtobufField field) {
 		fields.add(field);
 	}
-	
+
 	public List<ProtobufField> getFields() {
 		return fields;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
