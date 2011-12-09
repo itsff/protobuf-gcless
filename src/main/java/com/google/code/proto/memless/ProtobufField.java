@@ -13,9 +13,18 @@ class ProtobufField {
 	private String defaults;
 	private boolean isDeprecated;
 	private boolean isPacked;
+	private boolean isEnumType;
 
 	//TODO comments, deprecated &etc
 
+	public boolean isEnumType() {
+		return isEnumType;
+	}
+	
+	public void setEnumType(boolean isEnumType) {
+		this.isEnumType = isEnumType;
+	}
+	
 	public String getStreamBeanType() {
 		return streamBeanType;
 	}

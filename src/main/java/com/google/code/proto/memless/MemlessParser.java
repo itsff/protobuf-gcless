@@ -432,6 +432,7 @@ class MemlessParser {
 		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, curField.getType());
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
+			curField.setEnumType(true);
 			return;
 		}
 

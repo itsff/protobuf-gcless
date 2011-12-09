@@ -1,4 +1,4 @@
-package protobuf_unittest_import;
+package protobuf_memless_import;
 
 option optimize_for = SPEED;
 
