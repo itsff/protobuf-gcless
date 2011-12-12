@@ -278,7 +278,7 @@ public class MemlessGenerator {
 		}
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
 			result.append(generateMessage(innerMessage, outerClassName));
-			String serializerData = generateSerializer(curMessage, outerClassName);
+			String serializerData = generateSerializer(innerMessage, outerClassName);
 			result.append(serializerData);
 		}
 		for (ProtobufEnum curEnum : curMessage.getEnums()) {
