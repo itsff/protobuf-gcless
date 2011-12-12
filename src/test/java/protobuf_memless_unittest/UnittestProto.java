@@ -735,23 +735,29 @@ public final class UnittestProto {
 				}
 				byte[] repeated_nested_messageBuffer = null;
 				if (message.hasRepeated_nested_message()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_nested_message().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getRepeated_nested_message().get(i)));
 					}
+					repeated_nested_messageBuffer = baos.toByteArray();
 					totalSize += repeated_nested_messageBuffer.length;
 				}
 				byte[] repeated_foreign_messageBuffer = null;
 				if (message.hasRepeated_foreign_message()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_foreign_message().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeated_foreign_message().get(i)));
 					}
+					repeated_foreign_messageBuffer = baos.toByteArray();
 					totalSize += repeated_foreign_messageBuffer.length;
 				}
 				byte[] repeated_import_messageBuffer = null;
 				if (message.hasRepeated_import_message()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_import_message().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_import.ImportMessageSerializer.serialize(message.getRepeated_import_message().get(i)));
 					}
+					repeated_import_messageBuffer = baos.toByteArray();
 					totalSize += repeated_import_messageBuffer.length;
 				}
 				int repeated_nested_enumSize = 0;
@@ -1531,9 +1537,11 @@ public final class UnittestProto {
 				}
 				byte[] multiBuffer = null;
 				if (message.hasMulti()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getMulti().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getMulti().get(i)));
 					}
+					multiBuffer = baos.toByteArray();
 					totalSize += multiBuffer.length;
 				}
 				if (message.hasDummy4()) {
@@ -1789,9 +1797,11 @@ public final class UnittestProto {
 				}
 				byte[] repeated_messageBuffer = null;
 				if (message.hasRepeated_message()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_message().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getRepeated_message().get(i)));
 					}
+					repeated_messageBuffer = baos.toByteArray();
 					totalSize += repeated_messageBuffer.length;
 				}
 				if (message.hasDummy()) {
@@ -2121,9 +2131,11 @@ public final class UnittestProto {
 					}
 					byte[] nestedmessage_repeated_foreignmessageBuffer = null;
 					if (message.hasNestedmessage_repeated_foreignmessage()) {
+						java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 						for (int i = 0; i < message.getNestedmessage_repeated_foreignmessage().size(); i++) {
-//TODO
+							baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getNestedmessage_repeated_foreignmessage().get(i)));
 						}
+						nestedmessage_repeated_foreignmessageBuffer = baos.toByteArray();
 						totalSize += nestedmessage_repeated_foreignmessageBuffer.length;
 					}
 					final byte[] result = new byte[totalSize];
@@ -2304,9 +2316,11 @@ public final class UnittestProto {
 				}
 				byte[] RepeatedMessageFieldBuffer = null;
 				if (message.hasRepeatedMessageField()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeatedMessageField().size(); i++) {
-//TODO
+						baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeatedMessageField().get(i)));
 					}
+					RepeatedMessageFieldBuffer = baos.toByteArray();
 					totalSize += RepeatedMessageFieldBuffer.length;
 				}
 				int RepeatedStringPieceFieldSize = 0;

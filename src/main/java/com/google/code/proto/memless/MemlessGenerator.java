@@ -126,9 +126,11 @@ public class MemlessGenerator {
 					result.append("byte[] " + curField.getName() + "Buffer = null;\n");
 					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 					if (curField.getNature().equals("repeated")) {
+						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
-						result.append("//TODO\n"); //TODO
+						result.append("baos.write(" + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "().get(i)));\n");
 						result.append("}\n");
+						result.append(curField.getName() + "Buffer = baos.toByteArray();\n");
 					} else {
 						result.append(curField.getName() + "Buffer = " + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "());\n");
 					}
