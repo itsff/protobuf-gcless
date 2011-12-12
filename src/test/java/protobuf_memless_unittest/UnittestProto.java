@@ -498,6 +498,648 @@ public final class UnittestProto {
 			void setBb(int bb);
 		}
 
+		public static class TestAllTypesSerializer {
+			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestAllTypes message) {
+				try {
+					assertInitialized(message);
+					int totalSize = 0;
+					if (message.hasOptional_int32()) {
+						totalSize += ProtobufOutputStream.computeInt32Size(1, message.getOptional_int32());
+					}
+					if (message.hasOptional_int64()) {
+						totalSize += ProtobufOutputStream.computeInt64Size(2, message.getOptional_int64());
+					}
+					if (message.hasOptional_uint32()) {
+						totalSize += ProtobufOutputStream.computeUint32Size(3, message.getOptional_uint32());
+					}
+					if (message.hasOptional_uint64()) {
+						totalSize += ProtobufOutputStream.computeUint64Size(4, message.getOptional_uint64());
+					}
+					if (message.hasOptional_sint32()) {
+						totalSize += ProtobufOutputStream.computeSint32Size(5, message.getOptional_sint32());
+					}
+					if (message.hasOptional_sint64()) {
+						totalSize += ProtobufOutputStream.computeSint64Size(6, message.getOptional_sint64());
+					}
+					if (message.hasOptional_fixed32()) {
+						totalSize += ProtobufOutputStream.computeFixed32Size(7, message.getOptional_fixed32());
+					}
+					if (message.hasOptional_fixed64()) {
+						totalSize += ProtobufOutputStream.computeFixed64Size(8, message.getOptional_fixed64());
+					}
+					if (message.hasOptional_sfixed32()) {
+						totalSize += ProtobufOutputStream.computeSfixed32Size(9, message.getOptional_sfixed32());
+					}
+					if (message.hasOptional_sfixed64()) {
+						totalSize += ProtobufOutputStream.computeSfixed64Size(10, message.getOptional_sfixed64());
+					}
+					if (message.hasOptional_float()) {
+						totalSize += ProtobufOutputStream.computeFloatSize(11, message.getOptional_float());
+					}
+					if (message.hasOptional_double()) {
+						totalSize += ProtobufOutputStream.computeDoubleSize(12, message.getOptional_double());
+					}
+					if (message.hasOptional_bool()) {
+						totalSize += ProtobufOutputStream.computeBoolSize(13, message.getOptional_bool());
+					}
+					if (message.hasOptional_string()) {
+						totalSize += ProtobufOutputStream.computeStringSize(14, message.getOptional_string());
+					}
+					if (message.hasOptional_bytes()) {
+						totalSize += message.getOptional_bytes().length;
+					}
+					byte[] optional_nested_messageBuffer = null;
+					if (message.hasOptional_nested_message()) {
+						optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getOptional_nested_message());
+						totalSize += optional_nested_messageBuffer.length;
+					}
+					byte[] optional_foreign_messageBuffer = null;
+					if (message.hasOptional_foreign_message()) {
+						optional_foreign_messageBuffer = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getOptional_foreign_message());
+						totalSize += optional_foreign_messageBuffer.length;
+					}
+					byte[] optional_import_messageBuffer = null;
+					if (message.hasOptional_import_message()) {
+						optional_import_messageBuffer = protobuf_memless_import.ImportMessageSerializer.serialize(message.getOptional_import_message());
+						totalSize += optional_import_messageBuffer.length;
+					}
+					if (message.hasOptional_nested_enum()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(21, message.getOptional_nested_enum().getValue());
+					}
+					if (message.hasOptional_foreign_enum()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(22, message.getOptional_foreign_enum().getValue());
+					}
+					byte[] optional_import_enumBuffer = null;
+					if (message.hasOptional_import_enum()) {
+						optional_import_enumBuffer = protobuf_memless_import.ImportEnumSerializer.serialize(message.getOptional_import_enum());
+						totalSize += optional_import_enumBuffer.length;
+					}
+					if (message.hasOptional_string_piece()) {
+						totalSize += ProtobufOutputStream.computeStringSize(24, message.getOptional_string_piece());
+					}
+					if (message.hasOptional_cord()) {
+						totalSize += ProtobufOutputStream.computeStringSize(25, message.getOptional_cord());
+					}
+					int repeated_int32Size = 0;
+					if (message.hasRepeated_int32()) {
+						for (int i = 0; i < message.getRepeated_int32().size(); i++) {
+							repeated_int32Size += ProtobufOutputStream.computeInt32Size(31, message.getRepeated_int32().get(i));
+						}
+						totalSize += repeated_int32Size;
+					}
+					int repeated_int64Size = 0;
+					if (message.hasRepeated_int64()) {
+						for (int i = 0; i < message.getRepeated_int64().size(); i++) {
+							repeated_int64Size += ProtobufOutputStream.computeInt64Size(32, message.getRepeated_int64().get(i));
+						}
+						totalSize += repeated_int64Size;
+					}
+					int repeated_uint32Size = 0;
+					if (message.hasRepeated_uint32()) {
+						for (int i = 0; i < message.getRepeated_uint32().size(); i++) {
+							repeated_uint32Size += ProtobufOutputStream.computeUint32Size(33, message.getRepeated_uint32().get(i));
+						}
+						totalSize += repeated_uint32Size;
+					}
+					int repeated_uint64Size = 0;
+					if (message.hasRepeated_uint64()) {
+						for (int i = 0; i < message.getRepeated_uint64().size(); i++) {
+							repeated_uint64Size += ProtobufOutputStream.computeUint64Size(34, message.getRepeated_uint64().get(i));
+						}
+						totalSize += repeated_uint64Size;
+					}
+					int repeated_sint32Size = 0;
+					if (message.hasRepeated_sint32()) {
+						for (int i = 0; i < message.getRepeated_sint32().size(); i++) {
+							repeated_sint32Size += ProtobufOutputStream.computeSint32Size(35, message.getRepeated_sint32().get(i));
+						}
+						totalSize += repeated_sint32Size;
+					}
+					int repeated_sint64Size = 0;
+					if (message.hasRepeated_sint64()) {
+						for (int i = 0; i < message.getRepeated_sint64().size(); i++) {
+							repeated_sint64Size += ProtobufOutputStream.computeSint64Size(36, message.getRepeated_sint64().get(i));
+						}
+						totalSize += repeated_sint64Size;
+					}
+					int repeated_fixed32Size = 0;
+					if (message.hasRepeated_fixed32()) {
+						for (int i = 0; i < message.getRepeated_fixed32().size(); i++) {
+							repeated_fixed32Size += ProtobufOutputStream.computeFixed32Size(37, message.getRepeated_fixed32().get(i));
+						}
+						totalSize += repeated_fixed32Size;
+					}
+					int repeated_fixed64Size = 0;
+					if (message.hasRepeated_fixed64()) {
+						for (int i = 0; i < message.getRepeated_fixed64().size(); i++) {
+							repeated_fixed64Size += ProtobufOutputStream.computeFixed64Size(38, message.getRepeated_fixed64().get(i));
+						}
+						totalSize += repeated_fixed64Size;
+					}
+					int repeated_sfixed32Size = 0;
+					if (message.hasRepeated_sfixed32()) {
+						for (int i = 0; i < message.getRepeated_sfixed32().size(); i++) {
+							repeated_sfixed32Size += ProtobufOutputStream.computeSfixed32Size(39, message.getRepeated_sfixed32().get(i));
+						}
+						totalSize += repeated_sfixed32Size;
+					}
+					int repeated_sfixed64Size = 0;
+					if (message.hasRepeated_sfixed64()) {
+						for (int i = 0; i < message.getRepeated_sfixed64().size(); i++) {
+							repeated_sfixed64Size += ProtobufOutputStream.computeSfixed64Size(40, message.getRepeated_sfixed64().get(i));
+						}
+						totalSize += repeated_sfixed64Size;
+					}
+					int repeated_floatSize = 0;
+					if (message.hasRepeated_float()) {
+						for (int i = 0; i < message.getRepeated_float().size(); i++) {
+							repeated_floatSize += ProtobufOutputStream.computeFloatSize(41, message.getRepeated_float().get(i));
+						}
+						totalSize += repeated_floatSize;
+					}
+					int repeated_doubleSize = 0;
+					if (message.hasRepeated_double()) {
+						for (int i = 0; i < message.getRepeated_double().size(); i++) {
+							repeated_doubleSize += ProtobufOutputStream.computeDoubleSize(42, message.getRepeated_double().get(i));
+						}
+						totalSize += repeated_doubleSize;
+					}
+					int repeated_boolSize = 0;
+					if (message.hasRepeated_bool()) {
+						for (int i = 0; i < message.getRepeated_bool().size(); i++) {
+							repeated_boolSize += ProtobufOutputStream.computeBoolSize(43, message.getRepeated_bool().get(i));
+						}
+						totalSize += repeated_boolSize;
+					}
+					int repeated_stringSize = 0;
+					if (message.hasRepeated_string()) {
+						for (int i = 0; i < message.getRepeated_string().size(); i++) {
+							repeated_stringSize += ProtobufOutputStream.computeStringSize(44, message.getRepeated_string().get(i));
+						}
+						totalSize += repeated_stringSize;
+					}
+					int repeated_bytesSize = 0;
+					if (message.hasRepeated_bytes()) {
+						repeated_bytesSize = message.getRepeated_bytes().length;
+						totalSize += repeated_bytesSize;
+					}
+					byte[] repeated_nested_messageBuffer = null;
+					if (message.hasRepeated_nested_message()) {
+						for (int i = 0; i < message.getRepeated_nested_message().size(); i++) {
+//TODO
+						}
+						totalSize += repeated_nested_messageBuffer.length;
+					}
+					byte[] repeated_foreign_messageBuffer = null;
+					if (message.hasRepeated_foreign_message()) {
+						for (int i = 0; i < message.getRepeated_foreign_message().size(); i++) {
+//TODO
+						}
+						totalSize += repeated_foreign_messageBuffer.length;
+					}
+					byte[] repeated_import_messageBuffer = null;
+					if (message.hasRepeated_import_message()) {
+						for (int i = 0; i < message.getRepeated_import_message().size(); i++) {
+//TODO
+						}
+						totalSize += repeated_import_messageBuffer.length;
+					}
+					int repeated_nested_enumSize = 0;
+					if (message.hasRepeated_nested_enum()) {
+						for (int i = 0; i < message.getRepeated_nested_enum().size(); i++) {
+							repeated_nested_enumSize += ProtobufOutputStream.computeEnumSize(51, message.getRepeated_nested_enum().get(i).getValue());
+						}
+						totalSize += repeated_nested_enumSize;
+					}
+					int repeated_foreign_enumSize = 0;
+					if (message.hasRepeated_foreign_enum()) {
+						for (int i = 0; i < message.getRepeated_foreign_enum().size(); i++) {
+							repeated_foreign_enumSize += ProtobufOutputStream.computeEnumSize(52, message.getRepeated_foreign_enum().get(i).getValue());
+						}
+						totalSize += repeated_foreign_enumSize;
+					}
+					byte[] repeated_import_enumBuffer = null;
+					if (message.hasRepeated_import_enum()) {
+						for (int i = 0; i < message.getRepeated_import_enum().size(); i++) {
+//TODO
+						}
+						totalSize += repeated_import_enumBuffer.length;
+					}
+					int repeated_string_pieceSize = 0;
+					if (message.hasRepeated_string_piece()) {
+						for (int i = 0; i < message.getRepeated_string_piece().size(); i++) {
+							repeated_string_pieceSize += ProtobufOutputStream.computeStringSize(54, message.getRepeated_string_piece().get(i));
+						}
+						totalSize += repeated_string_pieceSize;
+					}
+					int repeated_cordSize = 0;
+					if (message.hasRepeated_cord()) {
+						for (int i = 0; i < message.getRepeated_cord().size(); i++) {
+							repeated_cordSize += ProtobufOutputStream.computeStringSize(55, message.getRepeated_cord().get(i));
+						}
+						totalSize += repeated_cordSize;
+					}
+					if (message.hasDefault_int32()) {
+						totalSize += ProtobufOutputStream.computeInt32Size(61, message.getDefault_int32());
+					}
+					if (message.hasDefault_int64()) {
+						totalSize += ProtobufOutputStream.computeInt64Size(62, message.getDefault_int64());
+					}
+					if (message.hasDefault_uint32()) {
+						totalSize += ProtobufOutputStream.computeUint32Size(63, message.getDefault_uint32());
+					}
+					if (message.hasDefault_uint64()) {
+						totalSize += ProtobufOutputStream.computeUint64Size(64, message.getDefault_uint64());
+					}
+					if (message.hasDefault_sint32()) {
+						totalSize += ProtobufOutputStream.computeSint32Size(65, message.getDefault_sint32());
+					}
+					if (message.hasDefault_sint64()) {
+						totalSize += ProtobufOutputStream.computeSint64Size(66, message.getDefault_sint64());
+					}
+					if (message.hasDefault_fixed32()) {
+						totalSize += ProtobufOutputStream.computeFixed32Size(67, message.getDefault_fixed32());
+					}
+					if (message.hasDefault_fixed64()) {
+						totalSize += ProtobufOutputStream.computeFixed64Size(68, message.getDefault_fixed64());
+					}
+					if (message.hasDefault_sfixed32()) {
+						totalSize += ProtobufOutputStream.computeSfixed32Size(69, message.getDefault_sfixed32());
+					}
+					if (message.hasDefault_sfixed64()) {
+						totalSize += ProtobufOutputStream.computeSfixed64Size(70, message.getDefault_sfixed64());
+					}
+					if (message.hasDefault_float()) {
+						totalSize += ProtobufOutputStream.computeFloatSize(71, message.getDefault_float());
+					}
+					if (message.hasDefault_double()) {
+						totalSize += ProtobufOutputStream.computeDoubleSize(72, message.getDefault_double());
+					}
+					if (message.hasDefault_bool()) {
+						totalSize += ProtobufOutputStream.computeBoolSize(73, message.getDefault_bool());
+					}
+					if (message.hasDefault_string()) {
+						totalSize += ProtobufOutputStream.computeStringSize(74, message.getDefault_string());
+					}
+					if (message.hasDefault_bytes()) {
+						totalSize += message.getDefault_bytes().length;
+					}
+					if (message.hasDefault_nested_enum()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(81, message.getDefault_nested_enum().getValue());
+					}
+					if (message.hasDefault_foreign_enum()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(82, message.getDefault_foreign_enum().getValue());
+					}
+					byte[] default_import_enumBuffer = null;
+					if (message.hasDefault_import_enum()) {
+						default_import_enumBuffer = protobuf_memless_import.ImportEnumSerializer.serialize(message.getDefault_import_enum());
+						totalSize += default_import_enumBuffer.length;
+					}
+					if (message.hasDefault_string_piece()) {
+						totalSize += ProtobufOutputStream.computeStringSize(84, message.getDefault_string_piece());
+					}
+					if (message.hasDefault_cord()) {
+						totalSize += ProtobufOutputStream.computeStringSize(85, message.getDefault_cord());
+					}
+					final byte[] result = new byte[totalSize];
+					int position = 0;
+					if (message.hasOptional_int32()) {
+						position = ProtobufOutputStream.writeInt32(1, message.getOptional_int32(), result, position);
+					}
+					if (message.hasOptional_int64()) {
+						position = ProtobufOutputStream.writeInt64(2, message.getOptional_int64(), result, position);
+					}
+					if (message.hasOptional_uint32()) {
+						position = ProtobufOutputStream.writeUint32(3, message.getOptional_uint32(), result, position);
+					}
+					if (message.hasOptional_uint64()) {
+						position = ProtobufOutputStream.writeUint64(4, message.getOptional_uint64(), result, position);
+					}
+					if (message.hasOptional_sint32()) {
+						position = ProtobufOutputStream.writeSint32(5, message.getOptional_sint32(), result, position);
+					}
+					if (message.hasOptional_sint64()) {
+						position = ProtobufOutputStream.writeSint64(6, message.getOptional_sint64(), result, position);
+					}
+					if (message.hasOptional_fixed32()) {
+						position = ProtobufOutputStream.writeFixed32(7, message.getOptional_fixed32(), result, position);
+					}
+					if (message.hasOptional_fixed64()) {
+						position = ProtobufOutputStream.writeFixed64(8, message.getOptional_fixed64(), result, position);
+					}
+					if (message.hasOptional_sfixed32()) {
+						position = ProtobufOutputStream.writeSfixed32(9, message.getOptional_sfixed32(), result, position);
+					}
+					if (message.hasOptional_sfixed64()) {
+						position = ProtobufOutputStream.writeSfixed64(10, message.getOptional_sfixed64(), result, position);
+					}
+					if (message.hasOptional_float()) {
+						position = ProtobufOutputStream.writeFloat(11, message.getOptional_float(), result, position);
+					}
+					if (message.hasOptional_double()) {
+						position = ProtobufOutputStream.writeDouble(12, message.getOptional_double(), result, position);
+					}
+					if (message.hasOptional_bool()) {
+						position = ProtobufOutputStream.writeBool(13, message.getOptional_bool(), result, position);
+					}
+					if (message.hasOptional_string()) {
+						position = ProtobufOutputStream.writeString(14, message.getOptional_string(), result, position);
+					}
+					if (message.hasOptional_bytes()) {
+						position = ProtobufOutputStream.writeBytes(15, message.getOptional_bytes(), result, position);
+					}
+					if (message.hasOptional_nested_message()) {
+						position = ProtobufOutputStream.writeBytes(18, optional_nested_messageBuffer, result, position);
+					}
+					if (message.hasOptional_foreign_message()) {
+						position = ProtobufOutputStream.writeBytes(19, optional_foreign_messageBuffer, result, position);
+					}
+					if (message.hasOptional_import_message()) {
+						position = ProtobufOutputStream.writeBytes(20, optional_import_messageBuffer, result, position);
+					}
+					if (message.hasOptional_nested_enum()) {
+						position = ProtobufOutputStream.writeEnum(21, message.getOptional_nested_enum().getValue(), result, position);
+					}
+					if (message.hasOptional_foreign_enum()) {
+						position = ProtobufOutputStream.writeEnum(22, message.getOptional_foreign_enum().getValue(), result, position);
+					}
+					if (message.hasOptional_import_enum()) {
+						position = ProtobufOutputStream.writeBytes(23, optional_import_enumBuffer, result, position);
+					}
+					if (message.hasOptional_string_piece()) {
+						position = ProtobufOutputStream.writeString(24, message.getOptional_string_piece(), result, position);
+					}
+					if (message.hasOptional_cord()) {
+						position = ProtobufOutputStream.writeString(25, message.getOptional_cord(), result, position);
+					}
+					if (message.hasRepeated_int32()) {
+						if (message.getRepeated_int32().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(31, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_int32Size, result, position);
+							for (int i = 0; i < message.getRepeated_int32().size(); i++) {
+								position = ProtobufOutputStream.writeInt32NoTag(message.getRepeated_int32().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_int64()) {
+						if (message.getRepeated_int64().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(32, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_int64Size, result, position);
+							for (int i = 0; i < message.getRepeated_int64().size(); i++) {
+								position = ProtobufOutputStream.writeInt64NoTag(message.getRepeated_int64().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_uint32()) {
+						if (message.getRepeated_uint32().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(33, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_uint32Size, result, position);
+							for (int i = 0; i < message.getRepeated_uint32().size(); i++) {
+								position = ProtobufOutputStream.writeUint32NoTag(message.getRepeated_uint32().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_uint64()) {
+						if (message.getRepeated_uint64().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(34, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_uint64Size, result, position);
+							for (int i = 0; i < message.getRepeated_uint64().size(); i++) {
+								position = ProtobufOutputStream.writeUint64NoTag(message.getRepeated_uint64().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_sint32()) {
+						if (message.getRepeated_sint32().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(35, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_sint32Size, result, position);
+							for (int i = 0; i < message.getRepeated_sint32().size(); i++) {
+								position = ProtobufOutputStream.writeSint32NoTag(message.getRepeated_sint32().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_sint64()) {
+						if (message.getRepeated_sint64().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(36, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_sint64Size, result, position);
+							for (int i = 0; i < message.getRepeated_sint64().size(); i++) {
+								position = ProtobufOutputStream.writeSint64NoTag(message.getRepeated_sint64().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_fixed32()) {
+						if (message.getRepeated_fixed32().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(37, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_fixed32Size, result, position);
+							for (int i = 0; i < message.getRepeated_fixed32().size(); i++) {
+								position = ProtobufOutputStream.writeFixed32NoTag(message.getRepeated_fixed32().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_fixed64()) {
+						if (message.getRepeated_fixed64().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(38, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_fixed64Size, result, position);
+							for (int i = 0; i < message.getRepeated_fixed64().size(); i++) {
+								position = ProtobufOutputStream.writeFixed64NoTag(message.getRepeated_fixed64().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_sfixed32()) {
+						if (message.getRepeated_sfixed32().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(39, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_sfixed32Size, result, position);
+							for (int i = 0; i < message.getRepeated_sfixed32().size(); i++) {
+								position = ProtobufOutputStream.writeSfixed32NoTag(message.getRepeated_sfixed32().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_sfixed64()) {
+						if (message.getRepeated_sfixed64().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(40, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_sfixed64Size, result, position);
+							for (int i = 0; i < message.getRepeated_sfixed64().size(); i++) {
+								position = ProtobufOutputStream.writeSfixed64NoTag(message.getRepeated_sfixed64().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_float()) {
+						if (message.getRepeated_float().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(41, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_floatSize, result, position);
+							for (int i = 0; i < message.getRepeated_float().size(); i++) {
+								position = ProtobufOutputStream.writeFloatNoTag(message.getRepeated_float().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_double()) {
+						if (message.getRepeated_double().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(42, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_doubleSize, result, position);
+							for (int i = 0; i < message.getRepeated_double().size(); i++) {
+								position = ProtobufOutputStream.writeDoubleNoTag(message.getRepeated_double().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_bool()) {
+						if (message.getRepeated_bool().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(43, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_boolSize, result, position);
+							for (int i = 0; i < message.getRepeated_bool().size(); i++) {
+								position = ProtobufOutputStream.writeBoolNoTag(message.getRepeated_bool().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_string()) {
+						if (message.getRepeated_string().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(44, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_stringSize, result, position);
+							for (int i = 0; i < message.getRepeated_string().size(); i++) {
+								position = ProtobufOutputStream.writeStringNoTag(message.getRepeated_string().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_bytes()) {
+						if (message.getRepeated_bytes().length != 0) {
+							position = ProtobufOutputStream.writeRawVarint32(45, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_bytesSize, result, position);
+							position = ProtobufOutputStream.writeRawBytes(message.getRepeated_bytes(), result, position);
+						}
+					}
+					if (message.hasRepeated_nested_message()) {
+						if (message.getRepeated_nested_message().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(48, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_nested_messageBuffer.length, result, position);
+							position = ProtobufOutputStream.writeRawBytes(repeated_nested_messageBuffer, result, position);
+						}
+					}
+					if (message.hasRepeated_foreign_message()) {
+						if (message.getRepeated_foreign_message().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(49, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_foreign_messageBuffer.length, result, position);
+							position = ProtobufOutputStream.writeRawBytes(repeated_foreign_messageBuffer, result, position);
+						}
+					}
+					if (message.hasRepeated_import_message()) {
+						if (message.getRepeated_import_message().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(50, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_import_messageBuffer.length, result, position);
+							position = ProtobufOutputStream.writeRawBytes(repeated_import_messageBuffer, result, position);
+						}
+					}
+					if (message.hasRepeated_nested_enum()) {
+						if (message.getRepeated_nested_enum().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(51, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_nested_enumSize, result, position);
+							for (int i = 0; i < message.getRepeated_nested_enum().size(); i++) {
+								position = ProtobufOutputStream.writeEnumNoTag(message.getRepeated_nested_enum().get(i).getValue(), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_foreign_enum()) {
+						if (message.getRepeated_foreign_enum().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(52, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_foreign_enumSize, result, position);
+							for (int i = 0; i < message.getRepeated_foreign_enum().size(); i++) {
+								position = ProtobufOutputStream.writeEnumNoTag(message.getRepeated_foreign_enum().get(i).getValue(), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_import_enum()) {
+						if (message.getRepeated_import_enum().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(53, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_import_enumBuffer.length, result, position);
+							position = ProtobufOutputStream.writeRawBytes(repeated_import_enumBuffer, result, position);
+						}
+					}
+					if (message.hasRepeated_string_piece()) {
+						if (message.getRepeated_string_piece().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(54, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_string_pieceSize, result, position);
+							for (int i = 0; i < message.getRepeated_string_piece().size(); i++) {
+								position = ProtobufOutputStream.writeStringNoTag(message.getRepeated_string_piece().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasRepeated_cord()) {
+						if (message.getRepeated_cord().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(55, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_cordSize, result, position);
+							for (int i = 0; i < message.getRepeated_cord().size(); i++) {
+								position = ProtobufOutputStream.writeStringNoTag(message.getRepeated_cord().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasDefault_int32()) {
+						position = ProtobufOutputStream.writeInt32(61, message.getDefault_int32(), result, position);
+					}
+					if (message.hasDefault_int64()) {
+						position = ProtobufOutputStream.writeInt64(62, message.getDefault_int64(), result, position);
+					}
+					if (message.hasDefault_uint32()) {
+						position = ProtobufOutputStream.writeUint32(63, message.getDefault_uint32(), result, position);
+					}
+					if (message.hasDefault_uint64()) {
+						position = ProtobufOutputStream.writeUint64(64, message.getDefault_uint64(), result, position);
+					}
+					if (message.hasDefault_sint32()) {
+						position = ProtobufOutputStream.writeSint32(65, message.getDefault_sint32(), result, position);
+					}
+					if (message.hasDefault_sint64()) {
+						position = ProtobufOutputStream.writeSint64(66, message.getDefault_sint64(), result, position);
+					}
+					if (message.hasDefault_fixed32()) {
+						position = ProtobufOutputStream.writeFixed32(67, message.getDefault_fixed32(), result, position);
+					}
+					if (message.hasDefault_fixed64()) {
+						position = ProtobufOutputStream.writeFixed64(68, message.getDefault_fixed64(), result, position);
+					}
+					if (message.hasDefault_sfixed32()) {
+						position = ProtobufOutputStream.writeSfixed32(69, message.getDefault_sfixed32(), result, position);
+					}
+					if (message.hasDefault_sfixed64()) {
+						position = ProtobufOutputStream.writeSfixed64(70, message.getDefault_sfixed64(), result, position);
+					}
+					if (message.hasDefault_float()) {
+						position = ProtobufOutputStream.writeFloat(71, message.getDefault_float(), result, position);
+					}
+					if (message.hasDefault_double()) {
+						position = ProtobufOutputStream.writeDouble(72, message.getDefault_double(), result, position);
+					}
+					if (message.hasDefault_bool()) {
+						position = ProtobufOutputStream.writeBool(73, message.getDefault_bool(), result, position);
+					}
+					if (message.hasDefault_string()) {
+						position = ProtobufOutputStream.writeString(74, message.getDefault_string(), result, position);
+					}
+					if (message.hasDefault_bytes()) {
+						position = ProtobufOutputStream.writeBytes(75, message.getDefault_bytes(), result, position);
+					}
+					if (message.hasDefault_nested_enum()) {
+						position = ProtobufOutputStream.writeEnum(81, message.getDefault_nested_enum().getValue(), result, position);
+					}
+					if (message.hasDefault_foreign_enum()) {
+						position = ProtobufOutputStream.writeEnum(82, message.getDefault_foreign_enum().getValue(), result, position);
+					}
+					if (message.hasDefault_import_enum()) {
+						position = ProtobufOutputStream.writeBytes(83, default_import_enumBuffer, result, position);
+					}
+					if (message.hasDefault_string_piece()) {
+						position = ProtobufOutputStream.writeString(84, message.getDefault_string_piece(), result, position);
+					}
+					if (message.hasDefault_cord()) {
+						position = ProtobufOutputStream.writeString(85, message.getDefault_cord(), result, position);
+					}
+					ProtobufOutputStream.checkNoSpaceLeft(result, position);
+					return result;
+				} catch (IOException e) {
+					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+				}
+			}
+
+			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestAllTypes message) {
+			}
+		}
+
 		public enum NestedEnum {
 			FOO(1), BAR(2), BAZ(3), ;
 			public static NestedEnum valueOf(int value) {
@@ -591,10 +1233,8 @@ public final class UnittestProto {
 					optional_import_messageBuffer = protobuf_memless_import.ImportMessageSerializer.serialize(message.getOptional_import_message());
 					totalSize += optional_import_messageBuffer.length;
 				}
-				byte[] optional_nested_enumBuffer = null;
 				if (message.hasOptional_nested_enum()) {
-					optional_nested_enumBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedEnumSerializer.serialize(message.getOptional_nested_enum());
-					totalSize += optional_nested_enumBuffer.length;
+					totalSize += ProtobufOutputStream.computeEnumSize(21, message.getOptional_nested_enum().getValue());
 				}
 				if (message.hasOptional_foreign_enum()) {
 					totalSize += ProtobufOutputStream.computeEnumSize(22, message.getOptional_foreign_enum().getValue());
@@ -734,12 +1374,12 @@ public final class UnittestProto {
 					}
 					totalSize += repeated_import_messageBuffer.length;
 				}
-				byte[] repeated_nested_enumBuffer = null;
+				int repeated_nested_enumSize = 0;
 				if (message.hasRepeated_nested_enum()) {
 					for (int i = 0; i < message.getRepeated_nested_enum().size(); i++) {
-//TODO
+						repeated_nested_enumSize += ProtobufOutputStream.computeEnumSize(51, message.getRepeated_nested_enum().get(i).getValue());
 					}
-					totalSize += repeated_nested_enumBuffer.length;
+					totalSize += repeated_nested_enumSize;
 				}
 				int repeated_foreign_enumSize = 0;
 				if (message.hasRepeated_foreign_enum()) {
@@ -814,10 +1454,8 @@ public final class UnittestProto {
 				if (message.hasDefault_bytes()) {
 					totalSize += message.getDefault_bytes().length;
 				}
-				byte[] default_nested_enumBuffer = null;
 				if (message.hasDefault_nested_enum()) {
-					default_nested_enumBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedEnumSerializer.serialize(message.getDefault_nested_enum());
-					totalSize += default_nested_enumBuffer.length;
+					totalSize += ProtobufOutputStream.computeEnumSize(81, message.getDefault_nested_enum().getValue());
 				}
 				if (message.hasDefault_foreign_enum()) {
 					totalSize += ProtobufOutputStream.computeEnumSize(82, message.getDefault_foreign_enum().getValue());
@@ -890,7 +1528,7 @@ public final class UnittestProto {
 					position = ProtobufOutputStream.writeBytes(20, optional_import_messageBuffer, result, position);
 				}
 				if (message.hasOptional_nested_enum()) {
-					position = ProtobufOutputStream.writeBytes(21, optional_nested_enumBuffer, result, position);
+					position = ProtobufOutputStream.writeEnum(21, message.getOptional_nested_enum().getValue(), result, position);
 				}
 				if (message.hasOptional_foreign_enum()) {
 					position = ProtobufOutputStream.writeEnum(22, message.getOptional_foreign_enum().getValue(), result, position);
@@ -1034,7 +1672,7 @@ public final class UnittestProto {
 					if (message.getRepeated_bytes().length != 0) {
 						position = ProtobufOutputStream.writeRawVarint32(45, result, position);
 						position = ProtobufOutputStream.writeRawVarint32(repeated_bytesSize, result, position);
-						position = ProtobufOutputStream.writeRawBytes(repeated_bytesBuffer, result, position);
+						position = ProtobufOutputStream.writeRawBytes(message.getRepeated_bytes(), result, position);
 					}
 				}
 				if (message.hasRepeated_nested_message()) {
@@ -1061,15 +1699,19 @@ public final class UnittestProto {
 				if (message.hasRepeated_nested_enum()) {
 					if (message.getRepeated_nested_enum().size() > 0) {
 						position = ProtobufOutputStream.writeRawVarint32(51, result, position);
-						position = ProtobufOutputStream.writeRawVarint32(repeated_nested_enumBuffer.length, result, position);
-						position = ProtobufOutputStream.writeRawBytes(repeated_nested_enumBuffer, result, position);
+						position = ProtobufOutputStream.writeRawVarint32(repeated_nested_enumSize, result, position);
+						for (int i = 0; i < message.getRepeated_nested_enum().size(); i++) {
+							position = ProtobufOutputStream.writeEnumNoTag(message.getRepeated_nested_enum().get(i).getValue(), result, position);
+						}
 					}
 				}
 				if (message.hasRepeated_foreign_enum()) {
 					if (message.getRepeated_foreign_enum().size() > 0) {
 						position = ProtobufOutputStream.writeRawVarint32(52, result, position);
-						position = ProtobufOutputStream.writeRawVarint32(repeated_foreign_enumBuffer.length, result, position);
-						position = ProtobufOutputStream.writeRawBytes(repeated_foreign_enumBuffer, result, position);
+						position = ProtobufOutputStream.writeRawVarint32(repeated_foreign_enumSize, result, position);
+						for (int i = 0; i < message.getRepeated_foreign_enum().size(); i++) {
+							position = ProtobufOutputStream.writeEnumNoTag(message.getRepeated_foreign_enum().get(i).getValue(), result, position);
+						}
 					}
 				}
 				if (message.hasRepeated_import_enum()) {
@@ -1143,7 +1785,7 @@ public final class UnittestProto {
 					position = ProtobufOutputStream.writeBytes(75, message.getDefault_bytes(), result, position);
 				}
 				if (message.hasDefault_nested_enum()) {
-					position = ProtobufOutputStream.writeBytes(81, default_nested_enumBuffer, result, position);
+					position = ProtobufOutputStream.writeEnum(81, message.getDefault_nested_enum().getValue(), result, position);
 				}
 				if (message.hasDefault_foreign_enum()) {
 					position = ProtobufOutputStream.writeEnum(82, message.getDefault_foreign_enum().getValue(), result, position);
@@ -1165,30 +1807,6 @@ public final class UnittestProto {
 		}
 
 		private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestAllTypes message) {
-		}
-
-		public static class NestedMessageSerializer {
-			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage message) {
-				try {
-					assertInitialized(message);
-					int totalSize = 0;
-					if (message.hasBb()) {
-						totalSize += ProtobufOutputStream.computeInt32Size(1, message.getBb());
-					}
-					final byte[] result = new byte[totalSize];
-					int position = 0;
-					if (message.hasBb()) {
-						position = ProtobufOutputStream.writeInt32(1, message.getBb(), result, position);
-					}
-					ProtobufOutputStream.checkNoSpaceLeft(result, position);
-					return result;
-				} catch (IOException e) {
-					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
-				}
-			}
-
-			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage message) {
-			}
 		}
 	}
 
@@ -1828,9 +2446,9 @@ public final class UnittestProto {
 	public interface TestForeignNested {
 		boolean hasForeign_nested();
 
-		TestAllTypes.NestedMessage getForeign_nested();
+		protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage getForeign_nested();
 
-		void setForeign_nested(TestAllTypes.NestedMessage foreign_nested);
+		void setForeign_nested(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage foreign_nested);
 	}
 
 	public static class TestForeignNestedSerializer {
@@ -2091,9 +2709,9 @@ public final class UnittestProto {
 	public interface TestNestedMessageHasBits {
 		boolean hasOptional_nested_message();
 
-		protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage getOptional_nested_message();
+		protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage getOptional_nested_message();
 
-		void setOptional_nested_message(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage optional_nested_message);
+		void setOptional_nested_message(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage optional_nested_message);
 
 		public interface NestedMessage {
 			boolean hasNestedmessage_repeated_int32();
@@ -2108,6 +2726,32 @@ public final class UnittestProto {
 
 			void setNestedmessage_repeated_foreignmessage(java.util.List<protobuf_memless_unittest.UnittestProto.ForeignMessage> nestedmessage_repeated_foreignmessage);
 		}
+
+		public static class TestNestedMessageHasBitsSerializer {
+			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits message) {
+				try {
+					assertInitialized(message);
+					int totalSize = 0;
+					byte[] optional_nested_messageBuffer = null;
+					if (message.hasOptional_nested_message()) {
+						optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.serialize(message.getOptional_nested_message());
+						totalSize += optional_nested_messageBuffer.length;
+					}
+					final byte[] result = new byte[totalSize];
+					int position = 0;
+					if (message.hasOptional_nested_message()) {
+						position = ProtobufOutputStream.writeBytes(1, optional_nested_messageBuffer, result, position);
+					}
+					ProtobufOutputStream.checkNoSpaceLeft(result, position);
+					return result;
+				} catch (IOException e) {
+					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+				}
+			}
+
+			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits message) {
+			}
+		}
 	}
 
 	public static class TestNestedMessageHasBitsSerializer {
@@ -2117,7 +2761,7 @@ public final class UnittestProto {
 				int totalSize = 0;
 				byte[] optional_nested_messageBuffer = null;
 				if (message.hasOptional_nested_message()) {
-					optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getOptional_nested_message());
+					optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.serialize(message.getOptional_nested_message());
 					totalSize += optional_nested_messageBuffer.length;
 				}
 				final byte[] result = new byte[totalSize];
@@ -2133,54 +2777,6 @@ public final class UnittestProto {
 		}
 
 		private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits message) {
-		}
-
-		public static class NestedMessageSerializer {
-			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message) {
-				try {
-					assertInitialized(message);
-					int totalSize = 0;
-					int nestedmessage_repeated_int32Size = 0;
-					if (message.hasNestedmessage_repeated_int32()) {
-						for (int i = 0; i < message.getNestedmessage_repeated_int32().size(); i++) {
-							nestedmessage_repeated_int32Size += ProtobufOutputStream.computeInt32Size(1, message.getNestedmessage_repeated_int32().get(i));
-						}
-						totalSize += nestedmessage_repeated_int32Size;
-					}
-					byte[] nestedmessage_repeated_foreignmessageBuffer = null;
-					if (message.hasNestedmessage_repeated_foreignmessage()) {
-						for (int i = 0; i < message.getNestedmessage_repeated_foreignmessage().size(); i++) {
-//TODO
-						}
-						totalSize += nestedmessage_repeated_foreignmessageBuffer.length;
-					}
-					final byte[] result = new byte[totalSize];
-					int position = 0;
-					if (message.hasNestedmessage_repeated_int32()) {
-						if (message.getNestedmessage_repeated_int32().size() > 0) {
-							position = ProtobufOutputStream.writeRawVarint32(1, result, position);
-							position = ProtobufOutputStream.writeRawVarint32(nestedmessage_repeated_int32Size, result, position);
-							for (int i = 0; i < message.getNestedmessage_repeated_int32().size(); i++) {
-								position = ProtobufOutputStream.writeInt32NoTag(message.getNestedmessage_repeated_int32().get(i), result, position);
-							}
-						}
-					}
-					if (message.hasNestedmessage_repeated_foreignmessage()) {
-						if (message.getNestedmessage_repeated_foreignmessage().size() > 0) {
-							position = ProtobufOutputStream.writeRawVarint32(2, result, position);
-							position = ProtobufOutputStream.writeRawVarint32(nestedmessage_repeated_foreignmessageBuffer.length, result, position);
-							position = ProtobufOutputStream.writeRawBytes(nestedmessage_repeated_foreignmessageBuffer, result, position);
-						}
-					}
-					ProtobufOutputStream.checkNoSpaceLeft(result, position);
-					return result;
-				} catch (IOException e) {
-					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
-				}
-			}
-
-			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message) {
-			}
 		}
 	}
 
@@ -2366,8 +2962,10 @@ public final class UnittestProto {
 				if (message.hasRepeatedEnumField()) {
 					if (message.getRepeatedEnumField().size() > 0) {
 						position = ProtobufOutputStream.writeRawVarint32(9, result, position);
-						position = ProtobufOutputStream.writeRawVarint32(RepeatedEnumFieldBuffer.length, result, position);
-						position = ProtobufOutputStream.writeRawBytes(RepeatedEnumFieldBuffer, result, position);
+						position = ProtobufOutputStream.writeRawVarint32(RepeatedEnumFieldSize, result, position);
+						for (int i = 0; i < message.getRepeatedEnumField().size(); i++) {
+							position = ProtobufOutputStream.writeEnumNoTag(message.getRepeatedEnumField().get(i).getValue(), result, position);
+						}
 					}
 				}
 				if (message.hasRepeatedMessageField()) {
@@ -3085,8 +3683,10 @@ public final class UnittestProto {
 				if (message.hasPacked_enum()) {
 					if (message.getPacked_enum().size() > 0) {
 						position = ProtobufOutputStream.writeRawVarint32(103, result, position);
-						position = ProtobufOutputStream.writeRawVarint32(packed_enumBuffer.length, result, position);
-						position = ProtobufOutputStream.writeRawBytes(packed_enumBuffer, result, position);
+						position = ProtobufOutputStream.writeRawVarint32(packed_enumSize, result, position);
+						for (int i = 0; i < message.getPacked_enum().size(); i++) {
+							position = ProtobufOutputStream.writeEnumNoTag(message.getPacked_enum().get(i).getValue(), result, position);
+						}
 					}
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
@@ -3411,8 +4011,10 @@ public final class UnittestProto {
 				if (message.hasUnpacked_enum()) {
 					if (message.getUnpacked_enum().size() > 0) {
 						position = ProtobufOutputStream.writeRawVarint32(103, result, position);
-						position = ProtobufOutputStream.writeRawVarint32(unpacked_enumBuffer.length, result, position);
-						position = ProtobufOutputStream.writeRawBytes(unpacked_enumBuffer, result, position);
+						position = ProtobufOutputStream.writeRawVarint32(unpacked_enumSize, result, position);
+						for (int i = 0; i < message.getUnpacked_enum().size(); i++) {
+							position = ProtobufOutputStream.writeEnumNoTag(message.getUnpacked_enum().get(i).getValue(), result, position);
+						}
 					}
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
@@ -3486,6 +4088,90 @@ public final class UnittestProto {
 			void setDynamic_field(int dynamic_field);
 		}
 
+		public static class TestDynamicExtensionsSerializer {
+			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestDynamicExtensions message) {
+				try {
+					assertInitialized(message);
+					int totalSize = 0;
+					if (message.hasScalar_extension()) {
+						totalSize += ProtobufOutputStream.computeFixed32Size(2000, message.getScalar_extension());
+					}
+					if (message.hasEnum_extension()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(2001, message.getEnum_extension().getValue());
+					}
+					if (message.hasDynamic_enum_extension()) {
+						totalSize += ProtobufOutputStream.computeEnumSize(2002, message.getDynamic_enum_extension().getValue());
+					}
+					byte[] message_extensionBuffer = null;
+					if (message.hasMessage_extension()) {
+						message_extensionBuffer = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getMessage_extension());
+						totalSize += message_extensionBuffer.length;
+					}
+					byte[] dynamic_message_extensionBuffer = null;
+					if (message.hasDynamic_message_extension()) {
+						dynamic_message_extensionBuffer = protobuf_memless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageTypeSerializer.serialize(message.getDynamic_message_extension());
+						totalSize += dynamic_message_extensionBuffer.length;
+					}
+					int repeated_extensionSize = 0;
+					if (message.hasRepeated_extension()) {
+						for (int i = 0; i < message.getRepeated_extension().size(); i++) {
+							repeated_extensionSize += ProtobufOutputStream.computeStringSize(2005, message.getRepeated_extension().get(i));
+						}
+						totalSize += repeated_extensionSize;
+					}
+					int packed_extensionSize = 0;
+					if (message.hasPacked_extension()) {
+						for (int i = 0; i < message.getPacked_extension().size(); i++) {
+							packed_extensionSize += ProtobufOutputStream.computeSint32Size(2006, message.getPacked_extension().get(i));
+						}
+						totalSize += packed_extensionSize;
+					}
+					final byte[] result = new byte[totalSize];
+					int position = 0;
+					if (message.hasScalar_extension()) {
+						position = ProtobufOutputStream.writeFixed32(2000, message.getScalar_extension(), result, position);
+					}
+					if (message.hasEnum_extension()) {
+						position = ProtobufOutputStream.writeEnum(2001, message.getEnum_extension().getValue(), result, position);
+					}
+					if (message.hasDynamic_enum_extension()) {
+						position = ProtobufOutputStream.writeEnum(2002, message.getDynamic_enum_extension().getValue(), result, position);
+					}
+					if (message.hasMessage_extension()) {
+						position = ProtobufOutputStream.writeBytes(2003, message_extensionBuffer, result, position);
+					}
+					if (message.hasDynamic_message_extension()) {
+						position = ProtobufOutputStream.writeBytes(2004, dynamic_message_extensionBuffer, result, position);
+					}
+					if (message.hasRepeated_extension()) {
+						if (message.getRepeated_extension().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(2005, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(repeated_extensionSize, result, position);
+							for (int i = 0; i < message.getRepeated_extension().size(); i++) {
+								position = ProtobufOutputStream.writeStringNoTag(message.getRepeated_extension().get(i), result, position);
+							}
+						}
+					}
+					if (message.hasPacked_extension()) {
+						if (message.getPacked_extension().size() > 0) {
+							position = ProtobufOutputStream.writeRawVarint32(2006, result, position);
+							position = ProtobufOutputStream.writeRawVarint32(packed_extensionSize, result, position);
+							for (int i = 0; i < message.getPacked_extension().size(); i++) {
+								position = ProtobufOutputStream.writeSint32NoTag(message.getPacked_extension().get(i), result, position);
+							}
+						}
+					}
+					ProtobufOutputStream.checkNoSpaceLeft(result, position);
+					return result;
+				} catch (IOException e) {
+					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+				}
+			}
+
+			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestDynamicExtensions message) {
+			}
+		}
+
 		public enum DynamicEnumType {
 			DYNAMIC_FOO(2200), DYNAMIC_BAR(2201), DYNAMIC_BAZ(2202), ;
 			public static DynamicEnumType valueOf(int value) {
@@ -3525,10 +4211,8 @@ public final class UnittestProto {
 				if (message.hasEnum_extension()) {
 					totalSize += ProtobufOutputStream.computeEnumSize(2001, message.getEnum_extension().getValue());
 				}
-				byte[] dynamic_enum_extensionBuffer = null;
 				if (message.hasDynamic_enum_extension()) {
-					dynamic_enum_extensionBuffer = protobuf_memless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumTypeSerializer.serialize(message.getDynamic_enum_extension());
-					totalSize += dynamic_enum_extensionBuffer.length;
+					totalSize += ProtobufOutputStream.computeEnumSize(2002, message.getDynamic_enum_extension().getValue());
 				}
 				byte[] message_extensionBuffer = null;
 				if (message.hasMessage_extension()) {
@@ -3563,7 +4247,7 @@ public final class UnittestProto {
 					position = ProtobufOutputStream.writeEnum(2001, message.getEnum_extension().getValue(), result, position);
 				}
 				if (message.hasDynamic_enum_extension()) {
-					position = ProtobufOutputStream.writeBytes(2002, dynamic_enum_extensionBuffer, result, position);
+					position = ProtobufOutputStream.writeEnum(2002, message.getDynamic_enum_extension().getValue(), result, position);
 				}
 				if (message.hasMessage_extension()) {
 					position = ProtobufOutputStream.writeBytes(2003, message_extensionBuffer, result, position);
@@ -3597,30 +4281,6 @@ public final class UnittestProto {
 		}
 
 		private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestDynamicExtensions message) {
-		}
-
-		public static class DynamicMessageTypeSerializer {
-			public static byte[] serialize(protobuf_memless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message) {
-				try {
-					assertInitialized(message);
-					int totalSize = 0;
-					if (message.hasDynamic_field()) {
-						totalSize += ProtobufOutputStream.computeInt32Size(2100, message.getDynamic_field());
-					}
-					final byte[] result = new byte[totalSize];
-					int position = 0;
-					if (message.hasDynamic_field()) {
-						position = ProtobufOutputStream.writeInt32(2100, message.getDynamic_field(), result, position);
-					}
-					ProtobufOutputStream.checkNoSpaceLeft(result, position);
-					return result;
-				} catch (IOException e) {
-					throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
-				}
-			}
-
-			private static void assertInitialized(protobuf_memless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message) {
-			}
 		}
 	}
 

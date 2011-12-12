@@ -79,7 +79,7 @@ public class MemlessGenerator {
 		}
 
 		for (ProtobufMessage curMessage : parser.getMessages()) {
-			String curMessageData = generateMessage(curMessage);
+			String curMessageData = generateMessage(curMessage, parser.getOuterClassName());
 			String serializerData = generateSerializer(curMessage, parser.getOuterClassName());
 			if (parser.getOuterClassName() != null) {
 				w.append(curMessageData);
@@ -109,7 +109,7 @@ public class MemlessGenerator {
 		}
 
 	}
-	
+
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName) {
 		StringBuilder result = new StringBuilder();
 		if (outerClassName == null) {
@@ -127,7 +127,7 @@ public class MemlessGenerator {
 		} else {
 			result.append("try {\nassertInitialized(message);\nint totalSize = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
-				if (curField.isComplexType() && !curField.isEnumType() ) {
+				if (curField.isComplexType() && !curField.isEnumType()) {
 					result.append("byte[] " + curField.getName() + "Buffer = null;\n");
 					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 					if (curField.getNature().equals("repeated")) {
@@ -149,7 +149,7 @@ public class MemlessGenerator {
 						result.append(curField.getName() + "Size = message.get" + curField.getBeanName() + "().length;\n");
 					} else {
 						result.append("for(int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
-						if( curField.isEnumType() ) {
+						if (curField.isEnumType()) {
 							result.append(curField.getName() + "Size += ProtobufOutputStream.computeEnumSize(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i).getValue());\n");
 						} else {
 							result.append(curField.getName() + "Size += ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i));\n");
@@ -162,7 +162,7 @@ public class MemlessGenerator {
 					result.append("totalSize += ");
 					if (curField.getType().equals("bytes")) {
 						result.append("message.get" + curField.getBeanName() + "().length;\n");
-					} else if( curField.isEnumType()) {
+					} else if (curField.isEnumType()) {
 						result.append("ProtobufOutputStream.computeEnumSize(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue());\n");
 					} else {
 						result.append("ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "());\n");
@@ -173,14 +173,6 @@ public class MemlessGenerator {
 			result.append("final byte[] result = new byte[totalSize];\nint position = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
-//			      if (getPackedInt32List().size() > 0) {
-//			          output.writeRawVarint32(722);
-//			          output.writeRawVarint32(packedInt32MemoizedSerializedSize);
-//			        }
-//			        for (int element : getPackedInt32List()) {
-//			          output.writeInt32NoTag(element);
-//			        }
-				// output.writeEnum(22, getOptionalForeignEnum().getNumber());
 				if (curField.getNature().equals("repeated")) {
 					if (curField.getType().equals("bytes")) {
 						result.append("if (message.get" + curField.getBeanName() + "().length != 0) {\n");
@@ -190,16 +182,22 @@ public class MemlessGenerator {
 					result.append("position = ProtobufOutputStream.writeRawVarint32(" + curField.getTag() + ", result, position);\n");
 					result.append("position = ProtobufOutputStream.writeRawVarint32(");
 					result.append(curField.getName());
-					if (curField.isComplexType()) {
+					if (curField.isComplexType() && !curField.isEnumType()) {
 						result.append("Buffer.length, result, position);\n");
 					} else {
 						result.append("Size, result, position);\n");
 					}
 					if (curField.getType().equals("bytes")) {
-						result.append("position = ProtobufOutputStream.writeRawBytes(" + curField.getName() + "Buffer, result, position);\n");
+						result.append("position = ProtobufOutputStream.writeRawBytes(message.get" + curField.getBeanName() + "(), result, position);\n");
 					} else {
 						if (curField.isComplexType()) {
-							result.append("position = ProtobufOutputStream.writeRawBytes(" + curField.getName() + "Buffer, result, position);\n");
+							if (curField.isEnumType()) {
+								result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+								result.append("position = ProtobufOutputStream.writeEnumNoTag(message.get" + curField.getBeanName() + "().get(i).getValue(), result, position);\n");
+								result.append("}\n");
+							} else {
+								result.append("position = ProtobufOutputStream.writeRawBytes(" + curField.getName() + "Buffer, result, position);\n");
+							}
 						} else {
 							result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
 							result.append("position = ProtobufOutputStream.write" + curField.getStreamBeanType() + "NoTag(message.get" + curField.getBeanName() + "().get(i), result, position);\n");
@@ -225,14 +223,6 @@ public class MemlessGenerator {
 			}
 			result.append("}\n");
 		}
-		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			String newOuterClassname = "";
-			if (outerClassName != null) {
-				newOuterClassname = outerClassName + ".";
-			}
-			newOuterClassname += curMessage.getName();
-			result.append(generateSerializer(innerMessage, newOuterClassname));
-		}
 		result.append("}\n");
 		return result.toString();
 	}
@@ -247,15 +237,15 @@ public class MemlessGenerator {
 			result.append(curField.getBeanName());
 			result.append("(), result, position);\n}\n");
 		} else {
-			if( curField.isEnumType() ) {
+			if (curField.isEnumType()) {
 				result.append("Enum(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue(), result, position);\n}\n");
-			} else { 
+			} else {
 				result.append("Bytes(" + curField.getTag() + ", " + curField.getName() + "Buffer, result, position);\n}\n");
 			}
 		}
 	}
 
-	private static String generateMessage(ProtobufMessage curMessage) {
+	private static String generateMessage(ProtobufMessage curMessage, String outerClassName) {
 		StringBuilder result = new StringBuilder();
 		result.append("public interface ");
 		result.append(curMessage.getName());
@@ -287,7 +277,9 @@ public class MemlessGenerator {
 			result.append(");\n");
 		}
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			result.append(generateMessage(innerMessage));
+			result.append(generateMessage(innerMessage, outerClassName));
+			String serializerData = generateSerializer(curMessage, outerClassName);
+			result.append(serializerData);
 		}
 		for (ProtobufEnum curEnum : curMessage.getEnums()) {
 			result.append(generateEnum(curEnum));
@@ -373,59 +365,6 @@ public class MemlessGenerator {
 		}
 		return result.toString();
 	}
-
-//	private static String constructTypeRaw(String messageType, String packageName, String outerClassName,
-//			ProtobufMessage curMessage) {
-//		String javaType = "";
-//		if (packageName != null) {
-//			javaType = packageName + ".";
-//		}
-//		if (outerClassName != null) {
-//			javaType += outerClassName + ".";
-//		}
-//		javaType += curMessage.getName();
-//		String depth = getFullyClarifiedName(curMessage, messageType, javaType);
-//		if (depth != null) {
-//			javaType = depth;
-//		}
-//		return javaType;
-//		//FIXME import message name is consumed. *_*
-//	}
-
-//	private static String convertNameToJavabean(ProtobufField curField) {
-//		return convertNameToJavabean(curField.getName());
-//	}
-//
-//	private static String convertNameToJavabean(String str) {
-//		StringBuilder result = new StringBuilder();
-//		result.append(Character.toUpperCase(str.charAt(0)));
-//		if (str.length() > 1) {
-//			result.append(str.substring(1));
-//		}
-//		return result.toString();
-//	}
-
-//    FOREIGN_FOO(0, 4),
-//    FOREIGN_BAR(1, 5),
-//    FOREIGN_BAZ(2, 6),
-//    ;
-//    
-//    
-//    public final int getNumber() { return value; }
-//    
-//    public static ForeignEnum valueOf(int value) {
-//      switch (value) {
-//        case 4: return FOREIGN_FOO;
-//        case 5: return FOREIGN_BAR;
-//        case 6: return FOREIGN_BAZ;
-//        default: return null;
-//      }
-//    }	
-
-//    private ForeignEnum(int index, int value) {
-//        this.index = index;
-//        this.value = value;
-//      }
 
 	private static File createPackage(File parent, String packageName) {
 		String[] paths = packageName.split("\\.");

@@ -89,14 +89,15 @@ class MemlessParser {
 				curEnum.setFullyClarifiedName(strToAppend + "." + curEnum.getFullyClarifiedName());
 			}
 		}
-		
-		enrichFieldsInMessage(messages);
+
+		enrichFieldsInMessage(messages, strToAppend);
 	}
 
 	private void appendPackageName(ProtobufMessage message, String name) {
 		message.setFullyClarifiedName(name + "." + message.getFullyClarifiedName());
+		System.out.println(message.getFullyClarifiedName());
 		for (ProtobufMessage curMessage : message.getNestedMessages()) {
-			appendPackageName(curMessage, name);
+			appendPackageName(curMessage, getParent(message.getFullyClarifiedName()));
 		}
 
 		for (ProtobufEnum curEnum : message.getEnums()) {
@@ -360,8 +361,7 @@ class MemlessParser {
 		String curToken = null;
 		do {
 			curToken = getNext();
-		} while (curToken != null
-				&& (curToken.equals("\n") || curToken.equals("\r") || curToken.equals("\n\r") || curToken.length() == 0));
+		} while (curToken != null && (curToken.equals("\n") || curToken.equals("\r") || curToken.equals("\n\r") || curToken.length() == 0));
 		return curToken;
 	}
 
@@ -398,20 +398,20 @@ class MemlessParser {
 		return curToken;
 	}
 
-	private void enrichFieldsInMessage(List<ProtobufMessage> messages) {
+	private void enrichFieldsInMessage(List<ProtobufMessage> messages, String externalPackage) {
 		for (ProtobufMessage curMessage : messages) {
 			if (curMessage.getFields() != null) {
 				for (ProtobufField curField : curMessage.getFields()) {
-					enrichField(curField);
+					enrichField(curField, curMessage.getFullyClarifiedName(), externalPackage);
 				}
 			}
 			if (curMessage.getNestedMessages() != null) {
-				enrichFieldsInMessage(curMessage.getNestedMessages());
+				enrichFieldsInMessage(curMessage.getNestedMessages(), externalPackage);
 			}
 		}
 	}
 
-	private void enrichField(ProtobufField curField) {
+	private void enrichField(ProtobufField curField, String prefix, String externalPackage) {
 		curField.setBeanName(convertNameToJavabean(curField.getName()));
 		curField.setStreamBeanType(convertNameToJavabean(curField.getType()));
 
@@ -420,24 +420,93 @@ class MemlessParser {
 			curField.setFullyClarifiedJavaType(javaType);
 			return;
 		}
-		
+
 		curField.setComplexType(true);
 
-		String complexFieldType = getFullyClarifiedNameBySimpleName(messages, curField.getType());
-		if (complexFieldType != null) {
-			curField.setFullyClarifiedJavaType(complexFieldType);
-			return;
+		String type = null;
+		if (prefix != null) {
+			type = prefix + "." + curField.getType();
+		} else {
+			type = curField.getType();
 		}
 
+		String complexFieldType = getFullyClarifiedNameBySimpleName(messages, type);
+		if (complexFieldType != null) {
+			curField.setFullyClarifiedJavaType(complexFieldType);
+			if (isEnum(messages, type)) {
+				curField.setEnumType(true);
+			}
+			return;
+		}
+		complexFieldType = getFullyClarifiedNameBySimpleName(messages, curField.getType());
+		if (complexFieldType != null) {
+			curField.setFullyClarifiedJavaType(complexFieldType);
+			if (isEnum(messages, curField.getType())) {
+				curField.setEnumType(true);
+			}
+			return;
+		}
+		if (externalPackage != null) {
+			complexFieldType = getFullyClarifiedNameBySimpleName(messages, externalPackage + "." + curField.getType());
+			if (complexFieldType != null) {
+				curField.setFullyClarifiedJavaType(complexFieldType);
+				if (isEnum(messages, externalPackage + "." + curField.getType())) {
+					curField.setEnumType(true);
+				}
+				return;
+			}
+		}
+
+		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, type);
+		if (complexFieldType != null) {
+			curField.setFullyClarifiedJavaType(complexFieldType);
+			curField.setEnumType(true);
+			return;
+		}
 		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, curField.getType());
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
 			curField.setEnumType(true);
 			return;
 		}
+		if (externalPackage != null) {
+			complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, externalPackage + "." + curField.getType());
+			if (complexFieldType != null) {
+				curField.setFullyClarifiedJavaType(complexFieldType);
+				curField.setEnumType(true);
+				return;
+			}
+		}
 
 		curField.setFullyClarifiedJavaType(curField.getType());
-		System.out.println("unknown field type: " + curField.getType());
+		System.out.println("unknown field type: " + type);
+	}
+
+	private static boolean isEnum(List<ProtobufMessage> messages, String type) {
+		for (ProtobufMessage curMessage : messages) {
+			if (curMessage.getNestedMessages() != null) {
+				boolean result = isEnum(curMessage.getNestedMessages(), type);
+				if (result) {
+					return result;
+				}
+			}
+			if (curMessage.getEnums() != null) {
+				for (ProtobufEnum curEnum : curMessage.getEnums()) {
+					if (curEnum.getName().equals(type) || curEnum.getFullyClarifiedName().equals(type)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	private static String getParent(String fullyClarifiedName) {
+		int index = fullyClarifiedName.lastIndexOf(".");
+		if (index == -1) {
+			return null;
+		}
+		return fullyClarifiedName.substring(0, index);
 	}
 
 	private static String getFullyClarifiedNameBySimpleName(List<ProtobufMessage> messages, String name) {
@@ -480,18 +549,14 @@ class MemlessParser {
 	}
 
 	private static String getJavaType(ProtobufField curField) {
-		if (curField.getType().equals("int32") || curField.getType().equals("uint32")
-				|| curField.getType().equals("sint32") || curField.getType().equals("fixed32")
-				|| curField.getType().equals("sfixed32")) {
+		if (curField.getType().equals("int32") || curField.getType().equals("uint32") || curField.getType().equals("sint32") || curField.getType().equals("fixed32") || curField.getType().equals("sfixed32")) {
 			if (curField.getNature().equals("repeated")) {
 				return "Integer";
 			} else {
 				return "int";
 			}
 		}
-		if (curField.getType().equals("int64") || curField.getType().equals("uint64")
-				|| curField.getType().equals("sint64") || curField.getType().equals("fixed64")
-				|| curField.getType().equals("sfixed64")) {
+		if (curField.getType().equals("int64") || curField.getType().equals("uint64") || curField.getType().equals("sint64") || curField.getType().equals("fixed64") || curField.getType().equals("sfixed64")) {
 			if (curField.getNature().equals("repeated")) {
 				return "Long";
 			} else {

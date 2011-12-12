@@ -16,15 +16,14 @@ class ProtobufField {
 	private boolean isEnumType;
 
 	//TODO comments, deprecated &etc
-
 	public boolean isEnumType() {
 		return isEnumType;
 	}
-	
+
 	public void setEnumType(boolean isEnumType) {
 		this.isEnumType = isEnumType;
 	}
-	
+
 	public String getStreamBeanType() {
 		return streamBeanType;
 	}
