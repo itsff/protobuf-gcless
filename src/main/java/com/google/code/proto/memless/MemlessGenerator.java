@@ -1,16 +1,12 @@
 package com.google.code.proto.memless;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MemlessGenerator {
 
@@ -43,9 +39,8 @@ public class MemlessGenerator {
 	}
 
 	private static void process(File output, String filename) throws Exception {
-		String file = loadFile(filename);
 		MemlessParser parser = new MemlessParser();
-		parser.process(file);
+		parser.process(filename);
 		String packageName = parser.getPackageName();
 		if (packageName != null) {
 			output = createPackage(output, packageName);
@@ -377,33 +372,6 @@ public class MemlessGenerator {
 			curDirectory = curDirPath;
 		}
 		return curDirectory;
-	}
-
-	private static String loadFile(String filename) throws Exception {
-		//rude, but didnt find usages of double slashes in-between some valid identifiers
-		Pattern COMMENT = Pattern.compile("//(.*)");
-		StringBuilder result = new StringBuilder();
-		BufferedReader r = null;
-		try {
-			r = new BufferedReader(new FileReader(filename));
-			String curLine = null;
-			while ((curLine = r.readLine()) != null) {
-				if (curLine.startsWith("//")) {
-					continue;
-				}
-				Matcher m = COMMENT.matcher(curLine);
-				if (m.find()) {
-					curLine = m.replaceAll("");
-				}
-				result.append(curLine);
-				result.append("\n");
-			}
-		} finally {
-			if (r != null) {
-				r.close();
-			}
-		}
-		return result.toString();
 	}
 
 }

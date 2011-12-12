@@ -1,7 +1,11 @@
 package com.google.code.proto.memless;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class MemlessParser {
 
@@ -11,10 +15,14 @@ class MemlessParser {
 	private List<ProtobufMessage> messages = new ArrayList<ProtobufMessage>();
 	private List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
 
+	private List<ProtobufMessage> importedMessages = new ArrayList<ProtobufMessage>();
+	private List<ProtobufEnum> importedEnums = new ArrayList<ProtobufEnum>();
+
 	private int curIndex = 0;
 	private String[] tokens;
 
-	void process(String file) throws Exception {
+	void process(String filename) throws Exception {
+		String file = loadFile(filename);
 		file = file.replaceAll(";", " ; ");
 		file = file.replaceAll("\\[", " [ ");
 		file = file.replaceAll("\\]", " ] ");
@@ -70,6 +78,19 @@ class MemlessParser {
 				System.out.println("Ignoring: " + optionType);
 				continue;
 			}
+			if (curToken.equals(Tokens.IMPORT_TOKEN)) {
+				String importFile = getNextIgnoreNewLine();
+				if (importFile == null) {
+					System.out.println("import file should be specified");
+					continue;
+				}
+				importFile = importFile.replaceAll("\"", "");
+				MemlessParser parser = new MemlessParser();
+				parser.process(importFile);
+				importedMessages.addAll(parser.getMessages());
+				importedEnums.addAll(parser.getEnums());
+				continue;
+			}
 			System.out.println("Ignoring: " + curToken);
 		}
 
@@ -90,7 +111,14 @@ class MemlessParser {
 			}
 		}
 
-		enrichFieldsInMessage(messages, strToAppend);
+		List<ProtobufMessage> allMessages = new ArrayList<ProtobufMessage>();
+		allMessages.addAll(messages);
+		allMessages.addAll(importedMessages);
+		List<ProtobufEnum> allEnums = new ArrayList<ProtobufEnum>();
+		allEnums.addAll(enums);
+		allEnums.addAll(importedEnums);
+
+		enrichFieldsInMessage(messages, strToAppend, allMessages, allEnums);
 	}
 
 	private void appendPackageName(ProtobufMessage message, String name) {
@@ -398,20 +426,20 @@ class MemlessParser {
 		return curToken;
 	}
 
-	private void enrichFieldsInMessage(List<ProtobufMessage> messages, String externalPackage) {
+	private static void enrichFieldsInMessage(List<ProtobufMessage> messages, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) {
 		for (ProtobufMessage curMessage : messages) {
 			if (curMessage.getFields() != null) {
 				for (ProtobufField curField : curMessage.getFields()) {
-					enrichField(curField, curMessage.getFullyClarifiedName(), externalPackage);
+					enrichField(curField, curMessage.getFullyClarifiedName(), externalPackage, allMessages, allEnums);
 				}
 			}
 			if (curMessage.getNestedMessages() != null) {
-				enrichFieldsInMessage(curMessage.getNestedMessages(), externalPackage);
+				enrichFieldsInMessage(curMessage.getNestedMessages(), externalPackage, allMessages, allEnums);
 			}
 		}
 	}
 
-	private void enrichField(ProtobufField curField, String prefix, String externalPackage) {
+	private static void enrichField(ProtobufField curField, String prefix, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) {
 		curField.setBeanName(convertNameToJavabean(curField.getName()));
 		curField.setStreamBeanType(convertNameToJavabean(curField.getType()));
 
@@ -430,47 +458,47 @@ class MemlessParser {
 			type = curField.getType();
 		}
 
-		String complexFieldType = getFullyClarifiedNameBySimpleName(messages, type);
+		String complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, type);
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
-			if (isEnum(messages, type)) {
+			if (isEnum(allMessages, type)) {
 				curField.setEnumType(true);
 			}
 			return;
 		}
-		complexFieldType = getFullyClarifiedNameBySimpleName(messages, curField.getType());
+		complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, curField.getType());
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
-			if (isEnum(messages, curField.getType())) {
+			if (isEnum(allMessages, curField.getType())) {
 				curField.setEnumType(true);
 			}
 			return;
 		}
 		if (externalPackage != null) {
-			complexFieldType = getFullyClarifiedNameBySimpleName(messages, externalPackage + "." + curField.getType());
+			complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, externalPackage + "." + curField.getType());
 			if (complexFieldType != null) {
 				curField.setFullyClarifiedJavaType(complexFieldType);
-				if (isEnum(messages, externalPackage + "." + curField.getType())) {
+				if (isEnum(allMessages, externalPackage + "." + curField.getType())) {
 					curField.setEnumType(true);
 				}
 				return;
 			}
 		}
 
-		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, type);
+		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(allEnums, type);
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
 			curField.setEnumType(true);
 			return;
 		}
-		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, curField.getType());
+		complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(allEnums, curField.getType());
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
 			curField.setEnumType(true);
 			return;
 		}
 		if (externalPackage != null) {
-			complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(enums, externalPackage + "." + curField.getType());
+			complexFieldType = getFullyClarifiedNameBySimpleNameFromEnum(allEnums, externalPackage + "." + curField.getType());
 			if (complexFieldType != null) {
 				curField.setFullyClarifiedJavaType(complexFieldType);
 				curField.setEnumType(true);
@@ -591,6 +619,33 @@ class MemlessParser {
 			}
 		}
 		return null;
+	}
+
+	private static String loadFile(String filename) throws Exception {
+		//rude, but didnt find usages of double slashes in-between some valid identifiers
+		Pattern COMMENT = Pattern.compile("//(.*)");
+		StringBuilder result = new StringBuilder();
+		BufferedReader r = null;
+		try {
+			r = new BufferedReader(new FileReader(filename));
+			String curLine = null;
+			while ((curLine = r.readLine()) != null) {
+				if (curLine.startsWith("//")) {
+					continue;
+				}
+				Matcher m = COMMENT.matcher(curLine);
+				if (m.find()) {
+					curLine = m.replaceAll("");
+				}
+				result.append(curLine);
+				result.append("\n");
+			}
+		} finally {
+			if (r != null) {
+				r.close();
+			}
+		}
+		return result.toString();
 	}
 
 }

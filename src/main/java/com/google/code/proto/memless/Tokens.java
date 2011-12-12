@@ -21,6 +21,7 @@ class Tokens {
 	static final String PACKED = "packed";
 	static final String DEPRECATED = "deprecated";
 	static final String OPTION = "option";
+	static final String IMPORT_TOKEN = "import";
 	static final String JAVA_OUTER_CLASSNAME = "java_outer_classname";
 
 	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[a-zA-Z_]+");
