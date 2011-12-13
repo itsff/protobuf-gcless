@@ -15,14 +15,6 @@ import protobuf_memless_unittest.UnittestProto.TestAllTypesSerializer;
 public class SerializationTest {
 
 	@Test
-	public void testOneStringSer() {
-		OneString message = new OneStringImpl();
-		message.setData("1");
-		byte[] data = OneStringSerializer.serialize(message);
-		System.out.println("here");
-	}
-	
-	@Test
 	public void testSerializationDeserialization() {
 		
 		TestAllTypes message = new TestAllTypesImpl();

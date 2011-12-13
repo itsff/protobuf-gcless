@@ -3,6 +3,7 @@ package com.google.code.proto.memless;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class ProtobufOutputStream {
 
@@ -18,6 +19,166 @@ public class ProtobufOutputStream {
 
 	static final int LITTLE_ENDIAN_64_SIZE = 8;
 	public static final int LITTLE_ENDIAN_32_SIZE = 4;
+
+	public static int writeRepeatedDouble(final int fieldNumber, final List<Double> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeDoubleNoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+
+	public static int writeRepeatedInt32(final int fieldNumber, final List<Integer> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeInt32NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+
+	public static int writeRepeatedInt64(final int fieldNumber, final List<Long> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeInt64NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+
+	public static int writeRepeatedUint32(final int fieldNumber, final List<Integer> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeUint32NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedUint64(final int fieldNumber, final List<Long> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeUint64NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedSint32(final int fieldNumber, final List<Integer> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeSint32NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedSint64(final int fieldNumber, final List<Long> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeSint64NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedFixed32(final int fieldNumber, final List<Integer> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeFixed32NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedFixed64(final int fieldNumber, final List<Long> value, byte[] buffer, int currentPosition) throws IOException {
+		if (value.isEmpty()) {
+			return currentPosition;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeFixed64NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedSfixed32(final int fieldNumber, final List<Integer> value, byte[] buffer, int position) throws IOException {
+		if (value.isEmpty()) {
+			return position;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeSfixed32NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedSfixed64(final int fieldNumber, final List<Long> value, byte[] buffer, int position) throws IOException {
+		if (value.isEmpty()) {
+			return position;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, position);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeSfixed64NoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedFloat(final int fieldNumber, final List<Float> value, byte[] buffer, int position) throws IOException {
+		if (value.isEmpty()) {
+			return position;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeFloatNoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedBool(final int fieldNumber, final List<Boolean> value, byte[] buffer, int position) throws IOException {
+		if (value.isEmpty()) {
+			return position;
+		}
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
+		result = writeRawVarint32(value.size(), buffer, result);
+		for (int i = 0; i < value.size(); i++) {
+			result = writeBoolNoTag(value.get(i), buffer, result);
+		}
+		return result;
+	}
+	
+	public static int writeRepeatedBytes(final int fieldNumber, final byte[] value, byte[] buffer, int position) throws IOException {
+		return writeBytes(fieldNumber, value, buffer, position);
+	}
 
 	public static int writeDouble(final int fieldNumber, final double value, byte[] output, int currentPosition) throws IOException {
 		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, output, currentPosition);
@@ -61,11 +222,6 @@ public class ProtobufOutputStream {
 	public static int writeBool(final int fieldNumber, final boolean value, byte[] buffer, int position) throws IOException {
 		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
 		return writeBoolNoTag(value, buffer, result);
-	}
-
-	public static int writeString(final int fieldNumber, final String value, byte[] buffer, int position) throws IOException {
-		int result = writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, buffer, position);
-		return writeStringNoTag(value, buffer, result);
 	}
 
 	public static void writeString(final int fieldNumber, final String value, ByteArrayOutputStream baos) throws IOException {
