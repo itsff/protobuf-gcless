@@ -1,5 +1,6 @@
 package com.google.code.proto.memless;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -7,7 +8,7 @@ public class ProtobufOutputStream {
 
 	static final int WIRETYPE_VARINT = 0;
 	static final int WIRETYPE_FIXED64 = 1;
-	static final int WIRETYPE_LENGTH_DELIMITED = 2;
+	public static final int WIRETYPE_LENGTH_DELIMITED = 2;
 	static final int WIRETYPE_START_GROUP = 3;
 	static final int WIRETYPE_END_GROUP = 4;
 	static final int WIRETYPE_FIXED32 = 5;
@@ -65,6 +66,24 @@ public class ProtobufOutputStream {
 	public static int writeString(final int fieldNumber, final String value, byte[] buffer, int position) throws IOException {
 		int result = writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, buffer, position);
 		return writeStringNoTag(value, buffer, result);
+	}
+
+	public static void writeString(final int fieldNumber, final String value, ByteArrayOutputStream baos) throws IOException {
+		final byte[] bytes = value.getBytes("UTF-8");
+		int size = computeTagSize(fieldNumber);
+		size += computeRawVarint32Size(bytes.length);
+		byte[] buffer = new byte[size];
+		int position = writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, buffer, 0);
+		writeRawVarint32(bytes.length, buffer, position);
+		baos.write(buffer);
+		baos.write(bytes);
+		baos.flush();
+	}
+
+	public static int writeString(final int fieldNumber, final byte[] value, byte[] buffer, int position) throws IOException {
+		int result = writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, buffer, position);
+		result = writeRawVarint32(value.length, buffer, result);
+		return writeRawBytes(value, buffer, result);
 	}
 
 	public static int writeBytes(final int fieldNumber, final byte[] value, byte[] buffer, int position) throws IOException {
@@ -153,7 +172,6 @@ public class ProtobufOutputStream {
 		if (buffer.length - position >= length) {
 // We have room in the current buffer.
 			System.arraycopy(value, offset, buffer, position, length);
-			position += length;
 		} else {
 			//TODO something with outputstreams
 // Write extends past current buffer.  Fill the rest of this buffer and

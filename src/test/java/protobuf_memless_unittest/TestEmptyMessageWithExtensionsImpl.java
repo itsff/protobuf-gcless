@@ -1,0 +1,4 @@
+package protobuf_memless_unittest;
+
+public class TestEmptyMessageWithExtensionsImpl implements protobuf_memless_unittest.UnittestProto.TestEmptyMessageWithExtensions {
+}
