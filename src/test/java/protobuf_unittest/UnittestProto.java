@@ -2084,10 +2084,10 @@ public final class UnittestProto {
     
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
+//      int size = memoizedSerializedSize;
+//      if (size != -1) return size;
     
-      size = 0;
+      int size = 0;
       if (hasOptionalInt32()) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, getOptionalInt32());

@@ -75,7 +75,6 @@ class MemlessParser {
 					outerClassName = outerClassName.replaceAll("\"", "");
 					continue;
 				}
-				System.out.println("Ignoring: " + optionType);
 				continue;
 			}
 			if (curToken.equals(Tokens.IMPORT_TOKEN)) {
@@ -91,7 +90,6 @@ class MemlessParser {
 				importedEnums.addAll(parser.getEnums());
 				continue;
 			}
-			System.out.println("Ignoring: " + curToken);
 		}
 
 		String strToAppend = null;
@@ -123,7 +121,6 @@ class MemlessParser {
 
 	private void appendPackageName(ProtobufMessage message, String name) {
 		message.setFullyClarifiedName(name + "." + message.getFullyClarifiedName());
-		System.out.println(message.getFullyClarifiedName());
 		for (ProtobufMessage curMessage : message.getNestedMessages()) {
 			appendPackageName(curMessage, getParent(message.getFullyClarifiedName()));
 		}
@@ -268,7 +265,6 @@ class MemlessParser {
 				parentMessage.addEnum(curEnum);
 				continue;
 			}
-			System.out.println("Ignoring: " + curToken);
 		}
 		throw new Exception("Incomplete message: " + parentMessage);
 	}
@@ -345,7 +341,6 @@ class MemlessParser {
 				fields.setDefaults(value);
 				continue;
 			}
-			System.out.println("Ignoring: " + curToken);
 		}
 		throw new Exception("Incomplete square braces");
 	}

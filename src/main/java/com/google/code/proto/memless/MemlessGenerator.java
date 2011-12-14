@@ -143,8 +143,6 @@ public class MemlessGenerator {
 						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 						result.append("totalSize += ProtobufOutputStream.computeEnumSize(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue());\n");
 					}
-					//TODO remove next line
-					result.append("System.out.println(totalSize);\n");
 					result.append("}\n");
 					continue;
 				}
@@ -166,34 +164,26 @@ public class MemlessGenerator {
 						result.append("totalSize += ProtobufOutputStream.computeRawVarint32Size(" + curField.getName() + "Buffer.length);\n");
 					}
 					result.append("totalSize += " + curField.getName() + "Buffer.length;\n");
-					//TODO remove next line
-					result.append("System.out.println(totalSize);\n");
 					result.append("}\n");
 					continue;
 				}
 				if (curField.getType().equals("string")) {
 					result.append("byte[] " + curField.getName() + "Buffer = null;\n");
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 					if (curField.getNature().equals("repeated")) {
-						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
 						result.append("ProtobufOutputStream.writeString(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i), baos);\n");
 						result.append("}\n");
 						result.append(curField.getName() + "Buffer = baos.toByteArray();\n");
 						result.append("totalSize += " + curField.getName() + "Buffer.length;\n");
-						//TODO remove next line
-						result.append("System.out.println(totalSize);\n");
-						result.append("}\n");
 					} else {
-						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 						result.append(curField.getName() + "Buffer = message.get" + curField.getBeanName() + "().getBytes(\"UTF-8\");\n");
 						result.append("totalSize += " + curField.getName() + "Buffer.length;\n");
 						result.append("totalSize += ProtobufOutputStream.computeTagSize(" + curField.getTag() + ");\n");
 						result.append("totalSize += ProtobufOutputStream.computeRawVarint32Size(" + curField.getName() + "Buffer.length);\n");
-						//TODO remove next line
-						result.append("System.out.println(totalSize);\n");
-						result.append("}\n");
 					}
+					result.append("}\n");
 					continue;
 				}
 
@@ -206,8 +196,6 @@ public class MemlessGenerator {
 						result.append("totalSize += ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i));\n");
 						result.append("}\n");
 					}
-					//TODO remove next line
-					result.append("System.out.println(totalSize);\n");
 					result.append("}\n");
 				} else {
 					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
@@ -219,8 +207,6 @@ public class MemlessGenerator {
 					} else {
 						result.append("ProtobufOutputStream.compute" + curField.getStreamBeanType() + "Size(" + curField.getTag() + ", message.get" + curField.getBeanName() + "());\n");
 					}
-					//TODO remove next line
-					result.append("System.out.println(totalSize);\n");
 					result.append("}\n");
 				}
 			}
@@ -233,8 +219,6 @@ public class MemlessGenerator {
 					} else {
 						result.append("position = ProtobufOutputStream.writeString(" + curField.getTag() + "," + curField.getName() + "Buffer, result, position);\n");
 					}
-					//TODO remove next line
-					result.append("System.out.println(position);\n");
 					result.append("}\n");
 					continue;
 				}
@@ -245,8 +229,6 @@ public class MemlessGenerator {
 					} else {
 						result.append("position = ProtobufOutputStream.writeEnum(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue(), result, position);\n");
 					}
-					//TODO remove next line
-					result.append("System.out.println(position);\n");
 					result.append("}\n");
 					continue;
 				}
@@ -270,8 +252,6 @@ public class MemlessGenerator {
 						result.append("Bytes(" + curField.getTag() + ", " + curField.getName() + "Buffer, result, position);\n");
 					}
 				}
-				//TODO remove next line
-				result.append("System.out.println(position);\n");
 				result.append("}\n");
 			}
 			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\nreturn result;\n} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
@@ -312,7 +292,9 @@ public class MemlessGenerator {
 		}
 		result.append("}\n");
 
-		BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Impl.java")));
+		//TODO check outer class
+		File outputFile = new File(output, curMessage.getName() + "Impl.java");
+		BufferedWriter messageWriter = new BufferedWriter(new FileWriter(outputFile));
 		appendPackage(messageWriter, packageName);
 		messageWriter.append(result.toString());
 		messageWriter.flush();

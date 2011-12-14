@@ -1,22 +1,52 @@
 package com.google.code.proto.memless;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import protobuf_memless_unittest.OneStringImpl;
+import protobuf_memless_unittest.ForeignMessageImpl;
 import protobuf_memless_unittest.TestAllTypesImpl;
-import protobuf_memless_unittest.UnittestProto.OneString;
-import protobuf_memless_unittest.UnittestProto.OneStringSerializer;
+import protobuf_memless_unittest.UnittestProto.ForeignMessage;
 import protobuf_memless_unittest.UnittestProto.TestAllTypes;
 import protobuf_memless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
 
 	@Test
-	public void testSerializationDeserialization() {
+	public void testSerializationDeserialization() throws Exception {
+
+		TestAllTypes message = createSampleMessage();
+
+		byte[] data = TestAllTypesSerializer.serialize(message);
+
+		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
+		result.toByteArray();
+		assertNotNull(result);
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		TestAllTypes message = createSampleMessage();
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < 100000; i++) {
+			TestAllTypesSerializer.serialize(message);
+		}
+		System.out.println("Optimized version: " + (System.currentTimeMillis() - start));
 		
+		byte[] data = TestAllTypesSerializer.serialize(message);
+		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
+		
+		start = System.currentTimeMillis();
+		for (int i = 0; i < 100000; i++) {
+			result.toByteArray();
+		}
+		System.out.println("Default version version: " + (System.currentTimeMillis() - start));
+	}
+
+	private static TestAllTypes createSampleMessage() {
 		TestAllTypes message = new TestAllTypesImpl();
 		message.setOptional_int32(1);
 		message.setOptional_int64(1l);
@@ -32,7 +62,7 @@ public class SerializationTest {
 		message.setOptional_double(1.1);
 		message.setOptional_bool(true);
 		message.setOptional_string("123");
-		message.setOptional_bytes(new byte[]{(byte)1, (byte)2});
+		message.setOptional_bytes(new byte[] {(byte) 1, (byte) 2});
 		message.setOptional_string_piece("123");
 		message.setOptional_cord("123");
 		List<Integer> valuesRepeated_int32 = new ArrayList<Integer>();
@@ -91,10 +121,16 @@ public class SerializationTest {
 		valuesRepeated_string.add("123");
 		valuesRepeated_string.add("123");
 		message.setRepeated_string(valuesRepeated_string);
-		message.setRepeated_bytes(new byte[]{(byte)1, (byte)2});
+		message.setRepeated_bytes(new byte[] {(byte) 1, (byte) 2});
 		List<protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage> valuesRepeated_nested_message = new ArrayList<protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessage>();
 		message.setRepeated_nested_message(valuesRepeated_nested_message);
 		List<protobuf_memless_unittest.UnittestProto.ForeignMessage> valuesRepeated_foreign_message = new ArrayList<protobuf_memless_unittest.UnittestProto.ForeignMessage>();
+		ForeignMessage foreignMessage1 = new ForeignMessageImpl();
+		foreignMessage1.setC(1);
+		ForeignMessage foreignMessage2 = new ForeignMessageImpl();
+		foreignMessage1.setC(2);
+		valuesRepeated_foreign_message.add(foreignMessage1);
+		valuesRepeated_foreign_message.add(foreignMessage2);
 		message.setRepeated_foreign_message(valuesRepeated_foreign_message);
 		List<protobuf_memless_import.ImportMessage> valuesRepeated_import_message = new ArrayList<protobuf_memless_import.ImportMessage>();
 		message.setRepeated_import_message(valuesRepeated_import_message);
@@ -126,12 +162,10 @@ public class SerializationTest {
 		message.setDefault_double(1.1);
 		message.setDefault_bool(true);
 		message.setDefault_string("123");
-		message.setDefault_bytes(new byte[]{(byte)1, (byte)2});
+		message.setDefault_bytes(new byte[] {(byte) 1, (byte) 2});
 		message.setDefault_string_piece("123");
 		message.setDefault_cord("123");
-		
-		byte[] data = TestAllTypesSerializer.serialize(message);
+		return message;
 	}
-	
-	
+
 }
