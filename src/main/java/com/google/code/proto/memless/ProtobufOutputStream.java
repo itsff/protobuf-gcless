@@ -2,8 +2,11 @@ package com.google.code.proto.memless;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import com.google.protobuf.WireFormat;
 
 public class ProtobufOutputStream {
 
@@ -24,10 +27,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeDoubleNoTag(value.get(i), buffer, result);
+			result = writeDouble(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -36,10 +40,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeInt32NoTag(value.get(i), buffer, result);
+			result = writeInt32(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -48,10 +53,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeInt64NoTag(value.get(i), buffer, result);
+			result = writeInt64(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -60,10 +66,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeUint32NoTag(value.get(i), buffer, result);
+			result = writeUint32(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -72,10 +79,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeUint64NoTag(value.get(i), buffer, result);
+			result = writeUint64(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -84,10 +92,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeSint32NoTag(value.get(i), buffer, result);
+			result = writeSint32(fieldNumber,value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -96,10 +105,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeSint64NoTag(value.get(i), buffer, result);
+			result = writeSint64(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -108,10 +118,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeFixed32NoTag(value.get(i), buffer, result);
+			result = writeFixed32(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -120,10 +131,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, currentPosition);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = currentPosition;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeFixed64NoTag(value.get(i), buffer, result);
+			result = writeFixed64(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -132,10 +144,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return position;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = position;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeSfixed32NoTag(value.get(i), buffer, result);
+			result = writeSfixed32(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -144,10 +157,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return position;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, position);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, position);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = position;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeSfixed64NoTag(value.get(i), buffer, result);
+			result = writeSfixed64(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -156,10 +170,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return position;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_FIXED32, buffer, position);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = position;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeFloatNoTag(value.get(i), buffer, result);
+			result = writeFloat(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -168,10 +183,11 @@ public class ProtobufOutputStream {
 		if (value.isEmpty()) {
 			return position;
 		}
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
-		result = writeRawVarint32(value.size(), buffer, result);
+//		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
+//		result = writeRawVarint32(value.size(), buffer, result);
+		int result = position;
 		for (int i = 0; i < value.size(); i++) {
-			result = writeBoolNoTag(value.get(i), buffer, result);
+			result = writeBool(fieldNumber, value.get(i), buffer, result);
 		}
 		return result;
 	}
@@ -187,6 +203,10 @@ public class ProtobufOutputStream {
 
 	public static int writeTag(final int fieldNumber, final int wireType, byte[] buffer, int position) throws IOException {
 		return writeRawVarint32(makeTag(fieldNumber, wireType), buffer, position);
+	}
+	
+	public static void writeMessageTag(final int fieldNumber, ByteArrayOutputStream baos) throws IOException {
+		writeRawVarint32(makeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED), baos);
 	}
 
 	public static int writeFloat(final int fieldNumber, final float value, byte[] buffer, int position) throws IOException {
@@ -246,6 +266,13 @@ public class ProtobufOutputStream {
 		int result = writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, buffer, position);
 		result = writeRawVarint32(value.length, buffer, result);
 		result = writeRawBytes(value, buffer, result);
+		return result;
+	}
+	
+	public static int computeBytesSize(final int fieldNumber, final byte[] value) throws IOException  {
+		int result = computeTagSize(fieldNumber);
+		result += computeRawVarint32Size(value.length);
+		result += value.length;
 		return result;
 	}
 
@@ -386,6 +413,26 @@ public class ProtobufOutputStream {
 			}
 		}
 	}
+	
+	public static void writeRawVarint32(int value, OutputStream baos) throws IOException {
+		while (true) {
+			if ((value & ~0x7F) == 0) {
+				writeRawByte(value, baos);
+				return;
+			} else {
+				writeRawByte((value & 0x7F) | 0x80, baos);
+				value >>>= 7;
+			}
+		}
+	}
+	
+	public static void writeRawByte(final int value, OutputStream baos) throws IOException {
+		writeRawByte((byte) value, baos);
+	}
+	
+	public static void writeRawByte(final byte value, OutputStream baos) throws IOException {
+		baos.write(value);
+	}
 
 	public static int writeRawVarint64(long value, byte[] buffer, int position) throws IOException {
 		int result = position;
@@ -404,6 +451,12 @@ public class ProtobufOutputStream {
 		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
 		return writeEnumNoTag(value, buffer, result);
 	}
+	
+	public static void writeEnum(final int fieldNumber, final int value, ByteArrayOutputStream baos) throws IOException {
+		writeRawVarint32(makeTag(fieldNumber, WIRETYPE_VARINT), baos);
+		writeRawVarint32(value, baos);
+	}
+	
 
 	public static int writeEnumNoTag(final int value, byte[] buffer, int position) throws IOException {
 		return writeRawVarint32(value, buffer, position);

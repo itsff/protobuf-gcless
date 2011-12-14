@@ -626,18 +626,24 @@ public final class UnittestProto {
 				byte[] optional_nested_messageBuffer = null;
 				if (message.hasOptional_nested_message()) {
 					optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getOptional_nested_message());
+					totalSize += ProtobufOutputStream.computeTagSize(18);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_nested_messageBuffer.length);
 					totalSize += optional_nested_messageBuffer.length;
 					System.out.println(totalSize);
 				}
 				byte[] optional_foreign_messageBuffer = null;
 				if (message.hasOptional_foreign_message()) {
 					optional_foreign_messageBuffer = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getOptional_foreign_message());
+					totalSize += ProtobufOutputStream.computeTagSize(19);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_foreign_messageBuffer.length);
 					totalSize += optional_foreign_messageBuffer.length;
 					System.out.println(totalSize);
 				}
 				byte[] optional_import_messageBuffer = null;
 				if (message.hasOptional_import_message()) {
 					optional_import_messageBuffer = protobuf_memless_import.ImportMessageSerializer.serialize(message.getOptional_import_message());
+					totalSize += ProtobufOutputStream.computeTagSize(20);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_import_messageBuffer.length);
 					totalSize += optional_import_messageBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -669,136 +675,84 @@ public final class UnittestProto {
 					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_cordBuffer.length);
 					System.out.println(totalSize);
 				}
-				int repeated_int32Size = 0;
 				if (message.hasRepeated_int32()) {
 					for (int i = 0; i < message.getRepeated_int32().size(); i++) {
-						repeated_int32Size += ProtobufOutputStream.computeInt32SizeNoTag(message.getRepeated_int32().get(i));
+						totalSize += ProtobufOutputStream.computeInt32Size(31, message.getRepeated_int32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(31);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_int32().size());
-					totalSize += repeated_int32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_int64Size = 0;
 				if (message.hasRepeated_int64()) {
 					for (int i = 0; i < message.getRepeated_int64().size(); i++) {
-						repeated_int64Size += ProtobufOutputStream.computeInt64SizeNoTag(message.getRepeated_int64().get(i));
+						totalSize += ProtobufOutputStream.computeInt64Size(32, message.getRepeated_int64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(32);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_int64().size());
-					totalSize += repeated_int64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_uint32Size = 0;
 				if (message.hasRepeated_uint32()) {
 					for (int i = 0; i < message.getRepeated_uint32().size(); i++) {
-						repeated_uint32Size += ProtobufOutputStream.computeUint32SizeNoTag(message.getRepeated_uint32().get(i));
+						totalSize += ProtobufOutputStream.computeUint32Size(33, message.getRepeated_uint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(33);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_uint32().size());
-					totalSize += repeated_uint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_uint64Size = 0;
 				if (message.hasRepeated_uint64()) {
 					for (int i = 0; i < message.getRepeated_uint64().size(); i++) {
-						repeated_uint64Size += ProtobufOutputStream.computeUint64SizeNoTag(message.getRepeated_uint64().get(i));
+						totalSize += ProtobufOutputStream.computeUint64Size(34, message.getRepeated_uint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(34);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_uint64().size());
-					totalSize += repeated_uint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_sint32Size = 0;
 				if (message.hasRepeated_sint32()) {
 					for (int i = 0; i < message.getRepeated_sint32().size(); i++) {
-						repeated_sint32Size += ProtobufOutputStream.computeSint32SizeNoTag(message.getRepeated_sint32().get(i));
+						totalSize += ProtobufOutputStream.computeSint32Size(35, message.getRepeated_sint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(35);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_sint32().size());
-					totalSize += repeated_sint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_sint64Size = 0;
 				if (message.hasRepeated_sint64()) {
 					for (int i = 0; i < message.getRepeated_sint64().size(); i++) {
-						repeated_sint64Size += ProtobufOutputStream.computeSint64SizeNoTag(message.getRepeated_sint64().get(i));
+						totalSize += ProtobufOutputStream.computeSint64Size(36, message.getRepeated_sint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(36);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_sint64().size());
-					totalSize += repeated_sint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_fixed32Size = 0;
 				if (message.hasRepeated_fixed32()) {
 					for (int i = 0; i < message.getRepeated_fixed32().size(); i++) {
-						repeated_fixed32Size += ProtobufOutputStream.computeFixed32SizeNoTag(message.getRepeated_fixed32().get(i));
+						totalSize += ProtobufOutputStream.computeFixed32Size(37, message.getRepeated_fixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(37);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_fixed32().size());
-					totalSize += repeated_fixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_fixed64Size = 0;
 				if (message.hasRepeated_fixed64()) {
 					for (int i = 0; i < message.getRepeated_fixed64().size(); i++) {
-						repeated_fixed64Size += ProtobufOutputStream.computeFixed64SizeNoTag(message.getRepeated_fixed64().get(i));
+						totalSize += ProtobufOutputStream.computeFixed64Size(38, message.getRepeated_fixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(38);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_fixed64().size());
-					totalSize += repeated_fixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_sfixed32Size = 0;
 				if (message.hasRepeated_sfixed32()) {
 					for (int i = 0; i < message.getRepeated_sfixed32().size(); i++) {
-						repeated_sfixed32Size += ProtobufOutputStream.computeSfixed32SizeNoTag(message.getRepeated_sfixed32().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed32Size(39, message.getRepeated_sfixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(39);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_sfixed32().size());
-					totalSize += repeated_sfixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_sfixed64Size = 0;
 				if (message.hasRepeated_sfixed64()) {
 					for (int i = 0; i < message.getRepeated_sfixed64().size(); i++) {
-						repeated_sfixed64Size += ProtobufOutputStream.computeSfixed64SizeNoTag(message.getRepeated_sfixed64().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed64Size(40, message.getRepeated_sfixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(40);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_sfixed64().size());
-					totalSize += repeated_sfixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_floatSize = 0;
 				if (message.hasRepeated_float()) {
 					for (int i = 0; i < message.getRepeated_float().size(); i++) {
-						repeated_floatSize += ProtobufOutputStream.computeFloatSizeNoTag(message.getRepeated_float().get(i));
+						totalSize += ProtobufOutputStream.computeFloatSize(41, message.getRepeated_float().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(41);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_float().size());
-					totalSize += repeated_floatSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_doubleSize = 0;
 				if (message.hasRepeated_double()) {
 					for (int i = 0; i < message.getRepeated_double().size(); i++) {
-						repeated_doubleSize += ProtobufOutputStream.computeDoubleSizeNoTag(message.getRepeated_double().get(i));
+						totalSize += ProtobufOutputStream.computeDoubleSize(42, message.getRepeated_double().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(42);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_double().size());
-					totalSize += repeated_doubleSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_boolSize = 0;
 				if (message.hasRepeated_bool()) {
 					for (int i = 0; i < message.getRepeated_bool().size(); i++) {
-						repeated_boolSize += ProtobufOutputStream.computeBoolSizeNoTag(message.getRepeated_bool().get(i));
+						totalSize += ProtobufOutputStream.computeBoolSize(43, message.getRepeated_bool().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(43);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_bool().size());
-					totalSize += repeated_boolSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				byte[] repeated_stringBuffer = null;
 				if (message.hasRepeated_string()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
@@ -806,24 +760,21 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(44, message.getRepeated_string().get(i), baos);
 					}
 					repeated_stringBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(44);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(repeated_stringBuffer.length);
 					totalSize += repeated_stringBuffer.length;
 					System.out.println(totalSize);
 				}
-				int repeated_bytesSize = 0;
 				if (message.hasRepeated_bytes()) {
-					repeated_bytesSize = message.getRepeated_bytes().length;
-					totalSize += repeated_bytesSize;
+					totalSize += ProtobufOutputStream.computeBytesSize(45, message.getRepeated_bytes());
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				byte[] repeated_nested_messageBuffer = null;
 				if (message.hasRepeated_nested_message()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(48);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_nested_message().size());
 					for (int i = 0; i < message.getRepeated_nested_message().size(); i++) {
-						baos.write(protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getRepeated_nested_message().get(i)));
+						byte[] curMessageData = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getRepeated_nested_message().get(i));
+						ProtobufOutputStream.writeMessageTag(48, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					repeated_nested_messageBuffer = baos.toByteArray();
 					totalSize += repeated_nested_messageBuffer.length;
@@ -832,10 +783,11 @@ public final class UnittestProto {
 				byte[] repeated_foreign_messageBuffer = null;
 				if (message.hasRepeated_foreign_message()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(49);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_foreign_message().size());
 					for (int i = 0; i < message.getRepeated_foreign_message().size(); i++) {
-						baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeated_foreign_message().get(i)));
+						byte[] curMessageData = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeated_foreign_message().get(i));
+						ProtobufOutputStream.writeMessageTag(49, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					repeated_foreign_messageBuffer = baos.toByteArray();
 					totalSize += repeated_foreign_messageBuffer.length;
@@ -844,45 +796,46 @@ public final class UnittestProto {
 				byte[] repeated_import_messageBuffer = null;
 				if (message.hasRepeated_import_message()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(50);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_import_message().size());
 					for (int i = 0; i < message.getRepeated_import_message().size(); i++) {
-						baos.write(protobuf_memless_import.ImportMessageSerializer.serialize(message.getRepeated_import_message().get(i)));
+						byte[] curMessageData = protobuf_memless_import.ImportMessageSerializer.serialize(message.getRepeated_import_message().get(i));
+						ProtobufOutputStream.writeMessageTag(50, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					repeated_import_messageBuffer = baos.toByteArray();
 					totalSize += repeated_import_messageBuffer.length;
 					System.out.println(totalSize);
 				}
-				int repeated_nested_enumSize = 0;
+				byte[] repeated_nested_enumBuffer = null;
 				if (message.hasRepeated_nested_enum()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_nested_enum().size(); i++) {
-						repeated_nested_enumSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getRepeated_nested_enum().get(i).getValue());
+						ProtobufOutputStream.writeEnum(51, message.getRepeated_nested_enum().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(51);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_nested_enum().size());
-					totalSize += repeated_nested_enumSize;
+					repeated_nested_enumBuffer = baos.toByteArray();
+					totalSize += repeated_nested_enumBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_foreign_enumSize = 0;
+				byte[] repeated_foreign_enumBuffer = null;
 				if (message.hasRepeated_foreign_enum()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_foreign_enum().size(); i++) {
-						repeated_foreign_enumSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getRepeated_foreign_enum().get(i).getValue());
+						ProtobufOutputStream.writeEnum(52, message.getRepeated_foreign_enum().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(52);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_foreign_enum().size());
-					totalSize += repeated_foreign_enumSize;
+					repeated_foreign_enumBuffer = baos.toByteArray();
+					totalSize += repeated_foreign_enumBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_import_enumSize = 0;
+				byte[] repeated_import_enumBuffer = null;
 				if (message.hasRepeated_import_enum()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeated_import_enum().size(); i++) {
-						repeated_import_enumSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getRepeated_import_enum().get(i).getValue());
+						ProtobufOutputStream.writeEnum(53, message.getRepeated_import_enum().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(53);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_import_enum().size());
-					totalSize += repeated_import_enumSize;
+					repeated_import_enumBuffer = baos.toByteArray();
+					totalSize += repeated_import_enumBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				byte[] repeated_string_pieceBuffer = null;
 				if (message.hasRepeated_string_piece()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
@@ -890,8 +843,6 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(54, message.getRepeated_string_piece().get(i), baos);
 					}
 					repeated_string_pieceBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(54);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(repeated_string_pieceBuffer.length);
 					totalSize += repeated_string_pieceBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -902,8 +853,6 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(55, message.getRepeated_cord().get(i), baos);
 					}
 					repeated_cordBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(55);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(repeated_cordBuffer.length);
 					totalSize += repeated_cordBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -1097,74 +1046,94 @@ public final class UnittestProto {
 				}
 				if (message.hasRepeated_int32()) {
 					position = ProtobufOutputStream.writeRepeatedInt32(31, message.getRepeated_int32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_int64()) {
 					position = ProtobufOutputStream.writeRepeatedInt64(32, message.getRepeated_int64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_uint32()) {
 					position = ProtobufOutputStream.writeRepeatedUint32(33, message.getRepeated_uint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_uint64()) {
 					position = ProtobufOutputStream.writeRepeatedUint64(34, message.getRepeated_uint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_sint32()) {
 					position = ProtobufOutputStream.writeRepeatedSint32(35, message.getRepeated_sint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_sint64()) {
 					position = ProtobufOutputStream.writeRepeatedSint64(36, message.getRepeated_sint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_fixed32()) {
 					position = ProtobufOutputStream.writeRepeatedFixed32(37, message.getRepeated_fixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_fixed64()) {
 					position = ProtobufOutputStream.writeRepeatedFixed64(38, message.getRepeated_fixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_sfixed32()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed32(39, message.getRepeated_sfixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_sfixed64()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed64(40, message.getRepeated_sfixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_float()) {
 					position = ProtobufOutputStream.writeRepeatedFloat(41, message.getRepeated_float(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_double()) {
 					position = ProtobufOutputStream.writeRepeatedDouble(42, message.getRepeated_double(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_bool()) {
 					position = ProtobufOutputStream.writeRepeatedBool(43, message.getRepeated_bool(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_string()) {
-					position = ProtobufOutputStream.writeString(44, repeated_stringBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(repeated_stringBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasRepeated_bytes()) {
 					position = ProtobufOutputStream.writeRepeatedBytes(45, message.getRepeated_bytes(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_nested_message()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_nested_messageBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_foreign_message()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_foreign_messageBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_import_message()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_import_messageBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_nested_enum()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_nested_enumBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_foreign_enum()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_foreign_enumBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_import_enum()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_import_enumBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_string_piece()) {
-					position = ProtobufOutputStream.writeString(54, repeated_string_pieceBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(repeated_string_pieceBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasRepeated_cord()) {
-					position = ProtobufOutputStream.writeString(55, repeated_cordBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(repeated_cordBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasDefault_int32()) {
@@ -1608,16 +1577,19 @@ public final class UnittestProto {
 				byte[] singleBuffer = null;
 				if (message.hasSingle()) {
 					singleBuffer = protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getSingle());
+					totalSize += ProtobufOutputStream.computeTagSize(1000);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(singleBuffer.length);
 					totalSize += singleBuffer.length;
 					System.out.println(totalSize);
 				}
 				byte[] multiBuffer = null;
 				if (message.hasMulti()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(1001);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getMulti().size());
 					for (int i = 0; i < message.getMulti().size(); i++) {
-						baos.write(protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getMulti().get(i)));
+						byte[] curMessageData = protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getMulti().get(i));
+						ProtobufOutputStream.writeMessageTag(1001, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					multiBuffer = baos.toByteArray();
 					totalSize += multiBuffer.length;
@@ -1762,7 +1734,8 @@ public final class UnittestProto {
 					System.out.println(position);
 				}
 				if (message.hasMulti()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(multiBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasDummy4()) {
 					position = ProtobufOutputStream.writeInt32(4, message.getDummy4(), result, position);
@@ -1932,16 +1905,19 @@ public final class UnittestProto {
 				byte[] optional_messageBuffer = null;
 				if (message.hasOptional_message()) {
 					optional_messageBuffer = protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getOptional_message());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_messageBuffer.length);
 					totalSize += optional_messageBuffer.length;
 					System.out.println(totalSize);
 				}
 				byte[] repeated_messageBuffer = null;
 				if (message.hasRepeated_message()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(2);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_message().size());
 					for (int i = 0; i < message.getRepeated_message().size(); i++) {
-						baos.write(protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getRepeated_message().get(i)));
+						byte[] curMessageData = protobuf_memless_unittest.UnittestProto.TestRequiredSerializer.serialize(message.getRepeated_message().get(i));
+						ProtobufOutputStream.writeMessageTag(2, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					repeated_messageBuffer = baos.toByteArray();
 					totalSize += repeated_messageBuffer.length;
@@ -1958,7 +1934,8 @@ public final class UnittestProto {
 					System.out.println(position);
 				}
 				if (message.hasRepeated_message()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(repeated_messageBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasDummy()) {
 					position = ProtobufOutputStream.writeInt32(3, message.getDummy(), result, position);
@@ -1991,6 +1968,8 @@ public final class UnittestProto {
 				byte[] foreign_nestedBuffer = null;
 				if (message.hasForeign_nested()) {
 					foreign_nestedBuffer = protobuf_memless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getForeign_nested());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(foreign_nestedBuffer.length);
 					totalSize += foreign_nestedBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2108,6 +2087,8 @@ public final class UnittestProto {
 				byte[] aBuffer = null;
 				if (message.hasA()) {
 					aBuffer = protobuf_memless_unittest.UnittestProto.TestRecursiveMessageSerializer.serialize(message.getA());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(aBuffer.length);
 					totalSize += aBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2152,6 +2133,8 @@ public final class UnittestProto {
 				byte[] bbBuffer = null;
 				if (message.hasBb()) {
 					bbBuffer = protobuf_memless_unittest.UnittestProto.TestMutualRecursionBSerializer.serialize(message.getBb());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(bbBuffer.length);
 					totalSize += bbBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2194,6 +2177,8 @@ public final class UnittestProto {
 				byte[] aBuffer = null;
 				if (message.hasA()) {
 					aBuffer = protobuf_memless_unittest.UnittestProto.TestMutualRecursionASerializer.serialize(message.getA());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(aBuffer.length);
 					totalSize += aBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2282,23 +2267,20 @@ public final class UnittestProto {
 				try {
 					assertInitialized(message);
 					int totalSize = 0;
-					int nestedmessage_repeated_int32Size = 0;
 					if (message.hasNestedmessage_repeated_int32()) {
 						for (int i = 0; i < message.getNestedmessage_repeated_int32().size(); i++) {
-							nestedmessage_repeated_int32Size += ProtobufOutputStream.computeInt32SizeNoTag(message.getNestedmessage_repeated_int32().get(i));
+							totalSize += ProtobufOutputStream.computeInt32Size(1, message.getNestedmessage_repeated_int32().get(i));
 						}
-						totalSize += ProtobufOutputStream.computeTagSize(1);
-						totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getNestedmessage_repeated_int32().size());
-						totalSize += nestedmessage_repeated_int32Size;
+						System.out.println(totalSize);
 					}
-					System.out.println(totalSize);
 					byte[] nestedmessage_repeated_foreignmessageBuffer = null;
 					if (message.hasNestedmessage_repeated_foreignmessage()) {
 						java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-						totalSize += ProtobufOutputStream.computeTagSize(2);
-						totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getNestedmessage_repeated_foreignmessage().size());
 						for (int i = 0; i < message.getNestedmessage_repeated_foreignmessage().size(); i++) {
-							baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getNestedmessage_repeated_foreignmessage().get(i)));
+							byte[] curMessageData = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getNestedmessage_repeated_foreignmessage().get(i));
+							ProtobufOutputStream.writeMessageTag(2, baos);
+							ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+							baos.write(curMessageData);
 						}
 						nestedmessage_repeated_foreignmessageBuffer = baos.toByteArray();
 						totalSize += nestedmessage_repeated_foreignmessageBuffer.length;
@@ -2308,9 +2290,11 @@ public final class UnittestProto {
 					int position = 0;
 					if (message.hasNestedmessage_repeated_int32()) {
 						position = ProtobufOutputStream.writeRepeatedInt32(1, message.getNestedmessage_repeated_int32(), result, position);
+						System.out.println(position);
 					}
 					if (message.hasNestedmessage_repeated_foreignmessage()) {
-//TODO
+						position = ProtobufOutputStream.writeRawBytes(nestedmessage_repeated_foreignmessageBuffer, result, position);
+						System.out.println(position);
 					}
 					ProtobufOutputStream.checkNoSpaceLeft(result, position);
 					return result;
@@ -2332,6 +2316,8 @@ public final class UnittestProto {
 				byte[] optional_nested_messageBuffer = null;
 				if (message.hasOptional_nested_message()) {
 					optional_nested_messageBuffer = protobuf_memless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.serialize(message.getOptional_nested_message());
+					totalSize += ProtobufOutputStream.computeTagSize(1);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(optional_nested_messageBuffer.length);
 					totalSize += optional_nested_messageBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2450,6 +2436,8 @@ public final class UnittestProto {
 				byte[] MessageFieldBuffer = null;
 				if (message.hasMessageField()) {
 					MessageFieldBuffer = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getMessageField());
+					totalSize += ProtobufOutputStream.computeTagSize(4);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(MessageFieldBuffer.length);
 					totalSize += MessageFieldBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2469,16 +2457,12 @@ public final class UnittestProto {
 					totalSize += ProtobufOutputStream.computeRawVarint32Size(CordFieldBuffer.length);
 					System.out.println(totalSize);
 				}
-				int RepeatedPrimitiveFieldSize = 0;
 				if (message.hasRepeatedPrimitiveField()) {
 					for (int i = 0; i < message.getRepeatedPrimitiveField().size(); i++) {
-						RepeatedPrimitiveFieldSize += ProtobufOutputStream.computeInt32SizeNoTag(message.getRepeatedPrimitiveField().get(i));
+						totalSize += ProtobufOutputStream.computeInt32Size(7, message.getRepeatedPrimitiveField().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(7);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeatedPrimitiveField().size());
-					totalSize += RepeatedPrimitiveFieldSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				byte[] RepeatedStringFieldBuffer = null;
 				if (message.hasRepeatedStringField()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
@@ -2486,28 +2470,27 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(8, message.getRepeatedStringField().get(i), baos);
 					}
 					RepeatedStringFieldBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(8);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(RepeatedStringFieldBuffer.length);
 					totalSize += RepeatedStringFieldBuffer.length;
 					System.out.println(totalSize);
 				}
-				int RepeatedEnumFieldSize = 0;
+				byte[] RepeatedEnumFieldBuffer = null;
 				if (message.hasRepeatedEnumField()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getRepeatedEnumField().size(); i++) {
-						RepeatedEnumFieldSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getRepeatedEnumField().get(i).getValue());
+						ProtobufOutputStream.writeEnum(9, message.getRepeatedEnumField().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(9);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeatedEnumField().size());
-					totalSize += RepeatedEnumFieldSize;
+					RepeatedEnumFieldBuffer = baos.toByteArray();
+					totalSize += RepeatedEnumFieldBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				byte[] RepeatedMessageFieldBuffer = null;
 				if (message.hasRepeatedMessageField()) {
 					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-					totalSize += ProtobufOutputStream.computeTagSize(10);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeatedMessageField().size());
 					for (int i = 0; i < message.getRepeatedMessageField().size(); i++) {
-						baos.write(protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeatedMessageField().get(i)));
+						byte[] curMessageData = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getRepeatedMessageField().get(i));
+						ProtobufOutputStream.writeMessageTag(10, baos);
+						ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);
+						baos.write(curMessageData);
 					}
 					RepeatedMessageFieldBuffer = baos.toByteArray();
 					totalSize += RepeatedMessageFieldBuffer.length;
@@ -2520,8 +2503,6 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(11, message.getRepeatedStringPieceField().get(i), baos);
 					}
 					RepeatedStringPieceFieldBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(11);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(RepeatedStringPieceFieldBuffer.length);
 					totalSize += RepeatedStringPieceFieldBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2532,8 +2513,6 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(12, message.getRepeatedCordField().get(i), baos);
 					}
 					RepeatedCordFieldBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(12);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(RepeatedCordFieldBuffer.length);
 					totalSize += RepeatedCordFieldBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -2565,23 +2544,26 @@ public final class UnittestProto {
 				}
 				if (message.hasRepeatedPrimitiveField()) {
 					position = ProtobufOutputStream.writeRepeatedInt32(7, message.getRepeatedPrimitiveField(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeatedStringField()) {
-					position = ProtobufOutputStream.writeString(8, RepeatedStringFieldBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(RepeatedStringFieldBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasRepeatedEnumField()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(RepeatedEnumFieldBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeatedMessageField()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(RepeatedMessageFieldBuffer, result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeatedStringPieceField()) {
-					position = ProtobufOutputStream.writeString(11, RepeatedStringPieceFieldBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(RepeatedStringPieceFieldBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasRepeatedCordField()) {
-					position = ProtobufOutputStream.writeString(12, RepeatedCordFieldBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(RepeatedCordFieldBuffer, result, position);
 					System.out.println(position);
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
@@ -3118,189 +3100,151 @@ public final class UnittestProto {
 			try {
 				assertInitialized(message);
 				int totalSize = 0;
-				int packed_int32Size = 0;
 				if (message.hasPacked_int32()) {
 					for (int i = 0; i < message.getPacked_int32().size(); i++) {
-						packed_int32Size += ProtobufOutputStream.computeInt32SizeNoTag(message.getPacked_int32().get(i));
+						totalSize += ProtobufOutputStream.computeInt32Size(90, message.getPacked_int32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(90);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_int32().size());
-					totalSize += packed_int32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_int64Size = 0;
 				if (message.hasPacked_int64()) {
 					for (int i = 0; i < message.getPacked_int64().size(); i++) {
-						packed_int64Size += ProtobufOutputStream.computeInt64SizeNoTag(message.getPacked_int64().get(i));
+						totalSize += ProtobufOutputStream.computeInt64Size(91, message.getPacked_int64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(91);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_int64().size());
-					totalSize += packed_int64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_uint32Size = 0;
 				if (message.hasPacked_uint32()) {
 					for (int i = 0; i < message.getPacked_uint32().size(); i++) {
-						packed_uint32Size += ProtobufOutputStream.computeUint32SizeNoTag(message.getPacked_uint32().get(i));
+						totalSize += ProtobufOutputStream.computeUint32Size(92, message.getPacked_uint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(92);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_uint32().size());
-					totalSize += packed_uint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_uint64Size = 0;
 				if (message.hasPacked_uint64()) {
 					for (int i = 0; i < message.getPacked_uint64().size(); i++) {
-						packed_uint64Size += ProtobufOutputStream.computeUint64SizeNoTag(message.getPacked_uint64().get(i));
+						totalSize += ProtobufOutputStream.computeUint64Size(93, message.getPacked_uint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(93);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_uint64().size());
-					totalSize += packed_uint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_sint32Size = 0;
 				if (message.hasPacked_sint32()) {
 					for (int i = 0; i < message.getPacked_sint32().size(); i++) {
-						packed_sint32Size += ProtobufOutputStream.computeSint32SizeNoTag(message.getPacked_sint32().get(i));
+						totalSize += ProtobufOutputStream.computeSint32Size(94, message.getPacked_sint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(94);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_sint32().size());
-					totalSize += packed_sint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_sint64Size = 0;
 				if (message.hasPacked_sint64()) {
 					for (int i = 0; i < message.getPacked_sint64().size(); i++) {
-						packed_sint64Size += ProtobufOutputStream.computeSint64SizeNoTag(message.getPacked_sint64().get(i));
+						totalSize += ProtobufOutputStream.computeSint64Size(95, message.getPacked_sint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(95);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_sint64().size());
-					totalSize += packed_sint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_fixed32Size = 0;
 				if (message.hasPacked_fixed32()) {
 					for (int i = 0; i < message.getPacked_fixed32().size(); i++) {
-						packed_fixed32Size += ProtobufOutputStream.computeFixed32SizeNoTag(message.getPacked_fixed32().get(i));
+						totalSize += ProtobufOutputStream.computeFixed32Size(96, message.getPacked_fixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(96);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_fixed32().size());
-					totalSize += packed_fixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_fixed64Size = 0;
 				if (message.hasPacked_fixed64()) {
 					for (int i = 0; i < message.getPacked_fixed64().size(); i++) {
-						packed_fixed64Size += ProtobufOutputStream.computeFixed64SizeNoTag(message.getPacked_fixed64().get(i));
+						totalSize += ProtobufOutputStream.computeFixed64Size(97, message.getPacked_fixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(97);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_fixed64().size());
-					totalSize += packed_fixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_sfixed32Size = 0;
 				if (message.hasPacked_sfixed32()) {
 					for (int i = 0; i < message.getPacked_sfixed32().size(); i++) {
-						packed_sfixed32Size += ProtobufOutputStream.computeSfixed32SizeNoTag(message.getPacked_sfixed32().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed32Size(98, message.getPacked_sfixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(98);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_sfixed32().size());
-					totalSize += packed_sfixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_sfixed64Size = 0;
 				if (message.hasPacked_sfixed64()) {
 					for (int i = 0; i < message.getPacked_sfixed64().size(); i++) {
-						packed_sfixed64Size += ProtobufOutputStream.computeSfixed64SizeNoTag(message.getPacked_sfixed64().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed64Size(99, message.getPacked_sfixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(99);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_sfixed64().size());
-					totalSize += packed_sfixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_floatSize = 0;
 				if (message.hasPacked_float()) {
 					for (int i = 0; i < message.getPacked_float().size(); i++) {
-						packed_floatSize += ProtobufOutputStream.computeFloatSizeNoTag(message.getPacked_float().get(i));
+						totalSize += ProtobufOutputStream.computeFloatSize(100, message.getPacked_float().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(100);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_float().size());
-					totalSize += packed_floatSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_doubleSize = 0;
 				if (message.hasPacked_double()) {
 					for (int i = 0; i < message.getPacked_double().size(); i++) {
-						packed_doubleSize += ProtobufOutputStream.computeDoubleSizeNoTag(message.getPacked_double().get(i));
+						totalSize += ProtobufOutputStream.computeDoubleSize(101, message.getPacked_double().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(101);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_double().size());
-					totalSize += packed_doubleSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_boolSize = 0;
 				if (message.hasPacked_bool()) {
 					for (int i = 0; i < message.getPacked_bool().size(); i++) {
-						packed_boolSize += ProtobufOutputStream.computeBoolSizeNoTag(message.getPacked_bool().get(i));
+						totalSize += ProtobufOutputStream.computeBoolSize(102, message.getPacked_bool().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(102);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_bool().size());
-					totalSize += packed_boolSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int packed_enumSize = 0;
+				byte[] packed_enumBuffer = null;
 				if (message.hasPacked_enum()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getPacked_enum().size(); i++) {
-						packed_enumSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getPacked_enum().get(i).getValue());
+						ProtobufOutputStream.writeEnum(103, message.getPacked_enum().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(103);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_enum().size());
-					totalSize += packed_enumSize;
+					packed_enumBuffer = baos.toByteArray();
+					totalSize += packed_enumBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				final byte[] result = new byte[totalSize];
 				int position = 0;
 				if (message.hasPacked_int32()) {
 					position = ProtobufOutputStream.writeRepeatedInt32(90, message.getPacked_int32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_int64()) {
 					position = ProtobufOutputStream.writeRepeatedInt64(91, message.getPacked_int64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_uint32()) {
 					position = ProtobufOutputStream.writeRepeatedUint32(92, message.getPacked_uint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_uint64()) {
 					position = ProtobufOutputStream.writeRepeatedUint64(93, message.getPacked_uint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_sint32()) {
 					position = ProtobufOutputStream.writeRepeatedSint32(94, message.getPacked_sint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_sint64()) {
 					position = ProtobufOutputStream.writeRepeatedSint64(95, message.getPacked_sint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_fixed32()) {
 					position = ProtobufOutputStream.writeRepeatedFixed32(96, message.getPacked_fixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_fixed64()) {
 					position = ProtobufOutputStream.writeRepeatedFixed64(97, message.getPacked_fixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_sfixed32()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed32(98, message.getPacked_sfixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_sfixed64()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed64(99, message.getPacked_sfixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_float()) {
 					position = ProtobufOutputStream.writeRepeatedFloat(100, message.getPacked_float(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_double()) {
 					position = ProtobufOutputStream.writeRepeatedDouble(101, message.getPacked_double(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_bool()) {
 					position = ProtobufOutputStream.writeRepeatedBool(102, message.getPacked_bool(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasPacked_enum()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(packed_enumBuffer, result, position);
+					System.out.println(position);
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
 				return result;
@@ -3404,189 +3348,151 @@ public final class UnittestProto {
 			try {
 				assertInitialized(message);
 				int totalSize = 0;
-				int unpacked_int32Size = 0;
 				if (message.hasUnpacked_int32()) {
 					for (int i = 0; i < message.getUnpacked_int32().size(); i++) {
-						unpacked_int32Size += ProtobufOutputStream.computeInt32SizeNoTag(message.getUnpacked_int32().get(i));
+						totalSize += ProtobufOutputStream.computeInt32Size(90, message.getUnpacked_int32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(90);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_int32().size());
-					totalSize += unpacked_int32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_int64Size = 0;
 				if (message.hasUnpacked_int64()) {
 					for (int i = 0; i < message.getUnpacked_int64().size(); i++) {
-						unpacked_int64Size += ProtobufOutputStream.computeInt64SizeNoTag(message.getUnpacked_int64().get(i));
+						totalSize += ProtobufOutputStream.computeInt64Size(91, message.getUnpacked_int64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(91);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_int64().size());
-					totalSize += unpacked_int64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_uint32Size = 0;
 				if (message.hasUnpacked_uint32()) {
 					for (int i = 0; i < message.getUnpacked_uint32().size(); i++) {
-						unpacked_uint32Size += ProtobufOutputStream.computeUint32SizeNoTag(message.getUnpacked_uint32().get(i));
+						totalSize += ProtobufOutputStream.computeUint32Size(92, message.getUnpacked_uint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(92);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_uint32().size());
-					totalSize += unpacked_uint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_uint64Size = 0;
 				if (message.hasUnpacked_uint64()) {
 					for (int i = 0; i < message.getUnpacked_uint64().size(); i++) {
-						unpacked_uint64Size += ProtobufOutputStream.computeUint64SizeNoTag(message.getUnpacked_uint64().get(i));
+						totalSize += ProtobufOutputStream.computeUint64Size(93, message.getUnpacked_uint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(93);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_uint64().size());
-					totalSize += unpacked_uint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_sint32Size = 0;
 				if (message.hasUnpacked_sint32()) {
 					for (int i = 0; i < message.getUnpacked_sint32().size(); i++) {
-						unpacked_sint32Size += ProtobufOutputStream.computeSint32SizeNoTag(message.getUnpacked_sint32().get(i));
+						totalSize += ProtobufOutputStream.computeSint32Size(94, message.getUnpacked_sint32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(94);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_sint32().size());
-					totalSize += unpacked_sint32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_sint64Size = 0;
 				if (message.hasUnpacked_sint64()) {
 					for (int i = 0; i < message.getUnpacked_sint64().size(); i++) {
-						unpacked_sint64Size += ProtobufOutputStream.computeSint64SizeNoTag(message.getUnpacked_sint64().get(i));
+						totalSize += ProtobufOutputStream.computeSint64Size(95, message.getUnpacked_sint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(95);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_sint64().size());
-					totalSize += unpacked_sint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_fixed32Size = 0;
 				if (message.hasUnpacked_fixed32()) {
 					for (int i = 0; i < message.getUnpacked_fixed32().size(); i++) {
-						unpacked_fixed32Size += ProtobufOutputStream.computeFixed32SizeNoTag(message.getUnpacked_fixed32().get(i));
+						totalSize += ProtobufOutputStream.computeFixed32Size(96, message.getUnpacked_fixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(96);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_fixed32().size());
-					totalSize += unpacked_fixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_fixed64Size = 0;
 				if (message.hasUnpacked_fixed64()) {
 					for (int i = 0; i < message.getUnpacked_fixed64().size(); i++) {
-						unpacked_fixed64Size += ProtobufOutputStream.computeFixed64SizeNoTag(message.getUnpacked_fixed64().get(i));
+						totalSize += ProtobufOutputStream.computeFixed64Size(97, message.getUnpacked_fixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(97);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_fixed64().size());
-					totalSize += unpacked_fixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_sfixed32Size = 0;
 				if (message.hasUnpacked_sfixed32()) {
 					for (int i = 0; i < message.getUnpacked_sfixed32().size(); i++) {
-						unpacked_sfixed32Size += ProtobufOutputStream.computeSfixed32SizeNoTag(message.getUnpacked_sfixed32().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed32Size(98, message.getUnpacked_sfixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(98);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_sfixed32().size());
-					totalSize += unpacked_sfixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_sfixed64Size = 0;
 				if (message.hasUnpacked_sfixed64()) {
 					for (int i = 0; i < message.getUnpacked_sfixed64().size(); i++) {
-						unpacked_sfixed64Size += ProtobufOutputStream.computeSfixed64SizeNoTag(message.getUnpacked_sfixed64().get(i));
+						totalSize += ProtobufOutputStream.computeSfixed64Size(99, message.getUnpacked_sfixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(99);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_sfixed64().size());
-					totalSize += unpacked_sfixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_floatSize = 0;
 				if (message.hasUnpacked_float()) {
 					for (int i = 0; i < message.getUnpacked_float().size(); i++) {
-						unpacked_floatSize += ProtobufOutputStream.computeFloatSizeNoTag(message.getUnpacked_float().get(i));
+						totalSize += ProtobufOutputStream.computeFloatSize(100, message.getUnpacked_float().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(100);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_float().size());
-					totalSize += unpacked_floatSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_doubleSize = 0;
 				if (message.hasUnpacked_double()) {
 					for (int i = 0; i < message.getUnpacked_double().size(); i++) {
-						unpacked_doubleSize += ProtobufOutputStream.computeDoubleSizeNoTag(message.getUnpacked_double().get(i));
+						totalSize += ProtobufOutputStream.computeDoubleSize(101, message.getUnpacked_double().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(101);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_double().size());
-					totalSize += unpacked_doubleSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_boolSize = 0;
 				if (message.hasUnpacked_bool()) {
 					for (int i = 0; i < message.getUnpacked_bool().size(); i++) {
-						unpacked_boolSize += ProtobufOutputStream.computeBoolSizeNoTag(message.getUnpacked_bool().get(i));
+						totalSize += ProtobufOutputStream.computeBoolSize(102, message.getUnpacked_bool().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(102);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_bool().size());
-					totalSize += unpacked_boolSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int unpacked_enumSize = 0;
+				byte[] unpacked_enumBuffer = null;
 				if (message.hasUnpacked_enum()) {
+					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 					for (int i = 0; i < message.getUnpacked_enum().size(); i++) {
-						unpacked_enumSize += ProtobufOutputStream.computeEnumSizeNoTag(message.getUnpacked_enum().get(i).getValue());
+						ProtobufOutputStream.writeEnum(103, message.getUnpacked_enum().get(i).getValue(), baos);
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(103);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getUnpacked_enum().size());
-					totalSize += unpacked_enumSize;
+					unpacked_enumBuffer = baos.toByteArray();
+					totalSize += unpacked_enumBuffer.length;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				final byte[] result = new byte[totalSize];
 				int position = 0;
 				if (message.hasUnpacked_int32()) {
 					position = ProtobufOutputStream.writeRepeatedInt32(90, message.getUnpacked_int32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_int64()) {
 					position = ProtobufOutputStream.writeRepeatedInt64(91, message.getUnpacked_int64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_uint32()) {
 					position = ProtobufOutputStream.writeRepeatedUint32(92, message.getUnpacked_uint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_uint64()) {
 					position = ProtobufOutputStream.writeRepeatedUint64(93, message.getUnpacked_uint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_sint32()) {
 					position = ProtobufOutputStream.writeRepeatedSint32(94, message.getUnpacked_sint32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_sint64()) {
 					position = ProtobufOutputStream.writeRepeatedSint64(95, message.getUnpacked_sint64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_fixed32()) {
 					position = ProtobufOutputStream.writeRepeatedFixed32(96, message.getUnpacked_fixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_fixed64()) {
 					position = ProtobufOutputStream.writeRepeatedFixed64(97, message.getUnpacked_fixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_sfixed32()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed32(98, message.getUnpacked_sfixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_sfixed64()) {
 					position = ProtobufOutputStream.writeRepeatedSfixed64(99, message.getUnpacked_sfixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_float()) {
 					position = ProtobufOutputStream.writeRepeatedFloat(100, message.getUnpacked_float(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_double()) {
 					position = ProtobufOutputStream.writeRepeatedDouble(101, message.getUnpacked_double(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_bool()) {
 					position = ProtobufOutputStream.writeRepeatedBool(102, message.getUnpacked_bool(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasUnpacked_enum()) {
-//TODO
+					position = ProtobufOutputStream.writeRawBytes(unpacked_enumBuffer, result, position);
+					System.out.println(position);
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
 				return result;
@@ -3733,12 +3639,16 @@ public final class UnittestProto {
 				byte[] message_extensionBuffer = null;
 				if (message.hasMessage_extension()) {
 					message_extensionBuffer = protobuf_memless_unittest.UnittestProto.ForeignMessageSerializer.serialize(message.getMessage_extension());
+					totalSize += ProtobufOutputStream.computeTagSize(2003);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(message_extensionBuffer.length);
 					totalSize += message_extensionBuffer.length;
 					System.out.println(totalSize);
 				}
 				byte[] dynamic_message_extensionBuffer = null;
 				if (message.hasDynamic_message_extension()) {
 					dynamic_message_extensionBuffer = protobuf_memless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageTypeSerializer.serialize(message.getDynamic_message_extension());
+					totalSize += ProtobufOutputStream.computeTagSize(2004);
+					totalSize += ProtobufOutputStream.computeRawVarint32Size(dynamic_message_extensionBuffer.length);
 					totalSize += dynamic_message_extensionBuffer.length;
 					System.out.println(totalSize);
 				}
@@ -3749,21 +3659,15 @@ public final class UnittestProto {
 						ProtobufOutputStream.writeString(2005, message.getRepeated_extension().get(i), baos);
 					}
 					repeated_extensionBuffer = baos.toByteArray();
-					totalSize += ProtobufOutputStream.computeTagSize(2005);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(repeated_extensionBuffer.length);
 					totalSize += repeated_extensionBuffer.length;
 					System.out.println(totalSize);
 				}
-				int packed_extensionSize = 0;
 				if (message.hasPacked_extension()) {
 					for (int i = 0; i < message.getPacked_extension().size(); i++) {
-						packed_extensionSize += ProtobufOutputStream.computeSint32SizeNoTag(message.getPacked_extension().get(i));
+						totalSize += ProtobufOutputStream.computeSint32Size(2006, message.getPacked_extension().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(2006);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getPacked_extension().size());
-					totalSize += packed_extensionSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				final byte[] result = new byte[totalSize];
 				int position = 0;
 				if (message.hasScalar_extension()) {
@@ -3787,11 +3691,12 @@ public final class UnittestProto {
 					System.out.println(position);
 				}
 				if (message.hasRepeated_extension()) {
-					position = ProtobufOutputStream.writeString(2005, repeated_extensionBuffer, result, position);
+					position = ProtobufOutputStream.writeRawBytes(repeated_extensionBuffer, result, position);
 					System.out.println(position);
 				}
 				if (message.hasPacked_extension()) {
 					position = ProtobufOutputStream.writeRepeatedSint32(2006, message.getPacked_extension(), result, position);
+					System.out.println(position);
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
 				return result;
@@ -3847,85 +3752,67 @@ public final class UnittestProto {
 			try {
 				assertInitialized(message);
 				int totalSize = 0;
-				int repeated_fixed32Size = 0;
 				if (message.hasRepeated_fixed32()) {
 					for (int i = 0; i < message.getRepeated_fixed32().size(); i++) {
-						repeated_fixed32Size += ProtobufOutputStream.computeFixed32SizeNoTag(message.getRepeated_fixed32().get(i));
+						totalSize += ProtobufOutputStream.computeFixed32Size(12, message.getRepeated_fixed32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(12);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_fixed32().size());
-					totalSize += repeated_fixed32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_int32Size = 0;
 				if (message.hasRepeated_int32()) {
 					for (int i = 0; i < message.getRepeated_int32().size(); i++) {
-						repeated_int32Size += ProtobufOutputStream.computeInt32SizeNoTag(message.getRepeated_int32().get(i));
+						totalSize += ProtobufOutputStream.computeInt32Size(13, message.getRepeated_int32().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(13);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_int32().size());
-					totalSize += repeated_int32Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_fixed64Size = 0;
 				if (message.hasRepeated_fixed64()) {
 					for (int i = 0; i < message.getRepeated_fixed64().size(); i++) {
-						repeated_fixed64Size += ProtobufOutputStream.computeFixed64SizeNoTag(message.getRepeated_fixed64().get(i));
+						totalSize += ProtobufOutputStream.computeFixed64Size(2046, message.getRepeated_fixed64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(2046);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_fixed64().size());
-					totalSize += repeated_fixed64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_int64Size = 0;
 				if (message.hasRepeated_int64()) {
 					for (int i = 0; i < message.getRepeated_int64().size(); i++) {
-						repeated_int64Size += ProtobufOutputStream.computeInt64SizeNoTag(message.getRepeated_int64().get(i));
+						totalSize += ProtobufOutputStream.computeInt64Size(2047, message.getRepeated_int64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(2047);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_int64().size());
-					totalSize += repeated_int64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_floatSize = 0;
 				if (message.hasRepeated_float()) {
 					for (int i = 0; i < message.getRepeated_float().size(); i++) {
-						repeated_floatSize += ProtobufOutputStream.computeFloatSizeNoTag(message.getRepeated_float().get(i));
+						totalSize += ProtobufOutputStream.computeFloatSize(262142, message.getRepeated_float().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(262142);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_float().size());
-					totalSize += repeated_floatSize;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
-				int repeated_uint64Size = 0;
 				if (message.hasRepeated_uint64()) {
 					for (int i = 0; i < message.getRepeated_uint64().size(); i++) {
-						repeated_uint64Size += ProtobufOutputStream.computeUint64SizeNoTag(message.getRepeated_uint64().get(i));
+						totalSize += ProtobufOutputStream.computeUint64Size(262143, message.getRepeated_uint64().get(i));
 					}
-					totalSize += ProtobufOutputStream.computeTagSize(262143);
-					totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getRepeated_uint64().size());
-					totalSize += repeated_uint64Size;
+					System.out.println(totalSize);
 				}
-				System.out.println(totalSize);
 				final byte[] result = new byte[totalSize];
 				int position = 0;
 				if (message.hasRepeated_fixed32()) {
 					position = ProtobufOutputStream.writeRepeatedFixed32(12, message.getRepeated_fixed32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_int32()) {
 					position = ProtobufOutputStream.writeRepeatedInt32(13, message.getRepeated_int32(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_fixed64()) {
 					position = ProtobufOutputStream.writeRepeatedFixed64(2046, message.getRepeated_fixed64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_int64()) {
 					position = ProtobufOutputStream.writeRepeatedInt64(2047, message.getRepeated_int64(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_float()) {
 					position = ProtobufOutputStream.writeRepeatedFloat(262142, message.getRepeated_float(), result, position);
+					System.out.println(position);
 				}
 				if (message.hasRepeated_uint64()) {
 					position = ProtobufOutputStream.writeRepeatedUint64(262143, message.getRepeated_uint64(), result, position);
+					System.out.println(position);
 				}
 				ProtobufOutputStream.checkNoSpaceLeft(result, position);
 				return result;
