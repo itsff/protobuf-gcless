@@ -421,4 +421,7 @@ public void setC(int C) {
 this.C = C;
 this.hasC = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestRequired create() {
+return new TestRequiredImpl();
+}
 }

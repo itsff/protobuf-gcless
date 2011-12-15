@@ -169,4 +169,7 @@ public void setUnpacked_enum(java.util.List<protobuf_gcless_unittest.UnittestPro
 this.Unpacked_enum = Unpacked_enum;
 this.hasUnpacked_enum = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes create() {
+return new TestUnpackedTypesImpl();
+}
 }

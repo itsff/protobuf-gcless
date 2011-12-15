@@ -13,4 +13,7 @@ public void setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB Bb
 this.Bb = Bb;
 this.hasBb = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA create() {
+return new TestMutualRecursionAImpl();
+}
 }

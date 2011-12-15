@@ -13,4 +13,7 @@ public void setDeprecated_int32(int Deprecated_int32) {
 this.Deprecated_int32 = Deprecated_int32;
 this.hasDeprecated_int32 = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields create() {
+return new TestDeprecatedFieldsImpl();
+}
 }

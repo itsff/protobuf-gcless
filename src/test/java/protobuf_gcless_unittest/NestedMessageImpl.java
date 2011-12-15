@@ -25,4 +25,7 @@ public void setNestedmessage_repeated_foreignmessage(java.util.List<protobuf_gcl
 this.Nestedmessage_repeated_foreignmessage = Nestedmessage_repeated_foreignmessage;
 this.hasNestedmessage_repeated_foreignmessage = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage create() {
+return new NestedMessageImpl();
+}
 }

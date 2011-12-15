@@ -145,4 +145,7 @@ public void setRepeatedCordField(java.util.List<String> RepeatedCordField) {
 this.RepeatedCordField = RepeatedCordField;
 this.hasRepeatedCordField = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames create() {
+return new TestCamelCaseFieldNamesImpl();
+}
 }

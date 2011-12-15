@@ -13,4 +13,7 @@ public void setForeign_nested(protobuf_gcless_unittest.UnittestProto.TestAllType
 this.Foreign_nested = Foreign_nested;
 this.hasForeign_nested = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestForeignNested create() {
+return new TestForeignNestedImpl();
+}
 }

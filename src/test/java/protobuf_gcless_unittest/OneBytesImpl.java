@@ -13,4 +13,7 @@ public void setData(byte[] Data) {
 this.Data = Data;
 this.hasData = true;
 }
+public protobuf_gcless_unittest.UnittestProto.OneBytes create() {
+return new OneBytesImpl();
+}
 }

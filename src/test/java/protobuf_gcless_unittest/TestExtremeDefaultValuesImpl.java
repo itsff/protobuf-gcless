@@ -229,4 +229,7 @@ public void setNan_float(float Nan_float) {
 this.Nan_float = Nan_float;
 this.hasNan_float = true;
 }
+public protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues create() {
+return new TestExtremeDefaultValuesImpl();
+}
 }

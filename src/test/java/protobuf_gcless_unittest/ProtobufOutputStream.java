@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class ProtobufOutputStream {
+final public class ProtobufOutputStream {
 
 	static final int WIRETYPE_VARINT = 0;
 	static final int WIRETYPE_FIXED64 = 1;
@@ -802,6 +802,10 @@ public class ProtobufOutputStream {
 
 	public static int computeSint64SizeNoTag(final long value) {
 		return computeRawVarint64Size(encodeZigZag64(value));
+	}
+	
+	private ProtobufOutputStream() {
+		//do nothing
 	}
 
 }
