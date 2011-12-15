@@ -1,4 +1,0 @@
-package protobuf_memless_unittest;
-
-public class TestPackedExtensionsImpl implements protobuf_memless_unittest.UnittestProto.TestPackedExtensions {
-}
