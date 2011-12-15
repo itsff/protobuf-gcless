@@ -1,4 +1,4 @@
-package protobuf_memless_import;
+package protobuf_gcless_import;
 
 option optimize_for = SPEED;
 
