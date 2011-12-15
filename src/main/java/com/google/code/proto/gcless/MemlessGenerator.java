@@ -1,8 +1,12 @@
-package com.google.code.proto.memless;
+package com.google.code.proto.gcless;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +56,6 @@ public class MemlessGenerator {
 			w.append(HEADER);
 			appendPackage(w, parser.getPackageName());
 			appendImport(w, "java.io.IOException");
-			appendImport(w, "com.google.code.proto.memless.ProtobufOutputStream");
 			w.append("public final class ");
 			w.append(parser.getOuterClassName());
 			w.append(" {\nprivate ");
@@ -89,7 +92,6 @@ public class MemlessGenerator {
 				appendPackage(messageWriter, parser.getPackageName());
 				if (!curMessage.getFields().isEmpty()) {
 					appendImport(messageWriter, "java.io.IOException");
-					appendImport(messageWriter, "com.google.code.proto.memless.ProtobufOutputStream");
 				}
 				messageWriter.append(serializerData);
 				messageWriter.flush();
@@ -109,7 +111,25 @@ public class MemlessGenerator {
 				generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
 			}
 		}
+		InputStream protobufOutputStream = MemlessGenerator.class.getResourceAsStream("ProtobufOutputStream.java");
+		if (protobufOutputStream == null) {
+			throw new Exception("Cannot find ProtobufOutputStream.java in classpath");
+		}
+		FileOutputStream fos = new FileOutputStream(new File(output, "ProtobufOutputStream.java"));
+		copy(protobufOutputStream, fos, 2048);
+		protobufOutputStream.close();
+		fos.flush();
+		fos.close();
+	}
 
+	private static void copy(InputStream input, OutputStream output, int bufferSize) throws IOException {
+		byte[] buf = new byte[bufferSize];
+		int bytesRead = input.read(buf);
+		while (bytesRead != -1) {
+			output.write(buf, 0, bytesRead);
+			bytesRead = input.read(buf);
+		}
+		output.flush();
 	}
 
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName) {
@@ -255,6 +275,70 @@ public class MemlessGenerator {
 				result.append("}\n");
 			}
 			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\nreturn result;\n} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
+			result.append("public static void serialize(" + fullMessageType + " message, java.io.OutputStream os) {\n");
+			result.append("try {\nassertInitialized(message);\n");
+			for (ProtobufField curField : curMessage.getFields()) {
+				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+				if (curField.getType().equals("string")) {
+					if (curField.getNature().equals("repeated")) {
+						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						result.append("ProtobufOutputStream.writeString(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i), os);\n");
+						result.append("}\n");
+					} else {
+						result.append("ProtobufOutputStream.writeString(" + curField.getTag() + ", message.get" + curField.getBeanName() + "(), os);\n");
+					}
+				} else if (curField.isEnumType()) {
+					if (curField.getNature().equals("repeated")) {
+						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						result.append("ProtobufOutputStream.writeEnum(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i).getValue(), os);\n");
+						result.append("}\n");
+					} else {
+						result.append("ProtobufOutputStream.writeEnum(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue(), os);\n");
+					}
+				} else if (curField.isComplexType()) {
+					if (curField.getNature().equals("repeated")) {
+						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						result.append("byte[] curMessageData = " + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "().get(i));\n");
+						result.append("ProtobufOutputStream.writeMessageTag(" + curField.getTag() + ", os);\n");
+						result.append("ProtobufOutputStream.writeRawVarint32(curMessageData.length, os);\n");
+						result.append("os.write(curMessageData);\n");
+						result.append("}\n");
+					} else {
+						result.append("byte[] curMessageData = " + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "());\n");
+						result.append("ProtobufOutputStream.writeMessageTag(" + curField.getTag() + ", os);\n");
+						result.append("ProtobufOutputStream.writeRawVarint32(curMessageData.length, os);\n");
+						result.append("os.write(curMessageData);\n");
+					}
+				} else if (curField.getType().equals("bytes")) {
+					result.append("ProtobufOutputStream.writeBytes(");
+					result.append(curField.getTag());
+					result.append(", message.get");
+					result.append(curField.getBeanName());
+					result.append("(), os);\n");
+				} else {
+					if (curField.getNature().equals("repeated")) {
+						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
+						result.append("ProtobufOutputStream.write");
+						result.append(curField.getStreamBeanType());
+						result.append("(");
+						result.append(curField.getTag());
+						result.append(", message.get");
+						result.append(curField.getBeanName());
+						result.append("().get(i), os);\n");
+						result.append("}\n");
+					} else {
+						result.append("ProtobufOutputStream.write");
+						result.append(curField.getStreamBeanType());
+						result.append("(");
+						result.append(curField.getTag());
+						result.append(", message.get");
+						result.append(curField.getBeanName());
+						result.append("(), os);\n");
+					}
+				}
+				result.append("}\n");
+			}
+			result.append("} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
 			result.append("private static void assertInitialized(");
 			result.append(fullMessageType);
 			result.append(" message) {\n");

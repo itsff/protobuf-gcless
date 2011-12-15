@@ -1,4 +1,4 @@
-package com.google.code.proto.memless;
+package com.google.code.proto.gcless;
 
 final class EnumValue {
 

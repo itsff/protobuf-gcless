@@ -1,4 +1,4 @@
-package com.google.code.proto.memless;
+package com.google.code.proto.gcless;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -421,7 +421,7 @@ class MemlessParser {
 		return curToken;
 	}
 
-	private static void enrichFieldsInMessage(List<ProtobufMessage> messages, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) {
+	private static void enrichFieldsInMessage(List<ProtobufMessage> messages, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) throws Exception {
 		for (ProtobufMessage curMessage : messages) {
 			if (curMessage.getFields() != null) {
 				for (ProtobufField curField : curMessage.getFields()) {
@@ -434,7 +434,7 @@ class MemlessParser {
 		}
 	}
 
-	private static void enrichField(ProtobufField curField, String prefix, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) {
+	private static void enrichField(ProtobufField curField, String prefix, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) throws Exception {
 		curField.setBeanName(convertNameToJavabean(curField.getName()));
 		curField.setStreamBeanType(convertNameToJavabean(curField.getType()));
 
@@ -502,7 +502,7 @@ class MemlessParser {
 		}
 
 		curField.setFullyClarifiedJavaType(curField.getType());
-		System.out.println("unknown field type: " + type);
+		throw new Exception("unknown field type: " + type);
 	}
 
 	private static boolean isEnum(List<ProtobufMessage> messages, String type) {
