@@ -13,7 +13,4 @@ public void setA(int A) {
 this.A = A;
 this.hasA = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber create() {
-return new TestDupFieldNumberImpl();
-}
 }

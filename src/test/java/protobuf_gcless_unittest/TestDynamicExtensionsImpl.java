@@ -85,7 +85,4 @@ public void setPacked_extension(java.util.List<Integer> Packed_extension) {
 this.Packed_extension = Packed_extension;
 this.hasPacked_extension = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions create() {
-return new TestDynamicExtensionsImpl();
-}
 }

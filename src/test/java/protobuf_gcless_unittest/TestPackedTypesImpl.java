@@ -169,7 +169,4 @@ public void setPacked_enum(java.util.List<protobuf_gcless_unittest.UnittestProto
 this.Packed_enum = Packed_enum;
 this.hasPacked_enum = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestPackedTypes create() {
-return new TestPackedTypesImpl();
-}
 }

@@ -1,5 +1,6 @@
 package com.google.code.proto.gcless;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,17 @@ import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
 
+	@Test
+	public void testDeserialization() throws Exception {
+		TestAllTypes message = createSampleMessage();
+
+		byte[] data = TestAllTypesSerializer.serialize(message);
+
+		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
+		assertNotNull(result);
+		assertEquals(message.getDefault_string(), result.getDefault_string());
+	}
+	
 	@Test
 	public void testSerializationDeserialization() throws Exception {
 

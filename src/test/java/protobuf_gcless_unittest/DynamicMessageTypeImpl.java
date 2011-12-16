@@ -13,7 +13,4 @@ public void setDynamic_field(int Dynamic_field) {
 this.Dynamic_field = Dynamic_field;
 this.hasDynamic_field = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType create() {
-return new DynamicMessageTypeImpl();
-}
 }

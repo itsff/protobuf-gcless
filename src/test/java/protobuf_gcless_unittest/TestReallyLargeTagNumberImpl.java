@@ -25,7 +25,4 @@ public void setBb(int Bb) {
 this.Bb = Bb;
 this.hasBb = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber create() {
-return new TestReallyLargeTagNumberImpl();
-}
 }

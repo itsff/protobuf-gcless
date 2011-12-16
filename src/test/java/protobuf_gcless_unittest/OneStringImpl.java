@@ -13,7 +13,4 @@ public void setData(String Data) {
 this.Data = Data;
 this.hasData = true;
 }
-public protobuf_gcless_unittest.UnittestProto.OneString create() {
-return new OneStringImpl();
-}
 }

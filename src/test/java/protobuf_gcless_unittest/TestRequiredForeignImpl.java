@@ -37,7 +37,4 @@ public void setDummy(int Dummy) {
 this.Dummy = Dummy;
 this.hasDummy = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestRequiredForeign create() {
-return new TestRequiredForeignImpl();
-}
 }

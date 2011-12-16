@@ -13,7 +13,4 @@ public void setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.Te
 this.Optional_nested_message = Optional_nested_message;
 this.hasOptional_nested_message = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits create() {
-return new TestNestedMessageHasBitsImpl();
-}
 }

@@ -793,7 +793,4 @@ public void setDefault_cord(String Default_cord) {
 this.Default_cord = Default_cord;
 this.hasDefault_cord = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestAllTypes create() {
-return new TestAllTypesImpl();
-}
 }

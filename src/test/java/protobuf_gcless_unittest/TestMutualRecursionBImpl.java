@@ -25,7 +25,4 @@ public void setOptional_int32(int Optional_int32) {
 this.Optional_int32 = Optional_int32;
 this.hasOptional_int32 = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB create() {
-return new TestMutualRecursionBImpl();
-}
 }

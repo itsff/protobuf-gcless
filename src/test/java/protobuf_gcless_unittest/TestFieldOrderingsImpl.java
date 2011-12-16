@@ -37,7 +37,4 @@ public void setMy_float(float My_float) {
 this.My_float = My_float;
 this.hasMy_float = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestFieldOrderings create() {
-return new TestFieldOrderingsImpl();
-}
 }

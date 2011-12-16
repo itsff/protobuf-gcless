@@ -13,7 +13,4 @@ public void setTest(String Test) {
 this.Test = Test;
 this.hasTest = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestNestedExtension create() {
-return new TestNestedExtensionImpl();
-}
 }

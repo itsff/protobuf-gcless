@@ -25,7 +25,4 @@ public void setI(int I) {
 this.I = I;
 this.hasI = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage create() {
-return new TestRecursiveMessageImpl();
-}
 }

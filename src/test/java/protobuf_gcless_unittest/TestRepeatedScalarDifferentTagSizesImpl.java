@@ -73,7 +73,4 @@ public void setRepeated_uint64(java.util.List<Long> Repeated_uint64) {
 this.Repeated_uint64 = Repeated_uint64;
 this.hasRepeated_uint64 = true;
 }
-public protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes create() {
-return new TestRepeatedScalarDifferentTagSizesImpl();
-}
 }
