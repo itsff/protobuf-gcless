@@ -75,12 +75,26 @@ public class MemlessGenerator {
 			}
 		}
 
+		String interfaceBased = System.getProperty("interface.based");
+		boolean isInterfaceBased = false;
+		if (interfaceBased != null && interfaceBased.equals("true")) {
+			isInterfaceBased = true;
+		}
+
 		for (ProtobufMessage curMessage : parser.getMessages()) {
-			String curMessageData = generateMessage(curMessage, parser.getOuterClassName());
-			String serializerData = generateSerializer(curMessage, parser.getOuterClassName());
+			String curMessageData = generateMessage(curMessage, parser.getOuterClassName(), isInterfaceBased);
+			String serializerData = generateSerializer(curMessage, parser.getOuterClassName(), isInterfaceBased);
+//			String factoryData = null;
+//			if (isInterfaceBased) {
+//				factoryData = generateMessageFactory(curMessage);
+//			}
+
 			if (parser.getOuterClassName() != null) {
 				w.append(curMessageData);
 				w.append(serializerData);
+//				if (factoryData != null) {
+//					w.append(factoryData);
+//				}
 			} else {
 				BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + ".java")));
 				appendPackage(messageWriter, parser.getPackageName());
@@ -95,6 +109,13 @@ public class MemlessGenerator {
 				messageWriter.append(serializerData);
 				messageWriter.flush();
 				messageWriter.close();
+//				if (factoryData != null) {
+//					messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Factory" + ".java")));
+//					appendPackage(messageWriter, parser.getPackageName());
+//					messageWriter.append(factoryData);
+//					messageWriter.flush();
+//					messageWriter.close();
+//				}
 			}
 		}
 
@@ -104,10 +125,12 @@ public class MemlessGenerator {
 			w.close();
 		}
 
-		String generateDefaultImpl = System.getProperty("generate.default");
-		if (generateDefaultImpl != null && generateDefaultImpl.equals("true")) {
-			for (ProtobufMessage curMessage : parser.getMessages()) {
-				generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
+		if (isInterfaceBased) {
+			String generateDefaultImpl = System.getProperty("generate.default");
+			if (generateDefaultImpl != null && generateDefaultImpl.equals("true")) {
+				for (ProtobufMessage curMessage : parser.getMessages()) {
+					generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
+				}
 			}
 		}
 //		InputStream protobufOutputStream = MemlessGenerator.class.getResourceAsStream("ProtobufOutputStream.java");
@@ -121,6 +144,8 @@ public class MemlessGenerator {
 //		fos.close();
 		//TODO copy ProtobufInputStream
 		//TODO copy CurrentCursor
+		//TODO copy MessageFactory
+		//TODO add test for class-based output
 	}
 
 	private static void copy(InputStream input, OutputStream output, int bufferSize) throws IOException {
@@ -133,7 +158,7 @@ public class MemlessGenerator {
 		output.flush();
 	}
 
-	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName) {
+	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
 		StringBuilder result = new StringBuilder();
 		if (outerClassName == null) {
 			result.append("public final class ");
@@ -340,21 +365,52 @@ public class MemlessGenerator {
 				result.append("}\n");
 			}
 			result.append("} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
-			result.append("public static " + fullMessageType + " parseFrom(" + fullMessageType + " message, byte[] data) throws java.io.IOException {\n");
+			if (interfaceBased) {
+				result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data) throws java.io.IOException {\n");
+				result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
+				result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
+				result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+				result.append("}\n");
+			} else {
+				result.append("public static " + fullMessageType + " parseFrom(byte[] data) throws java.io.IOException {\n");
+				result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
+			}
 			result.append("CurrentCursor cursor = new CurrentCursor();\n");
 			result.append("while(true) {\n");
 			result.append("int tag = ProtobufInputStream.readTag(data,cursor);\n");
 			result.append("switch(tag) {\n");
-			result.append("case 0: \n return message;\n ");
-			result.append("default: \n break;"); //TODO skip unknown field
+			result.append("case 0: \n");
+			result.append("if( cursor.getCurrentPosition() != data.length ) {\n");
+			result.append("throw new IOException(\"Corrupted message.\");\n");
+			result.append("}\n");
+			result.append("return message;\n ");
+			result.append("default: \n ProtobufInputStream.skipUnknown(tag, data, cursor);\n break;");
 			for (ProtobufField curField : curMessage.getFields()) {
 				result.append("case " + curField.getTag() + ": \n");
 				if (curField.isEnumType()) {
-
+					if (curField.getNature().equals("repeated")) {
+						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+						result.append("}\n");
+						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
+					} else {
+						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
+					}
 				} else if (curField.isComplexType()) {
-
+					if (curField.getNature().equals("repeated")) {
+						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+						result.append("}\n");
+						result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
+						result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
+						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, messageData" + curField.getBeanName() + "));\n");
+					} else {
+						result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
+						result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
+						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, messageData" + curField.getBeanName() + "));\n");
+					}
 				} else if (curField.getType().equals("bytes")) {
-
+					result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(data,cursor));\n");
 				} else {
 					if (curField.getNature().equals("repeated")) {
 						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
@@ -405,9 +461,6 @@ public class MemlessGenerator {
 			result.append("this.has" + curField.getBeanName() + " = true;\n");
 			result.append("}\n");
 		}
-		result.append("public " + curMessage.getFullyClarifiedName() + " create() {\n");
-		result.append("return new " + curMessage.getName() + "Impl();\n");
-		result.append("}\n");
 		result.append("}\n");
 
 		//TODO check outer class
@@ -426,44 +479,60 @@ public class MemlessGenerator {
 
 	}
 
-	private static String generateMessage(ProtobufMessage curMessage, String outerClassName) {
+	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
 		StringBuilder result = new StringBuilder();
-		result.append("public interface ");
-		result.append(curMessage.getName());
-		result.append(" {\n");
-		for (ProtobufField curField : curMessage.getFields()) {
-			if (curField.isDeprecated()) {
-				result.append("@Deprecated\n");
+		if (interfaceBased) {
+			result.append("public interface ");
+			result.append(curMessage.getName());
+			result.append(" {\n");
+			for (ProtobufField curField : curMessage.getFields()) {
+				if (curField.isDeprecated()) {
+					result.append("@Deprecated\n");
+				}
+				result.append("boolean has");
+				result.append(curField.getBeanName());
+				result.append("();\n");
+				String javaType = constructType(curField, curMessage);
+				if (curField.isDeprecated()) {
+					result.append("@Deprecated\n");
+				}
+				result.append(javaType);
+				result.append(" get");
+				result.append(curField.getBeanName());
+				result.append("();\n");
+				if (curField.isDeprecated()) {
+					result.append("@Deprecated\n");
+				}
+				result.append("void set");
+				result.append(curField.getBeanName());
+				result.append("(");
+				result.append(javaType);
+				result.append(" ");
+				result.append(curField.getName());
+				result.append(");\n");
 			}
-			result.append("boolean has");
-			result.append(curField.getBeanName());
-			result.append("();\n");
-			String javaType = constructType(curField, curMessage);
-			if (curField.isDeprecated()) {
-				result.append("@Deprecated\n");
+		} else {
+			result.append("public class " + curMessage.getName() + " {\n");
+			for (ProtobufField curField : curMessage.getFields()) {
+				String javaType = constructType(curField, curMessage);
+				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
+				result.append("private boolean has" + curField.getBeanName() + ";\n");
+				result.append("public boolean has" + curField.getBeanName() + "() {\n");
+				result.append("return has" + curField.getBeanName() + ";\n");
+				result.append("}\n");
+				result.append("public " + javaType + " get" + curField.getBeanName() + "() {\n");
+				result.append("return " + curField.getBeanName() + ";\n");
+				result.append("}\n");
+				result.append("public void set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
+				result.append("this." + curField.getBeanName() + " = " + curField.getBeanName() + ";\n");
+				result.append("this.has" + curField.getBeanName() + " = true;\n");
+				result.append("}\n");
 			}
-			result.append(javaType);
-			result.append(" get");
-			result.append(curField.getBeanName());
-			result.append("();\n");
-			if (curField.isDeprecated()) {
-				result.append("@Deprecated\n");
-			}
-			result.append("void set");
-			result.append(curField.getBeanName());
-			result.append("(");
-			result.append(javaType);
-			result.append(" ");
-			result.append(curField.getName());
-			result.append(");\n");
-
 		}
 
-		result.append(curMessage.getName() + " create();\n"); //no idea what implementation will be
-
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			result.append(generateMessage(innerMessage, outerClassName));
-			String serializerData = generateSerializer(innerMessage, outerClassName);
+			result.append(generateMessage(innerMessage, outerClassName, interfaceBased));
+			String serializerData = generateSerializer(innerMessage, outerClassName, interfaceBased);
 			result.append(serializerData);
 		}
 		for (ProtobufEnum curEnum : curMessage.getEnums()) {

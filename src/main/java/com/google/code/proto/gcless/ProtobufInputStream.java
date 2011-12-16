@@ -7,20 +7,50 @@ final public class ProtobufInputStream {
 	static final int WIRETYPE_VARINT = 0;
 	static final int WIRETYPE_FIXED64 = 1;
 	static final int WIRETYPE_LENGTH_DELIMITED = 2;
-	static final int WIRETYPE_START_GROUP = 3;
-	static final int WIRETYPE_END_GROUP = 4;
 	static final int WIRETYPE_FIXED32 = 5;
 
 	static final int TAG_TYPE_BITS = 3;
 	static final int TAG_TYPE_MASK = (1 << TAG_TYPE_BITS) - 1;
+
+	public static boolean skipUnknown(final int tag, byte[] data, CurrentCursor cursor) throws IOException {
+		switch (getTagWireType(tag)) {
+		case WIRETYPE_VARINT:
+			readInt64(data, cursor);
+			return true;
+		case WIRETYPE_FIXED64:
+			readFixed64(data, cursor);
+			return true;
+		case WIRETYPE_LENGTH_DELIMITED:
+			readBytes(data, cursor);
+			return true;
+		case WIRETYPE_FIXED32:
+			readFixed32(data, cursor);
+			return true;
+		default:
+			throw new IOException("invalid wire type");
+		}
+	}
+
+	public static int readEnum(byte[] data, CurrentCursor cursor) throws IOException {
+		return readRawVarint32(data, cursor);
+	}
+
+	public static byte[] readBytes(byte[] data, CurrentCursor cursor) throws IOException {
+		final int size = readRawVarint32(data, cursor);
+		return readRawBytes(size, data, cursor);
+	}
+
+	private static int getTagWireType(final int tag) {
+		return tag & TAG_TYPE_MASK;
+	}
 
 	public static int readTag(byte[] data, CurrentCursor currentPosition) throws IOException {
 		if (isAtEnd(data, currentPosition.getCurrentPosition())) {
 			return 0;
 		}
 
-		int lastTag = readRawVarint32(data, currentPosition);
-		if (getTagFieldNumber(lastTag) == 0) {
+		int lastTag = getTagFieldNumber(readRawVarint32(data, currentPosition));
+		if (lastTag == 0) {
 			// If we actually read zero (or any tag number corresponding to field
 			// number zero), that's not a valid tag.
 			throw new IOException("invalid data");
