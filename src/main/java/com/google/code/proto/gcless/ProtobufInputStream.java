@@ -1,6 +1,7 @@
 package com.google.code.proto.gcless;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 final public class ProtobufInputStream {
 
@@ -56,6 +57,11 @@ final public class ProtobufInputStream {
 			throw new IOException("invalid data");
 		}
 		return lastTag;
+	}
+	
+	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public static int readInt32(byte[] data, CurrentCursor cursor) throws IOException {
@@ -117,11 +123,49 @@ final public class ProtobufInputStream {
 		}
 		return result;
 	}
+	
+	public static int readRawVarint32(InputStream is) throws IOException {
+		byte tmp = readRawByte(is);
+		if (tmp >= 0) {
+			return tmp;
+		}
+		int result = tmp & 0x7f;
+		if ((tmp = readRawByte(is)) >= 0) {
+			result |= tmp << 7;
+		} else {
+			result |= (tmp & 0x7f) << 7;
+			if ((tmp = readRawByte(is)) >= 0) {
+				result |= tmp << 14;
+			} else {
+				result |= (tmp & 0x7f) << 14;
+				if ((tmp = readRawByte(is)) >= 0) {
+					result |= tmp << 21;
+				} else {
+					result |= (tmp & 0x7f) << 21;
+					result |= (tmp = readRawByte(is)) << 28;
+					if (tmp < 0) {
+						// Discard upper 32 bits.
+						for (int i = 0; i < 5; i++) {
+							if (readRawByte(is) >= 0) {
+								return result;
+							}
+						}
+						throw new IOException("malformed varint32");
+					}
+				}
+			}
+		}
+		return result;
+	}
 
 	public static byte readRawByte(byte[] data, CurrentCursor currentPosition) throws IOException {
 		byte result = data[currentPosition.getCurrentPosition()];
 		currentPosition.addToPosition(1);
 		return result;
+	}
+	
+	public static byte readRawByte(InputStream is) throws IOException {
+		return (byte)is.read();
 	}
 
 	public static boolean isAtEnd(byte[] data, int currentPosition) throws IOException {

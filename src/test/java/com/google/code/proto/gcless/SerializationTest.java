@@ -16,7 +16,7 @@ import protobuf_gcless_unittest.UnittestProto.TestAllTypes;
 import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
-
+	
 	@Test
 	public void testDeserialization() throws Exception {
 		TestAllTypes message = createSampleMessage();
@@ -26,6 +26,11 @@ public class SerializationTest {
 		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
 		assertNotNull(result);
 		assertEquals(message.getDefault_string(), result.getDefault_string());
+		assertEquals(2, message.getRepeated_foreign_message().size());
+		System.out.println(message.getRepeated_foreign_message().get(0).getC());
+		System.out.println(message.getRepeated_foreign_message().get(1).getC());
+		assertEquals(1, message.getRepeated_foreign_message().get(0).getC());
+		assertEquals(2, message.getRepeated_foreign_message().get(1).getC());
 	}
 	
 	@Test
@@ -54,6 +59,8 @@ public class SerializationTest {
 
 	public static void main(String[] args) throws Exception {
 		
+		MessageFactoryImpl factory = new MessageFactoryImpl();
+		
 		long times = 1000000;
 
 		TestAllTypes message = createSampleMessage();
@@ -61,7 +68,7 @@ public class SerializationTest {
 		for (int i = 0; i < times; i++) {
 			TestAllTypesSerializer.serialize(message);
 		}
-		System.out.println("Optimized version: " + (System.currentTimeMillis() - start));
+		System.out.println("Optimized version(serialize): " + (System.currentTimeMillis() - start));
 
 		byte[] data = TestAllTypesSerializer.serialize(message);
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
@@ -70,7 +77,7 @@ public class SerializationTest {
 		for (int i = 0; i < times; i++) {
 			result.toByteArray();
 		}
-		System.out.println("Default version: " + (System.currentTimeMillis() - start));
+		System.out.println("Default version(serialize): " + (System.currentTimeMillis() - start));
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length + 10); //little trick to remove stream io issues and measure pure serialization power.
 		
@@ -79,7 +86,7 @@ public class SerializationTest {
 			TestAllTypesSerializer.serialize(message, baos);
 			baos.reset();
 		}
-		System.out.println("Optimized streamed version: " + (System.currentTimeMillis() - start));
+		System.out.println("Optimized streamed version(serialize): " + (System.currentTimeMillis() - start));
 		
 
 		start = System.currentTimeMillis();
@@ -87,8 +94,19 @@ public class SerializationTest {
 			result.writeTo(baos);
 			baos.reset();
 		}
-		System.out.println("Default streamed version: " + (System.currentTimeMillis() - start));
+		System.out.println("Default streamed version(serialize): " + (System.currentTimeMillis() - start));
 
+		start = System.currentTimeMillis();
+		for (int i = 0; i < times; i++) {
+			TestAllTypesSerializer.parseFrom(factory, data);
+		}
+		System.out.println("Optimized streamed version(de-serialize): " + (System.currentTimeMillis() - start));
+		
+		start = System.currentTimeMillis();
+		for (int i = 0; i < times; i++) {
+			protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
+		}
+		System.out.println("Default streamed version(de-serialize): " + (System.currentTimeMillis() - start));
 	}
 
 	private static TestAllTypes createSampleMessage() {
@@ -164,7 +182,7 @@ public class SerializationTest {
 		message.setRepeated_bool(valuesRepeated_bool);
 		List<String> valuesRepeated_string = new ArrayList<String>();
 		valuesRepeated_string.add("123");
-		valuesRepeated_string.add("123");
+		valuesRepeated_string.add("456");
 		message.setRepeated_string(valuesRepeated_string);
 		message.setRepeated_bytes(new byte[] {(byte) 1, (byte) 2});
 		List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> valuesRepeated_nested_message = new ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage>();
