@@ -2,6 +2,7 @@ package com.google.code.proto.gcless;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -119,19 +120,29 @@ public class MemlessGenerator {
 				}
 			}
 		}
-//		InputStream protobufOutputStream = MemlessGenerator.class.getResourceAsStream("ProtobufOutputStream.java");
-//		if (protobufOutputStream == null) {
-//			throw new Exception("Cannot find ProtobufOutputStream.java in classpath");
-//		}
-//		FileOutputStream fos = new FileOutputStream(new File(output, "ProtobufOutputStream.java"));
-//		copy(protobufOutputStream, fos, 2048);
-//		protobufOutputStream.close();
-//		fos.flush();
-//		fos.close();
-		//TODO copy ProtobufInputStream
-		//TODO copy CurrentCursor
-		//TODO copy MessageFactory
-		//TODO add test for class-based output
+		copy("ProtobufOutputStream.java", output);
+		copy("ProtobufInputStream.java", output);
+		copy("CurrentCursor.java", output);
+		copy("MessageFactory.java", output);
+	}
+
+	private static void copy(String classpathFileName, File output) throws IOException {
+		InputStream protobufOutputStream = MemlessGenerator.class.getResourceAsStream(classpathFileName);
+		if (protobufOutputStream == null) {
+			throw new IOException("Cannot find " + classpathFileName + " in classpath");
+		}
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(new File(output, classpathFileName));
+			copy(protobufOutputStream, fos, 2048);
+		} finally {
+			if (protobufOutputStream != null) {
+				protobufOutputStream.close();
+			}
+			if (fos != null) {
+				fos.close();
+			}
+		}
 	}
 
 	private static void copy(InputStream input, OutputStream output, int bufferSize) throws IOException {
@@ -418,7 +429,7 @@ public class MemlessGenerator {
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
 		result.append("cursor.addToPosition(offset);\n");
 		result.append("cursor.setProcessUpToPosition(offset + length);\n");
-		createParseFromBytesBody(curMessage, result);
+		createParseFromBytesBody(curMessage, result, interfaceBased);
 		result.append("}\n");
 	}
 
@@ -434,11 +445,15 @@ public class MemlessGenerator {
 			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
 		}
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
-		createParseFromBytesBody(curMessage, result);
+		createParseFromBytesBody(curMessage, result, interfaceBased);
 		result.append("}\n");
 	}
-	
-	private static void createParseFromBytesBody(ProtobufMessage curMessage, StringBuilder result) {
+
+	private static void createParseFromBytesBody(ProtobufMessage curMessage, StringBuilder result, boolean interfaceBased) {
+		String factory = "";
+		if (interfaceBased) {
+			factory = "factory, ";
+		}
 		result.append("while(true) {\n");
 		result.append("int tag = ProtobufInputStream.readTag(data,cursor);\n");
 		result.append("switch(tag) {\n");
@@ -462,11 +477,11 @@ public class MemlessGenerator {
 					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
 					result.append("}\n");
 					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
-					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
 					result.append("cursor.addToPosition(length" + curField.getBeanName() + ");\n");
 				} else {
 					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
-					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
 					result.append("cursor.addToPosition(length" + curField.getBeanName() + ");\n");
 				}
 			} else if (curField.getType().equals("bytes")) {
@@ -496,20 +511,20 @@ public class MemlessGenerator {
 			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
 			result.append("}\n");
 		} else {
-			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is) throws java.io.IOException {\n");
+			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {\n");
 			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
 		}
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
 		result.append("cursor.addToPosition(offset);\n");
 		result.append("cursor.setProcessUpToPosition(offset + length);\n");
-		createParseFromStreamBody(curMessage, result);
+		createParseFromStreamBody(curMessage, result, interfaceBased);
 		result.append("}\n");
 	}
-	
+
 	private static void createParseFromStream(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
 		//streamed read
 		if (interfaceBased) {
-			result.append("/** Beware! All subsequent messages in stream will be consumed until end of stream.\n **/");
+			result.append("/** Beware! All subsequent messages in stream will be consumed until end of stream (default protobuf behaivour).\n  **/");
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {\n");
 			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
 			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
@@ -520,17 +535,21 @@ public class MemlessGenerator {
 			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
 		}
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
-		createParseFromStreamBody(curMessage, result);
+		createParseFromStreamBody(curMessage, result, interfaceBased);
 		result.append("}\n");
 	}
 
-	private static void createParseFromStreamBody(ProtobufMessage curMessage, StringBuilder result) {
+	private static void createParseFromStreamBody(ProtobufMessage curMessage, StringBuilder result, boolean interfaceBased) {
 		result.append("while(true) {\n");
 		result.append("int tag = ProtobufInputStream.readTag(is,cursor);\n");
 		result.append("switch(tag) {\n");
 		result.append("case 0: \n");
 		result.append("return message;\n ");
 		result.append("default: \n ProtobufInputStream.skipUnknown(tag, is, cursor);\n break;");
+		String factory = "";
+		if (interfaceBased) {
+			factory = "factory, ";
+		}
 		for (ProtobufField curField : curMessage.getFields()) {
 			result.append("case " + curField.getTag() + ": \n");
 			if (curField.isEnumType()) {
@@ -548,10 +567,10 @@ public class MemlessGenerator {
 					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
 					result.append("}\n");
 					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(is,cursor);\n");
-					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "is, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
 				} else {
 					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(is,cursor);\n");
-					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "is, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
 				}
 			} else if (curField.getType().equals("bytes")) {
 				result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(is,cursor));\n");

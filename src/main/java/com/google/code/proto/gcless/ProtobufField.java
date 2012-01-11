@@ -15,7 +15,6 @@ class ProtobufField {
 	private boolean isPacked;
 	private boolean isEnumType;
 
-	//TODO comments, deprecated &etc
 	public boolean isEnumType() {
 		return isEnumType;
 	}

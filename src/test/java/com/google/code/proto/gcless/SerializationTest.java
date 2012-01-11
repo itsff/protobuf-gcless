@@ -2,9 +2,12 @@ package com.google.code.proto.gcless;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -17,6 +20,23 @@ import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
 	
+	@Test
+	public void testDefaultSerializationOptimizedStreamedDeserialization() throws Exception {
+		TestAllTypes message = createSampleMessage();
+		byte[] data = TestAllTypesSerializer.serialize(message);
+		
+		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
+		
+		byte[] defaultSerializationData = result.toByteArray();
+		
+		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), new ByteArrayInputStream(defaultSerializationData));
+		assertDeepEquals(result, optimizedResult);
+		assertEquals(2, optimizedResult.getRepeated_foreign_message().size());
+		assertEquals(1, optimizedResult.getRepeated_foreign_message().get(0).getC());
+		assertEquals(2, optimizedResult.getRepeated_foreign_message().get(1).getC());
+		assertEquals(message.getDefault_string(), optimizedResult.getDefault_string());
+	}
+	
 	@Test 
 	public void testDefaultSerializationOptimizedDeserialization() throws Exception {
 		TestAllTypes message = createSampleMessage();
@@ -27,6 +47,7 @@ public class SerializationTest {
 		byte[] defaultSerializationData = result.toByteArray();
 		
 		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), defaultSerializationData);
+		assertDeepEquals(result, optimizedResult);
 		assertEquals(2, optimizedResult.getRepeated_foreign_message().size());
 		assertEquals(1, optimizedResult.getRepeated_foreign_message().get(0).getC());
 		assertEquals(2, optimizedResult.getRepeated_foreign_message().get(1).getC());
@@ -40,7 +61,25 @@ public class SerializationTest {
 
 		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
 		assertNotNull(result);
-		assertEquals(message.getDefault_string(), result.getDefault_string());
+		assertDeepEquals(message, result);
+		//TODO move to deep equals
+		assertEquals(2, result.getRepeated_foreign_message().size());
+		assertEquals(1, result.getRepeated_foreign_message().get(0).getC());
+		assertEquals(2, result.getRepeated_foreign_message().get(1).getC());
+	}
+	
+	@Test
+	public void testOptimizedSerializationToStreamedDeserialization() throws Exception {
+		TestAllTypes message = createSampleMessage();
+
+		byte[] data = TestAllTypesSerializer.serialize(message);
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), bais);
+		assertNotNull(result);
+		assertDeepEquals(message, result);
+		//TODO move to deep equals
 		assertEquals(2, result.getRepeated_foreign_message().size());
 		assertEquals(1, result.getRepeated_foreign_message().get(0).getC());
 		assertEquals(2, result.getRepeated_foreign_message().get(1).getC());
@@ -55,6 +94,8 @@ public class SerializationTest {
 
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
 		assertNotNull(result);
+		assertDeepEquals(result, message);
+		assertTrue(result.getUnknownFields().asMap().isEmpty());
 	}
 
 	@Test
@@ -67,9 +108,12 @@ public class SerializationTest {
 		
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(baos.toByteArray());
 		assertNotNull(result);
+		assertDeepEquals(result, message);
+		//TODO move to deep equals		
 		assertEquals(2, result.getRepeatedForeignMessageCount());
 		assertEquals(1, result.getRepeatedForeignMessage(0).getC());
 		assertEquals(2, result.getRepeatedForeignMessage(1).getC());		
+		assertTrue(result.getUnknownFields().asMap().isEmpty());
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -78,21 +122,23 @@ public class SerializationTest {
 		
 		long times = 1000000;
 
+		long start;
+		
 		TestAllTypes message = createSampleMessage();
-		long start = System.currentTimeMillis();
+		byte[] data = TestAllTypesSerializer.serialize(message);
+
+		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
 			TestAllTypesSerializer.serialize(message);
 		}
-		System.out.println("Optimized version(serialize): " + (System.currentTimeMillis() - start));
-
-		byte[] data = TestAllTypesSerializer.serialize(message);
+		System.out.println(" * Optimized version(serialize): " + (System.currentTimeMillis() - start));
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
 
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
 			result.toByteArray();
 		}
-		System.out.println("Default version(serialize): " + (System.currentTimeMillis() - start));
+		System.out.println(" * Default version(serialize): " + (System.currentTimeMillis() - start));
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length + 10); //little trick to remove stream io issues and measure pure serialization power.
 		
@@ -101,7 +147,7 @@ public class SerializationTest {
 			TestAllTypesSerializer.serialize(message, baos);
 			baos.reset();
 		}
-		System.out.println("Optimized streamed version(serialize): " + (System.currentTimeMillis() - start));
+		System.out.println(" * Optimized streamed version(serialize): " + (System.currentTimeMillis() - start));
 		
 
 		start = System.currentTimeMillis();
@@ -109,19 +155,103 @@ public class SerializationTest {
 			result.writeTo(baos);
 			baos.reset();
 		}
-		System.out.println("Default streamed version(serialize): " + (System.currentTimeMillis() - start));
+		System.out.println(" * Default streamed version(serialize): " + (System.currentTimeMillis() - start));
 
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
 			TestAllTypesSerializer.parseFrom(factory, data);
 		}
-		System.out.println("Optimized version(de-serialize): " + (System.currentTimeMillis() - start));
+		System.out.println(" * Optimized version(de-serialize): " + (System.currentTimeMillis() - start));
 		
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
 			protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
 		}
-		System.out.println("Default version(de-serialize): " + (System.currentTimeMillis() - start));
+		System.out.println(" * Default version(de-serialize): " + (System.currentTimeMillis() - start));
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		start = System.currentTimeMillis();
+		for (int i = 0; i < times; i++) {
+			TestAllTypesSerializer.parseFrom(factory, bais);
+			bais.reset();
+		}
+		System.out.println(" * Optimized streamed version(de-serialize): " + (System.currentTimeMillis() - start));
+		
+		start = System.currentTimeMillis();
+		for (int i = 0; i < times; i++) {
+			protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(bais);
+			bais.reset();
+		}
+		System.out.println(" * Default streamed version(de-serialize): " + (System.currentTimeMillis() - start));
+	}
+	
+	private static void assertDeepEquals(protobuf_unittest.UnittestProto.TestAllTypes defaultImpl, TestAllTypes optimized) {
+		assertEquals(defaultImpl.getOptionalInt32(), optimized.getOptional_int32());
+		assertEquals(defaultImpl.getOptionalInt64(), optimized.getOptional_int64());
+		assertEquals(defaultImpl.getOptionalUint32(), optimized.getOptional_uint32());
+		assertEquals(defaultImpl.getOptionalUint64(), optimized.getOptional_uint64());
+		assertEquals(defaultImpl.getOptionalSint32(), optimized.getOptional_sint32());
+		assertEquals(defaultImpl.getOptionalSint64(), optimized.getOptional_sint64());
+		assertEquals(defaultImpl.getOptionalFixed32(), optimized.getOptional_fixed32());
+		assertEquals(defaultImpl.getOptionalFixed64(), optimized.getOptional_fixed64());
+		assertEquals(defaultImpl.getOptionalSfixed32(), optimized.getOptional_sfixed32());
+		assertEquals(defaultImpl.getOptionalSfixed64(), optimized.getOptional_sfixed64());
+		assertEquals(defaultImpl.getOptionalFloat(), optimized.getOptional_float());
+		assertEquals(defaultImpl.getOptionalDouble(), optimized.getOptional_double());
+		assertEquals(defaultImpl.getOptionalBool(), optimized.getOptional_bool());
+		assertEquals(defaultImpl.getOptionalString(), optimized.getOptional_string());
+		assertTrue(Arrays.equals(defaultImpl.getOptionalBytes().toByteArray(), optimized.getOptional_bytes()));
+		assertEquals(defaultImpl.getOptionalStringPiece(), optimized.getOptional_string_piece());
+		assertEquals(defaultImpl.getOptionalCord(), optimized.getOptional_cord());
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt32List().toArray(), optimized.getRepeated_int32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt64List().toArray(), optimized.getRepeated_int64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint32List().toArray(), optimized.getRepeated_uint32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint64List().toArray(), optimized.getRepeated_uint64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint32List().toArray(), optimized.getRepeated_sint32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint64List().toArray(), optimized.getRepeated_sint64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed32List().toArray(), optimized.getRepeated_fixed32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed64List().toArray(), optimized.getRepeated_fixed64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed32List().toArray(), optimized.getRepeated_sfixed32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed64List().toArray(), optimized.getRepeated_sfixed64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFloatList().toArray(), optimized.getRepeated_float().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedDoubleList().toArray(), optimized.getRepeated_double().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedBoolList().toArray(), optimized.getRepeated_bool().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedStringList().toArray(), optimized.getRepeated_string().toArray()));
+	}
+	
+	private static void assertDeepEquals(TestAllTypes original, TestAllTypes result) {
+		assertEquals(original.getOptional_int32(), result.getOptional_int32());
+		assertEquals(original.getOptional_int64(), result.getOptional_int64());
+		assertEquals(original.getOptional_uint32(), result.getOptional_uint32());
+		assertEquals(original.getOptional_uint64(), result.getOptional_uint64());
+		assertEquals(original.getOptional_sint32(), result.getOptional_sint32());
+		assertEquals(original.getOptional_sint64(), result.getOptional_sint64());
+		assertEquals(original.getOptional_fixed32(), result.getOptional_fixed32());
+		assertEquals(original.getOptional_fixed64(), result.getOptional_fixed64());
+		assertEquals(original.getOptional_sfixed32(), result.getOptional_sfixed32());
+		assertEquals(original.getOptional_sfixed64(), result.getOptional_sfixed64());
+		assertEquals(original.getOptional_float(), result.getOptional_float());
+		assertEquals(original.getOptional_double(), result.getOptional_double());
+		assertEquals(original.getOptional_bool(), result.getOptional_bool());
+		assertEquals(original.getOptional_string(), result.getOptional_string());
+		assertTrue(Arrays.equals(original.getOptional_bytes(), result.getOptional_bytes()));
+		assertEquals(original.getOptional_string_piece(), result.getOptional_string_piece());
+		assertEquals(original.getOptional_cord(), result.getOptional_cord());
+		assertTrue(Arrays.equals(original.getRepeated_int32().toArray(), result.getRepeated_int32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_int64().toArray(), result.getRepeated_int64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_uint32().toArray(), result.getRepeated_uint32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_uint64().toArray(), result.getRepeated_uint64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_sint32().toArray(), result.getRepeated_sint32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_sint64().toArray(), result.getRepeated_sint64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_fixed32().toArray(), result.getRepeated_fixed32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_fixed64().toArray(), result.getRepeated_fixed64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_sfixed32().toArray(), result.getRepeated_sfixed32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_sfixed64().toArray(), result.getRepeated_sfixed64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_float().toArray(), result.getRepeated_float().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_double().toArray(), result.getRepeated_double().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_bool().toArray(), result.getRepeated_bool().toArray()));
+		assertTrue(Arrays.equals(original.getRepeated_string().toArray(), result.getRepeated_string().toArray()));
 	}
 
 	private static TestAllTypes createSampleMessage() {
@@ -247,3 +377,4 @@ public class SerializationTest {
 	}
 
 }
+
