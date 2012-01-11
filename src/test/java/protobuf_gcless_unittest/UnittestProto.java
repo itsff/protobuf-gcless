@@ -573,6 +573,53 @@ public final class UnittestProto {
 					}
 				}
 			}
+
+			/**
+			 * Beware! All subsequent messages in stream will be consumed until end of stream.
+			 **/
+			public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage message = (protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 1:
+						message.setBb(ProtobufInputStream.readInt32(is, cursor));
+						break;
+					}
+				}
+			}
+
+			public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage message = (protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				cursor.addToPosition(offset);
+				cursor.setProcessUpToPosition(offset + length);
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 1:
+						message.setBb(ProtobufInputStream.readInt32(is, cursor));
+						break;
+					}
+				}
+			}
 		}
 
 		public enum NestedEnum {
@@ -1997,6 +2044,587 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestAllTypes parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestAllTypes message = (protobuf_gcless_unittest.UnittestProto.TestAllTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setOptional_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setOptional_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 3:
+					message.setOptional_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 4:
+					message.setOptional_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 5:
+					message.setOptional_sint32(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 6:
+					message.setOptional_sint64(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 7:
+					message.setOptional_fixed32(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 8:
+					message.setOptional_fixed64(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 9:
+					message.setOptional_sfixed32(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 10:
+					message.setOptional_sfixed64(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 11:
+					message.setOptional_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 12:
+					message.setOptional_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 13:
+					message.setOptional_bool(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 14:
+					message.setOptional_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 15:
+					message.setOptional_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 18:
+					int lengthOptional_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_nested_message));
+					break;
+				case 19:
+					int lengthOptional_foreign_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_foreign_message(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_foreign_message));
+					break;
+				case 20:
+					int lengthOptional_import_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_import_message(protobuf_gcless_import.ImportMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_import_message));
+					break;
+				case 21:
+					message.setOptional_nested_enum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 22:
+					message.setOptional_foreign_enum(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 23:
+					message.setOptional_import_enum(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 24:
+					message.setOptional_string_piece(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 25:
+					message.setOptional_cord(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 31:
+					if (message.getRepeated_int32() == null || message.getRepeated_int32().isEmpty()) {
+						message.setRepeated_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 32:
+					if (message.getRepeated_int64() == null || message.getRepeated_int64().isEmpty()) {
+						message.setRepeated_int64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 33:
+					if (message.getRepeated_uint32() == null || message.getRepeated_uint32().isEmpty()) {
+						message.setRepeated_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 34:
+					if (message.getRepeated_uint64() == null || message.getRepeated_uint64().isEmpty()) {
+						message.setRepeated_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 35:
+					if (message.getRepeated_sint32() == null || message.getRepeated_sint32().isEmpty()) {
+						message.setRepeated_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 36:
+					if (message.getRepeated_sint64() == null || message.getRepeated_sint64().isEmpty()) {
+						message.setRepeated_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 37:
+					if (message.getRepeated_fixed32() == null || message.getRepeated_fixed32().isEmpty()) {
+						message.setRepeated_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 38:
+					if (message.getRepeated_fixed64() == null || message.getRepeated_fixed64().isEmpty()) {
+						message.setRepeated_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 39:
+					if (message.getRepeated_sfixed32() == null || message.getRepeated_sfixed32().isEmpty()) {
+						message.setRepeated_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 40:
+					if (message.getRepeated_sfixed64() == null || message.getRepeated_sfixed64().isEmpty()) {
+						message.setRepeated_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 41:
+					if (message.getRepeated_float() == null || message.getRepeated_float().isEmpty()) {
+						message.setRepeated_float(new java.util.ArrayList<Float>());
+					}
+					message.getRepeated_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 42:
+					if (message.getRepeated_double() == null || message.getRepeated_double().isEmpty()) {
+						message.setRepeated_double(new java.util.ArrayList<Double>());
+					}
+					message.getRepeated_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 43:
+					if (message.getRepeated_bool() == null || message.getRepeated_bool().isEmpty()) {
+						message.setRepeated_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getRepeated_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 44:
+					if (message.getRepeated_string() == null || message.getRepeated_string().isEmpty()) {
+						message.setRepeated_string(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_string().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 45:
+					message.setRepeated_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 48:
+					if (message.getRepeated_nested_message() == null || message.getRepeated_nested_message().isEmpty()) {
+						message.setRepeated_nested_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage>());
+					}
+					int lengthRepeated_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_nested_message().add(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_nested_message));
+					break;
+				case 49:
+					if (message.getRepeated_foreign_message() == null || message.getRepeated_foreign_message().isEmpty()) {
+						message.setRepeated_foreign_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+					}
+					int lengthRepeated_foreign_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_foreign_message().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_foreign_message));
+					break;
+				case 50:
+					if (message.getRepeated_import_message() == null || message.getRepeated_import_message().isEmpty()) {
+						message.setRepeated_import_message(new java.util.ArrayList<protobuf_gcless_import.ImportMessage>());
+					}
+					int lengthRepeated_import_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_import_message().add(protobuf_gcless_import.ImportMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_import_message));
+					break;
+				case 51:
+					if (message.getRepeated_nested_enum() == null || message.getRepeated_nested_enum().isEmpty()) {
+						message.setRepeated_nested_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum>());
+					}
+					message.getRepeated_nested_enum().add(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 52:
+					if (message.getRepeated_foreign_enum() == null || message.getRepeated_foreign_enum().isEmpty()) {
+						message.setRepeated_foreign_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getRepeated_foreign_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 53:
+					if (message.getRepeated_import_enum() == null || message.getRepeated_import_enum().isEmpty()) {
+						message.setRepeated_import_enum(new java.util.ArrayList<protobuf_gcless_import.ImportEnum>());
+					}
+					message.getRepeated_import_enum().add(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 54:
+					if (message.getRepeated_string_piece() == null || message.getRepeated_string_piece().isEmpty()) {
+						message.setRepeated_string_piece(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_string_piece().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 55:
+					if (message.getRepeated_cord() == null || message.getRepeated_cord().isEmpty()) {
+						message.setRepeated_cord(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_cord().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 61:
+					message.setDefault_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 62:
+					message.setDefault_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 63:
+					message.setDefault_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 64:
+					message.setDefault_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 65:
+					message.setDefault_sint32(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 66:
+					message.setDefault_sint64(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 67:
+					message.setDefault_fixed32(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 68:
+					message.setDefault_fixed64(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 69:
+					message.setDefault_sfixed32(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 70:
+					message.setDefault_sfixed64(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 71:
+					message.setDefault_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 72:
+					message.setDefault_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 73:
+					message.setDefault_bool(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 74:
+					message.setDefault_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 75:
+					message.setDefault_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 81:
+					message.setDefault_nested_enum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 82:
+					message.setDefault_foreign_enum(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 83:
+					message.setDefault_import_enum(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 84:
+					message.setDefault_string_piece(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 85:
+					message.setDefault_cord(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestAllTypes parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestAllTypes message = (protobuf_gcless_unittest.UnittestProto.TestAllTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setOptional_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setOptional_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 3:
+					message.setOptional_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 4:
+					message.setOptional_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 5:
+					message.setOptional_sint32(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 6:
+					message.setOptional_sint64(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 7:
+					message.setOptional_fixed32(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 8:
+					message.setOptional_fixed64(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 9:
+					message.setOptional_sfixed32(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 10:
+					message.setOptional_sfixed64(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 11:
+					message.setOptional_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 12:
+					message.setOptional_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 13:
+					message.setOptional_bool(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 14:
+					message.setOptional_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 15:
+					message.setOptional_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 18:
+					int lengthOptional_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_nested_message));
+					break;
+				case 19:
+					int lengthOptional_foreign_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_foreign_message(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_foreign_message));
+					break;
+				case 20:
+					int lengthOptional_import_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_import_message(protobuf_gcless_import.ImportMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_import_message));
+					break;
+				case 21:
+					message.setOptional_nested_enum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 22:
+					message.setOptional_foreign_enum(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 23:
+					message.setOptional_import_enum(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 24:
+					message.setOptional_string_piece(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 25:
+					message.setOptional_cord(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 31:
+					if (message.getRepeated_int32() == null || message.getRepeated_int32().isEmpty()) {
+						message.setRepeated_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 32:
+					if (message.getRepeated_int64() == null || message.getRepeated_int64().isEmpty()) {
+						message.setRepeated_int64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 33:
+					if (message.getRepeated_uint32() == null || message.getRepeated_uint32().isEmpty()) {
+						message.setRepeated_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 34:
+					if (message.getRepeated_uint64() == null || message.getRepeated_uint64().isEmpty()) {
+						message.setRepeated_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 35:
+					if (message.getRepeated_sint32() == null || message.getRepeated_sint32().isEmpty()) {
+						message.setRepeated_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 36:
+					if (message.getRepeated_sint64() == null || message.getRepeated_sint64().isEmpty()) {
+						message.setRepeated_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 37:
+					if (message.getRepeated_fixed32() == null || message.getRepeated_fixed32().isEmpty()) {
+						message.setRepeated_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 38:
+					if (message.getRepeated_fixed64() == null || message.getRepeated_fixed64().isEmpty()) {
+						message.setRepeated_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 39:
+					if (message.getRepeated_sfixed32() == null || message.getRepeated_sfixed32().isEmpty()) {
+						message.setRepeated_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 40:
+					if (message.getRepeated_sfixed64() == null || message.getRepeated_sfixed64().isEmpty()) {
+						message.setRepeated_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 41:
+					if (message.getRepeated_float() == null || message.getRepeated_float().isEmpty()) {
+						message.setRepeated_float(new java.util.ArrayList<Float>());
+					}
+					message.getRepeated_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 42:
+					if (message.getRepeated_double() == null || message.getRepeated_double().isEmpty()) {
+						message.setRepeated_double(new java.util.ArrayList<Double>());
+					}
+					message.getRepeated_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 43:
+					if (message.getRepeated_bool() == null || message.getRepeated_bool().isEmpty()) {
+						message.setRepeated_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getRepeated_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 44:
+					if (message.getRepeated_string() == null || message.getRepeated_string().isEmpty()) {
+						message.setRepeated_string(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_string().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 45:
+					message.setRepeated_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 48:
+					if (message.getRepeated_nested_message() == null || message.getRepeated_nested_message().isEmpty()) {
+						message.setRepeated_nested_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage>());
+					}
+					int lengthRepeated_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_nested_message().add(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_nested_message));
+					break;
+				case 49:
+					if (message.getRepeated_foreign_message() == null || message.getRepeated_foreign_message().isEmpty()) {
+						message.setRepeated_foreign_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+					}
+					int lengthRepeated_foreign_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_foreign_message().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_foreign_message));
+					break;
+				case 50:
+					if (message.getRepeated_import_message() == null || message.getRepeated_import_message().isEmpty()) {
+						message.setRepeated_import_message(new java.util.ArrayList<protobuf_gcless_import.ImportMessage>());
+					}
+					int lengthRepeated_import_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_import_message().add(protobuf_gcless_import.ImportMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_import_message));
+					break;
+				case 51:
+					if (message.getRepeated_nested_enum() == null || message.getRepeated_nested_enum().isEmpty()) {
+						message.setRepeated_nested_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum>());
+					}
+					message.getRepeated_nested_enum().add(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 52:
+					if (message.getRepeated_foreign_enum() == null || message.getRepeated_foreign_enum().isEmpty()) {
+						message.setRepeated_foreign_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getRepeated_foreign_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 53:
+					if (message.getRepeated_import_enum() == null || message.getRepeated_import_enum().isEmpty()) {
+						message.setRepeated_import_enum(new java.util.ArrayList<protobuf_gcless_import.ImportEnum>());
+					}
+					message.getRepeated_import_enum().add(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 54:
+					if (message.getRepeated_string_piece() == null || message.getRepeated_string_piece().isEmpty()) {
+						message.setRepeated_string_piece(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_string_piece().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 55:
+					if (message.getRepeated_cord() == null || message.getRepeated_cord().isEmpty()) {
+						message.setRepeated_cord(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_cord().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 61:
+					message.setDefault_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 62:
+					message.setDefault_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 63:
+					message.setDefault_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 64:
+					message.setDefault_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 65:
+					message.setDefault_sint32(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 66:
+					message.setDefault_sint64(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 67:
+					message.setDefault_fixed32(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 68:
+					message.setDefault_fixed64(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 69:
+					message.setDefault_sfixed32(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 70:
+					message.setDefault_sfixed64(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 71:
+					message.setDefault_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 72:
+					message.setDefault_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 73:
+					message.setDefault_bool(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 74:
+					message.setDefault_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 75:
+					message.setDefault_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 81:
+					message.setDefault_nested_enum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 82:
+					message.setDefault_foreign_enum(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 83:
+					message.setDefault_import_enum(protobuf_gcless_import.ImportEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 84:
+					message.setDefault_string_piece(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 85:
+					message.setDefault_cord(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestDeprecatedFields {
@@ -2078,6 +2706,53 @@ public final class UnittestProto {
 					break;
 				case 1:
 					message.setDeprecated_int32(ProtobufInputStream.readInt32(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message = (protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields) factory.create("protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setDeprecated_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message = (protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields) factory.create("protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setDeprecated_int32(ProtobufInputStream.readInt32(is, cursor));
 					break;
 				}
 			}
@@ -2164,6 +2839,53 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.ForeignMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.ForeignMessage message = (protobuf_gcless_unittest.UnittestProto.ForeignMessage) factory.create("protobuf_gcless_unittest.UnittestProto.ForeignMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.ForeignMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.ForeignMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setC(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.ForeignMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.ForeignMessage message = (protobuf_gcless_unittest.UnittestProto.ForeignMessage) factory.create("protobuf_gcless_unittest.UnittestProto.ForeignMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.ForeignMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.ForeignMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setC(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestAllExtensions {
@@ -2211,6 +2933,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestAllExtensions parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestAllExtensions message = (protobuf_gcless_unittest.UnittestProto.TestAllExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestAllExtensions parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestAllExtensions message = (protobuf_gcless_unittest.UnittestProto.TestAllExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestAllExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestAllExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestAllExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}
@@ -2297,6 +3060,53 @@ public final class UnittestProto {
 					break;
 				case 1002:
 					message.setTest(ProtobufInputStream.readString(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestNestedExtension parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestNestedExtension message = (protobuf_gcless_unittest.UnittestProto.TestNestedExtension) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedExtension");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedExtension)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedExtension");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1002:
+					message.setTest(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestNestedExtension parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestNestedExtension message = (protobuf_gcless_unittest.UnittestProto.TestNestedExtension) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedExtension");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedExtension)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedExtension");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1002:
+					message.setTest(ProtobufInputStream.readString(is, cursor));
 					break;
 				}
 			}
@@ -3135,6 +3945,267 @@ public final class UnittestProto {
 			}
 		}
 
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestRequired parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRequired message = (protobuf_gcless_unittest.UnittestProto.TestRequired) factory.create("protobuf_gcless_unittest.UnittestProto.TestRequired");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRequired)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRequired");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setDummy2(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 3:
+					message.setB(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 1000:
+					int lengthSingle = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setSingle(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthSingle));
+					break;
+				case 1001:
+					if (message.getMulti() == null || message.getMulti().isEmpty()) {
+						message.setMulti(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestRequired>());
+					}
+					int lengthMulti = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getMulti().add(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMulti));
+					break;
+				case 4:
+					message.setDummy4(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 5:
+					message.setDummy5(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 6:
+					message.setDummy6(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 7:
+					message.setDummy7(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 8:
+					message.setDummy8(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 9:
+					message.setDummy9(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 10:
+					message.setDummy10(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 11:
+					message.setDummy11(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 12:
+					message.setDummy12(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 13:
+					message.setDummy13(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 14:
+					message.setDummy14(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 15:
+					message.setDummy15(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 16:
+					message.setDummy16(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 17:
+					message.setDummy17(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 18:
+					message.setDummy18(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 19:
+					message.setDummy19(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 20:
+					message.setDummy20(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 21:
+					message.setDummy21(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 22:
+					message.setDummy22(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 23:
+					message.setDummy23(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 24:
+					message.setDummy24(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 25:
+					message.setDummy25(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 26:
+					message.setDummy26(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 27:
+					message.setDummy27(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 28:
+					message.setDummy28(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 29:
+					message.setDummy29(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 30:
+					message.setDummy30(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 31:
+					message.setDummy31(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 32:
+					message.setDummy32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 33:
+					message.setC(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestRequired parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRequired message = (protobuf_gcless_unittest.UnittestProto.TestRequired) factory.create("protobuf_gcless_unittest.UnittestProto.TestRequired");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRequired)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRequired");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setDummy2(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 3:
+					message.setB(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 1000:
+					int lengthSingle = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setSingle(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthSingle));
+					break;
+				case 1001:
+					if (message.getMulti() == null || message.getMulti().isEmpty()) {
+						message.setMulti(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestRequired>());
+					}
+					int lengthMulti = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getMulti().add(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMulti));
+					break;
+				case 4:
+					message.setDummy4(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 5:
+					message.setDummy5(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 6:
+					message.setDummy6(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 7:
+					message.setDummy7(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 8:
+					message.setDummy8(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 9:
+					message.setDummy9(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 10:
+					message.setDummy10(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 11:
+					message.setDummy11(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 12:
+					message.setDummy12(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 13:
+					message.setDummy13(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 14:
+					message.setDummy14(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 15:
+					message.setDummy15(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 16:
+					message.setDummy16(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 17:
+					message.setDummy17(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 18:
+					message.setDummy18(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 19:
+					message.setDummy19(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 20:
+					message.setDummy20(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 21:
+					message.setDummy21(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 22:
+					message.setDummy22(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 23:
+					message.setDummy23(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 24:
+					message.setDummy24(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 25:
+					message.setDummy25(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 26:
+					message.setDummy26(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 27:
+					message.setDummy27(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 28:
+					message.setDummy28(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 29:
+					message.setDummy29(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 30:
+					message.setDummy30(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 31:
+					message.setDummy31(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 32:
+					message.setDummy32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 33:
+					message.setC(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
 		private static void assertInitialized(protobuf_gcless_unittest.UnittestProto.TestRequired message) {
 			if (!message.hasA()) {
 				throw new IllegalArgumentException("Required field not initialized: a");
@@ -3305,6 +4376,75 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestRequiredForeign parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message = (protobuf_gcless_unittest.UnittestProto.TestRequiredForeign) factory.create("protobuf_gcless_unittest.UnittestProto.TestRequiredForeign");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRequiredForeign)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRequiredForeign");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthOptional_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_message(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_message));
+					break;
+				case 2:
+					if (message.getRepeated_message() == null || message.getRepeated_message().isEmpty()) {
+						message.setRepeated_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestRequired>());
+					}
+					int lengthRepeated_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_message().add(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_message));
+					break;
+				case 3:
+					message.setDummy(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestRequiredForeign parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message = (protobuf_gcless_unittest.UnittestProto.TestRequiredForeign) factory.create("protobuf_gcless_unittest.UnittestProto.TestRequiredForeign");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRequiredForeign)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRequiredForeign");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthOptional_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_message(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_message));
+					break;
+				case 2:
+					if (message.getRepeated_message() == null || message.getRepeated_message().isEmpty()) {
+						message.setRepeated_message(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestRequired>());
+					}
+					int lengthRepeated_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeated_message().add(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeated_message));
+					break;
+				case 3:
+					message.setDummy(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestForeignNested {
@@ -3398,6 +4538,55 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestForeignNested parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestForeignNested message = (protobuf_gcless_unittest.UnittestProto.TestForeignNested) factory.create("protobuf_gcless_unittest.UnittestProto.TestForeignNested");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestForeignNested)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestForeignNested");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthForeign_nested = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setForeign_nested(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthForeign_nested));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestForeignNested parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestForeignNested message = (protobuf_gcless_unittest.UnittestProto.TestForeignNested) factory.create("protobuf_gcless_unittest.UnittestProto.TestForeignNested");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestForeignNested)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestForeignNested");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthForeign_nested = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setForeign_nested(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthForeign_nested));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestEmptyMessage {
@@ -3445,6 +4634,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestEmptyMessage message = (protobuf_gcless_unittest.UnittestProto.TestEmptyMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestEmptyMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestEmptyMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestEmptyMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestEmptyMessage message = (protobuf_gcless_unittest.UnittestProto.TestEmptyMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestEmptyMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestEmptyMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestEmptyMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}
@@ -3500,6 +4730,47 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions message = (protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions message = (protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestMultipleExtensionRanges {
@@ -3547,6 +4818,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges message = (protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges) factory.create("protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges message = (protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges) factory.create("protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}
@@ -3650,6 +4962,59 @@ public final class UnittestProto {
 					break;
 				case 268435455:
 					message.setBb(ProtobufInputStream.readInt32(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber message = (protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber) factory.create("protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 268435455:
+					message.setBb(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber message = (protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber) factory.create("protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 268435455:
+					message.setBb(ProtobufInputStream.readInt32(is, cursor));
 					break;
 				}
 			}
@@ -3768,6 +5133,61 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message = (protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthA = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setA(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthA));
+					break;
+				case 2:
+					message.setI(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message = (protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthA = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setA(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthA));
+					break;
+				case 2:
+					message.setI(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestMutualRecursionA {
@@ -3857,6 +5277,55 @@ public final class UnittestProto {
 					int lengthBb = ProtobufInputStream.readRawVarint32(data, cursor);
 					message.setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionBSerializer.parseFrom(factory, data, cursor.getCurrentPosition(), lengthBb));
 					cursor.addToPosition(lengthBb);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message = (protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA) factory.create("protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthBb = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionBSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthBb));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message = (protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA) factory.create("protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthBb = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionBSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthBb));
 					break;
 				}
 			}
@@ -3975,6 +5444,61 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB message = (protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB) factory.create("protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthA = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setA(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionASerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthA));
+					break;
+				case 2:
+					message.setOptional_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB message = (protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB) factory.create("protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthA = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setA(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionASerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthA));
+					break;
+				case 2:
+					message.setOptional_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestDupFieldNumber {
@@ -4053,6 +5577,53 @@ public final class UnittestProto {
 					break;
 				case 1:
 					message.setA(ProtobufInputStream.readInt32(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message = (protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber) factory.create("protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message = (protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber) factory.create("protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setA(ProtobufInputStream.readInt32(is, cursor));
 					break;
 				}
 			}
@@ -4201,6 +5772,73 @@ public final class UnittestProto {
 					}
 				}
 			}
+
+			/**
+			 * Beware! All subsequent messages in stream will be consumed until end of stream.
+			 **/
+			public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message = (protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 1:
+						if (message.getNestedmessage_repeated_int32() == null || message.getNestedmessage_repeated_int32().isEmpty()) {
+							message.setNestedmessage_repeated_int32(new java.util.ArrayList<Integer>());
+						}
+						message.getNestedmessage_repeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+						break;
+					case 2:
+						if (message.getNestedmessage_repeated_foreignmessage() == null || message.getNestedmessage_repeated_foreignmessage().isEmpty()) {
+							message.setNestedmessage_repeated_foreignmessage(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+						}
+						int lengthNestedmessage_repeated_foreignmessage = ProtobufInputStream.readRawVarint32(is, cursor);
+						message.getNestedmessage_repeated_foreignmessage().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthNestedmessage_repeated_foreignmessage));
+						break;
+					}
+				}
+			}
+
+			public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message = (protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				cursor.addToPosition(offset);
+				cursor.setProcessUpToPosition(offset + length);
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 1:
+						if (message.getNestedmessage_repeated_int32() == null || message.getNestedmessage_repeated_int32().isEmpty()) {
+							message.setNestedmessage_repeated_int32(new java.util.ArrayList<Integer>());
+						}
+						message.getNestedmessage_repeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+						break;
+					case 2:
+						if (message.getNestedmessage_repeated_foreignmessage() == null || message.getNestedmessage_repeated_foreignmessage().isEmpty()) {
+							message.setNestedmessage_repeated_foreignmessage(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+						}
+						int lengthNestedmessage_repeated_foreignmessage = ProtobufInputStream.readRawVarint32(is, cursor);
+						message.getNestedmessage_repeated_foreignmessage().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthNestedmessage_repeated_foreignmessage));
+						break;
+					}
+				}
+			}
 		}
 	}
 
@@ -4283,6 +5921,55 @@ public final class UnittestProto {
 					int lengthOptional_nested_message = ProtobufInputStream.readRawVarint32(data, cursor);
 					message.setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.parseFrom(factory, data, cursor.getCurrentPosition(), lengthOptional_nested_message));
 					cursor.addToPosition(lengthOptional_nested_message);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits message = (protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthOptional_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_nested_message));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits message = (protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits) factory.create("protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					int lengthOptional_nested_message = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setOptional_nested_message(protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthOptional_nested_message));
 					break;
 				}
 			}
@@ -4713,6 +6400,159 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames message = (protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames) factory.create("protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setPrimitiveField(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setStringField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 3:
+					message.setEnumField(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 4:
+					int lengthMessageField = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setMessageField(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMessageField));
+					break;
+				case 5:
+					message.setStringPieceField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 6:
+					message.setCordField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 7:
+					if (message.getRepeatedPrimitiveField() == null || message.getRepeatedPrimitiveField().isEmpty()) {
+						message.setRepeatedPrimitiveField(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeatedPrimitiveField().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 8:
+					if (message.getRepeatedStringField() == null || message.getRepeatedStringField().isEmpty()) {
+						message.setRepeatedStringField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedStringField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 9:
+					if (message.getRepeatedEnumField() == null || message.getRepeatedEnumField().isEmpty()) {
+						message.setRepeatedEnumField(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getRepeatedEnumField().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 10:
+					if (message.getRepeatedMessageField() == null || message.getRepeatedMessageField().isEmpty()) {
+						message.setRepeatedMessageField(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+					}
+					int lengthRepeatedMessageField = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeatedMessageField().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeatedMessageField));
+					break;
+				case 11:
+					if (message.getRepeatedStringPieceField() == null || message.getRepeatedStringPieceField().isEmpty()) {
+						message.setRepeatedStringPieceField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedStringPieceField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 12:
+					if (message.getRepeatedCordField() == null || message.getRepeatedCordField().isEmpty()) {
+						message.setRepeatedCordField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedCordField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames message = (protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames) factory.create("protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setPrimitiveField(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2:
+					message.setStringField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 3:
+					message.setEnumField(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 4:
+					int lengthMessageField = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setMessageField(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMessageField));
+					break;
+				case 5:
+					message.setStringPieceField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 6:
+					message.setCordField(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 7:
+					if (message.getRepeatedPrimitiveField() == null || message.getRepeatedPrimitiveField().isEmpty()) {
+						message.setRepeatedPrimitiveField(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeatedPrimitiveField().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 8:
+					if (message.getRepeatedStringField() == null || message.getRepeatedStringField().isEmpty()) {
+						message.setRepeatedStringField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedStringField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 9:
+					if (message.getRepeatedEnumField() == null || message.getRepeatedEnumField().isEmpty()) {
+						message.setRepeatedEnumField(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getRepeatedEnumField().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 10:
+					if (message.getRepeatedMessageField() == null || message.getRepeatedMessageField().isEmpty()) {
+						message.setRepeatedMessageField(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>());
+					}
+					int lengthRepeatedMessageField = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.getRepeatedMessageField().add(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthRepeatedMessageField));
+					break;
+				case 11:
+					if (message.getRepeatedStringPieceField() == null || message.getRepeatedStringPieceField().isEmpty()) {
+						message.setRepeatedStringPieceField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedStringPieceField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 12:
+					if (message.getRepeatedCordField() == null || message.getRepeatedCordField().isEmpty()) {
+						message.setRepeatedCordField(new java.util.ArrayList<String>());
+					}
+					message.getRepeatedCordField().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestFieldOrderings {
@@ -4837,6 +6677,65 @@ public final class UnittestProto {
 					break;
 				case 101:
 					message.setMy_float(ProtobufInputStream.readFloat(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestFieldOrderings parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message = (protobuf_gcless_unittest.UnittestProto.TestFieldOrderings) factory.create("protobuf_gcless_unittest.UnittestProto.TestFieldOrderings");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestFieldOrderings)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestFieldOrderings");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 11:
+					message.setMy_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 1:
+					message.setMy_int(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 101:
+					message.setMy_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestFieldOrderings parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message = (protobuf_gcless_unittest.UnittestProto.TestFieldOrderings) factory.create("protobuf_gcless_unittest.UnittestProto.TestFieldOrderings");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestFieldOrderings)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestFieldOrderings");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 11:
+					message.setMy_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 1:
+					message.setMy_int(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 101:
+					message.setMy_float(ProtobufInputStream.readFloat(is, cursor));
 					break;
 				}
 			}
@@ -5307,6 +7206,161 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues message = (protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues) factory.create("protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setEscaped_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 2:
+					message.setLarge_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 3:
+					message.setLarge_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 4:
+					message.setSmall_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 5:
+					message.setSmall_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 6:
+					message.setUtf8_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 7:
+					message.setZero_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 8:
+					message.setOne_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 9:
+					message.setSmall_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 10:
+					message.setNegative_one_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 11:
+					message.setNegative_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 12:
+					message.setLarge_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 13:
+					message.setSmall_negative_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 14:
+					message.setInf_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 15:
+					message.setNeg_inf_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 16:
+					message.setNan_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 17:
+					message.setInf_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 18:
+					message.setNeg_inf_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 19:
+					message.setNan_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues message = (protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues) factory.create("protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setEscaped_bytes(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				case 2:
+					message.setLarge_uint32(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 3:
+					message.setLarge_uint64(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 4:
+					message.setSmall_int32(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 5:
+					message.setSmall_int64(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 6:
+					message.setUtf8_string(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 7:
+					message.setZero_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 8:
+					message.setOne_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 9:
+					message.setSmall_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 10:
+					message.setNegative_one_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 11:
+					message.setNegative_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 12:
+					message.setLarge_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 13:
+					message.setSmall_negative_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 14:
+					message.setInf_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 15:
+					message.setNeg_inf_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 16:
+					message.setNan_double(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 17:
+					message.setInf_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 18:
+					message.setNeg_inf_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 19:
+					message.setNan_float(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface OneString {
@@ -5393,6 +7447,53 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.OneString parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.OneString message = (protobuf_gcless_unittest.UnittestProto.OneString) factory.create("protobuf_gcless_unittest.UnittestProto.OneString");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.OneString)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.OneString");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setData(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.OneString parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.OneString message = (protobuf_gcless_unittest.UnittestProto.OneString) factory.create("protobuf_gcless_unittest.UnittestProto.OneString");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.OneString)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.OneString");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setData(ProtobufInputStream.readString(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface OneBytes {
@@ -5473,6 +7574,53 @@ public final class UnittestProto {
 					break;
 				case 1:
 					message.setData(ProtobufInputStream.readBytes(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.OneBytes parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.OneBytes message = (protobuf_gcless_unittest.UnittestProto.OneBytes) factory.create("protobuf_gcless_unittest.UnittestProto.OneBytes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.OneBytes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.OneBytes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setData(ProtobufInputStream.readBytes(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.OneBytes parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.OneBytes message = (protobuf_gcless_unittest.UnittestProto.OneBytes) factory.create("protobuf_gcless_unittest.UnittestProto.OneBytes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.OneBytes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.OneBytes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 1:
+					message.setData(ProtobufInputStream.readBytes(is, cursor));
 					break;
 				}
 			}
@@ -5976,6 +8124,215 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestPackedTypes parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestPackedTypes message = (protobuf_gcless_unittest.UnittestProto.TestPackedTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestPackedTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestPackedTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestPackedTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 90:
+					if (message.getPacked_int32() == null || message.getPacked_int32().isEmpty()) {
+						message.setPacked_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 91:
+					if (message.getPacked_int64() == null || message.getPacked_int64().isEmpty()) {
+						message.setPacked_int64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 92:
+					if (message.getPacked_uint32() == null || message.getPacked_uint32().isEmpty()) {
+						message.setPacked_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 93:
+					if (message.getPacked_uint64() == null || message.getPacked_uint64().isEmpty()) {
+						message.setPacked_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 94:
+					if (message.getPacked_sint32() == null || message.getPacked_sint32().isEmpty()) {
+						message.setPacked_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 95:
+					if (message.getPacked_sint64() == null || message.getPacked_sint64().isEmpty()) {
+						message.setPacked_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 96:
+					if (message.getPacked_fixed32() == null || message.getPacked_fixed32().isEmpty()) {
+						message.setPacked_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 97:
+					if (message.getPacked_fixed64() == null || message.getPacked_fixed64().isEmpty()) {
+						message.setPacked_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 98:
+					if (message.getPacked_sfixed32() == null || message.getPacked_sfixed32().isEmpty()) {
+						message.setPacked_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 99:
+					if (message.getPacked_sfixed64() == null || message.getPacked_sfixed64().isEmpty()) {
+						message.setPacked_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 100:
+					if (message.getPacked_float() == null || message.getPacked_float().isEmpty()) {
+						message.setPacked_float(new java.util.ArrayList<Float>());
+					}
+					message.getPacked_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 101:
+					if (message.getPacked_double() == null || message.getPacked_double().isEmpty()) {
+						message.setPacked_double(new java.util.ArrayList<Double>());
+					}
+					message.getPacked_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 102:
+					if (message.getPacked_bool() == null || message.getPacked_bool().isEmpty()) {
+						message.setPacked_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getPacked_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 103:
+					if (message.getPacked_enum() == null || message.getPacked_enum().isEmpty()) {
+						message.setPacked_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getPacked_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestPackedTypes parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestPackedTypes message = (protobuf_gcless_unittest.UnittestProto.TestPackedTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestPackedTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestPackedTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestPackedTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 90:
+					if (message.getPacked_int32() == null || message.getPacked_int32().isEmpty()) {
+						message.setPacked_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 91:
+					if (message.getPacked_int64() == null || message.getPacked_int64().isEmpty()) {
+						message.setPacked_int64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 92:
+					if (message.getPacked_uint32() == null || message.getPacked_uint32().isEmpty()) {
+						message.setPacked_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 93:
+					if (message.getPacked_uint64() == null || message.getPacked_uint64().isEmpty()) {
+						message.setPacked_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 94:
+					if (message.getPacked_sint32() == null || message.getPacked_sint32().isEmpty()) {
+						message.setPacked_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 95:
+					if (message.getPacked_sint64() == null || message.getPacked_sint64().isEmpty()) {
+						message.setPacked_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 96:
+					if (message.getPacked_fixed32() == null || message.getPacked_fixed32().isEmpty()) {
+						message.setPacked_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 97:
+					if (message.getPacked_fixed64() == null || message.getPacked_fixed64().isEmpty()) {
+						message.setPacked_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 98:
+					if (message.getPacked_sfixed32() == null || message.getPacked_sfixed32().isEmpty()) {
+						message.setPacked_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 99:
+					if (message.getPacked_sfixed64() == null || message.getPacked_sfixed64().isEmpty()) {
+						message.setPacked_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getPacked_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 100:
+					if (message.getPacked_float() == null || message.getPacked_float().isEmpty()) {
+						message.setPacked_float(new java.util.ArrayList<Float>());
+					}
+					message.getPacked_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 101:
+					if (message.getPacked_double() == null || message.getPacked_double().isEmpty()) {
+						message.setPacked_double(new java.util.ArrayList<Double>());
+					}
+					message.getPacked_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 102:
+					if (message.getPacked_bool() == null || message.getPacked_bool().isEmpty()) {
+						message.setPacked_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getPacked_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 103:
+					if (message.getPacked_enum() == null || message.getPacked_enum().isEmpty()) {
+						message.setPacked_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getPacked_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestUnpackedTypes {
@@ -6475,6 +8832,215 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message = (protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 90:
+					if (message.getUnpacked_int32() == null || message.getUnpacked_int32().isEmpty()) {
+						message.setUnpacked_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 91:
+					if (message.getUnpacked_int64() == null || message.getUnpacked_int64().isEmpty()) {
+						message.setUnpacked_int64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 92:
+					if (message.getUnpacked_uint32() == null || message.getUnpacked_uint32().isEmpty()) {
+						message.setUnpacked_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 93:
+					if (message.getUnpacked_uint64() == null || message.getUnpacked_uint64().isEmpty()) {
+						message.setUnpacked_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 94:
+					if (message.getUnpacked_sint32() == null || message.getUnpacked_sint32().isEmpty()) {
+						message.setUnpacked_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 95:
+					if (message.getUnpacked_sint64() == null || message.getUnpacked_sint64().isEmpty()) {
+						message.setUnpacked_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 96:
+					if (message.getUnpacked_fixed32() == null || message.getUnpacked_fixed32().isEmpty()) {
+						message.setUnpacked_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 97:
+					if (message.getUnpacked_fixed64() == null || message.getUnpacked_fixed64().isEmpty()) {
+						message.setUnpacked_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 98:
+					if (message.getUnpacked_sfixed32() == null || message.getUnpacked_sfixed32().isEmpty()) {
+						message.setUnpacked_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 99:
+					if (message.getUnpacked_sfixed64() == null || message.getUnpacked_sfixed64().isEmpty()) {
+						message.setUnpacked_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 100:
+					if (message.getUnpacked_float() == null || message.getUnpacked_float().isEmpty()) {
+						message.setUnpacked_float(new java.util.ArrayList<Float>());
+					}
+					message.getUnpacked_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 101:
+					if (message.getUnpacked_double() == null || message.getUnpacked_double().isEmpty()) {
+						message.setUnpacked_double(new java.util.ArrayList<Double>());
+					}
+					message.getUnpacked_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 102:
+					if (message.getUnpacked_bool() == null || message.getUnpacked_bool().isEmpty()) {
+						message.setUnpacked_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getUnpacked_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 103:
+					if (message.getUnpacked_enum() == null || message.getUnpacked_enum().isEmpty()) {
+						message.setUnpacked_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getUnpacked_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message = (protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes) factory.create("protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 90:
+					if (message.getUnpacked_int32() == null || message.getUnpacked_int32().isEmpty()) {
+						message.setUnpacked_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 91:
+					if (message.getUnpacked_int64() == null || message.getUnpacked_int64().isEmpty()) {
+						message.setUnpacked_int64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 92:
+					if (message.getUnpacked_uint32() == null || message.getUnpacked_uint32().isEmpty()) {
+						message.setUnpacked_uint32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_uint32().add(ProtobufInputStream.readUint32(is, cursor));
+					break;
+				case 93:
+					if (message.getUnpacked_uint64() == null || message.getUnpacked_uint64().isEmpty()) {
+						message.setUnpacked_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				case 94:
+					if (message.getUnpacked_sint32() == null || message.getUnpacked_sint32().isEmpty()) {
+						message.setUnpacked_sint32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_sint32().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				case 95:
+					if (message.getUnpacked_sint64() == null || message.getUnpacked_sint64().isEmpty()) {
+						message.setUnpacked_sint64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_sint64().add(ProtobufInputStream.readSint64(is, cursor));
+					break;
+				case 96:
+					if (message.getUnpacked_fixed32() == null || message.getUnpacked_fixed32().isEmpty()) {
+						message.setUnpacked_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 97:
+					if (message.getUnpacked_fixed64() == null || message.getUnpacked_fixed64().isEmpty()) {
+						message.setUnpacked_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 98:
+					if (message.getUnpacked_sfixed32() == null || message.getUnpacked_sfixed32().isEmpty()) {
+						message.setUnpacked_sfixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getUnpacked_sfixed32().add(ProtobufInputStream.readSfixed32(is, cursor));
+					break;
+				case 99:
+					if (message.getUnpacked_sfixed64() == null || message.getUnpacked_sfixed64().isEmpty()) {
+						message.setUnpacked_sfixed64(new java.util.ArrayList<Long>());
+					}
+					message.getUnpacked_sfixed64().add(ProtobufInputStream.readSfixed64(is, cursor));
+					break;
+				case 100:
+					if (message.getUnpacked_float() == null || message.getUnpacked_float().isEmpty()) {
+						message.setUnpacked_float(new java.util.ArrayList<Float>());
+					}
+					message.getUnpacked_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 101:
+					if (message.getUnpacked_double() == null || message.getUnpacked_double().isEmpty()) {
+						message.setUnpacked_double(new java.util.ArrayList<Double>());
+					}
+					message.getUnpacked_double().add(ProtobufInputStream.readDouble(is, cursor));
+					break;
+				case 102:
+					if (message.getUnpacked_bool() == null || message.getUnpacked_bool().isEmpty()) {
+						message.setUnpacked_bool(new java.util.ArrayList<Boolean>());
+					}
+					message.getUnpacked_bool().add(ProtobufInputStream.readBool(is, cursor));
+					break;
+				case 103:
+					if (message.getUnpacked_enum() == null || message.getUnpacked_enum().isEmpty()) {
+						message.setUnpacked_enum(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>());
+					}
+					message.getUnpacked_enum().add(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface TestPackedExtensions {
@@ -6522,6 +9088,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestPackedExtensions parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestPackedExtensions message = (protobuf_gcless_unittest.UnittestProto.TestPackedExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestPackedExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestPackedExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestPackedExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestPackedExtensions parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestPackedExtensions message = (protobuf_gcless_unittest.UnittestProto.TestPackedExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestPackedExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestPackedExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestPackedExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}
@@ -6647,6 +9254,53 @@ public final class UnittestProto {
 						break;
 					case 2100:
 						message.setDynamic_field(ProtobufInputStream.readInt32(data, cursor));
+						break;
+					}
+				}
+			}
+
+			/**
+			 * Beware! All subsequent messages in stream will be consumed until end of stream.
+			 **/
+			public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message = (protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType) factory.create("protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 2100:
+						message.setDynamic_field(ProtobufInputStream.readInt32(is, cursor));
+						break;
+					}
+				}
+			}
+
+			public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+				protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message = (protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType) factory.create("protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType");
+				if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType)) {
+					throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType");
+				}
+				CurrentCursor cursor = new CurrentCursor();
+				cursor.addToPosition(offset);
+				cursor.setProcessUpToPosition(offset + length);
+				while (true) {
+					int tag = ProtobufInputStream.readTag(is, cursor);
+					switch (tag) {
+					case 0:
+						return message;
+					default:
+						ProtobufInputStream.skipUnknown(tag, is, cursor);
+						break;
+					case 2100:
+						message.setDynamic_field(ProtobufInputStream.readInt32(is, cursor));
 						break;
 					}
 				}
@@ -6885,6 +9539,105 @@ public final class UnittestProto {
 						message.setPacked_extension(new java.util.ArrayList<Integer>());
 					}
 					message.getPacked_extension().add(ProtobufInputStream.readSint32(data, cursor));
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions message = (protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 2000:
+					message.setScalar_extension(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 2001:
+					message.setEnum_extension(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 2002:
+					message.setDynamic_enum_extension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 2003:
+					int lengthMessage_extension = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setMessage_extension(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMessage_extension));
+					break;
+				case 2004:
+					int lengthDynamic_message_extension = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setDynamic_message_extension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageTypeSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthDynamic_message_extension));
+					break;
+				case 2005:
+					if (message.getRepeated_extension() == null || message.getRepeated_extension().isEmpty()) {
+						message.setRepeated_extension(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_extension().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 2006:
+					if (message.getPacked_extension() == null || message.getPacked_extension().isEmpty()) {
+						message.setPacked_extension(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_extension().add(ProtobufInputStream.readSint32(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions message = (protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions) factory.create("protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 2000:
+					message.setScalar_extension(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 2001:
+					message.setEnum_extension(protobuf_gcless_unittest.UnittestProto.ForeignEnum.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 2002:
+					message.setDynamic_enum_extension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType.valueOf(ProtobufInputStream.readEnum(is, cursor)));
+					break;
+				case 2003:
+					int lengthMessage_extension = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setMessage_extension(protobuf_gcless_unittest.UnittestProto.ForeignMessageSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthMessage_extension));
+					break;
+				case 2004:
+					int lengthDynamic_message_extension = ProtobufInputStream.readRawVarint32(is, cursor);
+					message.setDynamic_message_extension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageTypeSerializer.parseFrom(factory, is, cursor.getCurrentPosition(), lengthDynamic_message_extension));
+					break;
+				case 2005:
+					if (message.getRepeated_extension() == null || message.getRepeated_extension().isEmpty()) {
+						message.setRepeated_extension(new java.util.ArrayList<String>());
+					}
+					message.getRepeated_extension().add(ProtobufInputStream.readString(is, cursor));
+					break;
+				case 2006:
+					if (message.getPacked_extension() == null || message.getPacked_extension().isEmpty()) {
+						message.setPacked_extension(new java.util.ArrayList<Integer>());
+					}
+					message.getPacked_extension().add(ProtobufInputStream.readSint32(is, cursor));
 					break;
 				}
 			}
@@ -7136,6 +9889,119 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message = (protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes) factory.create("protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 12:
+					if (message.getRepeated_fixed32() == null || message.getRepeated_fixed32().isEmpty()) {
+						message.setRepeated_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 13:
+					if (message.getRepeated_int32() == null || message.getRepeated_int32().isEmpty()) {
+						message.setRepeated_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2046:
+					if (message.getRepeated_fixed64() == null || message.getRepeated_fixed64().isEmpty()) {
+						message.setRepeated_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 2047:
+					if (message.getRepeated_int64() == null || message.getRepeated_int64().isEmpty()) {
+						message.setRepeated_int64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 262142:
+					if (message.getRepeated_float() == null || message.getRepeated_float().isEmpty()) {
+						message.setRepeated_float(new java.util.ArrayList<Float>());
+					}
+					message.getRepeated_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 262143:
+					if (message.getRepeated_uint64() == null || message.getRepeated_uint64().isEmpty()) {
+						message.setRepeated_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message = (protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes) factory.create("protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				case 12:
+					if (message.getRepeated_fixed32() == null || message.getRepeated_fixed32().isEmpty()) {
+						message.setRepeated_fixed32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_fixed32().add(ProtobufInputStream.readFixed32(is, cursor));
+					break;
+				case 13:
+					if (message.getRepeated_int32() == null || message.getRepeated_int32().isEmpty()) {
+						message.setRepeated_int32(new java.util.ArrayList<Integer>());
+					}
+					message.getRepeated_int32().add(ProtobufInputStream.readInt32(is, cursor));
+					break;
+				case 2046:
+					if (message.getRepeated_fixed64() == null || message.getRepeated_fixed64().isEmpty()) {
+						message.setRepeated_fixed64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_fixed64().add(ProtobufInputStream.readFixed64(is, cursor));
+					break;
+				case 2047:
+					if (message.getRepeated_int64() == null || message.getRepeated_int64().isEmpty()) {
+						message.setRepeated_int64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_int64().add(ProtobufInputStream.readInt64(is, cursor));
+					break;
+				case 262142:
+					if (message.getRepeated_float() == null || message.getRepeated_float().isEmpty()) {
+						message.setRepeated_float(new java.util.ArrayList<Float>());
+					}
+					message.getRepeated_float().add(ProtobufInputStream.readFloat(is, cursor));
+					break;
+				case 262143:
+					if (message.getRepeated_uint64() == null || message.getRepeated_uint64().isEmpty()) {
+						message.setRepeated_uint64(new java.util.ArrayList<Long>());
+					}
+					message.getRepeated_uint64().add(ProtobufInputStream.readUint64(is, cursor));
+					break;
+				}
+			}
+		}
 	}
 
 	public interface FooRequest {
@@ -7183,6 +10049,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.FooRequest parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.FooRequest message = (protobuf_gcless_unittest.UnittestProto.FooRequest) factory.create("protobuf_gcless_unittest.UnittestProto.FooRequest");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.FooRequest)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.FooRequest");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.FooRequest parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.FooRequest message = (protobuf_gcless_unittest.UnittestProto.FooRequest) factory.create("protobuf_gcless_unittest.UnittestProto.FooRequest");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.FooRequest)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.FooRequest");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}
@@ -7238,6 +10145,47 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.FooResponse parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.FooResponse message = (protobuf_gcless_unittest.UnittestProto.FooResponse) factory.create("protobuf_gcless_unittest.UnittestProto.FooResponse");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.FooResponse)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.FooResponse");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.FooResponse parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.FooResponse message = (protobuf_gcless_unittest.UnittestProto.FooResponse) factory.create("protobuf_gcless_unittest.UnittestProto.FooResponse");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.FooResponse)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.FooResponse");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
 	}
 
 	public interface BarRequest {
@@ -7289,6 +10237,47 @@ public final class UnittestProto {
 				}
 			}
 		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.BarRequest parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.BarRequest message = (protobuf_gcless_unittest.UnittestProto.BarRequest) factory.create("protobuf_gcless_unittest.UnittestProto.BarRequest");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.BarRequest)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.BarRequest");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.BarRequest parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.BarRequest message = (protobuf_gcless_unittest.UnittestProto.BarRequest) factory.create("protobuf_gcless_unittest.UnittestProto.BarRequest");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.BarRequest)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.BarRequest");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
 	}
 
 	public interface BarResponse {
@@ -7336,6 +10325,47 @@ public final class UnittestProto {
 					return message;
 				default:
 					ProtobufInputStream.skipUnknown(tag, data, cursor);
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Beware! All subsequent messages in stream will be consumed until end of stream.
+		 **/
+		public static protobuf_gcless_unittest.UnittestProto.BarResponse parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.BarResponse message = (protobuf_gcless_unittest.UnittestProto.BarResponse) factory.create("protobuf_gcless_unittest.UnittestProto.BarResponse");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.BarResponse)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.BarResponse");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
+					break;
+				}
+			}
+		}
+
+		public static protobuf_gcless_unittest.UnittestProto.BarResponse parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+			protobuf_gcless_unittest.UnittestProto.BarResponse message = (protobuf_gcless_unittest.UnittestProto.BarResponse) factory.create("protobuf_gcless_unittest.UnittestProto.BarResponse");
+			if (message == null || !(message instanceof protobuf_gcless_unittest.UnittestProto.BarResponse)) {
+				throw new IOException("Factory create invalid message for type: protobuf_gcless_unittest.UnittestProto.BarResponse");
+			}
+			CurrentCursor cursor = new CurrentCursor();
+			cursor.addToPosition(offset);
+			cursor.setProcessUpToPosition(offset + length);
+			while (true) {
+				int tag = ProtobufInputStream.readTag(is, cursor);
+				switch (tag) {
+				case 0:
+					return message;
+				default:
+					ProtobufInputStream.skipUnknown(tag, is, cursor);
 					break;
 				}
 			}

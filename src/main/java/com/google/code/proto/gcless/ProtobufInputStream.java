@@ -60,10 +60,22 @@ final public class ProtobufInputStream {
 		return lastTag;
 	}
 	
-//	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
+		if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+			return 0;
+		}
+		int tagId = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			return 0;
+		}
+		int lastTag = getTagFieldNumber(tagId);
+		if (lastTag == 0) {
+			// If we actually read zero (or any tag number corresponding to field
+			// number zero), that's not a valid tag.
+			throw new IOException("invalid tag: 0");
+		}
+		return lastTag;
+	}
 
 	public static int readInt32(byte[] data, CurrentCursor cursor) throws IOException {
 		return readRawVarint32(data, cursor);
@@ -125,6 +137,43 @@ final public class ProtobufInputStream {
 		return result;
 	}
 	
+	public static int readRawVarint32(InputStream is, CurrentCursor currentPosition) throws IOException {
+		byte tmp = readRawByte(is, currentPosition);
+		if( currentPosition.isEndOfStreamReached() ) {
+			return tmp;
+		}
+		if (tmp >= 0) {
+			return tmp;
+		}
+		int result = tmp & 0x7f;
+		if ((tmp = readRawByte(is, currentPosition)) >= 0) {
+			result |= tmp << 7;
+		} else {
+			result |= (tmp & 0x7f) << 7;
+			if ((tmp = readRawByte(is, currentPosition)) >= 0) {
+				result |= tmp << 14;
+			} else {
+				result |= (tmp & 0x7f) << 14;
+				if ((tmp = readRawByte(is, currentPosition)) >= 0) {
+					result |= tmp << 21;
+				} else {
+					result |= (tmp & 0x7f) << 21;
+					result |= (tmp = readRawByte(is, currentPosition)) << 28;
+					if (tmp < 0) {
+						// Discard upper 32 bits.
+						for (int i = 0; i < 5; i++) {
+							if (readRawByte(is, currentPosition) >= 0) {
+								return result;
+							}
+						}
+						throw new IOException("malformed varint32");
+					}
+				}
+			}
+		}
+		return result;
+	}	
+	
 	public static int readRawVarint32(InputStream is) throws IOException {
 		byte tmp = readRawByte(is);
 		if (tmp >= 0) {
@@ -164,6 +213,16 @@ final public class ProtobufInputStream {
 		currentPosition.addToPosition(1);
 		return result;
 	}
+	
+	public static byte readRawByte(InputStream is, CurrentCursor currentPosition) throws IOException {
+		int result = is.read();
+		if( result == -1 ) {
+			currentPosition.setEndOfStreamReached(true);
+		} else {
+			currentPosition.addToPosition(1);
+		}
+		return (byte)result;
+	}	
 	
 	public static byte readRawByte(InputStream is) throws IOException {
 		return (byte)is.read();
@@ -273,6 +332,248 @@ final public class ProtobufInputStream {
 		System.arraycopy(data, cursor.getCurrentPosition(), bytes, 0, size);
 		cursor.addToPosition(size);
 		return bytes;
+	}
+
+	public static void skipUnknown(int tag, InputStream is, CurrentCursor cursor) throws IOException {
+		switch (getTagWireType(tag)) {
+		case WIRETYPE_VARINT:
+			skipInt64(is, cursor);
+		case WIRETYPE_FIXED64:
+			skipFixed64(is, cursor);
+		case WIRETYPE_LENGTH_DELIMITED:
+			skipBytes(is, cursor);
+		case WIRETYPE_FIXED32:
+			skipFixed32(is, cursor);
+		default:
+			throw new IOException("invalid wire type");
+		}		
+	}
+	
+	private static void skipBytes(InputStream is, CurrentCursor cursor) throws IOException {
+		final int size = readRawVarint32(is, cursor);
+		skipBytes(size, is, cursor);
+	}
+
+	private static void skipInt64(InputStream is, CurrentCursor cursor) throws IOException {
+		skipRawVarint64(is, cursor);
+	}
+	
+	private static void skipRawVarint64(InputStream is, CurrentCursor cursor) throws IOException {
+		int shift = 0;
+		while (shift < 64) {
+			final byte b = readRawByte(is, cursor);
+			if ((b & 0x80) == 0) {
+				return;
+			}
+			shift += 7;
+		}
+		throw new IOException("malformed varint64");
+	}
+
+	private static void skipFixed64(InputStream is, CurrentCursor cursor) throws IOException {
+		skipRawLittleEndian64(is, cursor);
+	}
+
+	private static void skipRawLittleEndian64(InputStream is, CurrentCursor cursor) throws IOException {
+		skipBytes(8, is, cursor);
+	}
+	
+	private static void skipBytes(int count, InputStream is, CurrentCursor cursor) throws IOException {
+		long actualSkipped = is.skip(count);
+		if( actualSkipped != 0 && actualSkipped != count ) {
+			throw new IOException("invalid bytes skipped. Expected: " + count + " skipped: " + actualSkipped);
+		}
+		cursor.addToPosition(count);
+	}
+	
+	private static void skipFixed32(InputStream is, CurrentCursor cursor) throws IOException {
+		skipRawLittleEndian32(is, cursor);
+	}
+	
+	private static void skipRawLittleEndian32(InputStream is, CurrentCursor cursor) throws IOException {
+		skipBytes(4, is, cursor);
+	}
+
+	public static int readInt32(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed int32");
+		}
+		return result;
+	}
+
+	public static long readInt64(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawVarint64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed int64");
+		}
+		return result;
+	}
+
+	private static long readRawVarint64(InputStream is, CurrentCursor cursor) throws IOException {
+		int shift = 0;
+		long result = 0;
+		while (shift < 64) {
+			final byte b = readRawByte(is, cursor);
+			result |= (long) (b & 0x7F) << shift;
+			if ((b & 0x80) == 0) {
+				return result;
+			}
+			shift += 7;
+		}
+		throw new IOException("malformed varint64");
+	}
+
+	public static int readUint32(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Uint32");
+		}
+		return result;
+	}
+
+	public static long readUint64(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawVarint64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Uint64");
+		}
+		return result;
+	}
+
+	public static int readSint32(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Sint32");
+		}
+		return decodeZigZag32(result);
+	}
+
+	public static long readSint64(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawVarint64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Sint64");
+		}
+		return decodeZigZag64(result);
+	}
+
+	public static int readFixed32(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawLittleEndian32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Fixed32");
+		}
+		return result;
+	}
+
+	private static int readRawLittleEndian32(InputStream is, CurrentCursor cursor) throws IOException {
+		final byte b1 = readRawByte(is, cursor);
+		final byte b2 = readRawByte(is, cursor);
+		final byte b3 = readRawByte(is, cursor);
+		final byte b4 = readRawByte(is, cursor);
+		return (((int) b1 & 0xff)) | (((int) b2 & 0xff) << 8) | (((int) b3 & 0xff) << 16) | (((int) b4 & 0xff) << 24);
+	}
+
+	public static long readFixed64(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawLittleEndian64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Fixed64");
+		}
+		return result;
+	}
+
+	private static long readRawLittleEndian64(InputStream is, CurrentCursor cursor) throws IOException {
+		final byte b1 = readRawByte(is, cursor);
+		final byte b2 = readRawByte(is, cursor);
+		final byte b3 = readRawByte(is, cursor);
+		final byte b4 = readRawByte(is, cursor);
+		final byte b5 = readRawByte(is, cursor);
+		final byte b6 = readRawByte(is, cursor);
+		final byte b7 = readRawByte(is, cursor);
+		final byte b8 = readRawByte(is, cursor);
+		return (((long) b1 & 0xff)) | (((long) b2 & 0xff) << 8) | (((long) b3 & 0xff) << 16) | (((long) b4 & 0xff) << 24) | (((long) b5 & 0xff) << 32) | (((long) b6 & 0xff) << 40) | (((long) b7 & 0xff) << 48) | (((long) b8 & 0xff) << 56);
+	}
+
+	public static int readSfixed32(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawLittleEndian32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Sfixed32");
+		}
+		return result;
+	}
+
+	public static long readSfixed64(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawLittleEndian64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Sfixed64");
+		}
+		return result;
+	}
+
+	public static float readFloat(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawLittleEndian32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Float");
+		}
+		return Float.intBitsToFloat(result);
+	}
+
+	public static double readDouble(InputStream is, CurrentCursor cursor) throws IOException {
+		long result = readRawLittleEndian64(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Double");
+		}
+		return Double.longBitsToDouble(result);
+	}
+
+	public static boolean readBool(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Bool");
+		}
+		return  result!= 0;
+	}
+
+	public static String readString(InputStream is, CurrentCursor cursor) throws IOException {
+		final int size = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed String");
+		}
+		String result = new String(readRawBytes(size, is, cursor), "UTF-8");
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed String");
+		}
+		return result;
+	}
+	
+	private static byte[] readRawBytes(final int size, InputStream is, CurrentCursor cursor) throws IOException {
+		if (size < 0) {
+			throw new IOException("Invalid buffer size");
+		}
+		byte[] bytes = new byte[size];
+		int bytesRead = is.read(bytes, 0, size);
+		if( bytesRead != size ) {
+			throw new IOException("invalid amount of bytes read. Expected: " + size + " read: " + bytesRead);
+		}
+		return bytes;
+	}
+
+	public static byte[] readBytes(InputStream is, CurrentCursor cursor) throws IOException {
+		final int size = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Bytes");
+		}
+		byte[] result = readRawBytes(size, is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Bytes");
+		}
+		return result;
+	}
+
+	public static int readEnum(InputStream is, CurrentCursor cursor) throws IOException {
+		int result = readRawVarint32(is, cursor);
+		if( cursor.isEndOfStreamReached() ) {
+			throw new IOException("unexpected end of stream. malformed Enum");
+		}
+		return result;
 	}
 
 }

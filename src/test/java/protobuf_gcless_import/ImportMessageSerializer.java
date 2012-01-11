@@ -78,4 +78,51 @@ public final class ImportMessageSerializer {
 			}
 		}
 	}
+
+	/**
+	 * Beware! All subsequent messages in stream will be consumed until end of stream.
+	 **/
+	public static protobuf_gcless_import.ImportMessage parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
+		protobuf_gcless_import.ImportMessage message = (protobuf_gcless_import.ImportMessage) factory.create("protobuf_gcless_import.ImportMessage");
+		if (message == null || !(message instanceof protobuf_gcless_import.ImportMessage)) {
+			throw new IOException("Factory create invalid message for type: protobuf_gcless_import.ImportMessage");
+		}
+		CurrentCursor cursor = new CurrentCursor();
+		while (true) {
+			int tag = ProtobufInputStream.readTag(is, cursor);
+			switch (tag) {
+			case 0:
+				return message;
+			default:
+				ProtobufInputStream.skipUnknown(tag, is, cursor);
+				break;
+			case 1:
+				message.setD(ProtobufInputStream.readInt32(is, cursor));
+				break;
+			}
+		}
+	}
+
+	public static protobuf_gcless_import.ImportMessage parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+		protobuf_gcless_import.ImportMessage message = (protobuf_gcless_import.ImportMessage) factory.create("protobuf_gcless_import.ImportMessage");
+		if (message == null || !(message instanceof protobuf_gcless_import.ImportMessage)) {
+			throw new IOException("Factory create invalid message for type: protobuf_gcless_import.ImportMessage");
+		}
+		CurrentCursor cursor = new CurrentCursor();
+		cursor.addToPosition(offset);
+		cursor.setProcessUpToPosition(offset + length);
+		while (true) {
+			int tag = ProtobufInputStream.readTag(is, cursor);
+			switch (tag) {
+			case 0:
+				return message;
+			default:
+				ProtobufInputStream.skipUnknown(tag, is, cursor);
+				break;
+			case 1:
+				message.setD(ProtobufInputStream.readInt32(is, cursor));
+				break;
+			}
+		}
+	}
 }
