@@ -13,6 +13,7 @@ final public class ProtobufInputStream {
 	static final int TAG_TYPE_BITS = 3;
 	static final int TAG_TYPE_MASK = (1 << TAG_TYPE_BITS) - 1;
 
+	//TODO skip bytes instead of copy
 	public static boolean skipUnknown(final int tag, byte[] data, CurrentCursor cursor) throws IOException {
 		switch (getTagWireType(tag)) {
 		case WIRETYPE_VARINT:
@@ -46,7 +47,7 @@ final public class ProtobufInputStream {
 	}
 
 	public static int readTag(byte[] data, CurrentCursor currentPosition) throws IOException {
-		if (isAtEnd(data, currentPosition.getCurrentPosition())) {
+		if (isAtEnd(data, currentPosition)) {
 			return 0;
 		}
 
@@ -54,15 +55,15 @@ final public class ProtobufInputStream {
 		if (lastTag == 0) {
 			// If we actually read zero (or any tag number corresponding to field
 			// number zero), that's not a valid tag.
-			throw new IOException("invalid data");
+			throw new IOException("invalid tag: 0");
 		}
 		return lastTag;
 	}
 	
-	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	public static int readInt32(byte[] data, CurrentCursor cursor) throws IOException {
 		return readRawVarint32(data, cursor);
@@ -168,8 +169,8 @@ final public class ProtobufInputStream {
 		return (byte)is.read();
 	}
 
-	public static boolean isAtEnd(byte[] data, int currentPosition) throws IOException {
-		return currentPosition == data.length;
+	public static boolean isAtEnd(byte[] data, CurrentCursor cursor) throws IOException {
+		return cursor.getCurrentPosition() == data.length || cursor.getCurrentPosition() == cursor.getProcessUpToPosition();
 	}
 
 	private static int getTagFieldNumber(final int tag) {

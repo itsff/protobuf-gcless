@@ -17,8 +17,23 @@ import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
 	
+	@Test 
+	public void testDefaultSerializationOptimizedDeserialization() throws Exception {
+		TestAllTypes message = createSampleMessage();
+		byte[] data = TestAllTypesSerializer.serialize(message);
+		
+		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
+		
+		byte[] defaultSerializationData = result.toByteArray();
+		
+		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), defaultSerializationData);
+		assertEquals(2, optimizedResult.getRepeated_foreign_message().size());
+		assertEquals(1, optimizedResult.getRepeated_foreign_message().get(0).getC());
+		assertEquals(2, optimizedResult.getRepeated_foreign_message().get(1).getC());
+	}
+	
 	@Test
-	public void testDeserialization() throws Exception {
+	public void testOptimizedSerializationDeserialization() throws Exception {
 		TestAllTypes message = createSampleMessage();
 
 		byte[] data = TestAllTypesSerializer.serialize(message);
@@ -26,15 +41,13 @@ public class SerializationTest {
 		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
 		assertNotNull(result);
 		assertEquals(message.getDefault_string(), result.getDefault_string());
-		assertEquals(2, message.getRepeated_foreign_message().size());
-		System.out.println(message.getRepeated_foreign_message().get(0).getC());
-		System.out.println(message.getRepeated_foreign_message().get(1).getC());
-		assertEquals(1, message.getRepeated_foreign_message().get(0).getC());
-		assertEquals(2, message.getRepeated_foreign_message().get(1).getC());
+		assertEquals(2, result.getRepeated_foreign_message().size());
+		assertEquals(1, result.getRepeated_foreign_message().get(0).getC());
+		assertEquals(2, result.getRepeated_foreign_message().get(1).getC());
 	}
 	
 	@Test
-	public void testSerializationDeserialization() throws Exception {
+	public void testOptimizedSerializationDefaultDeserialization() throws Exception {
 
 		TestAllTypes message = createSampleMessage();
 
@@ -45,7 +58,7 @@ public class SerializationTest {
 	}
 
 	@Test
-	public void testSerializeToStream() throws Exception {
+	public void testOptimizedSerializeToStreamDefaultDeserialization() throws Exception {
 
 		TestAllTypes message = createSampleMessage();
 
@@ -54,7 +67,9 @@ public class SerializationTest {
 		
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(baos.toByteArray());
 		assertNotNull(result);
-
+		assertEquals(2, result.getRepeatedForeignMessageCount());
+		assertEquals(1, result.getRepeatedForeignMessage(0).getC());
+		assertEquals(2, result.getRepeatedForeignMessage(1).getC());		
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -100,13 +115,13 @@ public class SerializationTest {
 		for (int i = 0; i < times; i++) {
 			TestAllTypesSerializer.parseFrom(factory, data);
 		}
-		System.out.println("Optimized streamed version(de-serialize): " + (System.currentTimeMillis() - start));
+		System.out.println("Optimized version(de-serialize): " + (System.currentTimeMillis() - start));
 		
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
 			protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(data);
 		}
-		System.out.println("Default streamed version(de-serialize): " + (System.currentTimeMillis() - start));
+		System.out.println("Default version(de-serialize): " + (System.currentTimeMillis() - start));
 	}
 
 	private static TestAllTypes createSampleMessage() {
@@ -191,7 +206,7 @@ public class SerializationTest {
 		ForeignMessage foreignMessage1 = new ForeignMessageImpl();
 		foreignMessage1.setC(1);
 		ForeignMessage foreignMessage2 = new ForeignMessageImpl();
-		foreignMessage1.setC(2);
+		foreignMessage2.setC(2);
 		valuesRepeated_foreign_message.add(foreignMessage1);
 		valuesRepeated_foreign_message.add(foreignMessage2);
 		message.setRepeated_foreign_message(valuesRepeated_foreign_message);

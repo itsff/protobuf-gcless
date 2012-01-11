@@ -146,20 +146,36 @@ public class MemlessGenerator {
 
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
 		StringBuilder result = new StringBuilder();
+		String fullMessageType = curMessage.getFullyClarifiedName();
 		if (outerClassName == null) {
 			result.append("public final class ");
 		} else {
 			result.append("public static class ");
 		}
-		String fullMessageType = curMessage.getFullyClarifiedName();
 		result.append(curMessage.getName());
-		result.append("Serializer {\npublic static byte[] serialize(");
-		result.append(fullMessageType);
-		result.append(" message) {\n");
+		result.append("Serializer {\n");
+		createSerializeToBytes(curMessage, outerClassName, result, fullMessageType);
+		createSerializeToStream(curMessage, result, fullMessageType);
+		createParseFromBytes(curMessage, interfaceBased, result, fullMessageType);
+		createParseFromBytesWithLimit(curMessage, interfaceBased, result, fullMessageType);
+		createParseFromStream(curMessage, interfaceBased, result, fullMessageType);
+		if (hasRequired(curMessage)) {
+			createAssertInitialized(curMessage, result, fullMessageType);
+		}
+		result.append("}\n");
+		return result.toString();
+	}
+
+	private static void createSerializeToBytes(ProtobufMessage curMessage, String outerClassName, StringBuilder result, String fullMessageType) {
+		result.append("public static byte[] serialize(" + fullMessageType + " message) {\n");
 		if (curMessage.getFields().isEmpty()) {
-			result.append("return new byte[0]; \n}\n");
+			result.append("return new byte[0];\n");
 		} else {
-			result.append("try {\nassertInitialized(message);\nint totalSize = 0;\n");
+			result.append("try {\n");
+			if (hasRequired(curMessage)) {
+				result.append("assertInitialized(message);\n");
+			}
+			result.append("int totalSize = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				if (curField.isEnumType()) {
 					if (curField.getNature().equals("repeated")) {
@@ -286,9 +302,39 @@ public class MemlessGenerator {
 				}
 				result.append("}\n");
 			}
-			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\nreturn result;\n} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
-			result.append("public static void serialize(" + fullMessageType + " message, java.io.OutputStream os) {\n");
-			result.append("try {\nassertInitialized(message);\n");
+			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\n");
+			result.append("return result;\n");
+			result.append("} catch (IOException e) {\n");
+			result.append("throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);\n");
+			result.append("}\n");
+		}
+		result.append("}\n");
+	}
+
+	private static void createAssertInitialized(ProtobufMessage curMessage, StringBuilder result, String fullMessageType) {
+		result.append("private static void assertInitialized(");
+		result.append(fullMessageType);
+		result.append(" message) {\n");
+		for (ProtobufField curField : curMessage.getFields()) {
+			if (curField.getNature().equals("required")) {
+				result.append("if( !message.has" + curField.getBeanName() + "()) {\n");
+				result.append("throw new IllegalArgumentException(\"Required field not initialized: ");
+				result.append(curField.getName());
+				result.append("\");\n}\n");
+			}
+		}
+		result.append("}\n");
+	}
+
+	private static void createSerializeToStream(ProtobufMessage curMessage, StringBuilder result, String fullMessageType) {
+		result.append("public static void serialize(" + fullMessageType + " message, java.io.OutputStream os) {\n");
+		if (curMessage.getFields().isEmpty()) {
+			result.append("return; \n");
+		} else {
+			result.append("try {\n");
+			if (hasRequired(curMessage)) {
+				result.append("assertInitialized(message);\n");
+			}
 			for (ProtobufField curField : curMessage.getFields()) {
 				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
 				if (curField.getType().equals("string")) {
@@ -350,142 +396,156 @@ public class MemlessGenerator {
 				}
 				result.append("}\n");
 			}
-			result.append("} catch (IOException e) {\n	throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);}\n}\n");
-			if (interfaceBased) {
-				result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data) throws java.io.IOException {\n");
-				result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-				result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-				result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
-				result.append("}\n");
-			} else {
-				result.append("public static " + fullMessageType + " parseFrom(byte[] data) throws java.io.IOException {\n");
-				result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
-			}
-			result.append("CurrentCursor cursor = new CurrentCursor();\n");
-			result.append("while(true) {\n");
-			result.append("int tag = ProtobufInputStream.readTag(data,cursor);\n");
-			result.append("switch(tag) {\n");
-			result.append("case 0: \n");
-			result.append("if( cursor.getCurrentPosition() != data.length ) {\n");
-			result.append("throw new IOException(\"Corrupted message.\");\n");
-			result.append("}\n");
-			result.append("return message;\n ");
-			result.append("default: \n ProtobufInputStream.skipUnknown(tag, data, cursor);\n break;");
-			for (ProtobufField curField : curMessage.getFields()) {
-				result.append("case " + curField.getTag() + ": \n");
-				if (curField.isEnumType()) {
-					if (curField.getNature().equals("repeated")) {
-						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-						result.append("}\n");
-						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
-					} else {
-						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
-					}
-				} else if (curField.isComplexType()) {
-					if (curField.getNature().equals("repeated")) {
-						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-						result.append("}\n");
-						result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
-						result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
-						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, messageData" + curField.getBeanName() + "));\n");
-					} else {
-						result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
-						result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
-						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, messageData" + curField.getBeanName() + "));\n");
-					}
-				} else if (curField.getType().equals("bytes")) {
-					result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(data,cursor));\n");
-				} else {
-					if (curField.getNature().equals("repeated")) {
-						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-						result.append("}\n");
-						result.append("message.get" + curField.getBeanName() + "().add(ProtobufInputStream.read" + curField.getStreamBeanType() + "(data,cursor));\n");
-					} else {
-						result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.read" + curField.getStreamBeanType() + "(data,cursor));\n");
-					}
-				}
-				result.append("break;\n");
-			}
-			result.append("}\n");
-			result.append("}\n");
-			result.append("}\n");
-			//streamed read
-//			if (interfaceBased) {
-//				result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {\n");
-//				result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-//				result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-//				result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
-//				result.append("}\n");
-//			} else {
-//				result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is) throws java.io.IOException {\n");
-//				result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
-//			}
-//			result.append("CurrentCursor cursor = new CurrentCursor();\n");
-//			result.append("while(true) {\n");
-//			result.append("int tag = ProtobufInputStream.readTag(is,cursor);\n");
-//			result.append("switch(tag) {\n");
-//			result.append("case 0: \n");
-//			result.append("return message;\n ");
-//			result.append("default: \n ProtobufInputStream.skipUnknown(tag, is, cursor);\n break;");
-//			for (ProtobufField curField : curMessage.getFields()) {
-//				result.append("case " + curField.getTag() + ": \n");
-//				if (curField.isEnumType()) {
-//					if (curField.getNature().equals("repeated")) {
-//						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-//						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-//						result.append("}\n");
-//						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(is,cursor)));\n");
-//					} else {
-//						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(is,cursor)));\n");
-//					}
-//				} else if (curField.isComplexType()) {
-//					if (curField.getNature().equals("repeated")) {
-//						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-//						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-//						result.append("}\n");
-//						result.append("ProtobufInputStream.readRawVarint32(is,cursor);\n");
-//						result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is);\n");
-//					} else {
-//						result.append("ProtobufInputStream.readRawVarint32(data,cursor);\n");
-//						result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is);\n");
-//					}
-//				} else if (curField.getType().equals("bytes")) {
-//					result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(is,cursor));\n");
-//				} else {
-//					if (curField.getNature().equals("repeated")) {
-//						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
-//						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
-//						result.append("}\n");
-//						result.append("message.get" + curField.getBeanName() + "().add(ProtobufInputStream.read" + curField.getStreamBeanType() + "(is,cursor));\n");
-//					} else {
-//						result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.read" + curField.getStreamBeanType() + "(is,cursor));\n");
-//					}
-//				}
-//				result.append("break;\n");
-//			}
-//			result.append("}\n");
-//			result.append("}\n");
-//			result.append("}\n");
-			
-			
-			result.append("private static void assertInitialized(");
-			result.append(fullMessageType);
-			result.append(" message) {\n");
-			for (ProtobufField curField : curMessage.getFields()) {
-				if (curField.getNature().equals("required")) {
-					result.append("if( !message.has" + curField.getBeanName() + "()) {\n");
-					result.append("throw new IllegalArgumentException(\"Required field not initialized: ");
-					result.append(curField.getName());
-					result.append("\");\n}\n");
-				}
-			}
+			result.append("} catch (IOException e) {\n");
+			result.append("throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);\n");
 			result.append("}\n");
 		}
 		result.append("}\n");
-		return result.toString();
+	}
+
+	private static void createParseFromBytesWithLimit(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
+		if (interfaceBased) {
+			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data, int offset, int length) throws java.io.IOException {\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append("}\n");
+		} else {
+			result.append("public static " + fullMessageType + " parseFrom(byte[] data, int offset, int length) throws java.io.IOException {\n");
+			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
+		}
+		result.append("CurrentCursor cursor = new CurrentCursor();\n");
+		result.append("cursor.addToPosition(offset);\n");
+		result.append("cursor.setProcessUpToPosition(offset + length);\n");
+		createParseFromBytesBody(curMessage, result);
+		result.append("}\n");
+	}
+
+	private static void createParseFromBytes(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
+		if (interfaceBased) {
+			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data) throws java.io.IOException {\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append("}\n");
+		} else {
+			result.append("public static " + fullMessageType + " parseFrom(byte[] data) throws java.io.IOException {\n");
+			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
+		}
+		result.append("CurrentCursor cursor = new CurrentCursor();\n");
+		createParseFromBytesBody(curMessage, result);
+		result.append("}\n");
+	}
+	
+	private static void createParseFromBytesBody(ProtobufMessage curMessage, StringBuilder result) {
+		result.append("while(true) {\n");
+		result.append("int tag = ProtobufInputStream.readTag(data,cursor);\n");
+		result.append("switch(tag) {\n");
+		result.append("case 0: \n");
+		result.append("return message;\n ");
+		result.append("default: \n ProtobufInputStream.skipUnknown(tag, data, cursor);\n break;\n");
+		for (ProtobufField curField : curMessage.getFields()) {
+			result.append("case " + curField.getTag() + ": \n");
+			if (curField.isEnumType()) {
+				if (curField.getNature().equals("repeated")) {
+					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+					result.append("}\n");
+					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
+				} else {
+					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
+				}
+			} else if (curField.isComplexType()) {
+				if (curField.getNature().equals("repeated")) {
+					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+					result.append("}\n");
+					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
+//					result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
+					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("cursor.addToPosition(length" + curField.getBeanName() + ");\n");
+				} else {
+					result.append("int length" + curField.getBeanName() + " = ProtobufInputStream.readRawVarint32(data,cursor);\n");
+//					result.append("byte[] messageData" + curField.getBeanName() + " = ProtobufInputStream.readRawBytes(length" + curField.getBeanName() + ",data,cursor);\n");
+					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, data, cursor.getCurrentPosition(), length" + curField.getBeanName() + "));\n");
+					result.append("cursor.addToPosition(length" + curField.getBeanName() + ");\n");
+				}
+			} else if (curField.getType().equals("bytes")) {
+				result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(data,cursor));\n");
+			} else {
+				if (curField.getNature().equals("repeated")) {
+					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+					result.append("}\n");
+					result.append("message.get" + curField.getBeanName() + "().add(ProtobufInputStream.read" + curField.getStreamBeanType() + "(data,cursor));\n");
+				} else {
+					result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.read" + curField.getStreamBeanType() + "(data,cursor));\n");
+				}
+			}
+			result.append("break;\n");
+		}
+		result.append("}\n");
+		result.append("}\n");
+	}
+
+	private static void createParseFromStream(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
+		//streamed read
+//		if (interfaceBased) {
+//			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {\n");
+//			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
+//			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
+//			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+//			result.append("}\n");
+//		} else {
+//			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is) throws java.io.IOException {\n");
+//			result.append(fullMessageType + " message = new " + fullMessageType + "();\n");
+//		}
+//		result.append("CurrentCursor cursor = new CurrentCursor();\n");
+//		result.append("while(true) {\n");
+//		result.append("int tag = ProtobufInputStream.readTag(is,cursor);\n");
+//		result.append("switch(tag) {\n");
+//		result.append("case 0: \n");
+//		result.append("return message;\n ");
+//		result.append("default: \n ProtobufInputStream.skipUnknown(tag, is, cursor);\n break;");
+//		for (ProtobufField curField : curMessage.getFields()) {
+//			result.append("case " + curField.getTag() + ": \n");
+//			if (curField.isEnumType()) {
+//				if (curField.getNature().equals("repeated")) {
+//					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+//					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+//					result.append("}\n");
+//					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(is,cursor)));\n");
+//				} else {
+//					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(is,cursor)));\n");
+//				}
+//			} else if (curField.isComplexType()) {
+//				if (curField.getNature().equals("repeated")) {
+//					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+//					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+//					result.append("}\n");
+//					result.append("ProtobufInputStream.readRawVarint32(is,cursor);\n");
+//					result.append("message.get" + curField.getBeanName() + "().add(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is);\n");
+//				} else {
+//					result.append("ProtobufInputStream.readRawVarint32(data,cursor);\n");
+//					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(factory, is);\n");
+//				}
+//			} else if (curField.getType().equals("bytes")) {
+//				result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.readBytes(is,cursor));\n");
+//			} else {
+//				if (curField.getNature().equals("repeated")) {
+//					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+//					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+//					result.append("}\n");
+//					result.append("message.get" + curField.getBeanName() + "().add(ProtobufInputStream.read" + curField.getStreamBeanType() + "(is,cursor));\n");
+//				} else {
+//					result.append("message.set" + curField.getBeanName() + "(ProtobufInputStream.read" + curField.getStreamBeanType() + "(is,cursor));\n");
+//				}
+//			}
+//			result.append("break;\n");
+//		}
+//		result.append("}\n");
+//		result.append("}\n");
+//		result.append("}\n");
 	}
 
 	private static void generateDefaultMessageImpl(ProtobufMessage curMessage, File output, String packageName) throws Exception {
@@ -674,6 +734,15 @@ public class MemlessGenerator {
 			curDirectory = curDirPath;
 		}
 		return curDirectory;
+	}
+
+	private static boolean hasRequired(ProtobufMessage message) {
+		for (ProtobufField curField : message.getFields()) {
+			if (curField.getNature().equals("required")) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
