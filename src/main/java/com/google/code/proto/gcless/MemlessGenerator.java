@@ -1,12 +1,15 @@
 package com.google.code.proto.gcless;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,21 +123,21 @@ public class MemlessGenerator {
 				}
 			}
 		}
-		copy("ProtobufOutputStream.java", output);
-		copy("ProtobufInputStream.java", output);
-		copy("CurrentCursor.java", output);
-		copy("MessageFactory.java", output);
+		copy("ProtobufOutputStream.java", output, parser.getPackageName());
+		copy("ProtobufInputStream.java", output, parser.getPackageName());
+		copy("CurrentCursor.java", output, parser.getPackageName());
+		copy("MessageFactory.java", output, parser.getPackageName());
 	}
 
-	private static void copy(String classpathFileName, File output) throws IOException {
-		InputStream protobufOutputStream = MemlessGenerator.class.getResourceAsStream(classpathFileName);
+	private static void copy(String classpathFileName, File output, String packageName) throws IOException {
+		InputStream protobufOutputStream = MemlessGenerator.class.getClassLoader().getResourceAsStream(classpathFileName);
 		if (protobufOutputStream == null) {
 			throw new IOException("Cannot find " + classpathFileName + " in classpath");
 		}
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(new File(output, classpathFileName));
-			copy(protobufOutputStream, fos, 2048);
+			copy(protobufOutputStream, fos, 2048, packageName);
 		} finally {
 			if (protobufOutputStream != null) {
 				protobufOutputStream.close();
@@ -145,14 +148,19 @@ public class MemlessGenerator {
 		}
 	}
 
-	private static void copy(InputStream input, OutputStream output, int bufferSize) throws IOException {
-		byte[] buf = new byte[bufferSize];
-		int bytesRead = input.read(buf);
-		while (bytesRead != -1) {
-			output.write(buf, 0, bytesRead);
-			bytesRead = input.read(buf);
+	private static void copy(InputStream input, OutputStream output, int bufferSize, String packageName) throws IOException {
+		String curLine = null;
+		BufferedReader r = new BufferedReader(new InputStreamReader(input));
+		BufferedWriter w = new BufferedWriter(new OutputStreamWriter(output));
+		while ((curLine = r.readLine()) != null) {
+			String trimmedLine = curLine.trim();
+			if (trimmedLine.startsWith("package ")) {
+				curLine = "package " + packageName + ";\n";
+			}
+			w.append(curLine);
+			w.append("\n");
 		}
-		output.flush();
+		w.flush();
 	}
 
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
@@ -610,7 +618,6 @@ public class MemlessGenerator {
 		}
 		result.append("}\n");
 
-		//TODO check outer class
 		File outputFile = new File(output, curMessage.getName() + "Impl.java");
 		BufferedWriter messageWriter = new BufferedWriter(new FileWriter(outputFile));
 		appendPackage(messageWriter, packageName);

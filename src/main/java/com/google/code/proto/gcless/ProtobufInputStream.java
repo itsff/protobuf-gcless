@@ -13,7 +13,6 @@ final public class ProtobufInputStream {
 	static final int TAG_TYPE_BITS = 3;
 	static final int TAG_TYPE_MASK = (1 << TAG_TYPE_BITS) - 1;
 
-	//TODO skip bytes instead of copy
 	public static boolean skipUnknown(final int tag, byte[] data, CurrentCursor cursor) throws IOException {
 		switch (getTagWireType(tag)) {
 		case WIRETYPE_VARINT:
@@ -23,7 +22,7 @@ final public class ProtobufInputStream {
 			readFixed64(data, cursor);
 			return true;
 		case WIRETYPE_LENGTH_DELIMITED:
-			readBytes(data, cursor);
+			skipBytes(data, cursor);
 			return true;
 		case WIRETYPE_FIXED32:
 			readFixed32(data, cursor);
@@ -40,6 +39,18 @@ final public class ProtobufInputStream {
 	public static byte[] readBytes(byte[] data, CurrentCursor cursor) throws IOException {
 		final int size = readRawVarint32(data, cursor);
 		return readRawBytes(size, data, cursor);
+	}
+	
+	private static void skipBytes(byte[] data, CurrentCursor cursor) throws IOException {
+		final int size = readRawVarint32(data, cursor);
+		skipRawBytes(size, data, cursor);
+	}
+	
+	private static void skipRawBytes(final int size, byte[] data, CurrentCursor cursor) throws IOException {
+		if (size < 0) {
+			throw new IOException("Invalid buffer size");
+		}
+		cursor.addToPosition(size);
 	}
 
 	private static int getTagWireType(final int tag) {

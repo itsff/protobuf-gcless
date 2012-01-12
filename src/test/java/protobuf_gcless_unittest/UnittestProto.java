@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.google.code.proto.gcless.CurrentCursor;
 import com.google.code.proto.gcless.MessageFactory;
 import com.google.code.proto.gcless.ProtobufInputStream;
+import com.google.code.proto.gcless.ProtobufOutputStream;
 
 public final class UnittestProto {
 	private UnittestProto() {

@@ -62,10 +62,6 @@ public class SerializationTest {
 		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
 		assertNotNull(result);
 		assertDeepEquals(message, result);
-		//TODO move to deep equals
-		assertEquals(2, result.getRepeated_foreign_message().size());
-		assertEquals(1, result.getRepeated_foreign_message().get(0).getC());
-		assertEquals(2, result.getRepeated_foreign_message().get(1).getC());
 	}
 	
 	@Test
@@ -79,10 +75,6 @@ public class SerializationTest {
 		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), bais);
 		assertNotNull(result);
 		assertDeepEquals(message, result);
-		//TODO move to deep equals
-		assertEquals(2, result.getRepeated_foreign_message().size());
-		assertEquals(1, result.getRepeated_foreign_message().get(0).getC());
-		assertEquals(2, result.getRepeated_foreign_message().get(1).getC());
 	}
 	
 	@Test
@@ -109,10 +101,6 @@ public class SerializationTest {
 		protobuf_unittest.UnittestProto.TestAllTypes result = protobuf_unittest.UnittestProto.TestAllTypes.parseFrom(baos.toByteArray());
 		assertNotNull(result);
 		assertDeepEquals(result, message);
-		//TODO move to deep equals		
-		assertEquals(2, result.getRepeatedForeignMessageCount());
-		assertEquals(1, result.getRepeatedForeignMessage(0).getC());
-		assertEquals(2, result.getRepeatedForeignMessage(1).getC());		
 		assertTrue(result.getUnknownFields().asMap().isEmpty());
 	}
 
@@ -218,6 +206,9 @@ public class SerializationTest {
 		assertTrue(Arrays.equals(defaultImpl.getRepeatedDoubleList().toArray(), optimized.getRepeated_double().toArray()));
 		assertTrue(Arrays.equals(defaultImpl.getRepeatedBoolList().toArray(), optimized.getRepeated_bool().toArray()));
 		assertTrue(Arrays.equals(defaultImpl.getRepeatedStringList().toArray(), optimized.getRepeated_string().toArray()));
+		assertEquals(defaultImpl.getRepeatedForeignMessageCount(), optimized.getRepeated_foreign_message().size());
+		assertEquals(defaultImpl.getRepeatedForeignMessage(0).getC(), optimized.getRepeated_foreign_message().get(0).getC());
+		assertEquals(defaultImpl.getRepeatedForeignMessage(1).getC(), optimized.getRepeated_foreign_message().get(1).getC());
 	}
 	
 	private static void assertDeepEquals(TestAllTypes original, TestAllTypes result) {
@@ -252,6 +243,9 @@ public class SerializationTest {
 		assertTrue(Arrays.equals(original.getRepeated_double().toArray(), result.getRepeated_double().toArray()));
 		assertTrue(Arrays.equals(original.getRepeated_bool().toArray(), result.getRepeated_bool().toArray()));
 		assertTrue(Arrays.equals(original.getRepeated_string().toArray(), result.getRepeated_string().toArray()));
+		assertEquals(original.getRepeated_foreign_message().size(), result.getRepeated_foreign_message().size());
+		assertEquals(original.getRepeated_foreign_message().get(0).getC(), result.getRepeated_foreign_message().get(0).getC());
+		assertEquals(original.getRepeated_foreign_message().get(1).getC(), result.getRepeated_foreign_message().get(1).getC());
 	}
 
 	private static TestAllTypes createSampleMessage() {

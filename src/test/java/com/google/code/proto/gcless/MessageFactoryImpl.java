@@ -12,7 +12,6 @@ public class MessageFactoryImpl implements MessageFactory {
 		if( fullMessageName.equals("protobuf_gcless_unittest.UnittestProto.ForeignMessage") ) {
 			return new ForeignMessageImpl();
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
