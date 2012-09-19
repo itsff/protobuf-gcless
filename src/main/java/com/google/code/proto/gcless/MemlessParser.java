@@ -9,14 +9,17 @@ import java.util.regex.Pattern;
 
 class MemlessParser {
 
-	private String packageName;
+	private String protoPackageName;
 	private String outerClassName;
+	private String javaPackageName;
 
-	private List<ProtobufMessage> messages = new ArrayList<ProtobufMessage>();
-	private List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
+	private final List<ProtobufMessage> messages = new ArrayList<ProtobufMessage>();
+	private final List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
 
-	private List<ProtobufMessage> importedMessages = new ArrayList<ProtobufMessage>();
-	private List<ProtobufEnum> importedEnums = new ArrayList<ProtobufEnum>();
+	private final List<ProtobufMessage> importedMessages = new ArrayList<ProtobufMessage>();
+	private final List<ProtobufEnum> importedEnums = new ArrayList<ProtobufEnum>();
+	
+	private final List<MemlessParser> importedParsers = new ArrayList<MemlessParser>();
 
 	private int curIndex = 0;
 	private String[] tokens;
@@ -35,9 +38,9 @@ class MemlessParser {
 
 		String curToken = null;
 		while ((curToken = getNextIgnoreNewLine()) != null) {
-			if (curToken.equals(Tokens.PACKAGE)) {
-				packageName = getNextIgnoreNewLine();
-				if (packageName == null || !Tokens.isIdentifier(packageName)) {
+			if (curToken.equals(Tokens.PROTO_PACKAGE)) {
+				protoPackageName = getNextIgnoreNewLine();
+				if (protoPackageName == null || !Tokens.isIdentifier(protoPackageName)) {
 					throw new Exception("Invalid package definition. Expected package name");
 				}
 				consume(";");
@@ -50,7 +53,8 @@ class MemlessParser {
 				}
 				ProtobufMessage curMessage = new ProtobufMessage();
 				curMessage.setName(messageName);
-				curMessage.setFullyClarifiedName(messageName);
+				curMessage.setFullyClarifiedJavaName(messageName);
+				curMessage.setFullyClarifiedProtoName(messageName);
 				processInnerMessage(curMessage);
 				messages.add(curMessage);
 				continue;
@@ -62,7 +66,8 @@ class MemlessParser {
 				}
 				ProtobufEnum curEnum = new ProtobufEnum();
 				curEnum.setName(enumName);
-				curEnum.setFullyClarifiedName(enumName);
+				curEnum.setFullyClarifiedJavaName(enumName);
+				curEnum.setFullyClarifiedProtoName(enumName);
 				processInnerEnum(curEnum);
 				enums.add(curEnum);
 				continue;
@@ -75,6 +80,14 @@ class MemlessParser {
 					outerClassName = outerClassName.replaceAll("\"", "");
 					continue;
 				}
+				if (optionType != null && optionType.equals(Tokens.JAVA_PACKAGE)) {
+					consume("=");
+					javaPackageName = getNextIgnoreNewLine();
+					javaPackageName = javaPackageName.replaceAll("\"", "");
+					continue;
+				}
+				System.out.println("option \"" + optionType + "\" is not supported");
+				consumeTillMessage(";");
 				continue;
 			}
 			if (curToken.equals(Tokens.IMPORT_TOKEN)) {
@@ -86,15 +99,21 @@ class MemlessParser {
 				importFile = importFile.replaceAll("\"", "");
 				MemlessParser parser = new MemlessParser();
 				parser.process(importFile);
+				importedParsers.add(parser);
+				importedParsers.addAll(parser.getImportedParsers());
 				importedMessages.addAll(parser.getMessages());
 				importedEnums.addAll(parser.getEnums());
 				continue;
 			}
+			if( curToken.equals(Tokens.SYNTAX) ) {
+				System.out.println("\"syntax\" is not supported");
+				consumeTillMessage(";");
+			}
 		}
 
 		String strToAppend = null;
-		if (packageName != null) {
-			strToAppend = packageName;
+		if (javaPackageName != null) {
+			strToAppend = javaPackageName;
 			if (outerClassName != null) {
 				strToAppend += "." + outerClassName;
 			}
@@ -102,10 +121,19 @@ class MemlessParser {
 
 		if (strToAppend != null) {
 			for (ProtobufMessage curMessage : messages) {
-				appendPackageName(curMessage, strToAppend);
+				appendJavaPackageName(curMessage, strToAppend);
 			}
 			for (ProtobufEnum curEnum : enums) {
-				curEnum.setFullyClarifiedName(strToAppend + "." + curEnum.getFullyClarifiedName());
+				curEnum.setFullyClarifiedJavaName(strToAppend + "." + curEnum.getFullyClarifiedJavaName());
+			}
+		}
+		
+		if( protoPackageName != null ) {
+			for (ProtobufMessage curMessage : messages) {
+				appendProtoPackageName(curMessage, protoPackageName);
+			}
+			for (ProtobufEnum curEnum : enums) {
+				curEnum.setFullyClarifiedProtoName(protoPackageName + "." + curEnum.getFullyClarifiedProtoName());
 			}
 		}
 
@@ -116,17 +144,28 @@ class MemlessParser {
 		allEnums.addAll(enums);
 		allEnums.addAll(importedEnums);
 
-		enrichFieldsInMessage(messages, strToAppend, allMessages, allEnums);
+		enrichFieldsInMessage(messages, protoPackageName, allMessages, allEnums);
 	}
 
-	private void appendPackageName(ProtobufMessage message, String name) {
-		message.setFullyClarifiedName(name + "." + message.getFullyClarifiedName());
+	private static void appendJavaPackageName(ProtobufMessage message, String name) {
+		message.setFullyClarifiedJavaName(name + "." + message.getFullyClarifiedJavaName());
 		for (ProtobufMessage curMessage : message.getNestedMessages()) {
-			appendPackageName(curMessage, getParent(message.getFullyClarifiedName()));
+			appendJavaPackageName(curMessage, getParent(message.getFullyClarifiedJavaName()));
 		}
 
 		for (ProtobufEnum curEnum : message.getEnums()) {
-			curEnum.setFullyClarifiedName(name + "." + curEnum.getFullyClarifiedName());
+			curEnum.setFullyClarifiedJavaName(name + "." + curEnum.getFullyClarifiedJavaName());
+		}
+	}
+	
+	private static void appendProtoPackageName(ProtobufMessage message, String name) {
+		message.setFullyClarifiedProtoName(name + "." + message.getFullyClarifiedProtoName());
+		for (ProtobufMessage curMessage : message.getNestedMessages()) {
+			appendProtoPackageName(curMessage, getParent(message.getFullyClarifiedProtoName()));
+		}
+
+		for (ProtobufEnum curEnum : message.getEnums()) {
+			curEnum.setFullyClarifiedProtoName(name + "." + curEnum.getFullyClarifiedProtoName());
 		}
 	}
 
@@ -152,7 +191,8 @@ class MemlessParser {
 				}
 				ProtobufMessage curMessage = new ProtobufMessage();
 				curMessage.setName(messageName);
-				curMessage.setFullyClarifiedName(parentMessage.getFullyClarifiedName() + "." + messageName);
+				curMessage.setFullyClarifiedJavaName(parentMessage.getFullyClarifiedJavaName() + "." + messageName);
+				curMessage.setFullyClarifiedProtoName(parentMessage.getFullyClarifiedProtoName() + "." + messageName);
 				processInnerMessage(curMessage);
 				parentMessage.addNestedMessage(curMessage);
 				continue;
@@ -260,7 +300,8 @@ class MemlessParser {
 				}
 				ProtobufEnum curEnum = new ProtobufEnum();
 				curEnum.setName(enumName);
-				curEnum.setFullyClarifiedName(parentMessage.getFullyClarifiedName() + "." + enumName);
+				curEnum.setFullyClarifiedJavaName(parentMessage.getFullyClarifiedJavaName() + "." + enumName);
+				curEnum.setFullyClarifiedProtoName(parentMessage.getFullyClarifiedProtoName() + "." + enumName);
 				processInnerEnum(curEnum);
 				parentMessage.addEnum(curEnum);
 				continue;
@@ -345,8 +386,12 @@ class MemlessParser {
 		throw new Exception("Incomplete square braces");
 	}
 
-	String getPackageName() {
-		return packageName;
+	String getProtoPackageName() {
+		return protoPackageName;
+	}
+	
+	String getJavaPackageName() {
+		return javaPackageName;
 	}
 
 	List<ProtobufMessage> getMessages() {
@@ -359,6 +404,10 @@ class MemlessParser {
 
 	String getOuterClassName() {
 		return outerClassName;
+	}
+	
+	List<MemlessParser> getImportedParsers() {
+		return importedParsers;
 	}
 
 	private void consume(String expected) throws Exception {
@@ -425,7 +474,7 @@ class MemlessParser {
 		for (ProtobufMessage curMessage : messages) {
 			if (curMessage.getFields() != null) {
 				for (ProtobufField curField : curMessage.getFields()) {
-					enrichField(curField, curMessage.getFullyClarifiedName(), externalPackage, allMessages, allEnums);
+					enrichField(curField, curMessage.getFullyClarifiedJavaName(), externalPackage, allMessages, allEnums);
 				}
 			}
 			if (curMessage.getNestedMessages() != null) {
@@ -515,7 +564,7 @@ class MemlessParser {
 			}
 			if (curMessage.getEnums() != null) {
 				for (ProtobufEnum curEnum : curMessage.getEnums()) {
-					if (curEnum.getName().equals(type) || curEnum.getFullyClarifiedName().equals(type)) {
+					if (curEnum.getName().equals(type) || curEnum.getFullyClarifiedProtoName().equals(type)) {
 						return true;
 					}
 				}
@@ -534,8 +583,8 @@ class MemlessParser {
 
 	private static String getFullyClarifiedNameBySimpleName(List<ProtobufMessage> messages, String name) {
 		for (ProtobufMessage curMessage : messages) {
-			if (curMessage.getName().equals(name) || curMessage.getFullyClarifiedName().equals(name)) {
-				return curMessage.getFullyClarifiedName();
+			if (curMessage.getName().equals(name) || curMessage.getFullyClarifiedProtoName().equals(name)) {
+				return curMessage.getFullyClarifiedJavaName();
 			}
 			if (curMessage.getNestedMessages() != null) {
 				String result = getFullyClarifiedNameBySimpleName(curMessage.getNestedMessages(), name);
@@ -555,8 +604,8 @@ class MemlessParser {
 
 	private static String getFullyClarifiedNameBySimpleNameFromEnum(List<ProtobufEnum> messages, String name) {
 		for (ProtobufEnum curEnum : messages) {
-			if (curEnum.getName().equals(name) || curEnum.getFullyClarifiedName().equals(name)) {
-				return curEnum.getFullyClarifiedName();
+			if (curEnum.getName().equals(name) || curEnum.getFullyClarifiedProtoName().equals(name)) {
+				return curEnum.getFullyClarifiedJavaName();
 			}
 		}
 		return null;
@@ -617,7 +666,8 @@ class MemlessParser {
 	}
 
 	private static String loadFile(String filename) throws Exception {
-		//rude, but didnt find usages of double slashes in-between some valid identifiers
+		// rude, but didnt find usages of double slashes in-between some valid
+		// identifiers
 		Pattern COMMENT = Pattern.compile("//(.*)");
 		StringBuilder result = new StringBuilder();
 		BufferedReader r = null;

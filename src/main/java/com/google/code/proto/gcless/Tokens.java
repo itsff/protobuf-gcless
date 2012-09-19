@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 class Tokens {
 
-	static final String PACKAGE = "package";
+	static final String PROTO_PACKAGE = "package";
+	static final String SYNTAX = "syntax";
+	static final String JAVA_PACKAGE = "java_package";
 	static final String MESSAGE = "message";
 	static final String OPTIONAL_FIELD = "optional";
 	static final String REPEATED_FIELD = "repeated";

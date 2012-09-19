@@ -6,18 +6,27 @@ import java.util.List;
 final class ProtobufMessage {
 
 	private String name;
-	private String fullyClarifiedName;
+	private String fullyClarifiedJavaName;
+	private String fullyClarifiedProtoName;
 
 	private final List<ProtobufMessage> nestedMessages = new ArrayList<ProtobufMessage>();
 	private final List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
 	private final List<ProtobufField> fields = new ArrayList<ProtobufField>();
 
-	public String getFullyClarifiedName() {
-		return fullyClarifiedName;
+	public String getFullyClarifiedProtoName() {
+		return fullyClarifiedProtoName;
+	}
+	
+	public void setFullyClarifiedProtoName(String fullyClarifiedProtoName) {
+		this.fullyClarifiedProtoName = fullyClarifiedProtoName;
+	}
+	
+	public String getFullyClarifiedJavaName() {
+		return fullyClarifiedJavaName;
 	}
 
-	public void setFullyClarifiedName(String fullyClarifiedName) {
-		this.fullyClarifiedName = fullyClarifiedName;
+	public void setFullyClarifiedJavaName(String fullyClarifiedName) {
+		this.fullyClarifiedJavaName = fullyClarifiedName;
 	}
 
 	public String getName() {

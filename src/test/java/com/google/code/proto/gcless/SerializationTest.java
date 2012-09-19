@@ -12,6 +12,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition;
+import com.x.protobuf.TabNavigationPB.TabNavigation;
+import com.x.protobuf.TabNavigationPB.TabNavigationSerializer;
+
 import protobuf_gcless_unittest.ForeignMessageImpl;
 import protobuf_gcless_unittest.TestAllTypesImpl;
 import protobuf_gcless_unittest.UnittestProto.ForeignMessage;
@@ -19,6 +23,20 @@ import protobuf_gcless_unittest.UnittestProto.TestAllTypes;
 import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
 
 public class SerializationTest {
+	
+	@Test
+	public void testSerializationForIssue2() throws Exception {
+		TabNavigation nvigation = new TabNavigation();
+		nvigation.setState("123");
+		nvigation.setPage_transition(PageTransition.TYPED);
+		
+		byte[] data = TabNavigationSerializer.serialize(nvigation);
+		
+		TabNavigation result = TabNavigationSerializer.parseFrom(data);
+		
+		assertEquals(nvigation.getState(), result.getState());
+		assertEquals(nvigation.getPage_transition(), result.getPage_transition());
+	}
 	
 	@Test
 	public void testDefaultSerializationOptimizedStreamedDeserialization() throws Exception {

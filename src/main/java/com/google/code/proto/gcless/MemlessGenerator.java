@@ -27,11 +27,11 @@ public class MemlessGenerator {
 
 		File output = new File(args[0]);
 		if (!output.exists()) {
-			System.out.println("<output-path> doesnt exist");
+			System.out.println("<output-path> " + output.getAbsolutePath() + " doesnt exist");
 			return;
 		}
 		if (!output.isDirectory()) {
-			System.out.println("<output-path> is not a directory");
+			System.out.println("<output-path> " + output.getAbsolutePath() + " is not a directory");
 			return;
 		}
 
@@ -48,7 +48,14 @@ public class MemlessGenerator {
 	private static void process(File output, String filename) throws Exception {
 		MemlessParser parser = new MemlessParser();
 		parser.process(filename);
-		String packageName = parser.getPackageName();
+		process(output, parser);
+		for (MemlessParser cur : parser.getImportedParsers()) {
+			process(output, cur);
+		}
+	}
+
+	private static void process(File output, MemlessParser parser) throws IOException, Exception {
+		String packageName = parser.getJavaPackageName();
 		if (packageName != null) {
 			output = createPackage(output, packageName);
 		}
@@ -57,7 +64,7 @@ public class MemlessGenerator {
 		if (parser.getOuterClassName() != null) {
 			w = new BufferedWriter(new FileWriter(new File(output, parser.getOuterClassName() + ".java")));
 			w.append(HEADER);
-			appendPackage(w, parser.getPackageName());
+			appendPackage(w, parser.getJavaPackageName());
 			appendImport(w, "java.io.IOException");
 			w.append("public final class ");
 			w.append(parser.getOuterClassName());
@@ -72,7 +79,7 @@ public class MemlessGenerator {
 				w.append(curEnumData);
 			} else {
 				BufferedWriter enumWriter = new BufferedWriter(new FileWriter(new File(output, curEnum.getName() + ".java")));
-				appendPackage(enumWriter, parser.getPackageName());
+				appendPackage(enumWriter, parser.getJavaPackageName());
 				enumWriter.append(curEnumData);
 				enumWriter.flush();
 				enumWriter.close();
@@ -94,12 +101,12 @@ public class MemlessGenerator {
 				w.append(serializerData);
 			} else {
 				BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + ".java")));
-				appendPackage(messageWriter, parser.getPackageName());
+				appendPackage(messageWriter, parser.getJavaPackageName());
 				messageWriter.append(curMessageData);
 				messageWriter.flush();
 				messageWriter.close();
 				messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Serializer" + ".java")));
-				appendPackage(messageWriter, parser.getPackageName());
+				appendPackage(messageWriter, parser.getJavaPackageName());
 				if (!curMessage.getFields().isEmpty()) {
 					appendImport(messageWriter, "java.io.IOException");
 				}
@@ -119,14 +126,14 @@ public class MemlessGenerator {
 			String generateDefaultImpl = System.getProperty("generate.default");
 			if (generateDefaultImpl != null && generateDefaultImpl.equals("true")) {
 				for (ProtobufMessage curMessage : parser.getMessages()) {
-					generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
+					generateDefaultMessageImpl(curMessage, output, parser.getJavaPackageName());
 				}
 			}
 		}
-		copy("ProtobufOutputStream.java", output, parser.getPackageName());
-		copy("ProtobufInputStream.java", output, parser.getPackageName());
-		copy("CurrentCursor.java", output, parser.getPackageName());
-		copy("MessageFactory.java", output, parser.getPackageName());
+		copy("ProtobufOutputStream.java", output, parser.getJavaPackageName());
+		copy("ProtobufInputStream.java", output, parser.getJavaPackageName());
+		copy("CurrentCursor.java", output, parser.getJavaPackageName());
+		copy("MessageFactory.java", output, parser.getJavaPackageName());
 	}
 
 	private static void copy(String classpathFileName, File output, String packageName) throws IOException {
@@ -165,7 +172,7 @@ public class MemlessGenerator {
 
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
 		StringBuilder result = new StringBuilder();
-		String fullMessageType = curMessage.getFullyClarifiedName();
+		String fullMessageType = curMessage.getFullyClarifiedJavaName();
 		if (outerClassName == null) {
 			result.append("public final class ");
 		} else {
@@ -426,9 +433,9 @@ public class MemlessGenerator {
 	private static void createParseFromBytesWithLimit(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
 		if (interfaceBased) {
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data, int offset, int length) throws java.io.IOException {\n");
-			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedJavaName() + ")factory.create(\"" + curMessage.getFullyClarifiedJavaName() + "\");\n");
+			result.append("if( message == null) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("}\n");
 		} else {
 			result.append("public static " + fullMessageType + " parseFrom(byte[] data, int offset, int length) throws java.io.IOException {\n");
@@ -444,9 +451,9 @@ public class MemlessGenerator {
 	private static void createParseFromBytes(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
 		if (interfaceBased) {
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data) throws java.io.IOException {\n");
-			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedJavaName() + ")factory.create(\"" + curMessage.getFullyClarifiedJavaName() + "\");\n");
+			result.append("if( message == null ) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("}\n");
 		} else {
 			result.append("public static " + fullMessageType + " parseFrom(byte[] data) throws java.io.IOException {\n");
@@ -511,12 +518,12 @@ public class MemlessGenerator {
 	}
 
 	private static void createParseFromStreamWithLength(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
-		//streamed read
+		// streamed read
 		if (interfaceBased) {
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {\n");
-			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedJavaName() + ")factory.create(\"" + curMessage.getFullyClarifiedJavaName() + "\");\n");
+			result.append("if( message == null ) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("}\n");
 		} else {
 			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {\n");
@@ -530,13 +537,13 @@ public class MemlessGenerator {
 	}
 
 	private static void createParseFromStream(ProtobufMessage curMessage, boolean interfaceBased, StringBuilder result, String fullMessageType) {
-		//streamed read
+		// streamed read
 		if (interfaceBased) {
 			result.append("/** Beware! All subsequent messages in stream will be consumed until end of stream (default protobuf behaivour).\n  **/");
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {\n");
-			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedName() + ")factory.create(\"" + curMessage.getFullyClarifiedName() + "\");\n");
-			result.append("if( message == null || !(message instanceof " + curMessage.getFullyClarifiedName() + ")) { \n");
-			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedName() + "\");\n");
+			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedJavaName() + ")factory.create(\"" + curMessage.getFullyClarifiedJavaName() + "\");\n");
+			result.append("if( message == null) { \n");
+			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("}\n");
 		} else {
 			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is) throws java.io.IOException {\n");
@@ -600,7 +607,7 @@ public class MemlessGenerator {
 
 	private static void generateDefaultMessageImpl(ProtobufMessage curMessage, File output, String packageName) throws Exception {
 		StringBuilder result = new StringBuilder();
-		result.append("public class " + curMessage.getName() + "Impl implements " + curMessage.getFullyClarifiedName() + " {\n");
+		result.append("public class " + curMessage.getName() + "Impl implements " + curMessage.getFullyClarifiedJavaName() + " {\n");
 		for (ProtobufField curField : curMessage.getFields()) {
 			String javaType = constructType(curField, curMessage);
 			result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
@@ -666,7 +673,11 @@ public class MemlessGenerator {
 				result.append(");\n");
 			}
 		} else {
-			result.append("public class " + curMessage.getName() + " {\n");
+			String staticKeyword = "";
+			if (outerClassName != null) {
+				staticKeyword = "static";
+			}
+			result.append("public " + staticKeyword + " class " + curMessage.getName() + " {\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
 				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");

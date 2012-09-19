@@ -6,16 +6,25 @@ import java.util.List;
 final class ProtobufEnum {
 
 	private String name;
-	private String fullyClarifiedName;
+	private String fullyClarifiedJavaName;
+	private String fullyClarifiedProtoName;
+	
+	public String getFullyClarifiedProtoName() {
+		return fullyClarifiedProtoName;
+	}
+	
+	public void setFullyClarifiedProtoName(String fullyClarifiedProtoName) {
+		this.fullyClarifiedProtoName = fullyClarifiedProtoName;
+	}
 
 	private List<EnumValue> values = new ArrayList<EnumValue>();
 
-	public String getFullyClarifiedName() {
-		return fullyClarifiedName;
+	public String getFullyClarifiedJavaName() {
+		return fullyClarifiedJavaName;
 	}
 
-	public void setFullyClarifiedName(String fullyClarifiedName) {
-		this.fullyClarifiedName = fullyClarifiedName;
+	public void setFullyClarifiedJavaName(String fullyClarifiedName) {
+		this.fullyClarifiedJavaName = fullyClarifiedName;
 	}
 
 	public String getName() {
