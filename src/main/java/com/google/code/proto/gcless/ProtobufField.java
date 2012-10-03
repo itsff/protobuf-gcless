@@ -110,5 +110,12 @@ class ProtobufField {
 	public void setDefaults(String defaults) {
 		this.defaults = defaults;
 	}
+	
+	public boolean isListType() {
+		if (getNature().equals("repeated") && !getType().equals("bytes")) {
+			return true;
+		}
+		return false;
+	}
 
 }
