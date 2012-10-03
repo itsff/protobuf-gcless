@@ -7,6 +7,7 @@ final class GeneratorConfiguration {
 	private final boolean interfaceBased;
 	private final boolean generateStaticFields;
 	private final boolean generateListHelpers;
+	private final boolean generateChaining;
 
 	GeneratorConfiguration(Properties props) {
 		String interfaceBased = props.getProperty("interface.based");
@@ -31,6 +32,16 @@ final class GeneratorConfiguration {
 		} else {
 			this.generateListHelpers = false;
 		}
+		String generateChaining = props.getProperty("generate.chaining");
+		if( generateChaining != null && generateChaining.equals("true") ) {
+			this.generateChaining = true;
+		} else {
+			this.generateChaining = false;
+		}
+	}
+	
+	public boolean isGenerateChaining() {
+		return generateChaining;
 	}
 
 	public boolean isInterfaceBased() {

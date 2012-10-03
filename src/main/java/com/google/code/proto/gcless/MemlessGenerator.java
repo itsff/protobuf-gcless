@@ -640,6 +640,11 @@ public class MemlessGenerator {
 	}
 
 	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, GeneratorConfiguration config) {
+		String chainingReturn = "void";
+		if (config.isGenerateChaining()) {
+			chainingReturn = curMessage.getName();
+		}
+
 		StringBuilder result = new StringBuilder();
 		if (config.isInterfaceBased()) {
 			result.append("public interface ");
@@ -663,7 +668,7 @@ public class MemlessGenerator {
 				if (curField.isDeprecated()) {
 					result.append("@Deprecated\n");
 				}
-				result.append("void set");
+				result.append(chainingReturn + " set");
 				result.append(curField.getBeanName());
 				result.append("(");
 				result.append(javaType);
@@ -673,11 +678,11 @@ public class MemlessGenerator {
 				if (config.isGenerateListHelpers() && curField.isListType()) {
 					result.append(curField.getFullyClarifiedJavaType() + " get" + curField.getBeanName() + "(int index);\n");
 					result.append("int get" + curField.getBeanName() + "Count();\n");
-					result.append("void set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value);\n");
+					result.append(chainingReturn + " set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value);\n");
 
-					result.append("void add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value);\n");
-					result.append("void addAll" + curField.getBeanName() + "(java.lang.Iterable<? extends " + curField.getFullyClarifiedJavaType() + "> values);\n");
-					result.append("void clear" + curField.getBeanName() + "();\n");
+					result.append(chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value);\n");
+					result.append(chainingReturn + " addAll" + curField.getBeanName() + "(java.lang.Iterable<? extends " + curField.getFullyClarifiedJavaType() + "> values);\n");
+					result.append(chainingReturn + " clear" + curField.getBeanName() + "();\n");
 				}
 			}
 		} else {
@@ -699,9 +704,12 @@ public class MemlessGenerator {
 				result.append("public " + javaType + " get" + curField.getBeanName() + "() {\n");
 				result.append("return " + curField.getBeanName() + ";\n");
 				result.append("}\n");
-				result.append("public void set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
+				result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
 				result.append("this." + curField.getBeanName() + " = " + curField.getBeanName() + ";\n");
 				result.append("this.has" + curField.getBeanName() + " = true;\n");
+				if( config.isGenerateChaining() ) {
+					result.append("return this;\n");
+				}
 				result.append("}\n");
 				if (config.isGenerateListHelpers() && curField.isListType()) {
 					result.append("public " + curField.getFullyClarifiedJavaType() + " get" + curField.getBeanName() + "(int index) {\n");
@@ -712,16 +720,22 @@ public class MemlessGenerator {
 					result.append("return this." + curField.getBeanName() + ".size();\n");
 					result.append("}\n");
 
-					result.append("public void set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value) {\n");
+					result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value) {\n");
 					result.append("this." + curField.getBeanName() + ".set(index, value);\n");
+					if( config.isGenerateChaining() ) {
+						result.append("return this;\n");
+					}
 					result.append("}\n");
 
-					result.append("public void add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
+					result.append("public " + chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
 					initRepeatedFieldIfEmpty(result, curField);
 					result.append("this." + curField.getBeanName() + ".add(value);\n");
+					if( config.isGenerateChaining() ) {
+						result.append("return this;\n");
+					}
 					result.append("}\n");
 
-					result.append("public void addAll" + curField.getBeanName() + "(java.lang.Iterable<? extends " + curField.getFullyClarifiedJavaType() + "> values) {\n");
+					result.append("public " + chainingReturn + " addAll" + curField.getBeanName() + "(java.lang.Iterable<? extends " + curField.getFullyClarifiedJavaType() + "> values) {\n");
 					initRepeatedFieldIfEmpty(result, curField);
 					result.append("if (values instanceof java.util.Collection) {\n");
 					result.append("@SuppressWarnings(\"unsafe\") final\n");
@@ -732,11 +746,17 @@ public class MemlessGenerator {
 					result.append("this." + curField.getBeanName() + ".add(value);\n");
 					result.append("}\n}\n");
 					result.append("this.has" + curField.getBeanName() + " = true;\n");
+					if( config.isGenerateChaining() ) {
+						result.append("return this;\n");
+					}
 					result.append("}\n");
 
-					result.append("public void clear" + curField.getBeanName() + "() {\n");
+					result.append("public " + chainingReturn + " clear" + curField.getBeanName() + "() {\n");
 					result.append("this.has" + curField.getBeanName() + " = false;\n");
 					result.append("this." + curField.getBeanName() + " = null;\n");
+					if( config.isGenerateChaining() ) {
+						result.append("return this;\n");
+					}
 					result.append("}\n");
 				}
 			}
