@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class MemlessGenerator {
@@ -88,12 +89,19 @@ public class MemlessGenerator {
 
 		String interfaceBased = System.getProperty("interface.based");
 		boolean isInterfaceBased = false;
+		boolean isStaticFieldsGenerated = false;
 		if (interfaceBased != null && interfaceBased.equals("true")) {
 			isInterfaceBased = true;
 		}
+		if( !isInterfaceBased ) {
+			String genateStaticFields = System.getProperty("generate.static.fields");
+			if( genateStaticFields != null && genateStaticFields.equals("true") ) {
+				isStaticFieldsGenerated = true;
+			}
+		}
 
 		for (ProtobufMessage curMessage : parser.getMessages()) {
-			String curMessageData = generateMessage(curMessage, parser.getOuterClassName(), isInterfaceBased);
+			String curMessageData = generateMessage(curMessage, parser.getOuterClassName(), isInterfaceBased, isStaticFieldsGenerated);
 			String serializerData = generateSerializer(curMessage, parser.getOuterClassName(), isInterfaceBased);
 
 			if (parser.getOuterClassName() != null) {
@@ -640,7 +648,7 @@ public class MemlessGenerator {
 
 	}
 
-	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased) {
+	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, boolean interfaceBased, boolean generateStaticFields) {
 		StringBuilder result = new StringBuilder();
 		if (interfaceBased) {
 			result.append("public interface ");
@@ -681,6 +689,9 @@ public class MemlessGenerator {
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
 				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
+				if( generateStaticFields ) {
+					result.append("public static final int " + curField.getBeanName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
+				}
 				result.append("private boolean has" + curField.getBeanName() + ";\n");
 				result.append("public boolean has" + curField.getBeanName() + "() {\n");
 				result.append("return has" + curField.getBeanName() + ";\n");
@@ -696,7 +707,7 @@ public class MemlessGenerator {
 		}
 
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			result.append(generateMessage(innerMessage, outerClassName, interfaceBased));
+			result.append(generateMessage(innerMessage, outerClassName, interfaceBased, generateStaticFields));
 			String serializerData = generateSerializer(innerMessage, outerClassName, interfaceBased);
 			result.append(serializerData);
 		}
