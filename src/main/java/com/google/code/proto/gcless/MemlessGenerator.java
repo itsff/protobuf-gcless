@@ -227,9 +227,15 @@ public class MemlessGenerator {
 						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
 						result.append("byte[] curMessageData = " + curField.getFullyClarifiedJavaType() + "Serializer.serialize(message.get" + curField.getBeanName() + "().get(i));\n");
-						result.append("ProtobufOutputStream.writeMessageTag(" + curField.getTag() + ", baos);\n");
-						result.append("ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);\n");
-						result.append("baos.write(curMessageData);\n");
+						if (curField.isGroup()) {
+							result.append("ProtobufOutputStream.writeTag(" + curField.getTag() + ", ProtobufInputStream.WIRETYPE_GROUP_START, baos);\n");
+							result.append("baos.write(curMessageData);\n");
+							result.append("ProtobufOutputStream.writeTag(" + curField.getTag() + ", ProtobufInputStream.WIRETYPE_GROUP_END, baos);\n");
+						} else {
+							result.append("ProtobufOutputStream.writeMessageTag(" + curField.getTag() + ", baos);\n");
+							result.append("ProtobufOutputStream.writeRawVarint32(curMessageData.length, baos);\n");
+							result.append("baos.write(curMessageData);\n");
+						}
 						result.append("}\n");
 						result.append(curField.getName() + "Buffer = baos.toByteArray();\n");
 					} else {
@@ -331,7 +337,7 @@ public class MemlessGenerator {
 			result.append("ProtobufOutputStream.checkNoSpaceLeft(result, position);\n");
 			result.append("return result;\n");
 			result.append("} catch (IOException e) {\n");
-			result.append("throw new RuntimeException(\"Serializing to a byte array threw an IOException (should never happen).\", e);\n");
+			result.append("throw new RuntimeException(\"Serializing threw an IOException\", e);\n");
 			result.append("}\n");
 		}
 		result.append("}\n");
@@ -469,11 +475,21 @@ public class MemlessGenerator {
 			factory = "factory, ";
 		}
 		result.append("while(true) {\n");
-		result.append("int tag = ProtobufInputStream.readTag(data,cursor);\n");
+		result.append("if (ProtobufInputStream.isAtEnd(data, cursor)) {\n");
+		result.append("return message;\n");
+		result.append("}\n");
+		result.append("int varint = ProtobufInputStream.readRawVarint32(data, cursor);\n");
+		result.append("int tag = ProtobufInputStream.getTagFieldNumber(varint);\n");
+		if (curMessage.isGroup()) {
+			result.append("int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;\n");
+			result.append("if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {\n");
+			result.append("return message;\n");
+			result.append("}\n");
+		}
 		result.append("switch(tag) {\n");
 		result.append("case 0: \n");
 		result.append("return message;\n ");
-		result.append("default: \n ProtobufInputStream.skipUnknown(tag, data, cursor);\n break;\n");
+		result.append("default: \n ProtobufInputStream.skipUnknown(varint, data, cursor);\n break;\n");
 		for (ProtobufField curField : curMessage.getFields()) {
 			result.append("case " + curField.getTag() + ": \n");
 			if (curField.isEnumType()) {
@@ -486,7 +502,23 @@ public class MemlessGenerator {
 					result.append("message.set" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + ".valueOf(ProtobufInputStream.readEnum(data,cursor)));\n");
 				}
 			} else if (curField.isComplexType()) {
-				if (curField.getNature().equals("repeated")) {
+				if (curField.isGroup()) {
+					if (curField.getNature().equals("repeated")) {
+						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
+						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
+						result.append("}\n");
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
+								+ "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
+						result.append("cursor.addToPosition(" + curField.getFullyClarifiedJavaType() + "Serializer.serialize(temp" + curField.getBeanName() + ").length);\n");
+						result.append("message.get" + curField.getBeanName() + "().add(temp" + curField.getBeanName() + ");\n");
+						result.append("ProtobufInputStream.readTag(data,cursor); // end of this iteration of group\n");
+					} else {
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
+								+ "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
+						result.append("message.set" + curField.getBeanName() + "(temp" + curField.getBeanName() + ");\n");
+						result.append("cursor.addToPosition(" + curField.getFullyClarifiedJavaType() + "Serializer.serialize(temp" + curField.getBeanName() + ").length);\n");
+					}
+				} else if (curField.getNature().equals("repeated")) {
 					result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
 					result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
 					result.append("}\n");
@@ -707,7 +739,7 @@ public class MemlessGenerator {
 				result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
 				result.append("this." + curField.getBeanName() + " = " + curField.getBeanName() + ";\n");
 				result.append("this.has" + curField.getBeanName() + " = true;\n");
-				if( config.isGenerateChaining() ) {
+				if (config.isGenerateChaining()) {
 					result.append("return this;\n");
 				}
 				result.append("}\n");
@@ -722,7 +754,7 @@ public class MemlessGenerator {
 
 					result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value) {\n");
 					result.append("this." + curField.getBeanName() + ".set(index, value);\n");
-					if( config.isGenerateChaining() ) {
+					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
 					result.append("}\n");
@@ -730,7 +762,7 @@ public class MemlessGenerator {
 					result.append("public " + chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
 					initRepeatedFieldIfEmpty(result, curField);
 					result.append("this." + curField.getBeanName() + ".add(value);\n");
-					if( config.isGenerateChaining() ) {
+					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
 					result.append("}\n");
@@ -746,7 +778,7 @@ public class MemlessGenerator {
 					result.append("this." + curField.getBeanName() + ".add(value);\n");
 					result.append("}\n}\n");
 					result.append("this.has" + curField.getBeanName() + " = true;\n");
-					if( config.isGenerateChaining() ) {
+					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
 					result.append("}\n");
@@ -754,7 +786,7 @@ public class MemlessGenerator {
 					result.append("public " + chainingReturn + " clear" + curField.getBeanName() + "() {\n");
 					result.append("this.has" + curField.getBeanName() + " = false;\n");
 					result.append("this." + curField.getBeanName() + " = null;\n");
-					if( config.isGenerateChaining() ) {
+					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
 					result.append("}\n");

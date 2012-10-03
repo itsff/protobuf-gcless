@@ -8,11 +8,20 @@ final class ProtobufMessage {
 	private String name;
 	private String fullyClarifiedJavaName;
 	private String fullyClarifiedProtoName;
+	private boolean group;
 
 	private final List<ProtobufMessage> nestedMessages = new ArrayList<ProtobufMessage>();
 	private final List<ProtobufEnum> enums = new ArrayList<ProtobufEnum>();
 	private final List<ProtobufField> fields = new ArrayList<ProtobufField>();
 
+	public boolean isGroup() {
+		return group;
+	}
+	
+	public void setGroup(boolean group) {
+		this.group = group;
+	}
+	
 	public String getFullyClarifiedProtoName() {
 		return fullyClarifiedProtoName;
 	}

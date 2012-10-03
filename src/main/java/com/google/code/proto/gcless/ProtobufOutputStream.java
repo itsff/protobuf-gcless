@@ -9,7 +9,7 @@ final public class ProtobufOutputStream {
 
 	static final int WIRETYPE_VARINT = 0;
 	static final int WIRETYPE_FIXED64 = 1;
-	public static final int WIRETYPE_LENGTH_DELIMITED = 2;
+	static final int WIRETYPE_LENGTH_DELIMITED = 2;
 	static final int WIRETYPE_START_GROUP = 3;
 	static final int WIRETYPE_END_GROUP = 4;
 	static final int WIRETYPE_FIXED32 = 5;

@@ -8,13 +8,15 @@ final public class ProtobufInputStream {
 	static final int WIRETYPE_VARINT = 0;
 	static final int WIRETYPE_FIXED64 = 1;
 	static final int WIRETYPE_LENGTH_DELIMITED = 2;
+	static final int WIRETYPE_GROUP_START = 3;
+	static final int WIRETYPE_GROUP_END = 4;
 	static final int WIRETYPE_FIXED32 = 5;
 
 	static final int TAG_TYPE_BITS = 3;
 	static final int TAG_TYPE_MASK = (1 << TAG_TYPE_BITS) - 1;
 
-	public static boolean skipUnknown(final int tag, byte[] data, CurrentCursor cursor) throws IOException {
-		switch (getTagWireType(tag)) {
+	public static boolean skipUnknown(final int varint, byte[] data, CurrentCursor cursor) throws IOException {
+		switch (getTagWireType(varint)) {
 		case WIRETYPE_VARINT:
 			readInt64(data, cursor);
 			return true;
@@ -27,11 +29,30 @@ final public class ProtobufInputStream {
 		case WIRETYPE_FIXED32:
 			readFixed32(data, cursor);
 			return true;
+		case WIRETYPE_GROUP_START:
+			int groupStartTag = getTagFieldNumber(varint);
+			int groupEndTag = skipMessage(data, cursor);
+			if (groupStartTag != groupEndTag) {
+				throw new IOException("invalid end tag");
+			}
+			return true;
+		case WIRETYPE_GROUP_END:
+			return false;
 		default:
 			throw new IOException("invalid wire type");
 		}
 	}
 
+	public static int skipMessage(byte[] data, CurrentCursor cursor) 	throws IOException {
+		while (true) {
+			final int varint = readRawVarint32(data, cursor);
+			final int tag = getTagFieldNumber(varint);
+			if (tag == 0 || !skipUnknown(varint, data, cursor)) {
+				return tag;
+			}
+		}
+	}
+	
 	public static int readEnum(byte[] data, CurrentCursor cursor) throws IOException {
 		return readRawVarint32(data, cursor);
 	}
@@ -243,8 +264,8 @@ final public class ProtobufInputStream {
 		return cursor.getCurrentPosition() == data.length || cursor.getCurrentPosition() == cursor.getProcessUpToPosition();
 	}
 
-	private static int getTagFieldNumber(final int tag) {
-		return tag >>> TAG_TYPE_BITS;
+	public static int getTagFieldNumber(final int varint) {
+		return varint >>> TAG_TYPE_BITS;
 	}
 
 	private static int decodeZigZag32(final int n) {
@@ -345,19 +366,42 @@ final public class ProtobufInputStream {
 		return bytes;
 	}
 
-	public static void skipUnknown(int tag, InputStream is, CurrentCursor cursor) throws IOException {
-		switch (getTagWireType(tag)) {
+	public static boolean skipUnknown(int varint, InputStream is, CurrentCursor cursor) throws IOException {
+		switch (getTagWireType(varint)) {
 		case WIRETYPE_VARINT:
 			skipInt64(is, cursor);
+			return true;
 		case WIRETYPE_FIXED64:
 			skipFixed64(is, cursor);
+			return true;
 		case WIRETYPE_LENGTH_DELIMITED:
 			skipBytes(is, cursor);
+			return true;
 		case WIRETYPE_FIXED32:
 			skipFixed32(is, cursor);
+			return true;
+		case WIRETYPE_GROUP_START:
+			int groupStartTag = getTagFieldNumber(varint);
+			int groupEndTag = skipMessage(is, cursor);
+			if (groupStartTag != groupEndTag) {
+				throw new IOException("invalid end tag");
+			}
+			return true;
+		case WIRETYPE_GROUP_END:
+			return false;
 		default:
-			throw new IOException("invalid wire type");
-		}		
+			throw new IOException("invalid wire type:" + getTagWireType(varint));
+		}
+	}
+
+	public static int skipMessage(InputStream is, CurrentCursor cursor) throws IOException {
+		while (true) {
+			int varint = readRawVarint32(is, cursor);
+			int tag = getTagFieldNumber(varint);
+			if (tag == 0 || !skipUnknown(varint, is, cursor)) {
+				return tag;
+			}
+		}
 	}
 	
 	private static void skipBytes(InputStream is, CurrentCursor cursor) throws IOException {

@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class MemlessParser {
-	
+
 	private final static Pattern UNDERSCORE = Pattern.compile("_");
 
 	private String protoPackageName;
@@ -116,14 +117,13 @@ class MemlessParser {
 		String strToAppend = null;
 		if (javaPackageName != null) {
 			strToAppend = javaPackageName;
-		} else if( protoPackageName != null ) {
+		} else if (protoPackageName != null) {
 			strToAppend = protoPackageName;
 		}
-		
+
 		if (strToAppend != null && outerClassName != null) {
 			strToAppend += "." + outerClassName;
 		}
-
 
 		if (strToAppend != null) {
 			for (ProtobufMessage curMessage : messages) {
@@ -179,6 +179,7 @@ class MemlessParser {
 		String curToken = null;
 		int intendtion = 0;
 		while ((curToken = getNextIgnoreNewLine()) != null) {
+			curToken = curToken.trim();
 			if (curToken.equals(Tokens.BRACE_START)) {
 				intendtion++;
 				continue;
@@ -208,14 +209,13 @@ class MemlessParser {
 				if (type == null || !Tokens.isValidFieldType(type)) {
 					throw new Exception("Invalid field type found: " + type);
 				}
+				ProtobufField curField = new ProtobufField();
+				curField.setNature("optional");
 				if (type.equals("group")) {
-					System.out.println("groups are deprecated and not supported.");
-					consumeTillMessage(Tokens.BRACE_END);
+					processGroup(curField, parentMessage);
 					continue;
 				}
-				ProtobufField curField = new ProtobufField();
 				curField.setType(type);
-				curField.setNature("optional");
 				String name = getNextNotEmpty();
 				if (name == null || !Tokens.isIdentifier(name)) {
 					throw new Exception("Invalid field name: " + name);
@@ -240,14 +240,13 @@ class MemlessParser {
 				if (type == null || !Tokens.isValidFieldType(type)) {
 					throw new Exception("Invalid field type found: " + type);
 				}
+				ProtobufField curField = new ProtobufField();
+				curField.setNature("repeated");
 				if (type.equals("group")) {
-					System.out.println("groups are deprecated and not supported.");
-					consumeTillMessage(Tokens.BRACE_END);
+					processGroup(curField, parentMessage);
 					continue;
 				}
-				ProtobufField curField = new ProtobufField();
 				curField.setType(type);
-				curField.setNature("repeated");
 				String name = getNextNotEmpty();
 				if (name == null || !Tokens.isIdentifier(name)) {
 					throw new Exception("Invalid field name: " + name);
@@ -272,14 +271,13 @@ class MemlessParser {
 				if (type == null || !Tokens.isValidFieldType(type)) {
 					throw new Exception("Invalid field type found: " + type);
 				}
+				ProtobufField curField = new ProtobufField();
+				curField.setNature("required");
 				if (type.equals("group")) {
-					System.out.println("groups are deprecated and not supported.");
-					consumeTillMessage(Tokens.BRACE_END);
+					processGroup(curField, parentMessage);
 					continue;
 				}
-				ProtobufField curField = new ProtobufField();
 				curField.setType(type);
-				curField.setNature("required");
 				String name = getNextNotEmpty();
 				if (name == null || !Tokens.isIdentifier(name)) {
 					throw new Exception("Invalid field name: " + name);
@@ -314,6 +312,30 @@ class MemlessParser {
 			}
 		}
 		throw new Exception("Incomplete message: " + parentMessage);
+	}
+	
+	private void processGroup(ProtobufField curField, ProtobufMessage parentMessage) throws Exception {
+		curField.setGroup(true);
+		String groupName = getNextNotEmpty();
+		if (groupName == null || !Tokens.isIdentifier(groupName)) {
+			throw new Exception("Invalid group name. Invalid symbols found: " + groupName);
+		}
+		curField.setType(groupName);
+		curField.setName(groupName.toLowerCase(Locale.UK));
+		consume("=");
+		long tag = consumeLong();
+		if (!Tokens.isValidTag(tag)) {
+			throw new Exception("Invalid tag detected: " + tag);
+		}
+		curField.setTag(tag);
+		parentMessage.addField(curField);
+		ProtobufMessage curMessage = new ProtobufMessage();
+		curMessage.setName(groupName);
+		curMessage.setGroup(true);
+		curMessage.setFullyClarifiedJavaName(parentMessage.getFullyClarifiedJavaName() + "." + groupName);
+		curMessage.setFullyClarifiedProtoName(parentMessage.getFullyClarifiedProtoName() + "." + groupName);
+		processInnerMessage(curMessage);
+		parentMessage.addNestedMessage(curMessage);
 	}
 
 	private void processInnerEnum(ProtobufEnum pEnum) throws Exception {
@@ -392,16 +414,16 @@ class MemlessParser {
 		throw new Exception("Incomplete square braces");
 	}
 
-//	String getProtoPackageName() {
-//		return protoPackageName;
-//	}
-//
-//	String getJavaPackageName() {
-//		return javaPackageName;
-//	}
-	
+	// String getProtoPackageName() {
+	// return protoPackageName;
+	// }
+	//
+	// String getJavaPackageName() {
+	// return javaPackageName;
+	// }
+
 	String getPackageName() {
-		if( javaPackageName != null ) {
+		if (javaPackageName != null) {
 			return javaPackageName;
 		}
 		return protoPackageName;
@@ -514,10 +536,10 @@ class MemlessParser {
 		} else {
 			type = curField.getType();
 		}
-		
-		if( curField.getType().equals("protobuf_gcless_import.ImportMessage") ) {
+
+		if (curField.getType().equals("protobuf_gcless_import.ImportMessage")) {
 			System.out.println("debug here");
-		}		
+		}
 
 		String complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, type);
 		if (complexFieldType != null) {
@@ -634,12 +656,12 @@ class MemlessParser {
 		}
 		StringBuilder result = new StringBuilder();
 		String[] parts = UNDERSCORE.split(str);
-		for( String curPart : parts ) {
-			if( curPart.length() == 0 ) {
+		for (String curPart : parts) {
+			if (curPart.length() == 0) {
 				continue;
 			}
 			result.append(Character.toUpperCase(curPart.charAt(0)));
-			if( curPart.length() > 1 ) {
+			if (curPart.length() > 1) {
 				result.append(curPart.substring(1));
 			}
 		}

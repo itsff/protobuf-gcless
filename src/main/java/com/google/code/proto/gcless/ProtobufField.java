@@ -14,7 +14,16 @@ class ProtobufField {
 	private boolean isDeprecated;
 	private boolean isPacked;
 	private boolean isEnumType;
-
+	private boolean group;
+	
+	public boolean isGroup() {
+		return group;
+	}
+	
+	public void setGroup(boolean group) {
+		this.group = group;
+	}
+	
 	public boolean isEnumType() {
 		return isEnumType;
 	}
