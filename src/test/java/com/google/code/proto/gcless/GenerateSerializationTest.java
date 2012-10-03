@@ -6,7 +6,7 @@ import com.google.code.proto.gcless.MemlessParser;
 import com.google.code.proto.gcless.ProtobufField;
 import com.google.code.proto.gcless.ProtobufMessage;
 
-public class GenerateTest {
+public class GenerateSerializationTest {
 
 	public static void main(String[] args) throws Exception {
 

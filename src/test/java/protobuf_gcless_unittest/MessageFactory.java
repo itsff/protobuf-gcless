@@ -1,4 +1,4 @@
-package com.x.protobuf;
+package protobuf_gcless_unittest;
 
 
 public interface MessageFactory {

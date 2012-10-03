@@ -1,5 +1,6 @@
 package protobuf_gcless_import;
 
+
 public class CurrentCursor {
 
 	private int currentPosition = 0;

@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class MemlessParser {
+	
+	private final static Pattern UNDERSCORE = Pattern.compile("_");
 
 	private String protoPackageName;
 	private String outerClassName;
@@ -18,7 +20,7 @@ class MemlessParser {
 
 	private final List<ProtobufMessage> importedMessages = new ArrayList<ProtobufMessage>();
 	private final List<ProtobufEnum> importedEnums = new ArrayList<ProtobufEnum>();
-	
+
 	private final List<MemlessParser> importedParsers = new ArrayList<MemlessParser>();
 
 	private int curIndex = 0;
@@ -105,7 +107,7 @@ class MemlessParser {
 				importedEnums.addAll(parser.getEnums());
 				continue;
 			}
-			if( curToken.equals(Tokens.SYNTAX) ) {
+			if (curToken.equals(Tokens.SYNTAX)) {
 				System.out.println("\"syntax\" is not supported");
 				consumeTillMessage(";");
 			}
@@ -114,10 +116,14 @@ class MemlessParser {
 		String strToAppend = null;
 		if (javaPackageName != null) {
 			strToAppend = javaPackageName;
-			if (outerClassName != null) {
-				strToAppend += "." + outerClassName;
-			}
+		} else if( protoPackageName != null ) {
+			strToAppend = protoPackageName;
 		}
+		
+		if (strToAppend != null && outerClassName != null) {
+			strToAppend += "." + outerClassName;
+		}
+
 
 		if (strToAppend != null) {
 			for (ProtobufMessage curMessage : messages) {
@@ -127,8 +133,8 @@ class MemlessParser {
 				curEnum.setFullyClarifiedJavaName(strToAppend + "." + curEnum.getFullyClarifiedJavaName());
 			}
 		}
-		
-		if( protoPackageName != null ) {
+
+		if (protoPackageName != null) {
 			for (ProtobufMessage curMessage : messages) {
 				appendProtoPackageName(curMessage, protoPackageName);
 			}
@@ -157,7 +163,7 @@ class MemlessParser {
 			curEnum.setFullyClarifiedJavaName(name + "." + curEnum.getFullyClarifiedJavaName());
 		}
 	}
-	
+
 	private static void appendProtoPackageName(ProtobufMessage message, String name) {
 		message.setFullyClarifiedProtoName(name + "." + message.getFullyClarifiedProtoName());
 		for (ProtobufMessage curMessage : message.getNestedMessages()) {
@@ -386,12 +392,19 @@ class MemlessParser {
 		throw new Exception("Incomplete square braces");
 	}
 
-	String getProtoPackageName() {
-		return protoPackageName;
-	}
+//	String getProtoPackageName() {
+//		return protoPackageName;
+//	}
+//
+//	String getJavaPackageName() {
+//		return javaPackageName;
+//	}
 	
-	String getJavaPackageName() {
-		return javaPackageName;
+	String getPackageName() {
+		if( javaPackageName != null ) {
+			return javaPackageName;
+		}
+		return protoPackageName;
 	}
 
 	List<ProtobufMessage> getMessages() {
@@ -405,7 +418,7 @@ class MemlessParser {
 	String getOuterClassName() {
 		return outerClassName;
 	}
-	
+
 	List<MemlessParser> getImportedParsers() {
 		return importedParsers;
 	}
@@ -501,6 +514,10 @@ class MemlessParser {
 		} else {
 			type = curField.getType();
 		}
+		
+		if( curField.getType().equals("protobuf_gcless_import.ImportMessage") ) {
+			System.out.println("debug here");
+		}		
 
 		String complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, type);
 		if (complexFieldType != null) {
@@ -611,11 +628,20 @@ class MemlessParser {
 		return null;
 	}
 
-	private static String convertNameToJavabean(String str) {
+	static String convertNameToJavabean(String str) {
+		if (str == null || str.length() == 0) {
+			return "";
+		}
 		StringBuilder result = new StringBuilder();
-		result.append(Character.toUpperCase(str.charAt(0)));
-		if (str.length() > 1) {
-			result.append(str.substring(1));
+		String[] parts = UNDERSCORE.split(str);
+		for( String curPart : parts ) {
+			if( curPart.length() == 0 ) {
+				continue;
+			}
+			result.append(Character.toUpperCase(curPart.charAt(0)));
+			if( curPart.length() > 1 ) {
+				result.append(curPart.substring(1));
+			}
 		}
 		return result.toString();
 	}

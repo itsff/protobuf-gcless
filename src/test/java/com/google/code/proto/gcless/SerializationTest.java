@@ -16,8 +16,6 @@ import com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition;
 import com.x.protobuf.TabNavigationPB.TabNavigation;
 import com.x.protobuf.TabNavigationPB.TabNavigationSerializer;
 
-import protobuf_gcless_unittest.ForeignMessageImpl;
-import protobuf_gcless_unittest.TestAllTypesImpl;
 import protobuf_gcless_unittest.UnittestProto.ForeignMessage;
 import protobuf_gcless_unittest.UnittestProto.TestAllTypes;
 import protobuf_gcless_unittest.UnittestProto.TestAllTypesSerializer;
@@ -28,14 +26,14 @@ public class SerializationTest {
 	public void testSerializationForIssue2() throws Exception {
 		TabNavigation nvigation = new TabNavigation();
 		nvigation.setState("123");
-		nvigation.setPage_transition(PageTransition.TYPED);
+		nvigation.setPageTransition(PageTransition.TYPED);
 		
 		byte[] data = TabNavigationSerializer.serialize(nvigation);
 		
 		TabNavigation result = TabNavigationSerializer.parseFrom(data);
 		
 		assertEquals(nvigation.getState(), result.getState());
-		assertEquals(nvigation.getPage_transition(), result.getPage_transition());
+		assertEquals(nvigation.getPageTransition(), result.getPageTransition());
 	}
 	
 	@Test
@@ -47,12 +45,12 @@ public class SerializationTest {
 		
 		byte[] defaultSerializationData = result.toByteArray();
 		
-		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), new ByteArrayInputStream(defaultSerializationData));
+		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new ByteArrayInputStream(defaultSerializationData));
 		assertDeepEquals(result, optimizedResult);
-		assertEquals(2, optimizedResult.getRepeated_foreign_message().size());
-		assertEquals(1, optimizedResult.getRepeated_foreign_message().get(0).getC());
-		assertEquals(2, optimizedResult.getRepeated_foreign_message().get(1).getC());
-		assertEquals(message.getDefault_string(), optimizedResult.getDefault_string());
+		assertEquals(2, optimizedResult.getRepeatedForeignMessage().size());
+		assertEquals(1, optimizedResult.getRepeatedForeignMessage().get(0).getC());
+		assertEquals(2, optimizedResult.getRepeatedForeignMessage().get(1).getC());
+		assertEquals(message.getDefaultString(), optimizedResult.getDefaultString());
 	}
 	
 	@Test 
@@ -64,11 +62,11 @@ public class SerializationTest {
 		
 		byte[] defaultSerializationData = result.toByteArray();
 		
-		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), defaultSerializationData);
+		TestAllTypes optimizedResult = TestAllTypesSerializer.parseFrom(defaultSerializationData);
 		assertDeepEquals(result, optimizedResult);
-		assertEquals(2, optimizedResult.getRepeated_foreign_message().size());
-		assertEquals(1, optimizedResult.getRepeated_foreign_message().get(0).getC());
-		assertEquals(2, optimizedResult.getRepeated_foreign_message().get(1).getC());
+		assertEquals(2, optimizedResult.getRepeatedForeignMessage().size());
+		assertEquals(1, optimizedResult.getRepeatedForeignMessage().get(0).getC());
+		assertEquals(2, optimizedResult.getRepeatedForeignMessage().get(1).getC());
 	}
 	
 	@Test
@@ -77,7 +75,7 @@ public class SerializationTest {
 
 		byte[] data = TestAllTypesSerializer.serialize(message);
 
-		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), data);
+		TestAllTypes result = TestAllTypesSerializer.parseFrom(data);
 		assertNotNull(result);
 		assertDeepEquals(message, result);
 	}
@@ -90,7 +88,7 @@ public class SerializationTest {
 		
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-		TestAllTypes result = TestAllTypesSerializer.parseFrom(new MessageFactoryImpl(), bais);
+		TestAllTypes result = TestAllTypesSerializer.parseFrom(bais);
 		assertNotNull(result);
 		assertDeepEquals(message, result);
 	}
@@ -123,8 +121,6 @@ public class SerializationTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		
-		MessageFactoryImpl factory = new MessageFactoryImpl();
 		
 		long times = 1000000;
 
@@ -165,7 +161,7 @@ public class SerializationTest {
 
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
-			TestAllTypesSerializer.parseFrom(factory, data);
+			TestAllTypesSerializer.parseFrom(data);
 		}
 		System.out.println(" * Optimized version(de-serialize): " + (System.currentTimeMillis() - start));
 		
@@ -179,7 +175,7 @@ public class SerializationTest {
 
 		start = System.currentTimeMillis();
 		for (int i = 0; i < times; i++) {
-			TestAllTypesSerializer.parseFrom(factory, bais);
+			TestAllTypesSerializer.parseFrom(bais);
 			bais.reset();
 		}
 		System.out.println(" * Optimized streamed version(de-serialize): " + (System.currentTimeMillis() - start));
@@ -193,198 +189,198 @@ public class SerializationTest {
 	}
 	
 	private static void assertDeepEquals(protobuf_unittest.UnittestProto.TestAllTypes defaultImpl, TestAllTypes optimized) {
-		assertEquals(defaultImpl.getOptionalInt32(), optimized.getOptional_int32());
-		assertEquals(defaultImpl.getOptionalInt64(), optimized.getOptional_int64());
-		assertEquals(defaultImpl.getOptionalUint32(), optimized.getOptional_uint32());
-		assertEquals(defaultImpl.getOptionalUint64(), optimized.getOptional_uint64());
-		assertEquals(defaultImpl.getOptionalSint32(), optimized.getOptional_sint32());
-		assertEquals(defaultImpl.getOptionalSint64(), optimized.getOptional_sint64());
-		assertEquals(defaultImpl.getOptionalFixed32(), optimized.getOptional_fixed32());
-		assertEquals(defaultImpl.getOptionalFixed64(), optimized.getOptional_fixed64());
-		assertEquals(defaultImpl.getOptionalSfixed32(), optimized.getOptional_sfixed32());
-		assertEquals(defaultImpl.getOptionalSfixed64(), optimized.getOptional_sfixed64());
-		assertEquals(defaultImpl.getOptionalFloat(), optimized.getOptional_float());
-		assertEquals(defaultImpl.getOptionalDouble(), optimized.getOptional_double());
-		assertEquals(defaultImpl.getOptionalBool(), optimized.getOptional_bool());
-		assertEquals(defaultImpl.getOptionalString(), optimized.getOptional_string());
-		assertTrue(Arrays.equals(defaultImpl.getOptionalBytes().toByteArray(), optimized.getOptional_bytes()));
-		assertEquals(defaultImpl.getOptionalStringPiece(), optimized.getOptional_string_piece());
-		assertEquals(defaultImpl.getOptionalCord(), optimized.getOptional_cord());
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt32List().toArray(), optimized.getRepeated_int32().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt64List().toArray(), optimized.getRepeated_int64().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint32List().toArray(), optimized.getRepeated_uint32().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint64List().toArray(), optimized.getRepeated_uint64().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint32List().toArray(), optimized.getRepeated_sint32().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint64List().toArray(), optimized.getRepeated_sint64().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed32List().toArray(), optimized.getRepeated_fixed32().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed64List().toArray(), optimized.getRepeated_fixed64().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed32List().toArray(), optimized.getRepeated_sfixed32().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed64List().toArray(), optimized.getRepeated_sfixed64().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedFloatList().toArray(), optimized.getRepeated_float().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedDoubleList().toArray(), optimized.getRepeated_double().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedBoolList().toArray(), optimized.getRepeated_bool().toArray()));
-		assertTrue(Arrays.equals(defaultImpl.getRepeatedStringList().toArray(), optimized.getRepeated_string().toArray()));
-		assertEquals(defaultImpl.getRepeatedForeignMessageCount(), optimized.getRepeated_foreign_message().size());
-		assertEquals(defaultImpl.getRepeatedForeignMessage(0).getC(), optimized.getRepeated_foreign_message().get(0).getC());
-		assertEquals(defaultImpl.getRepeatedForeignMessage(1).getC(), optimized.getRepeated_foreign_message().get(1).getC());
+		assertEquals(defaultImpl.getOptionalInt32(), optimized.getOptionalInt32());
+		assertEquals(defaultImpl.getOptionalInt64(), optimized.getOptionalInt64());
+		assertEquals(defaultImpl.getOptionalUint32(), optimized.getOptionalUint32());
+		assertEquals(defaultImpl.getOptionalUint64(), optimized.getOptionalUint64());
+		assertEquals(defaultImpl.getOptionalSint32(), optimized.getOptionalSint32());
+		assertEquals(defaultImpl.getOptionalSint64(), optimized.getOptionalSint64());
+		assertEquals(defaultImpl.getOptionalFixed32(), optimized.getOptionalFixed32());
+		assertEquals(defaultImpl.getOptionalFixed64(), optimized.getOptionalFixed64());
+		assertEquals(defaultImpl.getOptionalSfixed32(), optimized.getOptionalSfixed32());
+		assertEquals(defaultImpl.getOptionalSfixed64(), optimized.getOptionalSfixed64());
+		assertEquals(defaultImpl.getOptionalFloat(), optimized.getOptionalFloat());
+		assertEquals(defaultImpl.getOptionalDouble(), optimized.getOptionalDouble());
+		assertEquals(defaultImpl.getOptionalBool(), optimized.getOptionalBool());
+		assertEquals(defaultImpl.getOptionalString(), optimized.getOptionalString());
+		assertTrue(Arrays.equals(defaultImpl.getOptionalBytes().toByteArray(), optimized.getOptionalBytes()));
+		assertEquals(defaultImpl.getOptionalStringPiece(), optimized.getOptionalStringPiece());
+		assertEquals(defaultImpl.getOptionalCord(), optimized.getOptionalCord());
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt32List().toArray(), optimized.getRepeatedInt32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedInt64List().toArray(), optimized.getRepeatedInt64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint32List().toArray(), optimized.getRepeatedUint32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedUint64List().toArray(), optimized.getRepeatedUint64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint32List().toArray(), optimized.getRepeatedSint32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSint64List().toArray(), optimized.getRepeatedSint64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed32List().toArray(), optimized.getRepeatedFixed32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFixed64List().toArray(), optimized.getRepeatedFixed64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed32List().toArray(), optimized.getRepeatedSfixed32().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedSfixed64List().toArray(), optimized.getRepeatedSfixed64().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedFloatList().toArray(), optimized.getRepeatedFloat().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedDoubleList().toArray(), optimized.getRepeatedDouble().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedBoolList().toArray(), optimized.getRepeatedBool().toArray()));
+		assertTrue(Arrays.equals(defaultImpl.getRepeatedStringList().toArray(), optimized.getRepeatedString().toArray()));
+		assertEquals(defaultImpl.getRepeatedForeignMessageCount(), optimized.getRepeatedForeignMessage().size());
+		assertEquals(defaultImpl.getRepeatedForeignMessage(0).getC(), optimized.getRepeatedForeignMessage().get(0).getC());
+		assertEquals(defaultImpl.getRepeatedForeignMessage(1).getC(), optimized.getRepeatedForeignMessage().get(1).getC());
 	}
 	
 	private static void assertDeepEquals(TestAllTypes original, TestAllTypes result) {
-		assertEquals(original.getOptional_int32(), result.getOptional_int32());
-		assertEquals(original.getOptional_int64(), result.getOptional_int64());
-		assertEquals(original.getOptional_uint32(), result.getOptional_uint32());
-		assertEquals(original.getOptional_uint64(), result.getOptional_uint64());
-		assertEquals(original.getOptional_sint32(), result.getOptional_sint32());
-		assertEquals(original.getOptional_sint64(), result.getOptional_sint64());
-		assertEquals(original.getOptional_fixed32(), result.getOptional_fixed32());
-		assertEquals(original.getOptional_fixed64(), result.getOptional_fixed64());
-		assertEquals(original.getOptional_sfixed32(), result.getOptional_sfixed32());
-		assertEquals(original.getOptional_sfixed64(), result.getOptional_sfixed64());
-		assertEquals(original.getOptional_float(), result.getOptional_float());
-		assertEquals(original.getOptional_double(), result.getOptional_double());
-		assertEquals(original.getOptional_bool(), result.getOptional_bool());
-		assertEquals(original.getOptional_string(), result.getOptional_string());
-		assertTrue(Arrays.equals(original.getOptional_bytes(), result.getOptional_bytes()));
-		assertEquals(original.getOptional_string_piece(), result.getOptional_string_piece());
-		assertEquals(original.getOptional_cord(), result.getOptional_cord());
-		assertTrue(Arrays.equals(original.getRepeated_int32().toArray(), result.getRepeated_int32().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_int64().toArray(), result.getRepeated_int64().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_uint32().toArray(), result.getRepeated_uint32().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_uint64().toArray(), result.getRepeated_uint64().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_sint32().toArray(), result.getRepeated_sint32().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_sint64().toArray(), result.getRepeated_sint64().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_fixed32().toArray(), result.getRepeated_fixed32().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_fixed64().toArray(), result.getRepeated_fixed64().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_sfixed32().toArray(), result.getRepeated_sfixed32().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_sfixed64().toArray(), result.getRepeated_sfixed64().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_float().toArray(), result.getRepeated_float().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_double().toArray(), result.getRepeated_double().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_bool().toArray(), result.getRepeated_bool().toArray()));
-		assertTrue(Arrays.equals(original.getRepeated_string().toArray(), result.getRepeated_string().toArray()));
-		assertEquals(original.getRepeated_foreign_message().size(), result.getRepeated_foreign_message().size());
-		assertEquals(original.getRepeated_foreign_message().get(0).getC(), result.getRepeated_foreign_message().get(0).getC());
-		assertEquals(original.getRepeated_foreign_message().get(1).getC(), result.getRepeated_foreign_message().get(1).getC());
+		assertEquals(original.getOptionalInt32(), result.getOptionalInt32());
+		assertEquals(original.getOptionalInt64(), result.getOptionalInt64());
+		assertEquals(original.getOptionalUint32(), result.getOptionalUint32());
+		assertEquals(original.getOptionalUint64(), result.getOptionalUint64());
+		assertEquals(original.getOptionalSint32(), result.getOptionalSint32());
+		assertEquals(original.getOptionalSint64(), result.getOptionalSint64());
+		assertEquals(original.getOptionalFixed32(), result.getOptionalFixed32());
+		assertEquals(original.getOptionalFixed64(), result.getOptionalFixed64());
+		assertEquals(original.getOptionalSfixed32(), result.getOptionalSfixed32());
+		assertEquals(original.getOptionalSfixed64(), result.getOptionalSfixed64());
+		assertEquals(original.getOptionalFloat(), result.getOptionalFloat());
+		assertEquals(original.getOptionalDouble(), result.getOptionalDouble());
+		assertEquals(original.getOptionalBool(), result.getOptionalBool());
+		assertEquals(original.getOptionalString(), result.getOptionalString());
+		assertTrue(Arrays.equals(original.getOptionalBytes(), result.getOptionalBytes()));
+		assertEquals(original.getOptionalStringPiece(), result.getOptionalStringPiece());
+		assertEquals(original.getOptionalCord(), result.getOptionalCord());
+		assertTrue(Arrays.equals(original.getRepeatedInt32().toArray(), result.getRepeatedInt32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedInt64().toArray(), result.getRepeatedInt64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedUint32().toArray(), result.getRepeatedUint32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedUint64().toArray(), result.getRepeatedUint64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedSint32().toArray(), result.getRepeatedSint32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedSint64().toArray(), result.getRepeatedSint64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedFixed32().toArray(), result.getRepeatedFixed32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedFixed64().toArray(), result.getRepeatedFixed64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedSfixed32().toArray(), result.getRepeatedSfixed32().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedSfixed64().toArray(), result.getRepeatedSfixed64().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedFloat().toArray(), result.getRepeatedFloat().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedDouble().toArray(), result.getRepeatedDouble().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedBool().toArray(), result.getRepeatedBool().toArray()));
+		assertTrue(Arrays.equals(original.getRepeatedString().toArray(), result.getRepeatedString().toArray()));
+		assertEquals(original.getRepeatedForeignMessage().size(), result.getRepeatedForeignMessage().size());
+		assertEquals(original.getRepeatedForeignMessage().get(0).getC(), result.getRepeatedForeignMessage().get(0).getC());
+		assertEquals(original.getRepeatedForeignMessage().get(1).getC(), result.getRepeatedForeignMessage().get(1).getC());
 	}
 
 	private static TestAllTypes createSampleMessage() {
-		TestAllTypes message = new TestAllTypesImpl();
-		message.setOptional_int32(1);
-		message.setOptional_int64(1l);
-		message.setOptional_uint32(1);
-		message.setOptional_uint64(1l);
-		message.setOptional_sint32(1);
-		message.setOptional_sint64(1l);
-		message.setOptional_fixed32(1);
-		message.setOptional_fixed64(1l);
-		message.setOptional_sfixed32(1);
-		message.setOptional_sfixed64(1l);
-		message.setOptional_float(1.0f);
-		message.setOptional_double(1.1);
-		message.setOptional_bool(true);
-		message.setOptional_string("123");
-		message.setOptional_bytes(new byte[] {(byte) 1, (byte) 2});
-		message.setOptional_string_piece("123");
-		message.setOptional_cord("123");
+		TestAllTypes message = new TestAllTypes();
+		message.setOptionalInt32(1);
+		message.setOptionalInt64(1l);
+		message.setOptionalUint32(1);
+		message.setOptionalUint64(1l);
+		message.setOptionalSint32(1);
+		message.setOptionalSint64(1l);
+		message.setOptionalFixed32(1);
+		message.setOptionalFixed64(1l);
+		message.setOptionalSfixed32(1);
+		message.setOptionalSfixed64(1l);
+		message.setOptionalFloat(1.0f);
+		message.setOptionalDouble(1.1);
+		message.setOptionalBool(true);
+		message.setOptionalString("123");
+		message.setOptionalBytes(new byte[] {(byte) 1, (byte) 2});
+		message.setOptionalStringPiece("123");
+		message.setOptionalCord("123");
 		List<Integer> valuesRepeated_int32 = new ArrayList<Integer>();
 		valuesRepeated_int32.add(1);
 		valuesRepeated_int32.add(1);
-		message.setRepeated_int32(valuesRepeated_int32);
+		message.setRepeatedInt32(valuesRepeated_int32);
 		List<Long> valuesRepeated_int64 = new ArrayList<Long>();
 		valuesRepeated_int64.add(1l);
 		valuesRepeated_int64.add(1l);
-		message.setRepeated_int64(valuesRepeated_int64);
+		message.setRepeatedInt64(valuesRepeated_int64);
 		List<Integer> valuesRepeated_uint32 = new ArrayList<Integer>();
 		valuesRepeated_uint32.add(1);
 		valuesRepeated_uint32.add(1);
-		message.setRepeated_uint32(valuesRepeated_uint32);
+		message.setRepeatedUint32(valuesRepeated_uint32);
 		List<Long> valuesRepeated_uint64 = new ArrayList<Long>();
 		valuesRepeated_uint64.add(1l);
 		valuesRepeated_uint64.add(1l);
-		message.setRepeated_uint64(valuesRepeated_uint64);
+		message.setRepeatedUint64(valuesRepeated_uint64);
 		List<Integer> valuesRepeated_sint32 = new ArrayList<Integer>();
 		valuesRepeated_sint32.add(1);
 		valuesRepeated_sint32.add(1);
-		message.setRepeated_sint32(valuesRepeated_sint32);
+		message.setRepeatedSint32(valuesRepeated_sint32);
 		List<Long> valuesRepeated_sint64 = new ArrayList<Long>();
 		valuesRepeated_sint64.add(1l);
 		valuesRepeated_sint64.add(1l);
-		message.setRepeated_sint64(valuesRepeated_sint64);
+		message.setRepeatedSint64(valuesRepeated_sint64);
 		List<Integer> valuesRepeated_fixed32 = new ArrayList<Integer>();
 		valuesRepeated_fixed32.add(1);
 		valuesRepeated_fixed32.add(1);
-		message.setRepeated_fixed32(valuesRepeated_fixed32);
+		message.setRepeatedFixed32(valuesRepeated_fixed32);
 		List<Long> valuesRepeated_fixed64 = new ArrayList<Long>();
 		valuesRepeated_fixed64.add(1l);
 		valuesRepeated_fixed64.add(1l);
-		message.setRepeated_fixed64(valuesRepeated_fixed64);
+		message.setRepeatedFixed64(valuesRepeated_fixed64);
 		List<Integer> valuesRepeated_sfixed32 = new ArrayList<Integer>();
 		valuesRepeated_sfixed32.add(1);
 		valuesRepeated_sfixed32.add(1);
-		message.setRepeated_sfixed32(valuesRepeated_sfixed32);
+		message.setRepeatedSfixed32(valuesRepeated_sfixed32);
 		List<Long> valuesRepeated_sfixed64 = new ArrayList<Long>();
 		valuesRepeated_sfixed64.add(1l);
 		valuesRepeated_sfixed64.add(1l);
-		message.setRepeated_sfixed64(valuesRepeated_sfixed64);
+		message.setRepeatedSfixed64(valuesRepeated_sfixed64);
 		List<Float> valuesRepeated_float = new ArrayList<Float>();
 		valuesRepeated_float.add(1.0f);
 		valuesRepeated_float.add(1.0f);
-		message.setRepeated_float(valuesRepeated_float);
+		message.setRepeatedFloat(valuesRepeated_float);
 		List<Double> valuesRepeated_double = new ArrayList<Double>();
 		valuesRepeated_double.add(1.1);
 		valuesRepeated_double.add(1.1);
-		message.setRepeated_double(valuesRepeated_double);
+		message.setRepeatedDouble(valuesRepeated_double);
 		List<Boolean> valuesRepeated_bool = new ArrayList<Boolean>();
 		valuesRepeated_bool.add(true);
 		valuesRepeated_bool.add(true);
-		message.setRepeated_bool(valuesRepeated_bool);
+		message.setRepeatedBool(valuesRepeated_bool);
 		List<String> valuesRepeated_string = new ArrayList<String>();
 		valuesRepeated_string.add("123");
 		valuesRepeated_string.add("456");
-		message.setRepeated_string(valuesRepeated_string);
-		message.setRepeated_bytes(new byte[] {(byte) 1, (byte) 2});
+		message.setRepeatedString(valuesRepeated_string);
+		message.setRepeatedBytes(new byte[] {(byte) 1, (byte) 2});
 		List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> valuesRepeated_nested_message = new ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage>();
-		message.setRepeated_nested_message(valuesRepeated_nested_message);
+		message.setRepeatedNestedMessage(valuesRepeated_nested_message);
 		List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> valuesRepeated_foreign_message = new ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignMessage>();
-		ForeignMessage foreignMessage1 = new ForeignMessageImpl();
+		ForeignMessage foreignMessage1 = new ForeignMessage();
 		foreignMessage1.setC(1);
-		ForeignMessage foreignMessage2 = new ForeignMessageImpl();
+		ForeignMessage foreignMessage2 = new ForeignMessage();
 		foreignMessage2.setC(2);
 		valuesRepeated_foreign_message.add(foreignMessage1);
 		valuesRepeated_foreign_message.add(foreignMessage2);
-		message.setRepeated_foreign_message(valuesRepeated_foreign_message);
+		message.setRepeatedForeignMessage(valuesRepeated_foreign_message);
 		List<protobuf_gcless_import.ImportMessage> valuesRepeated_import_message = new ArrayList<protobuf_gcless_import.ImportMessage>();
-		message.setRepeated_import_message(valuesRepeated_import_message);
+		message.setRepeatedImportMessage(valuesRepeated_import_message);
 		List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum> valuesRepeated_nested_enum = new ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum>();
-		message.setRepeated_nested_enum(valuesRepeated_nested_enum);
+		message.setRepeatedNestedEnum(valuesRepeated_nested_enum);
 		List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> valuesRepeated_foreign_enum = new ArrayList<protobuf_gcless_unittest.UnittestProto.ForeignEnum>();
-		message.setRepeated_foreign_enum(valuesRepeated_foreign_enum);
+		message.setRepeatedForeignEnum(valuesRepeated_foreign_enum);
 		List<protobuf_gcless_import.ImportEnum> valuesRepeated_import_enum = new ArrayList<protobuf_gcless_import.ImportEnum>();
-		message.setRepeated_import_enum(valuesRepeated_import_enum);
+		message.setRepeatedImportEnum(valuesRepeated_import_enum);
 		List<String> valuesRepeated_string_piece = new ArrayList<String>();
 		valuesRepeated_string_piece.add("123");
 		valuesRepeated_string_piece.add("123");
-		message.setRepeated_string_piece(valuesRepeated_string_piece);
+		message.setRepeatedStringPiece(valuesRepeated_string_piece);
 		List<String> valuesRepeated_cord = new ArrayList<String>();
 		valuesRepeated_cord.add("123");
 		valuesRepeated_cord.add("123");
-		message.setRepeated_cord(valuesRepeated_cord);
-		message.setDefault_int32(1);
-		message.setDefault_int64(1l);
-		message.setDefault_uint32(1);
-		message.setDefault_uint64(1l);
-		message.setDefault_sint32(1);
-		message.setDefault_sint64(1l);
-		message.setDefault_fixed32(1);
-		message.setDefault_fixed64(1l);
-		message.setDefault_sfixed32(1);
-		message.setDefault_sfixed64(1l);
-		message.setDefault_float(1.0f);
-		message.setDefault_double(1.1);
-		message.setDefault_bool(true);
-		message.setDefault_string("123");
-		message.setDefault_bytes(new byte[] {(byte) 1, (byte) 2});
-		message.setDefault_string_piece("123");
-		message.setDefault_cord("123");
+		message.setRepeatedCord(valuesRepeated_cord);
+		message.setDefaultInt32(1);
+		message.setDefaultInt64(1l);
+		message.setDefaultUint32(1);
+		message.setDefaultUint64(1l);
+		message.setDefaultSint32(1);
+		message.setDefaultSint64(1l);
+		message.setDefaultFixed32(1);
+		message.setDefaultFixed64(1l);
+		message.setDefaultSfixed32(1);
+		message.setDefaultSfixed64(1l);
+		message.setDefaultFloat(1.0f);
+		message.setDefaultDouble(1.1);
+		message.setDefaultBool(true);
+		message.setDefaultString("123");
+		message.setDefaultBytes(new byte[] {(byte) 1, (byte) 2});
+		message.setDefaultStringPiece("123");
+		message.setDefaultCord("123");
 		return message;
 	}
 

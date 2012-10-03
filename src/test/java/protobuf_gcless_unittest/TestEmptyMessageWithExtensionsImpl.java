@@ -1,4 +1,0 @@
-package protobuf_gcless_unittest;
-
-public class TestEmptyMessageWithExtensionsImpl implements protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions {
-}

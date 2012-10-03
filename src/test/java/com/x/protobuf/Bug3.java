@@ -5,18 +5,18 @@ import java.io.IOException;
 public final class Bug3 {
 private Bug3() {}
 public static class B {
-private String Id_string;
+private String IdString;
 public static final int ID_STRING_FIELD_NUMBER = 1;
-private boolean hasId_string;
-public boolean hasId_string() {
-return hasId_string;
+private boolean hasIdString;
+public boolean hasIdString() {
+return hasIdString;
 }
-public String getId_string() {
-return Id_string;
+public String getIdString() {
+return IdString;
 }
-public void setId_string(String Id_string) {
-this.Id_string = Id_string;
-this.hasId_string = true;
+public void setIdString(String IdString) {
+this.IdString = IdString;
+this.hasIdString = true;
 }
 }
 public static class BSerializer {
@@ -24,15 +24,15 @@ public static byte[] serialize(com.x.protobuf.Bug3.B message) {
 try {
 int totalSize = 0;
 byte[] id_stringBuffer = null;
-if (message.hasId_string()) {
-id_stringBuffer = message.getId_string().getBytes("UTF-8");
+if (message.hasIdString()) {
+id_stringBuffer = message.getIdString().getBytes("UTF-8");
 totalSize += id_stringBuffer.length;
 totalSize += ProtobufOutputStream.computeTagSize(1);
 totalSize += ProtobufOutputStream.computeRawVarint32Size(id_stringBuffer.length);
 }
 final byte[] result = new byte[totalSize];
 int position = 0;
-if (message.hasId_string()) {
+if (message.hasIdString()) {
 position = ProtobufOutputStream.writeString(1,id_stringBuffer, result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
@@ -43,8 +43,8 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 public static void serialize(com.x.protobuf.Bug3.B message, java.io.OutputStream os) {
 try {
-if (message.hasId_string()) {
-ProtobufOutputStream.writeString(1, message.getId_string(), os);
+if (message.hasIdString()) {
+ProtobufOutputStream.writeString(1, message.getIdString(), os);
 }
 } catch (IOException e) {
 throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
@@ -62,7 +62,7 @@ return message;
  ProtobufInputStream.skipUnknown(tag, data, cursor);
  break;
 case 1: 
-message.setId_string(ProtobufInputStream.readString(data,cursor));
+message.setIdString(ProtobufInputStream.readString(data,cursor));
 break;
 }
 }
@@ -81,7 +81,7 @@ return message;
  ProtobufInputStream.skipUnknown(tag, data, cursor);
  break;
 case 1: 
-message.setId_string(ProtobufInputStream.readString(data,cursor));
+message.setIdString(ProtobufInputStream.readString(data,cursor));
 break;
 }
 }
@@ -97,7 +97,7 @@ return message;
  default: 
  ProtobufInputStream.skipUnknown(tag, is, cursor);
  break;case 1: 
-message.setId_string(ProtobufInputStream.readString(is,cursor));
+message.setIdString(ProtobufInputStream.readString(is,cursor));
 break;
 }
 }
@@ -115,7 +115,7 @@ return message;
  default: 
  ProtobufInputStream.skipUnknown(tag, is, cursor);
  break;case 1: 
-message.setId_string(ProtobufInputStream.readString(is,cursor));
+message.setIdString(ProtobufInputStream.readString(is,cursor));
 break;
 }
 }

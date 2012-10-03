@@ -56,7 +56,7 @@ public class MemlessGenerator {
 	}
 
 	private static void process(File output, MemlessParser parser) throws IOException, Exception {
-		String packageName = parser.getJavaPackageName();
+		String packageName = parser.getPackageName();
 		if (packageName != null) {
 			output = createPackage(output, packageName);
 		}
@@ -65,7 +65,7 @@ public class MemlessGenerator {
 		if (parser.getOuterClassName() != null) {
 			w = new BufferedWriter(new FileWriter(new File(output, parser.getOuterClassName() + ".java")));
 			w.append(HEADER);
-			appendPackage(w, parser.getJavaPackageName());
+			appendPackage(w, parser.getPackageName());
 			appendImport(w, "java.io.IOException");
 			w.append("public final class ");
 			w.append(parser.getOuterClassName());
@@ -80,7 +80,7 @@ public class MemlessGenerator {
 				w.append(curEnumData);
 			} else {
 				BufferedWriter enumWriter = new BufferedWriter(new FileWriter(new File(output, curEnum.getName() + ".java")));
-				appendPackage(enumWriter, parser.getJavaPackageName());
+				appendPackage(enumWriter, parser.getPackageName());
 				enumWriter.append(curEnumData);
 				enumWriter.flush();
 				enumWriter.close();
@@ -109,12 +109,12 @@ public class MemlessGenerator {
 				w.append(serializerData);
 			} else {
 				BufferedWriter messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + ".java")));
-				appendPackage(messageWriter, parser.getJavaPackageName());
+				appendPackage(messageWriter, parser.getPackageName());
 				messageWriter.append(curMessageData);
 				messageWriter.flush();
 				messageWriter.close();
 				messageWriter = new BufferedWriter(new FileWriter(new File(output, curMessage.getName() + "Serializer" + ".java")));
-				appendPackage(messageWriter, parser.getJavaPackageName());
+				appendPackage(messageWriter, parser.getPackageName());
 				if (!curMessage.getFields().isEmpty()) {
 					appendImport(messageWriter, "java.io.IOException");
 				}
@@ -134,14 +134,16 @@ public class MemlessGenerator {
 			String generateDefaultImpl = System.getProperty("generate.default");
 			if (generateDefaultImpl != null && generateDefaultImpl.equals("true")) {
 				for (ProtobufMessage curMessage : parser.getMessages()) {
-					generateDefaultMessageImpl(curMessage, output, parser.getJavaPackageName());
+					generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
 				}
 			}
 		}
-		copy("ProtobufOutputStream.java", output, parser.getJavaPackageName());
-		copy("ProtobufInputStream.java", output, parser.getJavaPackageName());
-		copy("CurrentCursor.java", output, parser.getJavaPackageName());
-		copy("MessageFactory.java", output, parser.getJavaPackageName());
+		copy("ProtobufOutputStream.java", output, parser.getPackageName());
+		copy("ProtobufInputStream.java", output, parser.getPackageName());
+		copy("CurrentCursor.java", output, parser.getPackageName());
+		if( isInterfaceBased ) {
+			copy("MessageFactory.java", output, parser.getPackageName());
+		}
 	}
 
 	private static void copy(String classpathFileName, File output, String packageName) throws IOException {
@@ -690,7 +692,7 @@ public class MemlessGenerator {
 				String javaType = constructType(curField, curMessage);
 				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
 				if( generateStaticFields ) {
-					result.append("public static final int " + curField.getBeanName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
+					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
 				}
 				result.append("private boolean has" + curField.getBeanName() + ";\n");
 				result.append("public boolean has" + curField.getBeanName() + "() {\n");
@@ -782,8 +784,6 @@ public class MemlessGenerator {
 	private static String constructType(ProtobufField curField, ProtobufMessage curMessage) {
 		StringBuilder result = new StringBuilder();
 		String javaType = curField.getFullyClarifiedJavaType();
-		if (javaType == null) {
-		}
 		if (curField.getNature().equals("repeated") && !curField.getType().equals("bytes")) {
 			result.append("java.util.List<");
 		}

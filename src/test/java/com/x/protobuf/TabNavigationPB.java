@@ -17,17 +17,17 @@ public void setState(String State) {
 this.State = State;
 this.hasState = true;
 }
-private com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition Page_transition;
-private boolean hasPage_transition;
-public boolean hasPage_transition() {
-return hasPage_transition;
+private com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition PageTransition;
+private boolean hasPageTransition;
+public boolean hasPageTransition() {
+return hasPageTransition;
 }
-public com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition getPage_transition() {
-return Page_transition;
+public com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition getPageTransition() {
+return PageTransition;
 }
-public void setPage_transition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition Page_transition) {
-this.Page_transition = Page_transition;
-this.hasPage_transition = true;
+public void setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition PageTransition) {
+this.PageTransition = PageTransition;
+this.hasPageTransition = true;
 }
 }
 public static class TabNavigationSerializer {
@@ -41,16 +41,16 @@ totalSize += stateBuffer.length;
 totalSize += ProtobufOutputStream.computeTagSize(5);
 totalSize += ProtobufOutputStream.computeRawVarint32Size(stateBuffer.length);
 }
-if (message.hasPage_transition()) {
-totalSize += ProtobufOutputStream.computeEnumSize(6, message.getPage_transition().getValue());
+if (message.hasPageTransition()) {
+totalSize += ProtobufOutputStream.computeEnumSize(6, message.getPageTransition().getValue());
 }
 final byte[] result = new byte[totalSize];
 int position = 0;
 if (message.hasState()) {
 position = ProtobufOutputStream.writeString(5,stateBuffer, result, position);
 }
-if (message.hasPage_transition()) {
-position = ProtobufOutputStream.writeEnum(6, message.getPage_transition().getValue(), result, position);
+if (message.hasPageTransition()) {
+position = ProtobufOutputStream.writeEnum(6, message.getPageTransition().getValue(), result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
@@ -63,8 +63,8 @@ try {
 if (message.hasState()) {
 ProtobufOutputStream.writeString(5, message.getState(), os);
 }
-if (message.hasPage_transition()) {
-ProtobufOutputStream.writeEnum(6, message.getPage_transition().getValue(), os);
+if (message.hasPageTransition()) {
+ProtobufOutputStream.writeEnum(6, message.getPageTransition().getValue(), os);
 }
 } catch (IOException e) {
 throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
@@ -85,7 +85,7 @@ case 5:
 message.setState(ProtobufInputStream.readString(data,cursor));
 break;
 case 6: 
-message.setPage_transition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(data,cursor)));
+message.setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(data,cursor)));
 break;
 }
 }
@@ -107,7 +107,7 @@ case 5:
 message.setState(ProtobufInputStream.readString(data,cursor));
 break;
 case 6: 
-message.setPage_transition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(data,cursor)));
+message.setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(data,cursor)));
 break;
 }
 }
@@ -126,7 +126,7 @@ return message;
 message.setState(ProtobufInputStream.readString(is,cursor));
 break;
 case 6: 
-message.setPage_transition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(is,cursor)));
+message.setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(is,cursor)));
 break;
 }
 }
@@ -147,7 +147,7 @@ return message;
 message.setState(ProtobufInputStream.readString(is,cursor));
 break;
 case 6: 
-message.setPage_transition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(is,cursor)));
+message.setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition.valueOf(ProtobufInputStream.readEnum(is,cursor)));
 break;
 }
 }
