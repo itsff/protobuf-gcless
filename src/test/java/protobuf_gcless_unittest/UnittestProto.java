@@ -259,6 +259,18 @@ public void setOptionalBytes(byte[] OptionalBytes) {
 this.OptionalBytes = OptionalBytes;
 this.hasOptionalBytes = true;
 }
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup Optionalgroup;
+private boolean hasOptionalgroup;
+public boolean hasOptionalgroup() {
+return hasOptionalgroup;
+}
+public protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup getOptionalgroup() {
+return Optionalgroup;
+}
+public void setOptionalgroup(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup Optionalgroup) {
+this.Optionalgroup = Optionalgroup;
+this.hasOptionalgroup = true;
+}
 private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage OptionalNestedMessage;
 private boolean hasOptionalNestedMessage;
 public boolean hasOptionalNestedMessage() {
@@ -534,6 +546,18 @@ return RepeatedBytes;
 public void setRepeatedBytes(byte[] RepeatedBytes) {
 this.RepeatedBytes = RepeatedBytes;
 this.hasRepeatedBytes = true;
+}
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> Repeatedgroup;
+private boolean hasRepeatedgroup;
+public boolean hasRepeatedgroup() {
+return hasRepeatedgroup;
+}
+public java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> getRepeatedgroup() {
+return Repeatedgroup;
+}
+public void setRepeatedgroup(java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> Repeatedgroup) {
+this.Repeatedgroup = Repeatedgroup;
+this.hasRepeatedgroup = true;
 }
 private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> RepeatedNestedMessage;
 private boolean hasRepeatedNestedMessage;
@@ -899,8 +923,8 @@ position = ProtobufOutputStream.writeInt32(1, message.getBb(), result, position)
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage message, java.io.OutputStream os) {
@@ -916,12 +940,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage 
 protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setBb(ProtobufInputStream.readInt32(data,cursor));
@@ -935,12 +963,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setBb(ProtobufInputStream.readInt32(data,cursor));
@@ -952,12 +984,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage 
 protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setBb(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -970,14 +1009,321 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setBb(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+}
+public static class OptionalGroup {
+private int A;
+private boolean hasA;
+public boolean hasA() {
+return hasA;
+}
+public int getA() {
+return A;
+}
+public void setA(int A) {
+this.A = A;
+this.hasA = true;
+}
+}
+public static class OptionalGroupSerializer {
+public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message) {
+try {
+int totalSize = 0;
+if (message.hasA()) {
+totalSize += ProtobufOutputStream.computeInt32Size(17, message.getA());
+}
+final byte[] result = new byte[totalSize];
+int position = 0;
+if (message.hasA()) {
+position = ProtobufOutputStream.writeInt32(17, message.getA(), result, position);
+}
+ProtobufOutputStream.checkNoSpaceLeft(result, position);
+return result;
+} catch (Exception e) {
+throw new RuntimeException(e);
+}
+}
+public static void serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message, java.io.OutputStream os) {
+try {
+if (message.hasA()) {
+ProtobufOutputStream.writeInt32(17, message.getA(), os);
+}
+} catch (IOException e) {
+throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup parseFrom(byte[] data) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 17: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 17: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup parseFrom(java.io.InputStream is) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 17: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 17: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+}
+public static class RepeatedGroup {
+private int A;
+private boolean hasA;
+public boolean hasA() {
+return hasA;
+}
+public int getA() {
+return A;
+}
+public void setA(int A) {
+this.A = A;
+this.hasA = true;
+}
+}
+public static class RepeatedGroupSerializer {
+public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message) {
+try {
+int totalSize = 0;
+if (message.hasA()) {
+totalSize += ProtobufOutputStream.computeInt32Size(47, message.getA());
+}
+final byte[] result = new byte[totalSize];
+int position = 0;
+if (message.hasA()) {
+position = ProtobufOutputStream.writeInt32(47, message.getA(), result, position);
+}
+ProtobufOutputStream.checkNoSpaceLeft(result, position);
+return result;
+} catch (Exception e) {
+throw new RuntimeException(e);
+}
+}
+public static void serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message, java.io.OutputStream os) {
+try {
+if (message.hasA()) {
+ProtobufOutputStream.writeInt32(47, message.getA(), os);
+}
+} catch (IOException e) {
+throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup parseFrom(byte[] data) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 47: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 47: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup parseFrom(java.io.InputStream is) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 47: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 47: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
 break;
 }
 }
@@ -1060,6 +1406,15 @@ if (message.hasOptionalBytes()) {
 totalSize += message.getOptionalBytes().length;
 totalSize += ProtobufOutputStream.computeTagSize(15);
 totalSize += ProtobufOutputStream.computeRawVarint32Size(message.getOptionalBytes().length);
+}
+byte[] optionalgroupBuffer = null;
+if (message.hasOptionalgroup()) {
+java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+ProtobufOutputStream.writeTag(16, ProtobufInputStream.WIRETYPE_GROUP_START, baos);
+baos.write(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.serialize(message.getOptionalgroup()));
+ProtobufOutputStream.writeTag(16, ProtobufInputStream.WIRETYPE_GROUP_END, baos);
+optionalgroupBuffer = baos.toByteArray();
+totalSize += optionalgroupBuffer.length;
 }
 byte[] optional_nested_messageBuffer = null;
 if (message.hasOptionalNestedMessage()) {
@@ -1181,6 +1536,18 @@ totalSize += repeated_stringBuffer.length;
 }
 if (message.hasRepeatedBytes()) {
 totalSize += ProtobufOutputStream.computeBytesSize(45, message.getRepeatedBytes());
+}
+byte[] repeatedgroupBuffer = null;
+if (message.hasRepeatedgroup()) {
+java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+for( int i=0;i<message.getRepeatedgroup().size();i++) {
+byte[] curMessageData = protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.serialize(message.getRepeatedgroup().get(i));
+ProtobufOutputStream.writeTag(46, ProtobufInputStream.WIRETYPE_GROUP_START, baos);
+baos.write(curMessageData);
+ProtobufOutputStream.writeTag(46, ProtobufInputStream.WIRETYPE_GROUP_END, baos);
+}
+repeatedgroupBuffer = baos.toByteArray();
+totalSize += repeatedgroupBuffer.length;
 }
 byte[] repeated_nested_messageBuffer = null;
 if (message.hasRepeatedNestedMessage()) {
@@ -1384,6 +1751,9 @@ position = ProtobufOutputStream.writeString(14,optional_stringBuffer, result, po
 if (message.hasOptionalBytes()) {
 position = ProtobufOutputStream.writeBytes(15, message.getOptionalBytes(), result, position);
 }
+if (message.hasOptionalgroup()) {
+position = ProtobufOutputStream.writeRawBytes(optionalgroupBuffer, result, position);
+}
 if (message.hasOptionalNestedMessage()) {
 position = ProtobufOutputStream.writeBytes(18, optional_nested_messageBuffer, result, position);
 }
@@ -1452,6 +1822,9 @@ position = ProtobufOutputStream.writeRawBytes(repeated_stringBuffer, result, pos
 }
 if (message.hasRepeatedBytes()) {
 position = ProtobufOutputStream.writeRepeatedBytes(45, message.getRepeatedBytes(), result, position);
+}
+if (message.hasRepeatedgroup()) {
+position = ProtobufOutputStream.writeRawBytes(repeatedgroupBuffer, result, position);
 }
 if (message.hasRepeatedNestedMessage()) {
 position = ProtobufOutputStream.writeRawBytes(repeated_nested_messageBuffer, result, position);
@@ -1539,8 +1912,8 @@ position = ProtobufOutputStream.writeString(85,default_cordBuffer, result, posit
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestAllTypes message, java.io.OutputStream os) {
@@ -1589,6 +1962,11 @@ ProtobufOutputStream.writeString(14, message.getOptionalString(), os);
 }
 if (message.hasOptionalBytes()) {
 ProtobufOutputStream.writeBytes(15, message.getOptionalBytes(), os);
+}
+if (message.hasOptionalgroup()) {
+ProtobufOutputStream.writeTag(16, ProtobufInputStream.WIRETYPE_GROUP_START, os);
+os.write(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.serialize(message.getOptionalgroup()));
+ProtobufOutputStream.writeTag(16, ProtobufInputStream.WIRETYPE_GROUP_END, os);
 }
 if (message.hasOptionalNestedMessage()) {
 byte[] curMessageData = protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.serialize(message.getOptionalNestedMessage());
@@ -1695,6 +2073,13 @@ ProtobufOutputStream.writeString(44, message.getRepeatedString().get(i), os);
 }
 if (message.hasRepeatedBytes()) {
 ProtobufOutputStream.writeBytes(45, message.getRepeatedBytes(), os);
+}
+if (message.hasRepeatedgroup()) {
+for( int i=0;i<message.getRepeatedgroup().size();i++) {
+ProtobufOutputStream.writeTag(46, ProtobufInputStream.WIRETYPE_GROUP_START, os);
+os.write(protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.serialize(message.getRepeatedgroup().get(i)));
+ProtobufOutputStream.writeTag(46, ProtobufInputStream.WIRETYPE_GROUP_END, os);
+}
 }
 if (message.hasRepeatedNestedMessage()) {
 for( int i=0;i<message.getRepeatedNestedMessage().size();i++) {
@@ -1813,12 +2198,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllTypes parseFrom(byte
 protobuf_gcless_unittest.UnittestProto.TestAllTypes message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setOptionalInt32(ProtobufInputStream.readInt32(data,cursor));
@@ -1864,6 +2253,12 @@ message.setOptionalString(ProtobufInputStream.readString(data,cursor));
 break;
 case 15: 
 message.setOptionalBytes(ProtobufInputStream.readBytes(data,cursor));
+break;
+case 16: 
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup tempOptionalgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setOptionalgroup(tempOptionalgroup);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.serialize(tempOptionalgroup).length);
+ProtobufInputStream.readTag(data,cursor);
 break;
 case 18: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -1981,6 +2376,15 @@ message.getRepeatedString().add(ProtobufInputStream.readString(data,cursor));
 break;
 case 45: 
 message.setRepeatedBytes(ProtobufInputStream.readBytes(data,cursor));
+break;
+case 46: 
+if( message.getRepeatedgroup() == null || message.getRepeatedgroup().isEmpty()) {
+message.setRepeatedgroup(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup>());
+}
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup tempRepeatedgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.serialize(tempRepeatedgroup).length);
+message.getRepeatedgroup().add(tempRepeatedgroup);
+ProtobufInputStream.readTag(data,cursor);
 break;
 case 48: 
 if( message.getRepeatedNestedMessage() == null || message.getRepeatedNestedMessage().isEmpty()) {
@@ -2105,12 +2509,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setOptionalInt32(ProtobufInputStream.readInt32(data,cursor));
@@ -2156,6 +2564,12 @@ message.setOptionalString(ProtobufInputStream.readString(data,cursor));
 break;
 case 15: 
 message.setOptionalBytes(ProtobufInputStream.readBytes(data,cursor));
+break;
+case 16: 
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup tempOptionalgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setOptionalgroup(tempOptionalgroup);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.serialize(tempOptionalgroup).length);
+ProtobufInputStream.readTag(data,cursor);
 break;
 case 18: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -2273,6 +2687,15 @@ message.getRepeatedString().add(ProtobufInputStream.readString(data,cursor));
 break;
 case 45: 
 message.setRepeatedBytes(ProtobufInputStream.readBytes(data,cursor));
+break;
+case 46: 
+if( message.getRepeatedgroup() == null || message.getRepeatedgroup().isEmpty()) {
+message.setRepeatedgroup(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup>());
+}
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup tempRepeatedgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.serialize(tempRepeatedgroup).length);
+message.getRepeatedgroup().add(tempRepeatedgroup);
+ProtobufInputStream.readTag(data,cursor);
 break;
 case 48: 
 if( message.getRepeatedNestedMessage() == null || message.getRepeatedNestedMessage().isEmpty()) {
@@ -2395,12 +2818,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllTypes parseFrom(java
 protobuf_gcless_unittest.UnittestProto.TestAllTypes message = new protobuf_gcless_unittest.UnittestProto.TestAllTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setOptionalInt32(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -2445,6 +2875,10 @@ message.setOptionalString(ProtobufInputStream.readString(is,cursor));
 break;
 case 15: 
 message.setOptionalBytes(ProtobufInputStream.readBytes(is,cursor));
+break;
+case 16: 
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup tempOptionalgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setOptionalgroup(tempOptionalgroup);
 break;
 case 18: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(is,cursor);
@@ -2559,6 +2993,13 @@ message.getRepeatedString().add(ProtobufInputStream.readString(is,cursor));
 break;
 case 45: 
 message.setRepeatedBytes(ProtobufInputStream.readBytes(is,cursor));
+break;
+case 46: 
+if( message.getRepeatedgroup() == null || message.getRepeatedgroup().isEmpty()) {
+message.setRepeatedgroup(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup>());
+}
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup tempRepeatedgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.getRepeatedgroup().add(tempRepeatedgroup);
 break;
 case 48: 
 if( message.getRepeatedNestedMessage() == null || message.getRepeatedNestedMessage().isEmpty()) {
@@ -2680,12 +3121,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setOptionalInt32(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -2730,6 +3178,10 @@ message.setOptionalString(ProtobufInputStream.readString(is,cursor));
 break;
 case 15: 
 message.setOptionalBytes(ProtobufInputStream.readBytes(is,cursor));
+break;
+case 16: 
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup tempOptionalgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroupSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setOptionalgroup(tempOptionalgroup);
 break;
 case 18: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(is,cursor);
@@ -2844,6 +3296,13 @@ message.getRepeatedString().add(ProtobufInputStream.readString(is,cursor));
 break;
 case 45: 
 message.setRepeatedBytes(ProtobufInputStream.readBytes(is,cursor));
+break;
+case 46: 
+if( message.getRepeatedgroup() == null || message.getRepeatedgroup().isEmpty()) {
+message.setRepeatedgroup(new java.util.ArrayList<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup>());
+}
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup tempRepeatedgroup = protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroupSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.getRepeatedgroup().add(tempRepeatedgroup);
 break;
 case 48: 
 if( message.getRepeatedNestedMessage() == null || message.getRepeatedNestedMessage().isEmpty()) {
@@ -2988,8 +3447,8 @@ position = ProtobufOutputStream.writeInt32(1, message.getDeprecatedInt32(), resu
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message, java.io.OutputStream os) {
@@ -3005,12 +3464,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields parseF
 protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message = new protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setDeprecatedInt32(ProtobufInputStream.readInt32(data,cursor));
@@ -3024,12 +3487,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setDeprecatedInt32(ProtobufInputStream.readInt32(data,cursor));
@@ -3041,12 +3508,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields parseF
 protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message = new protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setDeprecatedInt32(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -3059,12 +3533,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setDeprecatedInt32(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -3100,8 +3581,8 @@ position = ProtobufOutputStream.writeInt32(1, message.getC(), result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.ForeignMessage message, java.io.OutputStream os) {
@@ -3117,12 +3598,16 @@ public static protobuf_gcless_unittest.UnittestProto.ForeignMessage parseFrom(by
 protobuf_gcless_unittest.UnittestProto.ForeignMessage message = new protobuf_gcless_unittest.UnittestProto.ForeignMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setC(ProtobufInputStream.readInt32(data,cursor));
@@ -3136,12 +3621,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setC(ProtobufInputStream.readInt32(data,cursor));
@@ -3153,12 +3642,19 @@ public static protobuf_gcless_unittest.UnittestProto.ForeignMessage parseFrom(ja
 protobuf_gcless_unittest.UnittestProto.ForeignMessage message = new protobuf_gcless_unittest.UnittestProto.ForeignMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setC(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -3171,12 +3667,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setC(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -3197,12 +3700,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllExtensions parseFrom
 protobuf_gcless_unittest.UnittestProto.TestAllExtensions message = new protobuf_gcless_unittest.UnittestProto.TestAllExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -3213,12 +3720,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -3227,12 +3738,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestAllExtensions parseFrom
 protobuf_gcless_unittest.UnittestProto.TestAllExtensions message = new protobuf_gcless_unittest.UnittestProto.TestAllExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -3242,12 +3760,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -3284,8 +3809,8 @@ position = ProtobufOutputStream.writeString(1002,testBuffer, result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestNestedExtension message, java.io.OutputStream os) {
@@ -3301,12 +3826,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedExtension parseFr
 protobuf_gcless_unittest.UnittestProto.TestNestedExtension message = new protobuf_gcless_unittest.UnittestProto.TestNestedExtension();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1002: 
 message.setTest(ProtobufInputStream.readString(data,cursor));
@@ -3320,12 +3849,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1002: 
 message.setTest(ProtobufInputStream.readString(data,cursor));
@@ -3337,12 +3870,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedExtension parseFr
 protobuf_gcless_unittest.UnittestProto.TestNestedExtension message = new protobuf_gcless_unittest.UnittestProto.TestNestedExtension();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1002: 
 message.setTest(ProtobufInputStream.readString(is,cursor));
 break;
@@ -3355,12 +3895,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1002: 
 message.setTest(ProtobufInputStream.readString(is,cursor));
 break;
@@ -4022,8 +4569,8 @@ position = ProtobufOutputStream.writeInt32(33, message.getC(), result, position)
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestRequired message, java.io.OutputStream os) {
@@ -4150,12 +4697,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestRequired parseFrom(byte
 protobuf_gcless_unittest.UnittestProto.TestRequired message = new protobuf_gcless_unittest.UnittestProto.TestRequired();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
@@ -4278,12 +4829,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
@@ -4404,12 +4959,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestRequired parseFrom(java
 protobuf_gcless_unittest.UnittestProto.TestRequired message = new protobuf_gcless_unittest.UnittestProto.TestRequired();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -4529,12 +5091,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -4737,8 +5306,8 @@ position = ProtobufOutputStream.writeInt32(3, message.getDummy(), result, positi
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message, java.io.OutputStream os) {
@@ -4768,12 +5337,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestRequiredForeign parseFr
 protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message = new protobuf_gcless_unittest.UnittestProto.TestRequiredForeign();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthOptionalMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -4800,12 +5373,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthOptionalMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -4830,12 +5407,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestRequiredForeign parseFr
 protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message = new protobuf_gcless_unittest.UnittestProto.TestRequiredForeign();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthOptionalMessage = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setOptionalMessage(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthOptionalMessage));
@@ -4859,12 +5443,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthOptionalMessage = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setOptionalMessage(protobuf_gcless_unittest.UnittestProto.TestRequiredSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthOptionalMessage));
@@ -4915,8 +5506,8 @@ position = ProtobufOutputStream.writeBytes(1, foreign_nestedBuffer, result, posi
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestForeignNested message, java.io.OutputStream os) {
@@ -4935,12 +5526,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestForeignNested parseFrom
 protobuf_gcless_unittest.UnittestProto.TestForeignNested message = new protobuf_gcless_unittest.UnittestProto.TestForeignNested();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthForeignNested = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -4956,12 +5551,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthForeignNested = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -4975,12 +5574,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestForeignNested parseFrom
 protobuf_gcless_unittest.UnittestProto.TestForeignNested message = new protobuf_gcless_unittest.UnittestProto.TestForeignNested();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthForeignNested = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setForeignNested(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthForeignNested));
@@ -4994,12 +5600,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthForeignNested = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setForeignNested(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthForeignNested));
@@ -5021,12 +5634,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessage parseFrom(
 protobuf_gcless_unittest.UnittestProto.TestEmptyMessage message = new protobuf_gcless_unittest.UnittestProto.TestEmptyMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5037,12 +5654,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5051,12 +5672,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessage parseFrom(
 protobuf_gcless_unittest.UnittestProto.TestEmptyMessage message = new protobuf_gcless_unittest.UnittestProto.TestEmptyMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5066,12 +5694,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5089,12 +5724,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensi
 protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions message = new protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5105,12 +5744,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5119,12 +5762,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensi
 protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions message = new protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5134,12 +5784,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5157,12 +5814,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges
 protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges message = new protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5173,12 +5834,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -5187,12 +5852,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges
 protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges message = new protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5202,12 +5874,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -5258,8 +5937,8 @@ position = ProtobufOutputStream.writeInt32(268435455, message.getBb(), result, p
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber message, java.io.OutputStream os) {
@@ -5278,12 +5957,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber pa
 protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber message = new protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
@@ -5300,12 +5983,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
@@ -5320,12 +6007,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber pa
 protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber message = new protobuf_gcless_unittest.UnittestProto.TestReallyLargeTagNumber();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -5341,12 +6035,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -5407,8 +6108,8 @@ position = ProtobufOutputStream.writeInt32(2, message.getI(), result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message, java.io.OutputStream os) {
@@ -5430,12 +6131,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage parseF
 protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message = new protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5454,12 +6159,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5476,12 +6185,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage parseF
 protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message = new protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setA(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthA));
@@ -5498,12 +6214,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setA(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthA));
@@ -5547,8 +6270,8 @@ position = ProtobufOutputStream.writeBytes(1, bbBuffer, result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message, java.io.OutputStream os) {
@@ -5567,12 +6290,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA parseF
 protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message = new protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthBb = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5588,12 +6315,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthBb = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5607,12 +6338,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA parseF
 protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message = new protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthBb = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionBSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthBb));
@@ -5626,12 +6364,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthBb = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionBSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthBb));
@@ -5690,8 +6435,8 @@ position = ProtobufOutputStream.writeInt32(2, message.getOptionalInt32(), result
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB message, java.io.OutputStream os) {
@@ -5713,12 +6458,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB parseF
 protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB message = new protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5737,12 +6486,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -5759,12 +6512,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB parseF
 protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB message = new protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setA(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionASerializer.parseFrom(is, cursor.getCurrentPosition(), lengthA));
@@ -5781,12 +6541,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthA = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setA(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionASerializer.parseFrom(is, cursor.getCurrentPosition(), lengthA));
@@ -5811,9 +6578,46 @@ public void setA(int A) {
 this.A = A;
 this.hasA = true;
 }
+private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo Foo;
+private boolean hasFoo;
+public boolean hasFoo() {
+return hasFoo;
 }
-public static class TestDupFieldNumberSerializer {
-public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message) {
+public protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo getFoo() {
+return Foo;
+}
+public void setFoo(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo Foo) {
+this.Foo = Foo;
+this.hasFoo = true;
+}
+private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar Bar;
+private boolean hasBar;
+public boolean hasBar() {
+return hasBar;
+}
+public protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar getBar() {
+return Bar;
+}
+public void setBar(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar Bar) {
+this.Bar = Bar;
+this.hasBar = true;
+}
+public static class Foo {
+private int A;
+private boolean hasA;
+public boolean hasA() {
+return hasA;
+}
+public int getA() {
+return A;
+}
+public void setA(int A) {
+this.A = A;
+this.hasA = true;
+}
+}
+public static class FooSerializer {
+public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message) {
 try {
 int totalSize = 0;
 if (message.hasA()) {
@@ -5826,14 +6630,335 @@ position = ProtobufOutputStream.writeInt32(1, message.getA(), result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
+} catch (Exception e) {
+throw new RuntimeException(e);
+}
+}
+public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message, java.io.OutputStream os) {
+try {
+if (message.hasA()) {
+ProtobufOutputStream.writeInt32(1, message.getA(), os);
+}
 } catch (IOException e) {
 throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo parseFrom(byte[] data) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 1: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 1: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo parseFrom(java.io.InputStream is) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 1: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 1: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+}
+public static class Bar {
+private int A;
+private boolean hasA;
+public boolean hasA() {
+return hasA;
+}
+public int getA() {
+return A;
+}
+public void setA(int A) {
+this.A = A;
+this.hasA = true;
+}
+}
+public static class BarSerializer {
+public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message) {
+try {
+int totalSize = 0;
+if (message.hasA()) {
+totalSize += ProtobufOutputStream.computeInt32Size(1, message.getA());
+}
+final byte[] result = new byte[totalSize];
+int position = 0;
+if (message.hasA()) {
+position = ProtobufOutputStream.writeInt32(1, message.getA(), result, position);
+}
+ProtobufOutputStream.checkNoSpaceLeft(result, position);
+return result;
+} catch (Exception e) {
+throw new RuntimeException(e);
+}
+}
+public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message, java.io.OutputStream os) {
+try {
+if (message.hasA()) {
+ProtobufOutputStream.writeInt32(1, message.getA(), os);
+}
+} catch (IOException e) {
+throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar parseFrom(byte[] data) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 1: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
+ break;
+case 1: 
+message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar parseFrom(java.io.InputStream is) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar();
+CurrentCursor cursor = new CurrentCursor();
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 1: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar();
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
+int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
+if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
+return message;
+}
+switch(tag) {
+case 0: 
+return message;
+ default: 
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
+ break;case 1: 
+message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+}
+}
+}
+}
+}
+public static class TestDupFieldNumberSerializer {
+public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message) {
+try {
+int totalSize = 0;
+if (message.hasA()) {
+totalSize += ProtobufOutputStream.computeInt32Size(1, message.getA());
+}
+byte[] fooBuffer = null;
+if (message.hasFoo()) {
+java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+ProtobufOutputStream.writeTag(2, ProtobufInputStream.WIRETYPE_GROUP_START, baos);
+baos.write(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.serialize(message.getFoo()));
+ProtobufOutputStream.writeTag(2, ProtobufInputStream.WIRETYPE_GROUP_END, baos);
+fooBuffer = baos.toByteArray();
+totalSize += fooBuffer.length;
+}
+byte[] barBuffer = null;
+if (message.hasBar()) {
+java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+ProtobufOutputStream.writeTag(3, ProtobufInputStream.WIRETYPE_GROUP_START, baos);
+baos.write(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.serialize(message.getBar()));
+ProtobufOutputStream.writeTag(3, ProtobufInputStream.WIRETYPE_GROUP_END, baos);
+barBuffer = baos.toByteArray();
+totalSize += barBuffer.length;
+}
+final byte[] result = new byte[totalSize];
+int position = 0;
+if (message.hasA()) {
+position = ProtobufOutputStream.writeInt32(1, message.getA(), result, position);
+}
+if (message.hasFoo()) {
+position = ProtobufOutputStream.writeRawBytes(fooBuffer, result, position);
+}
+if (message.hasBar()) {
+position = ProtobufOutputStream.writeRawBytes(barBuffer, result, position);
+}
+ProtobufOutputStream.checkNoSpaceLeft(result, position);
+return result;
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message, java.io.OutputStream os) {
 try {
 if (message.hasA()) {
 ProtobufOutputStream.writeInt32(1, message.getA(), os);
+}
+if (message.hasFoo()) {
+ProtobufOutputStream.writeTag(2, ProtobufInputStream.WIRETYPE_GROUP_START, os);
+os.write(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.serialize(message.getFoo()));
+ProtobufOutputStream.writeTag(2, ProtobufInputStream.WIRETYPE_GROUP_END, os);
+}
+if (message.hasBar()) {
+ProtobufOutputStream.writeTag(3, ProtobufInputStream.WIRETYPE_GROUP_START, os);
+os.write(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.serialize(message.getBar()));
+ProtobufOutputStream.writeTag(3, ProtobufInputStream.WIRETYPE_GROUP_END, os);
 }
 } catch (IOException e) {
 throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
@@ -5843,15 +6968,31 @@ public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber parseFro
 protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+case 2: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo tempFoo = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setFoo(tempFoo);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.serialize(tempFoo).length);
+ProtobufInputStream.readTag(data,cursor);
+break;
+case 3: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar tempBar = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setBar(tempBar);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.serialize(tempBar).length);
+ProtobufInputStream.readTag(data,cursor);
 break;
 }
 }
@@ -5862,15 +7003,31 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setA(ProtobufInputStream.readInt32(data,cursor));
+break;
+case 2: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo tempFoo = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setFoo(tempFoo);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.serialize(tempFoo).length);
+ProtobufInputStream.readTag(data,cursor);
+break;
+case 3: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar tempBar = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setBar(tempBar);
+cursor.addToPosition(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.serialize(tempBar).length);
+ProtobufInputStream.readTag(data,cursor);
 break;
 }
 }
@@ -5879,14 +7036,29 @@ public static protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber parseFro
 protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber message = new protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+case 2: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo tempFoo = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setFoo(tempFoo);
+break;
+case 3: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar tempBar = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setBar(tempBar);
 break;
 }
 }
@@ -5897,14 +7069,29 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setA(ProtobufInputStream.readInt32(is,cursor));
+break;
+case 2: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo tempFoo = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.FooSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setFoo(tempFoo);
+break;
+case 3: 
+protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar tempBar = protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.BarSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+message.setBar(tempBar);
 break;
 }
 }
@@ -5980,8 +7167,8 @@ position = ProtobufOutputStream.writeRawBytes(nestedmessage_repeated_foreignmess
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message, java.io.OutputStream os) {
@@ -6007,12 +7194,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.Ne
 protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message = new protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 if( message.getNestedmessageRepeatedInt32() == null || message.getNestedmessageRepeatedInt32().isEmpty()) {
@@ -6037,12 +7228,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 if( message.getNestedmessageRepeatedInt32() == null || message.getNestedmessageRepeatedInt32().isEmpty()) {
@@ -6065,12 +7260,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.Ne
 protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage message = new protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits.NestedMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 if( message.getNestedmessageRepeatedInt32() == null || message.getNestedmessageRepeatedInt32().isEmpty()) {
 message.setNestedmessageRepeatedInt32(new java.util.ArrayList<Integer>());
@@ -6093,12 +7295,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 if( message.getNestedmessageRepeatedInt32() == null || message.getNestedmessageRepeatedInt32().isEmpty()) {
 message.setNestedmessageRepeatedInt32(new java.util.ArrayList<Integer>());
@@ -6135,8 +7344,8 @@ position = ProtobufOutputStream.writeBytes(1, optional_nested_messageBuffer, res
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits message, java.io.OutputStream os) {
@@ -6155,12 +7364,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits pa
 protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits message = new protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -6176,12 +7389,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(data,cursor);
@@ -6195,12 +7412,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits pa
 protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits message = new protobuf_gcless_unittest.UnittestProto.TestNestedMessageHasBits();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setOptionalNestedMessage(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthOptionalNestedMessage));
@@ -6214,12 +7438,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 int lengthOptionalNestedMessage = ProtobufInputStream.readRawVarint32(is,cursor);
 message.setOptionalNestedMessage(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessageSerializer.parseFrom(is, cursor.getCurrentPosition(), lengthOptionalNestedMessage));
@@ -6505,8 +7736,8 @@ position = ProtobufOutputStream.writeRawBytes(RepeatedCordFieldBuffer, result, p
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames message, java.io.OutputStream os) {
@@ -6573,12 +7804,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames par
 protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames message = new protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setPrimitiveField(ProtobufInputStream.readInt32(data,cursor));
@@ -6647,12 +7882,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setPrimitiveField(ProtobufInputStream.readInt32(data,cursor));
@@ -6719,12 +7958,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames par
 protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames message = new protobuf_gcless_unittest.UnittestProto.TestCamelCaseFieldNames();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setPrimitiveField(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -6790,12 +8036,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setPrimitiveField(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -6924,8 +8177,8 @@ position = ProtobufOutputStream.writeFloat(101, message.getMyFloat(), result, po
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message, java.io.OutputStream os) {
@@ -6947,12 +8200,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestFieldOrderings parseFro
 protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message = new protobuf_gcless_unittest.UnittestProto.TestFieldOrderings();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 11: 
 message.setMyString(ProtobufInputStream.readString(data,cursor));
@@ -6972,12 +8229,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 11: 
 message.setMyString(ProtobufInputStream.readString(data,cursor));
@@ -6995,12 +8256,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestFieldOrderings parseFro
 protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message = new protobuf_gcless_unittest.UnittestProto.TestFieldOrderings();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 11: 
 message.setMyString(ProtobufInputStream.readString(is,cursor));
 break;
@@ -7019,12 +8287,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 11: 
 message.setMyString(ProtobufInputStream.readString(is,cursor));
 break;
@@ -7396,8 +8671,8 @@ position = ProtobufOutputStream.writeFloat(19, message.getNanFloat(), result, po
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues message, java.io.OutputStream os) {
@@ -7467,12 +8742,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues pa
 protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues message = new protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setEscapedBytes(ProtobufInputStream.readBytes(data,cursor));
@@ -7540,12 +8819,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setEscapedBytes(ProtobufInputStream.readBytes(data,cursor));
@@ -7611,12 +8894,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues pa
 protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues message = new protobuf_gcless_unittest.UnittestProto.TestExtremeDefaultValues();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setEscapedBytes(ProtobufInputStream.readBytes(is,cursor));
 break;
@@ -7683,12 +8973,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setEscapedBytes(ProtobufInputStream.readBytes(is,cursor));
 break;
@@ -7782,8 +9079,8 @@ position = ProtobufOutputStream.writeString(1,dataBuffer, result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.OneString message, java.io.OutputStream os) {
@@ -7799,12 +9096,16 @@ public static protobuf_gcless_unittest.UnittestProto.OneString parseFrom(byte[] 
 protobuf_gcless_unittest.UnittestProto.OneString message = new protobuf_gcless_unittest.UnittestProto.OneString();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setData(ProtobufInputStream.readString(data,cursor));
@@ -7818,12 +9119,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setData(ProtobufInputStream.readString(data,cursor));
@@ -7835,12 +9140,19 @@ public static protobuf_gcless_unittest.UnittestProto.OneString parseFrom(java.io
 protobuf_gcless_unittest.UnittestProto.OneString message = new protobuf_gcless_unittest.UnittestProto.OneString();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setData(ProtobufInputStream.readString(is,cursor));
 break;
@@ -7853,12 +9165,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setData(ProtobufInputStream.readString(is,cursor));
 break;
@@ -7896,8 +9215,8 @@ position = ProtobufOutputStream.writeBytes(1, message.getData(), result, positio
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.OneBytes message, java.io.OutputStream os) {
@@ -7913,12 +9232,16 @@ public static protobuf_gcless_unittest.UnittestProto.OneBytes parseFrom(byte[] d
 protobuf_gcless_unittest.UnittestProto.OneBytes message = new protobuf_gcless_unittest.UnittestProto.OneBytes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setData(ProtobufInputStream.readBytes(data,cursor));
@@ -7932,12 +9255,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setData(ProtobufInputStream.readBytes(data,cursor));
@@ -7949,12 +9276,19 @@ public static protobuf_gcless_unittest.UnittestProto.OneBytes parseFrom(java.io.
 protobuf_gcless_unittest.UnittestProto.OneBytes message = new protobuf_gcless_unittest.UnittestProto.OneBytes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setData(ProtobufInputStream.readBytes(is,cursor));
 break;
@@ -7967,12 +9301,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setData(ProtobufInputStream.readBytes(is,cursor));
 break;
@@ -8274,8 +9615,8 @@ position = ProtobufOutputStream.writeRawBytes(packed_enumBuffer, result, positio
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestPackedTypes message, java.io.OutputStream os) {
@@ -8358,12 +9699,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestPackedTypes parseFrom(b
 protobuf_gcless_unittest.UnittestProto.TestPackedTypes message = new protobuf_gcless_unittest.UnittestProto.TestPackedTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 90: 
 if( message.getPackedInt32() == null || message.getPackedInt32().isEmpty()) {
@@ -8458,12 +9803,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 90: 
 if( message.getPackedInt32() == null || message.getPackedInt32().isEmpty()) {
@@ -8556,12 +9905,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestPackedTypes parseFrom(j
 protobuf_gcless_unittest.UnittestProto.TestPackedTypes message = new protobuf_gcless_unittest.UnittestProto.TestPackedTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 90: 
 if( message.getPackedInt32() == null || message.getPackedInt32().isEmpty()) {
 message.setPackedInt32(new java.util.ArrayList<Integer>());
@@ -8655,12 +10011,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 90: 
 if( message.getPackedInt32() == null || message.getPackedInt32().isEmpty()) {
 message.setPackedInt32(new java.util.ArrayList<Integer>());
@@ -9043,8 +10406,8 @@ position = ProtobufOutputStream.writeRawBytes(unpacked_enumBuffer, result, posit
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message, java.io.OutputStream os) {
@@ -9127,12 +10490,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes parseFrom
 protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message = new protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 90: 
 if( message.getUnpackedInt32() == null || message.getUnpackedInt32().isEmpty()) {
@@ -9227,12 +10594,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 90: 
 if( message.getUnpackedInt32() == null || message.getUnpackedInt32().isEmpty()) {
@@ -9325,12 +10696,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes parseFrom
 protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message = new protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 90: 
 if( message.getUnpackedInt32() == null || message.getUnpackedInt32().isEmpty()) {
 message.setUnpackedInt32(new java.util.ArrayList<Integer>());
@@ -9424,12 +10802,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 90: 
 if( message.getUnpackedInt32() == null || message.getUnpackedInt32().isEmpty()) {
 message.setUnpackedInt32(new java.util.ArrayList<Integer>());
@@ -9531,12 +10916,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestPackedExtensions parseF
 protobuf_gcless_unittest.UnittestProto.TestPackedExtensions message = new protobuf_gcless_unittest.UnittestProto.TestPackedExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -9547,12 +10936,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -9561,12 +10954,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestPackedExtensions parseF
 protobuf_gcless_unittest.UnittestProto.TestPackedExtensions message = new protobuf_gcless_unittest.UnittestProto.TestPackedExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -9576,12 +10976,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -9699,8 +11106,8 @@ position = ProtobufOutputStream.writeInt32(2100, message.getDynamicField(), resu
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message, java.io.OutputStream os) {
@@ -9716,12 +11123,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.Dynam
 protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message = new protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 2100: 
 message.setDynamicField(ProtobufInputStream.readInt32(data,cursor));
@@ -9735,12 +11146,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 2100: 
 message.setDynamicField(ProtobufInputStream.readInt32(data,cursor));
@@ -9752,12 +11167,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.Dynam
 protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType message = new protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 2100: 
 message.setDynamicField(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -9770,12 +11192,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 2100: 
 message.setDynamicField(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -9872,8 +11301,8 @@ position = ProtobufOutputStream.writeRepeatedSint32(2006, message.getPackedExten
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions message, java.io.OutputStream os) {
@@ -9917,12 +11346,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions parse
 protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions message = new protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 2000: 
 message.setScalarExtension(ProtobufInputStream.readFixed32(data,cursor));
@@ -9964,12 +11397,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 2000: 
 message.setScalarExtension(ProtobufInputStream.readFixed32(data,cursor));
@@ -10009,12 +11446,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions parse
 protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions message = new protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 2000: 
 message.setScalarExtension(ProtobufInputStream.readFixed32(is,cursor));
 break;
@@ -10053,12 +11497,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 2000: 
 message.setScalarExtension(ProtobufInputStream.readFixed32(is,cursor));
 break;
@@ -10222,8 +11673,8 @@ position = ProtobufOutputStream.writeRepeatedUint64(262143, message.getRepeatedU
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message, java.io.OutputStream os) {
@@ -10266,12 +11717,16 @@ public static protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferent
 protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message = new protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 12: 
 if( message.getRepeatedFixed32() == null || message.getRepeatedFixed32().isEmpty()) {
@@ -10318,12 +11773,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 12: 
 if( message.getRepeatedFixed32() == null || message.getRepeatedFixed32().isEmpty()) {
@@ -10368,12 +11827,19 @@ public static protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferent
 protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message = new protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 12: 
 if( message.getRepeatedFixed32() == null || message.getRepeatedFixed32().isEmpty()) {
 message.setRepeatedFixed32(new java.util.ArrayList<Integer>());
@@ -10419,12 +11885,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 12: 
 if( message.getRepeatedFixed32() == null || message.getRepeatedFixed32().isEmpty()) {
 message.setRepeatedFixed32(new java.util.ArrayList<Integer>());
@@ -10478,12 +11951,16 @@ public static protobuf_gcless_unittest.UnittestProto.FooRequest parseFrom(byte[]
 protobuf_gcless_unittest.UnittestProto.FooRequest message = new protobuf_gcless_unittest.UnittestProto.FooRequest();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10494,12 +11971,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10508,12 +11989,19 @@ public static protobuf_gcless_unittest.UnittestProto.FooRequest parseFrom(java.i
 protobuf_gcless_unittest.UnittestProto.FooRequest message = new protobuf_gcless_unittest.UnittestProto.FooRequest();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10523,12 +12011,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10546,12 +12041,16 @@ public static protobuf_gcless_unittest.UnittestProto.FooResponse parseFrom(byte[
 protobuf_gcless_unittest.UnittestProto.FooResponse message = new protobuf_gcless_unittest.UnittestProto.FooResponse();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10562,12 +12061,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10576,12 +12079,19 @@ public static protobuf_gcless_unittest.UnittestProto.FooResponse parseFrom(java.
 protobuf_gcless_unittest.UnittestProto.FooResponse message = new protobuf_gcless_unittest.UnittestProto.FooResponse();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10591,12 +12101,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10614,12 +12131,16 @@ public static protobuf_gcless_unittest.UnittestProto.BarRequest parseFrom(byte[]
 protobuf_gcless_unittest.UnittestProto.BarRequest message = new protobuf_gcless_unittest.UnittestProto.BarRequest();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10630,12 +12151,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10644,12 +12169,19 @@ public static protobuf_gcless_unittest.UnittestProto.BarRequest parseFrom(java.i
 protobuf_gcless_unittest.UnittestProto.BarRequest message = new protobuf_gcless_unittest.UnittestProto.BarRequest();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10659,12 +12191,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10682,12 +12221,16 @@ public static protobuf_gcless_unittest.UnittestProto.BarResponse parseFrom(byte[
 protobuf_gcless_unittest.UnittestProto.BarResponse message = new protobuf_gcless_unittest.UnittestProto.BarResponse();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10698,12 +12241,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -10712,12 +12259,19 @@ public static protobuf_gcless_unittest.UnittestProto.BarResponse parseFrom(java.
 protobuf_gcless_unittest.UnittestProto.BarResponse message = new protobuf_gcless_unittest.UnittestProto.BarResponse();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -10727,12 +12281,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }

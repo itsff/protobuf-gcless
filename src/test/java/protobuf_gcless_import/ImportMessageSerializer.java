@@ -15,8 +15,8 @@ position = ProtobufOutputStream.writeInt32(1, message.getD(), result, position);
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(protobuf_gcless_import.ImportMessage message, java.io.OutputStream os) {
@@ -32,12 +32,16 @@ public static protobuf_gcless_import.ImportMessage parseFrom(byte[] data) throws
 protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setD(ProtobufInputStream.readInt32(data,cursor));
@@ -51,12 +55,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 1: 
 message.setD(ProtobufInputStream.readInt32(data,cursor));
@@ -68,12 +76,19 @@ public static protobuf_gcless_import.ImportMessage parseFrom(java.io.InputStream
 protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setD(ProtobufInputStream.readInt32(is,cursor));
 break;
@@ -86,12 +101,19 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 1: 
 message.setD(ProtobufInputStream.readInt32(is,cursor));
 break;

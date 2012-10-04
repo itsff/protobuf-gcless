@@ -37,12 +37,16 @@ public static com.x.protobuf.SyncEnumsPB.SyncEnums parseFrom(byte[] data) throws
 com.x.protobuf.SyncEnumsPB.SyncEnums message = new com.x.protobuf.SyncEnumsPB.SyncEnums();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -53,12 +57,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 }
 }
@@ -67,12 +75,16 @@ public static com.x.protobuf.SyncEnumsPB.SyncEnums parseFrom(java.io.InputStream
 com.x.protobuf.SyncEnumsPB.SyncEnums message = new com.x.protobuf.SyncEnumsPB.SyncEnums();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }
@@ -82,12 +94,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;}
 }
 }

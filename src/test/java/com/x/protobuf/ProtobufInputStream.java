@@ -65,10 +65,10 @@ final public class ProtobufInputStream {
 	
 	private static void skipBytes(byte[] data, CurrentCursor cursor) throws IOException {
 		final int size = readRawVarint32(data, cursor);
-		skipRawBytes(size, data, cursor);
+		skipRawBytes(size, cursor);
 	}
 	
-	private static void skipRawBytes(final int size, byte[] data, CurrentCursor cursor) throws IOException {
+	private static void skipRawBytes(final int size, CurrentCursor cursor) throws IOException {
 		if (size < 0) {
 			throw new IOException("Invalid buffer size");
 		}
@@ -241,7 +241,7 @@ final public class ProtobufInputStream {
 		return result;
 	}
 
-	public static byte readRawByte(byte[] data, CurrentCursor currentPosition) throws IOException {
+	public static byte readRawByte(byte[] data, CurrentCursor currentPosition) {
 		byte result = data[currentPosition.getCurrentPosition()];
 		currentPosition.addToPosition(1);
 		return result;
@@ -261,8 +261,12 @@ final public class ProtobufInputStream {
 		return (byte)is.read();
 	}
 
-	public static boolean isAtEnd(byte[] data, CurrentCursor cursor) throws IOException {
+	public static boolean isAtEnd(byte[] data, CurrentCursor cursor) {
 		return cursor.getCurrentPosition() == data.length || cursor.getCurrentPosition() == cursor.getProcessUpToPosition();
+	}
+
+	public static boolean isAtEnd(CurrentCursor cursor) {
+		return cursor.isEndOfStreamReached();
 	}
 
 	public static int getTagFieldNumber(final int varint) {
@@ -293,11 +297,11 @@ final public class ProtobufInputStream {
 		return decodeZigZag64(readRawVarint64(data, cursor));
 	}
 
-	public static int readFixed32(byte[] data, CurrentCursor cursor) throws IOException {
+	public static int readFixed32(byte[] data, CurrentCursor cursor) {
 		return readRawLittleEndian32(data, cursor);
 	}
 
-	public static int readRawLittleEndian32(byte[] data, CurrentCursor cursor) throws IOException {
+	public static int readRawLittleEndian32(byte[] data, CurrentCursor cursor) {
 		final byte b1 = readRawByte(data, cursor);
 		final byte b2 = readRawByte(data, cursor);
 		final byte b3 = readRawByte(data, cursor);
@@ -305,11 +309,11 @@ final public class ProtobufInputStream {
 		return (((int) b1 & 0xff)) | (((int) b2 & 0xff) << 8) | (((int) b3 & 0xff) << 16) | (((int) b4 & 0xff) << 24);
 	}
 
-	public static long readFixed64(byte[] data, CurrentCursor cursor) throws IOException {
+	public static long readFixed64(byte[] data, CurrentCursor cursor) {
 		return readRawLittleEndian64(data, cursor);
 	}
 
-	public static long readRawLittleEndian64(byte[] data, CurrentCursor cursor) throws IOException {
+	public static long readRawLittleEndian64(byte[] data, CurrentCursor cursor) {
 		final byte b1 = readRawByte(data, cursor);
 		final byte b2 = readRawByte(data, cursor);
 		final byte b3 = readRawByte(data, cursor);
@@ -321,19 +325,19 @@ final public class ProtobufInputStream {
 		return (((long) b1 & 0xff)) | (((long) b2 & 0xff) << 8) | (((long) b3 & 0xff) << 16) | (((long) b4 & 0xff) << 24) | (((long) b5 & 0xff) << 32) | (((long) b6 & 0xff) << 40) | (((long) b7 & 0xff) << 48) | (((long) b8 & 0xff) << 56);
 	}
 
-	public static int readSfixed32(byte[] data, CurrentCursor cursor) throws IOException {
+	public static int readSfixed32(byte[] data, CurrentCursor cursor) {
 		return readRawLittleEndian32(data, cursor);
 	}
 
-	public static long readSfixed64(byte[] data, CurrentCursor cursor) throws IOException {
+	public static long readSfixed64(byte[] data, CurrentCursor cursor) {
 		return readRawLittleEndian64(data, cursor);
 	}
 
-	public static float readFloat(byte[] data, CurrentCursor cursor) throws IOException {
+	public static float readFloat(byte[] data, CurrentCursor cursor) {
 		return Float.intBitsToFloat(readRawLittleEndian32(data, cursor));
 	}
 
-	public static double readDouble(byte[] data, CurrentCursor cursor) throws IOException {
+	public static double readDouble(byte[] data, CurrentCursor cursor) {
 		return Double.longBitsToDouble(readRawLittleEndian64(data, cursor));
 	}
 
@@ -609,6 +613,7 @@ final public class ProtobufInputStream {
 		if( bytesRead != size ) {
 			throw new IOException("invalid amount of bytes read. Expected: " + size + " read: " + bytesRead);
 		}
+		cursor.addToPosition(size);
 		return bytes;
 	}
 

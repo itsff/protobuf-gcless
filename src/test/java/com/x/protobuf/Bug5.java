@@ -126,8 +126,8 @@ position = ProtobufOutputStream.writeRepeatedInt32(32902, message.getEntry2(), r
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(com.x.protobuf.Bug5.A message, java.io.OutputStream os) {
@@ -150,12 +150,16 @@ public static com.x.protobuf.Bug5.A parseFrom(byte[] data) throws java.io.IOExce
 com.x.protobuf.Bug5.A message = new com.x.protobuf.Bug5.A();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 32904: 
 if( message.getEntry() == null || message.getEntry().isEmpty()) {
@@ -178,12 +182,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 32904: 
 if( message.getEntry() == null || message.getEntry().isEmpty()) {
@@ -204,12 +212,16 @@ public static com.x.protobuf.Bug5.A parseFrom(java.io.InputStream is) throws jav
 com.x.protobuf.Bug5.A message = new com.x.protobuf.Bug5.A();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 32904: 
 if( message.getEntry() == null || message.getEntry().isEmpty()) {
 message.setEntry(new java.util.ArrayList<String>());
@@ -231,12 +243,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 32904: 
 if( message.getEntry() == null || message.getEntry().isEmpty()) {
 message.setEntry(new java.util.ArrayList<String>());

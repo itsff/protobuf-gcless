@@ -26,6 +26,10 @@ public class Issue7SerializationTest {
 		Bug7.SearchResponseSerializer.serialize(message, baos);
 		result = Bug7.SearchResponseSerializer.parseFrom(new ByteArrayInputStream(baos.toByteArray()));
 		assertNotNull(result);
+		
+		//compatibility between byte[] and InputStream
+		result = Bug7.SearchResponseSerializer.parseFrom(new ByteArrayInputStream(data));
+		assertNotNull(result);
 	}
 	
 	@Test
@@ -50,7 +54,7 @@ public class Issue7SerializationTest {
 		assertMessagesEqual(message, response);
 	}
 
-	private Bug7.SearchResponse getMessage() {
+	private static Bug7.SearchResponse getMessage() {
 		Bug7.SearchResponse.Result r1 = new Bug7.SearchResponse.Result();
 		r1.setTitle("title");
 		r1.setUrl("url");

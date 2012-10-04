@@ -54,8 +54,8 @@ position = ProtobufOutputStream.writeEnum(6, message.getPageTransition().getValu
 }
 ProtobufOutputStream.checkNoSpaceLeft(result, position);
 return result;
-} catch (IOException e) {
-throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+} catch (Exception e) {
+throw new RuntimeException(e);
 }
 }
 public static void serialize(com.x.protobuf.TabNavigationPB.TabNavigation message, java.io.OutputStream os) {
@@ -74,12 +74,16 @@ public static com.x.protobuf.TabNavigationPB.TabNavigation parseFrom(byte[] data
 com.x.protobuf.TabNavigationPB.TabNavigation message = new com.x.protobuf.TabNavigationPB.TabNavigation();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 5: 
 message.setState(ProtobufInputStream.readString(data,cursor));
@@ -96,12 +100,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(data,cursor);
+if (ProtobufInputStream.isAtEnd(data, cursor)) {
+return message;
+}
+int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, data, cursor);
+ ProtobufInputStream.skipUnknown(varint, data, cursor);
  break;
 case 5: 
 message.setState(ProtobufInputStream.readString(data,cursor));
@@ -116,12 +124,16 @@ public static com.x.protobuf.TabNavigationPB.TabNavigation parseFrom(java.io.Inp
 com.x.protobuf.TabNavigationPB.TabNavigation message = new com.x.protobuf.TabNavigationPB.TabNavigation();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 5: 
 message.setState(ProtobufInputStream.readString(is,cursor));
 break;
@@ -137,12 +149,16 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
-int tag = ProtobufInputStream.readTag(is,cursor);
+int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+int tag = ProtobufInputStream.getTagFieldNumber(varint);
+if (ProtobufInputStream.isAtEnd(cursor)) {
+return message;
+}
 switch(tag) {
 case 0: 
 return message;
  default: 
- ProtobufInputStream.skipUnknown(tag, is, cursor);
+ ProtobufInputStream.skipUnknown(varint, is, cursor);
  break;case 5: 
 message.setState(ProtobufInputStream.readString(is,cursor));
 break;

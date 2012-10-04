@@ -199,8 +199,8 @@ public class SerializationTest {
 		assertEquals(defaultImpl.getOptionalFixed64(), optimized.getOptionalFixed64());
 		assertEquals(defaultImpl.getOptionalSfixed32(), optimized.getOptionalSfixed32());
 		assertEquals(defaultImpl.getOptionalSfixed64(), optimized.getOptionalSfixed64());
-		assertEquals(defaultImpl.getOptionalFloat(), optimized.getOptionalFloat());
-		assertEquals(defaultImpl.getOptionalDouble(), optimized.getOptionalDouble());
+		assertEquals(defaultImpl.getOptionalFloat(), optimized.getOptionalFloat(), 0.0);
+		assertEquals(defaultImpl.getOptionalDouble(), optimized.getOptionalDouble(), 0.0);
 		assertEquals(defaultImpl.getOptionalBool(), optimized.getOptionalBool());
 		assertEquals(defaultImpl.getOptionalString(), optimized.getOptionalString());
 		assertTrue(Arrays.equals(defaultImpl.getOptionalBytes().toByteArray(), optimized.getOptionalBytes()));
@@ -236,8 +236,8 @@ public class SerializationTest {
 		assertEquals(original.getOptionalFixed64(), result.getOptionalFixed64());
 		assertEquals(original.getOptionalSfixed32(), result.getOptionalSfixed32());
 		assertEquals(original.getOptionalSfixed64(), result.getOptionalSfixed64());
-		assertEquals(original.getOptionalFloat(), result.getOptionalFloat());
-		assertEquals(original.getOptionalDouble(), result.getOptionalDouble());
+		assertEquals(original.getOptionalFloat(), result.getOptionalFloat(), 0.0);
+		assertEquals(original.getOptionalDouble(), result.getOptionalDouble(), 0.0);
 		assertEquals(original.getOptionalBool(), result.getOptionalBool());
 		assertEquals(original.getOptionalString(), result.getOptionalString());
 		assertTrue(Arrays.equals(original.getOptionalBytes(), result.getOptionalBytes()));
