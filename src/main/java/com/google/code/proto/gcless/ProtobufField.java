@@ -120,6 +120,12 @@ class ProtobufField {
 		this.defaults = defaults;
 	}
 	
+	@Override
+	public String toString() {
+		return "ProtobufField [name=" + name + ", beanName=" + beanName + ", type=" + type + ", streamBeanType=" + streamBeanType + ", fullyClarifiedJavaType=" + fullyClarifiedJavaType + ", complexType=" + complexType + ", nature=" + nature
+				+ ", tag=" + tag + ", defaults=" + defaults + ", isDeprecated=" + isDeprecated + ", isPacked=" + isPacked + ", isEnumType=" + isEnumType + ", group=" + group + "]";
+	}
+
 	public boolean isListType() {
 		if (getNature().equals("repeated") && !getType().equals("bytes")) {
 			return true;

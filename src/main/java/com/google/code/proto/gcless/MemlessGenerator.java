@@ -528,11 +528,13 @@ public class MemlessGenerator {
 						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
 						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
 						result.append("}\n");
-						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
+								+ "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
 						result.append("cursor.addToPosition(" + curField.getFullyClarifiedJavaType() + "Serializer.serialize(temp" + curField.getBeanName() + ").length);\n");
 						result.append("message.get" + curField.getBeanName() + "().add(temp" + curField.getBeanName() + ");\n");
 					} else {
-						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
+								+ "data, cursor.getCurrentPosition(), Integer.MAX_VALUE);\n");
 						result.append("message.set" + curField.getBeanName() + "(temp" + curField.getBeanName() + ");\n");
 						result.append("cursor.addToPosition(" + curField.getFullyClarifiedJavaType() + "Serializer.serialize(temp" + curField.getBeanName() + ").length);\n");
 					}
@@ -765,7 +767,11 @@ public class MemlessGenerator {
 			if (outerClassName != null) {
 				staticKeyword = "static";
 			}
-			result.append("public " + staticKeyword + " class " + curMessage.getName() + " {\n");
+			result.append("public " + staticKeyword + " class " + curMessage.getName());
+			if (config.getMessageExtendsClass() != null) {
+				result.append(" extends " + config.getMessageExtendsClass());
+			}
+			result.append(" {\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
 				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
@@ -834,6 +840,46 @@ public class MemlessGenerator {
 					}
 					result.append("}\n");
 				}
+			}
+			if (config.isGenerateToString()) {
+				result.append("@Override\n");
+				result.append("public String toString() {\n");
+				result.append("java.lang.StringBuilder builder = new java.lang.StringBuilder();\n");
+				result.append("try {\n");
+				result.append("toString(builder);\n");
+				result.append("return builder.toString();\n");
+				result.append("} catch (java.io.IOException e) {\n");
+				result.append("throw new RuntimeException(\"Unable toString\", e);\n");
+				result.append("}\n");
+				result.append("}\n");
+				result.append("public void toString(java.lang.Appendable a) throws java.io.IOException {\n");
+				result.append("a.append(\"" + curMessage.getName() + " [\");\n");
+				for (int i = 0; i < curMessage.getFields().size(); i++) {
+					ProtobufField curField = curMessage.getFields().get(i);
+					if( i != 0 ) {
+						result.append("a.append(\",\");\n");
+					}
+					if (curField.isComplexType()) {
+						if( curField.isListType() ) {
+							result.append("a.append(\"[\");\n");
+							result.append("for( int i=0;i<" + curField.getBeanName() + ".size();i++ ) {\n");
+							result.append(curField.getFullyClarifiedJavaType() + " cur = " + curField.getBeanName() + ".get(i);\n");
+							result.append("if( i != 0 ) {\n ");
+							result.append("a.append(\", \");\n");
+							result.append("}\n");
+							result.append("cur.toString(a);\n");
+							result.append("}\n");
+							result.append("a.append(\"]\");\n");
+						} else {
+							result.append("a.append(\" " + curField.getBeanName() + "=\");\n");
+							result.append(curField.getBeanName() + ".toString(a);\n");
+						}
+					} else {
+						result.append("a.append(\" " + curField.getBeanName() + "=\" + " + curField.getBeanName() + ");\n");
+					}
+				}
+				result.append("a.append(\"]\");\n");
+				result.append("}\n");
 			}
 		}
 

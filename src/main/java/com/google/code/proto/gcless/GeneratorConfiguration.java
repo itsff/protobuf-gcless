@@ -8,6 +8,8 @@ final class GeneratorConfiguration {
 	private final boolean generateStaticFields;
 	private final boolean generateListHelpers;
 	private final boolean generateChaining;
+	private final String messageExtendsClass;
+	private final boolean generateToString;
 
 	GeneratorConfiguration(Properties props) {
 		String interfaceBased = props.getProperty("interface.based");
@@ -38,6 +40,21 @@ final class GeneratorConfiguration {
 		} else {
 			this.generateChaining = false;
 		}
+		this.messageExtendsClass = props.getProperty("message.extends.class");
+		String generateToStringStr = props.getProperty("generate.tostring");
+		if( generateToStringStr != null && generateToStringStr.equals("true") ) {
+			this.generateToString = true;
+		} else {
+			this.generateToString = false;
+		}
+	}
+	
+	public boolean isGenerateToString() {
+		return generateToString;
+	}
+	
+	public String getMessageExtendsClass() {
+		return messageExtendsClass;
 	}
 	
 	public boolean isGenerateChaining() {

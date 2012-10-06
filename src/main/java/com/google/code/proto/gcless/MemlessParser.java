@@ -537,10 +537,6 @@ class MemlessParser {
 			type = curField.getType();
 		}
 
-		if (curField.getType().equals("protobuf_gcless_import.ImportMessage")) {
-			System.out.println("debug here");
-		}
-
 		String complexFieldType = getFullyClarifiedNameBySimpleName(allMessages, type);
 		if (complexFieldType != null) {
 			curField.setFullyClarifiedJavaType(complexFieldType);
