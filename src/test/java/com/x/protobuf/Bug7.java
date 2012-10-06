@@ -5,77 +5,77 @@ import java.io.IOException;
 public final class Bug7 {
 private Bug7() {}
 public static class SearchResponse {
-private java.util.List<com.x.protobuf.Bug7.SearchResponse.Result> Result;
+private java.util.List<com.x.protobuf.Bug7.SearchResponse.Result> result;
 private boolean hasResult;
 public boolean hasResult() {
 return hasResult;
 }
 public java.util.List<com.x.protobuf.Bug7.SearchResponse.Result> getResult() {
-return Result;
+return result;
 }
 public void setResult(java.util.List<com.x.protobuf.Bug7.SearchResponse.Result> Result) {
-this.Result = Result;
+this.result = Result;
 this.hasResult = true;
 }
-private com.x.protobuf.Bug7.SearchResponse.Test Test;
+private com.x.protobuf.Bug7.SearchResponse.Test test;
 private boolean hasTest;
 public boolean hasTest() {
 return hasTest;
 }
 public com.x.protobuf.Bug7.SearchResponse.Test getTest() {
-return Test;
+return test;
 }
 public void setTest(com.x.protobuf.Bug7.SearchResponse.Test Test) {
-this.Test = Test;
+this.test = Test;
 this.hasTest = true;
 }
-private com.x.protobuf.Bug7.SearchResponse.Test2 Test2;
+private com.x.protobuf.Bug7.SearchResponse.Test2 test2;
 private boolean hasTest2;
 public boolean hasTest2() {
 return hasTest2;
 }
 public com.x.protobuf.Bug7.SearchResponse.Test2 getTest2() {
-return Test2;
+return test2;
 }
 public void setTest2(com.x.protobuf.Bug7.SearchResponse.Test2 Test2) {
-this.Test2 = Test2;
+this.test2 = Test2;
 this.hasTest2 = true;
 }
 public static class Result {
-private String Url;
+private String url;
 private boolean hasUrl;
 public boolean hasUrl() {
 return hasUrl;
 }
 public String getUrl() {
-return Url;
+return url;
 }
 public void setUrl(String Url) {
-this.Url = Url;
+this.url = Url;
 this.hasUrl = true;
 }
-private String Title;
+private String title;
 private boolean hasTitle;
 public boolean hasTitle() {
 return hasTitle;
 }
 public String getTitle() {
-return Title;
+return title;
 }
 public void setTitle(String Title) {
-this.Title = Title;
+this.title = Title;
 this.hasTitle = true;
 }
-private java.util.List<String> Snippets;
+private java.util.List<String> snippets;
 private boolean hasSnippets;
 public boolean hasSnippets() {
 return hasSnippets;
 }
 public java.util.List<String> getSnippets() {
-return Snippets;
+return snippets;
 }
 public void setSnippets(java.util.List<String> Snippets) {
-this.Snippets = Snippets;
+this.snippets = Snippets;
 this.hasSnippets = true;
 }
 }
@@ -293,16 +293,16 @@ throw new IllegalArgumentException("Required field not initialized: url");
 }
 }
 public static class Test {
-private String Test;
+private String test;
 private boolean hasTest;
 public boolean hasTest() {
 return hasTest;
 }
 public String getTest() {
-return Test;
+return test;
 }
 public void setTest(String Test) {
-this.Test = Test;
+this.test = Test;
 this.hasTest = true;
 }
 }
@@ -454,16 +454,16 @@ throw new IllegalArgumentException("Required field not initialized: test");
 }
 }
 public static class Test2 {
-private int Test;
+private int test;
 private boolean hasTest;
 public boolean hasTest() {
 return hasTest;
 }
 public int getTest() {
-return Test;
+return test;
 }
 public void setTest(int Test) {
-this.Test = Test;
+this.test = Test;
 this.hasTest = true;
 }
 }

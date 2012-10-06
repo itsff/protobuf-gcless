@@ -79,833 +79,833 @@ return value;
 }
 
 public static class TestAllTypes {
-private int OptionalInt32;
+private int optionalInt32;
 private boolean hasOptionalInt32;
 public boolean hasOptionalInt32() {
 return hasOptionalInt32;
 }
 public int getOptionalInt32() {
-return OptionalInt32;
+return optionalInt32;
 }
 public void setOptionalInt32(int OptionalInt32) {
-this.OptionalInt32 = OptionalInt32;
+this.optionalInt32 = OptionalInt32;
 this.hasOptionalInt32 = true;
 }
-private long OptionalInt64;
+private long optionalInt64;
 private boolean hasOptionalInt64;
 public boolean hasOptionalInt64() {
 return hasOptionalInt64;
 }
 public long getOptionalInt64() {
-return OptionalInt64;
+return optionalInt64;
 }
 public void setOptionalInt64(long OptionalInt64) {
-this.OptionalInt64 = OptionalInt64;
+this.optionalInt64 = OptionalInt64;
 this.hasOptionalInt64 = true;
 }
-private int OptionalUint32;
+private int optionalUint32;
 private boolean hasOptionalUint32;
 public boolean hasOptionalUint32() {
 return hasOptionalUint32;
 }
 public int getOptionalUint32() {
-return OptionalUint32;
+return optionalUint32;
 }
 public void setOptionalUint32(int OptionalUint32) {
-this.OptionalUint32 = OptionalUint32;
+this.optionalUint32 = OptionalUint32;
 this.hasOptionalUint32 = true;
 }
-private long OptionalUint64;
+private long optionalUint64;
 private boolean hasOptionalUint64;
 public boolean hasOptionalUint64() {
 return hasOptionalUint64;
 }
 public long getOptionalUint64() {
-return OptionalUint64;
+return optionalUint64;
 }
 public void setOptionalUint64(long OptionalUint64) {
-this.OptionalUint64 = OptionalUint64;
+this.optionalUint64 = OptionalUint64;
 this.hasOptionalUint64 = true;
 }
-private int OptionalSint32;
+private int optionalSint32;
 private boolean hasOptionalSint32;
 public boolean hasOptionalSint32() {
 return hasOptionalSint32;
 }
 public int getOptionalSint32() {
-return OptionalSint32;
+return optionalSint32;
 }
 public void setOptionalSint32(int OptionalSint32) {
-this.OptionalSint32 = OptionalSint32;
+this.optionalSint32 = OptionalSint32;
 this.hasOptionalSint32 = true;
 }
-private long OptionalSint64;
+private long optionalSint64;
 private boolean hasOptionalSint64;
 public boolean hasOptionalSint64() {
 return hasOptionalSint64;
 }
 public long getOptionalSint64() {
-return OptionalSint64;
+return optionalSint64;
 }
 public void setOptionalSint64(long OptionalSint64) {
-this.OptionalSint64 = OptionalSint64;
+this.optionalSint64 = OptionalSint64;
 this.hasOptionalSint64 = true;
 }
-private int OptionalFixed32;
+private int optionalFixed32;
 private boolean hasOptionalFixed32;
 public boolean hasOptionalFixed32() {
 return hasOptionalFixed32;
 }
 public int getOptionalFixed32() {
-return OptionalFixed32;
+return optionalFixed32;
 }
 public void setOptionalFixed32(int OptionalFixed32) {
-this.OptionalFixed32 = OptionalFixed32;
+this.optionalFixed32 = OptionalFixed32;
 this.hasOptionalFixed32 = true;
 }
-private long OptionalFixed64;
+private long optionalFixed64;
 private boolean hasOptionalFixed64;
 public boolean hasOptionalFixed64() {
 return hasOptionalFixed64;
 }
 public long getOptionalFixed64() {
-return OptionalFixed64;
+return optionalFixed64;
 }
 public void setOptionalFixed64(long OptionalFixed64) {
-this.OptionalFixed64 = OptionalFixed64;
+this.optionalFixed64 = OptionalFixed64;
 this.hasOptionalFixed64 = true;
 }
-private int OptionalSfixed32;
+private int optionalSfixed32;
 private boolean hasOptionalSfixed32;
 public boolean hasOptionalSfixed32() {
 return hasOptionalSfixed32;
 }
 public int getOptionalSfixed32() {
-return OptionalSfixed32;
+return optionalSfixed32;
 }
 public void setOptionalSfixed32(int OptionalSfixed32) {
-this.OptionalSfixed32 = OptionalSfixed32;
+this.optionalSfixed32 = OptionalSfixed32;
 this.hasOptionalSfixed32 = true;
 }
-private long OptionalSfixed64;
+private long optionalSfixed64;
 private boolean hasOptionalSfixed64;
 public boolean hasOptionalSfixed64() {
 return hasOptionalSfixed64;
 }
 public long getOptionalSfixed64() {
-return OptionalSfixed64;
+return optionalSfixed64;
 }
 public void setOptionalSfixed64(long OptionalSfixed64) {
-this.OptionalSfixed64 = OptionalSfixed64;
+this.optionalSfixed64 = OptionalSfixed64;
 this.hasOptionalSfixed64 = true;
 }
-private float OptionalFloat;
+private float optionalFloat;
 private boolean hasOptionalFloat;
 public boolean hasOptionalFloat() {
 return hasOptionalFloat;
 }
 public float getOptionalFloat() {
-return OptionalFloat;
+return optionalFloat;
 }
 public void setOptionalFloat(float OptionalFloat) {
-this.OptionalFloat = OptionalFloat;
+this.optionalFloat = OptionalFloat;
 this.hasOptionalFloat = true;
 }
-private double OptionalDouble;
+private double optionalDouble;
 private boolean hasOptionalDouble;
 public boolean hasOptionalDouble() {
 return hasOptionalDouble;
 }
 public double getOptionalDouble() {
-return OptionalDouble;
+return optionalDouble;
 }
 public void setOptionalDouble(double OptionalDouble) {
-this.OptionalDouble = OptionalDouble;
+this.optionalDouble = OptionalDouble;
 this.hasOptionalDouble = true;
 }
-private boolean OptionalBool;
+private boolean optionalBool;
 private boolean hasOptionalBool;
 public boolean hasOptionalBool() {
 return hasOptionalBool;
 }
 public boolean getOptionalBool() {
-return OptionalBool;
+return optionalBool;
 }
 public void setOptionalBool(boolean OptionalBool) {
-this.OptionalBool = OptionalBool;
+this.optionalBool = OptionalBool;
 this.hasOptionalBool = true;
 }
-private String OptionalString;
+private String optionalString;
 private boolean hasOptionalString;
 public boolean hasOptionalString() {
 return hasOptionalString;
 }
 public String getOptionalString() {
-return OptionalString;
+return optionalString;
 }
 public void setOptionalString(String OptionalString) {
-this.OptionalString = OptionalString;
+this.optionalString = OptionalString;
 this.hasOptionalString = true;
 }
-private byte[] OptionalBytes;
+private byte[] optionalBytes;
 private boolean hasOptionalBytes;
 public boolean hasOptionalBytes() {
 return hasOptionalBytes;
 }
 public byte[] getOptionalBytes() {
-return OptionalBytes;
+return optionalBytes;
 }
 public void setOptionalBytes(byte[] OptionalBytes) {
-this.OptionalBytes = OptionalBytes;
+this.optionalBytes = OptionalBytes;
 this.hasOptionalBytes = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup Optionalgroup;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup optionalgroup;
 private boolean hasOptionalgroup;
 public boolean hasOptionalgroup() {
 return hasOptionalgroup;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup getOptionalgroup() {
-return Optionalgroup;
+return optionalgroup;
 }
 public void setOptionalgroup(protobuf_gcless_unittest.UnittestProto.TestAllTypes.OptionalGroup Optionalgroup) {
-this.Optionalgroup = Optionalgroup;
+this.optionalgroup = Optionalgroup;
 this.hasOptionalgroup = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage OptionalNestedMessage;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage optionalNestedMessage;
 private boolean hasOptionalNestedMessage;
 public boolean hasOptionalNestedMessage() {
 return hasOptionalNestedMessage;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage getOptionalNestedMessage() {
-return OptionalNestedMessage;
+return optionalNestedMessage;
 }
 public void setOptionalNestedMessage(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage OptionalNestedMessage) {
-this.OptionalNestedMessage = OptionalNestedMessage;
+this.optionalNestedMessage = OptionalNestedMessage;
 this.hasOptionalNestedMessage = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignMessage OptionalForeignMessage;
+private protobuf_gcless_unittest.UnittestProto.ForeignMessage optionalForeignMessage;
 private boolean hasOptionalForeignMessage;
 public boolean hasOptionalForeignMessage() {
 return hasOptionalForeignMessage;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignMessage getOptionalForeignMessage() {
-return OptionalForeignMessage;
+return optionalForeignMessage;
 }
 public void setOptionalForeignMessage(protobuf_gcless_unittest.UnittestProto.ForeignMessage OptionalForeignMessage) {
-this.OptionalForeignMessage = OptionalForeignMessage;
+this.optionalForeignMessage = OptionalForeignMessage;
 this.hasOptionalForeignMessage = true;
 }
-private protobuf_gcless_import.ImportMessage OptionalImportMessage;
+private protobuf_gcless_import.ImportMessage optionalImportMessage;
 private boolean hasOptionalImportMessage;
 public boolean hasOptionalImportMessage() {
 return hasOptionalImportMessage;
 }
 public protobuf_gcless_import.ImportMessage getOptionalImportMessage() {
-return OptionalImportMessage;
+return optionalImportMessage;
 }
 public void setOptionalImportMessage(protobuf_gcless_import.ImportMessage OptionalImportMessage) {
-this.OptionalImportMessage = OptionalImportMessage;
+this.optionalImportMessage = OptionalImportMessage;
 this.hasOptionalImportMessage = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum OptionalNestedEnum;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum optionalNestedEnum;
 private boolean hasOptionalNestedEnum;
 public boolean hasOptionalNestedEnum() {
 return hasOptionalNestedEnum;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum getOptionalNestedEnum() {
-return OptionalNestedEnum;
+return optionalNestedEnum;
 }
 public void setOptionalNestedEnum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum OptionalNestedEnum) {
-this.OptionalNestedEnum = OptionalNestedEnum;
+this.optionalNestedEnum = OptionalNestedEnum;
 this.hasOptionalNestedEnum = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignEnum OptionalForeignEnum;
+private protobuf_gcless_unittest.UnittestProto.ForeignEnum optionalForeignEnum;
 private boolean hasOptionalForeignEnum;
 public boolean hasOptionalForeignEnum() {
 return hasOptionalForeignEnum;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignEnum getOptionalForeignEnum() {
-return OptionalForeignEnum;
+return optionalForeignEnum;
 }
 public void setOptionalForeignEnum(protobuf_gcless_unittest.UnittestProto.ForeignEnum OptionalForeignEnum) {
-this.OptionalForeignEnum = OptionalForeignEnum;
+this.optionalForeignEnum = OptionalForeignEnum;
 this.hasOptionalForeignEnum = true;
 }
-private protobuf_gcless_import.ImportEnum OptionalImportEnum;
+private protobuf_gcless_import.ImportEnum optionalImportEnum;
 private boolean hasOptionalImportEnum;
 public boolean hasOptionalImportEnum() {
 return hasOptionalImportEnum;
 }
 public protobuf_gcless_import.ImportEnum getOptionalImportEnum() {
-return OptionalImportEnum;
+return optionalImportEnum;
 }
 public void setOptionalImportEnum(protobuf_gcless_import.ImportEnum OptionalImportEnum) {
-this.OptionalImportEnum = OptionalImportEnum;
+this.optionalImportEnum = OptionalImportEnum;
 this.hasOptionalImportEnum = true;
 }
-private String OptionalStringPiece;
+private String optionalStringPiece;
 private boolean hasOptionalStringPiece;
 public boolean hasOptionalStringPiece() {
 return hasOptionalStringPiece;
 }
 public String getOptionalStringPiece() {
-return OptionalStringPiece;
+return optionalStringPiece;
 }
 public void setOptionalStringPiece(String OptionalStringPiece) {
-this.OptionalStringPiece = OptionalStringPiece;
+this.optionalStringPiece = OptionalStringPiece;
 this.hasOptionalStringPiece = true;
 }
-private String OptionalCord;
+private String optionalCord;
 private boolean hasOptionalCord;
 public boolean hasOptionalCord() {
 return hasOptionalCord;
 }
 public String getOptionalCord() {
-return OptionalCord;
+return optionalCord;
 }
 public void setOptionalCord(String OptionalCord) {
-this.OptionalCord = OptionalCord;
+this.optionalCord = OptionalCord;
 this.hasOptionalCord = true;
 }
-private java.util.List<Integer> RepeatedInt32;
+private java.util.List<Integer> repeatedInt32;
 private boolean hasRepeatedInt32;
 public boolean hasRepeatedInt32() {
 return hasRepeatedInt32;
 }
 public java.util.List<Integer> getRepeatedInt32() {
-return RepeatedInt32;
+return repeatedInt32;
 }
 public void setRepeatedInt32(java.util.List<Integer> RepeatedInt32) {
-this.RepeatedInt32 = RepeatedInt32;
+this.repeatedInt32 = RepeatedInt32;
 this.hasRepeatedInt32 = true;
 }
-private java.util.List<Long> RepeatedInt64;
+private java.util.List<Long> repeatedInt64;
 private boolean hasRepeatedInt64;
 public boolean hasRepeatedInt64() {
 return hasRepeatedInt64;
 }
 public java.util.List<Long> getRepeatedInt64() {
-return RepeatedInt64;
+return repeatedInt64;
 }
 public void setRepeatedInt64(java.util.List<Long> RepeatedInt64) {
-this.RepeatedInt64 = RepeatedInt64;
+this.repeatedInt64 = RepeatedInt64;
 this.hasRepeatedInt64 = true;
 }
-private java.util.List<Integer> RepeatedUint32;
+private java.util.List<Integer> repeatedUint32;
 private boolean hasRepeatedUint32;
 public boolean hasRepeatedUint32() {
 return hasRepeatedUint32;
 }
 public java.util.List<Integer> getRepeatedUint32() {
-return RepeatedUint32;
+return repeatedUint32;
 }
 public void setRepeatedUint32(java.util.List<Integer> RepeatedUint32) {
-this.RepeatedUint32 = RepeatedUint32;
+this.repeatedUint32 = RepeatedUint32;
 this.hasRepeatedUint32 = true;
 }
-private java.util.List<Long> RepeatedUint64;
+private java.util.List<Long> repeatedUint64;
 private boolean hasRepeatedUint64;
 public boolean hasRepeatedUint64() {
 return hasRepeatedUint64;
 }
 public java.util.List<Long> getRepeatedUint64() {
-return RepeatedUint64;
+return repeatedUint64;
 }
 public void setRepeatedUint64(java.util.List<Long> RepeatedUint64) {
-this.RepeatedUint64 = RepeatedUint64;
+this.repeatedUint64 = RepeatedUint64;
 this.hasRepeatedUint64 = true;
 }
-private java.util.List<Integer> RepeatedSint32;
+private java.util.List<Integer> repeatedSint32;
 private boolean hasRepeatedSint32;
 public boolean hasRepeatedSint32() {
 return hasRepeatedSint32;
 }
 public java.util.List<Integer> getRepeatedSint32() {
-return RepeatedSint32;
+return repeatedSint32;
 }
 public void setRepeatedSint32(java.util.List<Integer> RepeatedSint32) {
-this.RepeatedSint32 = RepeatedSint32;
+this.repeatedSint32 = RepeatedSint32;
 this.hasRepeatedSint32 = true;
 }
-private java.util.List<Long> RepeatedSint64;
+private java.util.List<Long> repeatedSint64;
 private boolean hasRepeatedSint64;
 public boolean hasRepeatedSint64() {
 return hasRepeatedSint64;
 }
 public java.util.List<Long> getRepeatedSint64() {
-return RepeatedSint64;
+return repeatedSint64;
 }
 public void setRepeatedSint64(java.util.List<Long> RepeatedSint64) {
-this.RepeatedSint64 = RepeatedSint64;
+this.repeatedSint64 = RepeatedSint64;
 this.hasRepeatedSint64 = true;
 }
-private java.util.List<Integer> RepeatedFixed32;
+private java.util.List<Integer> repeatedFixed32;
 private boolean hasRepeatedFixed32;
 public boolean hasRepeatedFixed32() {
 return hasRepeatedFixed32;
 }
 public java.util.List<Integer> getRepeatedFixed32() {
-return RepeatedFixed32;
+return repeatedFixed32;
 }
 public void setRepeatedFixed32(java.util.List<Integer> RepeatedFixed32) {
-this.RepeatedFixed32 = RepeatedFixed32;
+this.repeatedFixed32 = RepeatedFixed32;
 this.hasRepeatedFixed32 = true;
 }
-private java.util.List<Long> RepeatedFixed64;
+private java.util.List<Long> repeatedFixed64;
 private boolean hasRepeatedFixed64;
 public boolean hasRepeatedFixed64() {
 return hasRepeatedFixed64;
 }
 public java.util.List<Long> getRepeatedFixed64() {
-return RepeatedFixed64;
+return repeatedFixed64;
 }
 public void setRepeatedFixed64(java.util.List<Long> RepeatedFixed64) {
-this.RepeatedFixed64 = RepeatedFixed64;
+this.repeatedFixed64 = RepeatedFixed64;
 this.hasRepeatedFixed64 = true;
 }
-private java.util.List<Integer> RepeatedSfixed32;
+private java.util.List<Integer> repeatedSfixed32;
 private boolean hasRepeatedSfixed32;
 public boolean hasRepeatedSfixed32() {
 return hasRepeatedSfixed32;
 }
 public java.util.List<Integer> getRepeatedSfixed32() {
-return RepeatedSfixed32;
+return repeatedSfixed32;
 }
 public void setRepeatedSfixed32(java.util.List<Integer> RepeatedSfixed32) {
-this.RepeatedSfixed32 = RepeatedSfixed32;
+this.repeatedSfixed32 = RepeatedSfixed32;
 this.hasRepeatedSfixed32 = true;
 }
-private java.util.List<Long> RepeatedSfixed64;
+private java.util.List<Long> repeatedSfixed64;
 private boolean hasRepeatedSfixed64;
 public boolean hasRepeatedSfixed64() {
 return hasRepeatedSfixed64;
 }
 public java.util.List<Long> getRepeatedSfixed64() {
-return RepeatedSfixed64;
+return repeatedSfixed64;
 }
 public void setRepeatedSfixed64(java.util.List<Long> RepeatedSfixed64) {
-this.RepeatedSfixed64 = RepeatedSfixed64;
+this.repeatedSfixed64 = RepeatedSfixed64;
 this.hasRepeatedSfixed64 = true;
 }
-private java.util.List<Float> RepeatedFloat;
+private java.util.List<Float> repeatedFloat;
 private boolean hasRepeatedFloat;
 public boolean hasRepeatedFloat() {
 return hasRepeatedFloat;
 }
 public java.util.List<Float> getRepeatedFloat() {
-return RepeatedFloat;
+return repeatedFloat;
 }
 public void setRepeatedFloat(java.util.List<Float> RepeatedFloat) {
-this.RepeatedFloat = RepeatedFloat;
+this.repeatedFloat = RepeatedFloat;
 this.hasRepeatedFloat = true;
 }
-private java.util.List<Double> RepeatedDouble;
+private java.util.List<Double> repeatedDouble;
 private boolean hasRepeatedDouble;
 public boolean hasRepeatedDouble() {
 return hasRepeatedDouble;
 }
 public java.util.List<Double> getRepeatedDouble() {
-return RepeatedDouble;
+return repeatedDouble;
 }
 public void setRepeatedDouble(java.util.List<Double> RepeatedDouble) {
-this.RepeatedDouble = RepeatedDouble;
+this.repeatedDouble = RepeatedDouble;
 this.hasRepeatedDouble = true;
 }
-private java.util.List<Boolean> RepeatedBool;
+private java.util.List<Boolean> repeatedBool;
 private boolean hasRepeatedBool;
 public boolean hasRepeatedBool() {
 return hasRepeatedBool;
 }
 public java.util.List<Boolean> getRepeatedBool() {
-return RepeatedBool;
+return repeatedBool;
 }
 public void setRepeatedBool(java.util.List<Boolean> RepeatedBool) {
-this.RepeatedBool = RepeatedBool;
+this.repeatedBool = RepeatedBool;
 this.hasRepeatedBool = true;
 }
-private java.util.List<String> RepeatedString;
+private java.util.List<String> repeatedString;
 private boolean hasRepeatedString;
 public boolean hasRepeatedString() {
 return hasRepeatedString;
 }
 public java.util.List<String> getRepeatedString() {
-return RepeatedString;
+return repeatedString;
 }
 public void setRepeatedString(java.util.List<String> RepeatedString) {
-this.RepeatedString = RepeatedString;
+this.repeatedString = RepeatedString;
 this.hasRepeatedString = true;
 }
-private byte[] RepeatedBytes;
+private byte[] repeatedBytes;
 private boolean hasRepeatedBytes;
 public boolean hasRepeatedBytes() {
 return hasRepeatedBytes;
 }
 public byte[] getRepeatedBytes() {
-return RepeatedBytes;
+return repeatedBytes;
 }
 public void setRepeatedBytes(byte[] RepeatedBytes) {
-this.RepeatedBytes = RepeatedBytes;
+this.repeatedBytes = RepeatedBytes;
 this.hasRepeatedBytes = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> Repeatedgroup;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> repeatedgroup;
 private boolean hasRepeatedgroup;
 public boolean hasRepeatedgroup() {
 return hasRepeatedgroup;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> getRepeatedgroup() {
-return Repeatedgroup;
+return repeatedgroup;
 }
 public void setRepeatedgroup(java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup> Repeatedgroup) {
-this.Repeatedgroup = Repeatedgroup;
+this.repeatedgroup = Repeatedgroup;
 this.hasRepeatedgroup = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> RepeatedNestedMessage;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> repeatedNestedMessage;
 private boolean hasRepeatedNestedMessage;
 public boolean hasRepeatedNestedMessage() {
 return hasRepeatedNestedMessage;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> getRepeatedNestedMessage() {
-return RepeatedNestedMessage;
+return repeatedNestedMessage;
 }
 public void setRepeatedNestedMessage(java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage> RepeatedNestedMessage) {
-this.RepeatedNestedMessage = RepeatedNestedMessage;
+this.repeatedNestedMessage = RepeatedNestedMessage;
 this.hasRepeatedNestedMessage = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> RepeatedForeignMessage;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> repeatedForeignMessage;
 private boolean hasRepeatedForeignMessage;
 public boolean hasRepeatedForeignMessage() {
 return hasRepeatedForeignMessage;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> getRepeatedForeignMessage() {
-return RepeatedForeignMessage;
+return repeatedForeignMessage;
 }
 public void setRepeatedForeignMessage(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> RepeatedForeignMessage) {
-this.RepeatedForeignMessage = RepeatedForeignMessage;
+this.repeatedForeignMessage = RepeatedForeignMessage;
 this.hasRepeatedForeignMessage = true;
 }
-private java.util.List<protobuf_gcless_import.ImportMessage> RepeatedImportMessage;
+private java.util.List<protobuf_gcless_import.ImportMessage> repeatedImportMessage;
 private boolean hasRepeatedImportMessage;
 public boolean hasRepeatedImportMessage() {
 return hasRepeatedImportMessage;
 }
 public java.util.List<protobuf_gcless_import.ImportMessage> getRepeatedImportMessage() {
-return RepeatedImportMessage;
+return repeatedImportMessage;
 }
 public void setRepeatedImportMessage(java.util.List<protobuf_gcless_import.ImportMessage> RepeatedImportMessage) {
-this.RepeatedImportMessage = RepeatedImportMessage;
+this.repeatedImportMessage = RepeatedImportMessage;
 this.hasRepeatedImportMessage = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum> RepeatedNestedEnum;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum> repeatedNestedEnum;
 private boolean hasRepeatedNestedEnum;
 public boolean hasRepeatedNestedEnum() {
 return hasRepeatedNestedEnum;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum> getRepeatedNestedEnum() {
-return RepeatedNestedEnum;
+return repeatedNestedEnum;
 }
 public void setRepeatedNestedEnum(java.util.List<protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum> RepeatedNestedEnum) {
-this.RepeatedNestedEnum = RepeatedNestedEnum;
+this.repeatedNestedEnum = RepeatedNestedEnum;
 this.hasRepeatedNestedEnum = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> RepeatedForeignEnum;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> repeatedForeignEnum;
 private boolean hasRepeatedForeignEnum;
 public boolean hasRepeatedForeignEnum() {
 return hasRepeatedForeignEnum;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> getRepeatedForeignEnum() {
-return RepeatedForeignEnum;
+return repeatedForeignEnum;
 }
 public void setRepeatedForeignEnum(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> RepeatedForeignEnum) {
-this.RepeatedForeignEnum = RepeatedForeignEnum;
+this.repeatedForeignEnum = RepeatedForeignEnum;
 this.hasRepeatedForeignEnum = true;
 }
-private java.util.List<protobuf_gcless_import.ImportEnum> RepeatedImportEnum;
+private java.util.List<protobuf_gcless_import.ImportEnum> repeatedImportEnum;
 private boolean hasRepeatedImportEnum;
 public boolean hasRepeatedImportEnum() {
 return hasRepeatedImportEnum;
 }
 public java.util.List<protobuf_gcless_import.ImportEnum> getRepeatedImportEnum() {
-return RepeatedImportEnum;
+return repeatedImportEnum;
 }
 public void setRepeatedImportEnum(java.util.List<protobuf_gcless_import.ImportEnum> RepeatedImportEnum) {
-this.RepeatedImportEnum = RepeatedImportEnum;
+this.repeatedImportEnum = RepeatedImportEnum;
 this.hasRepeatedImportEnum = true;
 }
-private java.util.List<String> RepeatedStringPiece;
+private java.util.List<String> repeatedStringPiece;
 private boolean hasRepeatedStringPiece;
 public boolean hasRepeatedStringPiece() {
 return hasRepeatedStringPiece;
 }
 public java.util.List<String> getRepeatedStringPiece() {
-return RepeatedStringPiece;
+return repeatedStringPiece;
 }
 public void setRepeatedStringPiece(java.util.List<String> RepeatedStringPiece) {
-this.RepeatedStringPiece = RepeatedStringPiece;
+this.repeatedStringPiece = RepeatedStringPiece;
 this.hasRepeatedStringPiece = true;
 }
-private java.util.List<String> RepeatedCord;
+private java.util.List<String> repeatedCord;
 private boolean hasRepeatedCord;
 public boolean hasRepeatedCord() {
 return hasRepeatedCord;
 }
 public java.util.List<String> getRepeatedCord() {
-return RepeatedCord;
+return repeatedCord;
 }
 public void setRepeatedCord(java.util.List<String> RepeatedCord) {
-this.RepeatedCord = RepeatedCord;
+this.repeatedCord = RepeatedCord;
 this.hasRepeatedCord = true;
 }
-private int DefaultInt32;
+private int defaultInt32;
 private boolean hasDefaultInt32;
 public boolean hasDefaultInt32() {
 return hasDefaultInt32;
 }
 public int getDefaultInt32() {
-return DefaultInt32;
+return defaultInt32;
 }
 public void setDefaultInt32(int DefaultInt32) {
-this.DefaultInt32 = DefaultInt32;
+this.defaultInt32 = DefaultInt32;
 this.hasDefaultInt32 = true;
 }
-private long DefaultInt64;
+private long defaultInt64;
 private boolean hasDefaultInt64;
 public boolean hasDefaultInt64() {
 return hasDefaultInt64;
 }
 public long getDefaultInt64() {
-return DefaultInt64;
+return defaultInt64;
 }
 public void setDefaultInt64(long DefaultInt64) {
-this.DefaultInt64 = DefaultInt64;
+this.defaultInt64 = DefaultInt64;
 this.hasDefaultInt64 = true;
 }
-private int DefaultUint32;
+private int defaultUint32;
 private boolean hasDefaultUint32;
 public boolean hasDefaultUint32() {
 return hasDefaultUint32;
 }
 public int getDefaultUint32() {
-return DefaultUint32;
+return defaultUint32;
 }
 public void setDefaultUint32(int DefaultUint32) {
-this.DefaultUint32 = DefaultUint32;
+this.defaultUint32 = DefaultUint32;
 this.hasDefaultUint32 = true;
 }
-private long DefaultUint64;
+private long defaultUint64;
 private boolean hasDefaultUint64;
 public boolean hasDefaultUint64() {
 return hasDefaultUint64;
 }
 public long getDefaultUint64() {
-return DefaultUint64;
+return defaultUint64;
 }
 public void setDefaultUint64(long DefaultUint64) {
-this.DefaultUint64 = DefaultUint64;
+this.defaultUint64 = DefaultUint64;
 this.hasDefaultUint64 = true;
 }
-private int DefaultSint32;
+private int defaultSint32;
 private boolean hasDefaultSint32;
 public boolean hasDefaultSint32() {
 return hasDefaultSint32;
 }
 public int getDefaultSint32() {
-return DefaultSint32;
+return defaultSint32;
 }
 public void setDefaultSint32(int DefaultSint32) {
-this.DefaultSint32 = DefaultSint32;
+this.defaultSint32 = DefaultSint32;
 this.hasDefaultSint32 = true;
 }
-private long DefaultSint64;
+private long defaultSint64;
 private boolean hasDefaultSint64;
 public boolean hasDefaultSint64() {
 return hasDefaultSint64;
 }
 public long getDefaultSint64() {
-return DefaultSint64;
+return defaultSint64;
 }
 public void setDefaultSint64(long DefaultSint64) {
-this.DefaultSint64 = DefaultSint64;
+this.defaultSint64 = DefaultSint64;
 this.hasDefaultSint64 = true;
 }
-private int DefaultFixed32;
+private int defaultFixed32;
 private boolean hasDefaultFixed32;
 public boolean hasDefaultFixed32() {
 return hasDefaultFixed32;
 }
 public int getDefaultFixed32() {
-return DefaultFixed32;
+return defaultFixed32;
 }
 public void setDefaultFixed32(int DefaultFixed32) {
-this.DefaultFixed32 = DefaultFixed32;
+this.defaultFixed32 = DefaultFixed32;
 this.hasDefaultFixed32 = true;
 }
-private long DefaultFixed64;
+private long defaultFixed64;
 private boolean hasDefaultFixed64;
 public boolean hasDefaultFixed64() {
 return hasDefaultFixed64;
 }
 public long getDefaultFixed64() {
-return DefaultFixed64;
+return defaultFixed64;
 }
 public void setDefaultFixed64(long DefaultFixed64) {
-this.DefaultFixed64 = DefaultFixed64;
+this.defaultFixed64 = DefaultFixed64;
 this.hasDefaultFixed64 = true;
 }
-private int DefaultSfixed32;
+private int defaultSfixed32;
 private boolean hasDefaultSfixed32;
 public boolean hasDefaultSfixed32() {
 return hasDefaultSfixed32;
 }
 public int getDefaultSfixed32() {
-return DefaultSfixed32;
+return defaultSfixed32;
 }
 public void setDefaultSfixed32(int DefaultSfixed32) {
-this.DefaultSfixed32 = DefaultSfixed32;
+this.defaultSfixed32 = DefaultSfixed32;
 this.hasDefaultSfixed32 = true;
 }
-private long DefaultSfixed64;
+private long defaultSfixed64;
 private boolean hasDefaultSfixed64;
 public boolean hasDefaultSfixed64() {
 return hasDefaultSfixed64;
 }
 public long getDefaultSfixed64() {
-return DefaultSfixed64;
+return defaultSfixed64;
 }
 public void setDefaultSfixed64(long DefaultSfixed64) {
-this.DefaultSfixed64 = DefaultSfixed64;
+this.defaultSfixed64 = DefaultSfixed64;
 this.hasDefaultSfixed64 = true;
 }
-private float DefaultFloat;
+private float defaultFloat;
 private boolean hasDefaultFloat;
 public boolean hasDefaultFloat() {
 return hasDefaultFloat;
 }
 public float getDefaultFloat() {
-return DefaultFloat;
+return defaultFloat;
 }
 public void setDefaultFloat(float DefaultFloat) {
-this.DefaultFloat = DefaultFloat;
+this.defaultFloat = DefaultFloat;
 this.hasDefaultFloat = true;
 }
-private double DefaultDouble;
+private double defaultDouble;
 private boolean hasDefaultDouble;
 public boolean hasDefaultDouble() {
 return hasDefaultDouble;
 }
 public double getDefaultDouble() {
-return DefaultDouble;
+return defaultDouble;
 }
 public void setDefaultDouble(double DefaultDouble) {
-this.DefaultDouble = DefaultDouble;
+this.defaultDouble = DefaultDouble;
 this.hasDefaultDouble = true;
 }
-private boolean DefaultBool;
+private boolean defaultBool;
 private boolean hasDefaultBool;
 public boolean hasDefaultBool() {
 return hasDefaultBool;
 }
 public boolean getDefaultBool() {
-return DefaultBool;
+return defaultBool;
 }
 public void setDefaultBool(boolean DefaultBool) {
-this.DefaultBool = DefaultBool;
+this.defaultBool = DefaultBool;
 this.hasDefaultBool = true;
 }
-private String DefaultString;
+private String defaultString;
 private boolean hasDefaultString;
 public boolean hasDefaultString() {
 return hasDefaultString;
 }
 public String getDefaultString() {
-return DefaultString;
+return defaultString;
 }
 public void setDefaultString(String DefaultString) {
-this.DefaultString = DefaultString;
+this.defaultString = DefaultString;
 this.hasDefaultString = true;
 }
-private byte[] DefaultBytes;
+private byte[] defaultBytes;
 private boolean hasDefaultBytes;
 public boolean hasDefaultBytes() {
 return hasDefaultBytes;
 }
 public byte[] getDefaultBytes() {
-return DefaultBytes;
+return defaultBytes;
 }
 public void setDefaultBytes(byte[] DefaultBytes) {
-this.DefaultBytes = DefaultBytes;
+this.defaultBytes = DefaultBytes;
 this.hasDefaultBytes = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum DefaultNestedEnum;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum defaultNestedEnum;
 private boolean hasDefaultNestedEnum;
 public boolean hasDefaultNestedEnum() {
 return hasDefaultNestedEnum;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum getDefaultNestedEnum() {
-return DefaultNestedEnum;
+return defaultNestedEnum;
 }
 public void setDefaultNestedEnum(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum DefaultNestedEnum) {
-this.DefaultNestedEnum = DefaultNestedEnum;
+this.defaultNestedEnum = DefaultNestedEnum;
 this.hasDefaultNestedEnum = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignEnum DefaultForeignEnum;
+private protobuf_gcless_unittest.UnittestProto.ForeignEnum defaultForeignEnum;
 private boolean hasDefaultForeignEnum;
 public boolean hasDefaultForeignEnum() {
 return hasDefaultForeignEnum;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignEnum getDefaultForeignEnum() {
-return DefaultForeignEnum;
+return defaultForeignEnum;
 }
 public void setDefaultForeignEnum(protobuf_gcless_unittest.UnittestProto.ForeignEnum DefaultForeignEnum) {
-this.DefaultForeignEnum = DefaultForeignEnum;
+this.defaultForeignEnum = DefaultForeignEnum;
 this.hasDefaultForeignEnum = true;
 }
-private protobuf_gcless_import.ImportEnum DefaultImportEnum;
+private protobuf_gcless_import.ImportEnum defaultImportEnum;
 private boolean hasDefaultImportEnum;
 public boolean hasDefaultImportEnum() {
 return hasDefaultImportEnum;
 }
 public protobuf_gcless_import.ImportEnum getDefaultImportEnum() {
-return DefaultImportEnum;
+return defaultImportEnum;
 }
 public void setDefaultImportEnum(protobuf_gcless_import.ImportEnum DefaultImportEnum) {
-this.DefaultImportEnum = DefaultImportEnum;
+this.defaultImportEnum = DefaultImportEnum;
 this.hasDefaultImportEnum = true;
 }
-private String DefaultStringPiece;
+private String defaultStringPiece;
 private boolean hasDefaultStringPiece;
 public boolean hasDefaultStringPiece() {
 return hasDefaultStringPiece;
 }
 public String getDefaultStringPiece() {
-return DefaultStringPiece;
+return defaultStringPiece;
 }
 public void setDefaultStringPiece(String DefaultStringPiece) {
-this.DefaultStringPiece = DefaultStringPiece;
+this.defaultStringPiece = DefaultStringPiece;
 this.hasDefaultStringPiece = true;
 }
-private String DefaultCord;
+private String defaultCord;
 private boolean hasDefaultCord;
 public boolean hasDefaultCord() {
 return hasDefaultCord;
 }
 public String getDefaultCord() {
-return DefaultCord;
+return defaultCord;
 }
 public void setDefaultCord(String DefaultCord) {
-this.DefaultCord = DefaultCord;
+this.defaultCord = DefaultCord;
 this.hasDefaultCord = true;
 }
 public static class NestedMessage {
-private int Bb;
+private int bb;
 private boolean hasBb;
 public boolean hasBb() {
 return hasBb;
 }
 public int getBb() {
-return Bb;
+return bb;
 }
 public void setBb(int Bb) {
-this.Bb = Bb;
+this.bb = Bb;
 this.hasBb = true;
 }
 }
@@ -1030,16 +1030,16 @@ break;
 }
 }
 public static class OptionalGroup {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
 }
@@ -1180,16 +1180,16 @@ break;
 }
 }
 public static class RepeatedGroup {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
 }
@@ -3420,16 +3420,16 @@ break;
 }
 }
 public static class TestDeprecatedFields {
-private int DeprecatedInt32;
+private int deprecatedInt32;
 private boolean hasDeprecatedInt32;
 public boolean hasDeprecatedInt32() {
 return hasDeprecatedInt32;
 }
 public int getDeprecatedInt32() {
-return DeprecatedInt32;
+return deprecatedInt32;
 }
 public void setDeprecatedInt32(int DeprecatedInt32) {
-this.DeprecatedInt32 = DeprecatedInt32;
+this.deprecatedInt32 = DeprecatedInt32;
 this.hasDeprecatedInt32 = true;
 }
 }
@@ -3554,16 +3554,16 @@ break;
 }
 }
 public static class ForeignMessage {
-private int C;
+private int c;
 private boolean hasC;
 public boolean hasC() {
 return hasC;
 }
 public int getC() {
-return C;
+return c;
 }
 public void setC(int C) {
-this.C = C;
+this.c = C;
 this.hasC = true;
 }
 }
@@ -3778,16 +3778,16 @@ return message;
 }
 }
 public static class TestNestedExtension {
-private String Test;
+private String test;
 private boolean hasTest;
 public boolean hasTest() {
 return hasTest;
 }
 public String getTest() {
-return Test;
+return test;
 }
 public void setTest(String Test) {
-this.Test = Test;
+this.test = Test;
 this.hasTest = true;
 }
 }
@@ -3916,424 +3916,424 @@ break;
 }
 }
 public static class TestRequired {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
-private int Dummy2;
+private int dummy2;
 private boolean hasDummy2;
 public boolean hasDummy2() {
 return hasDummy2;
 }
 public int getDummy2() {
-return Dummy2;
+return dummy2;
 }
 public void setDummy2(int Dummy2) {
-this.Dummy2 = Dummy2;
+this.dummy2 = Dummy2;
 this.hasDummy2 = true;
 }
-private int B;
+private int b;
 private boolean hasB;
 public boolean hasB() {
 return hasB;
 }
 public int getB() {
-return B;
+return b;
 }
 public void setB(int B) {
-this.B = B;
+this.b = B;
 this.hasB = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestRequired Single;
+private protobuf_gcless_unittest.UnittestProto.TestRequired single;
 private boolean hasSingle;
 public boolean hasSingle() {
 return hasSingle;
 }
 public protobuf_gcless_unittest.UnittestProto.TestRequired getSingle() {
-return Single;
+return single;
 }
 public void setSingle(protobuf_gcless_unittest.UnittestProto.TestRequired Single) {
-this.Single = Single;
+this.single = Single;
 this.hasSingle = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> Multi;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> multi;
 private boolean hasMulti;
 public boolean hasMulti() {
 return hasMulti;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> getMulti() {
-return Multi;
+return multi;
 }
 public void setMulti(java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> Multi) {
-this.Multi = Multi;
+this.multi = Multi;
 this.hasMulti = true;
 }
-private int Dummy4;
+private int dummy4;
 private boolean hasDummy4;
 public boolean hasDummy4() {
 return hasDummy4;
 }
 public int getDummy4() {
-return Dummy4;
+return dummy4;
 }
 public void setDummy4(int Dummy4) {
-this.Dummy4 = Dummy4;
+this.dummy4 = Dummy4;
 this.hasDummy4 = true;
 }
-private int Dummy5;
+private int dummy5;
 private boolean hasDummy5;
 public boolean hasDummy5() {
 return hasDummy5;
 }
 public int getDummy5() {
-return Dummy5;
+return dummy5;
 }
 public void setDummy5(int Dummy5) {
-this.Dummy5 = Dummy5;
+this.dummy5 = Dummy5;
 this.hasDummy5 = true;
 }
-private int Dummy6;
+private int dummy6;
 private boolean hasDummy6;
 public boolean hasDummy6() {
 return hasDummy6;
 }
 public int getDummy6() {
-return Dummy6;
+return dummy6;
 }
 public void setDummy6(int Dummy6) {
-this.Dummy6 = Dummy6;
+this.dummy6 = Dummy6;
 this.hasDummy6 = true;
 }
-private int Dummy7;
+private int dummy7;
 private boolean hasDummy7;
 public boolean hasDummy7() {
 return hasDummy7;
 }
 public int getDummy7() {
-return Dummy7;
+return dummy7;
 }
 public void setDummy7(int Dummy7) {
-this.Dummy7 = Dummy7;
+this.dummy7 = Dummy7;
 this.hasDummy7 = true;
 }
-private int Dummy8;
+private int dummy8;
 private boolean hasDummy8;
 public boolean hasDummy8() {
 return hasDummy8;
 }
 public int getDummy8() {
-return Dummy8;
+return dummy8;
 }
 public void setDummy8(int Dummy8) {
-this.Dummy8 = Dummy8;
+this.dummy8 = Dummy8;
 this.hasDummy8 = true;
 }
-private int Dummy9;
+private int dummy9;
 private boolean hasDummy9;
 public boolean hasDummy9() {
 return hasDummy9;
 }
 public int getDummy9() {
-return Dummy9;
+return dummy9;
 }
 public void setDummy9(int Dummy9) {
-this.Dummy9 = Dummy9;
+this.dummy9 = Dummy9;
 this.hasDummy9 = true;
 }
-private int Dummy10;
+private int dummy10;
 private boolean hasDummy10;
 public boolean hasDummy10() {
 return hasDummy10;
 }
 public int getDummy10() {
-return Dummy10;
+return dummy10;
 }
 public void setDummy10(int Dummy10) {
-this.Dummy10 = Dummy10;
+this.dummy10 = Dummy10;
 this.hasDummy10 = true;
 }
-private int Dummy11;
+private int dummy11;
 private boolean hasDummy11;
 public boolean hasDummy11() {
 return hasDummy11;
 }
 public int getDummy11() {
-return Dummy11;
+return dummy11;
 }
 public void setDummy11(int Dummy11) {
-this.Dummy11 = Dummy11;
+this.dummy11 = Dummy11;
 this.hasDummy11 = true;
 }
-private int Dummy12;
+private int dummy12;
 private boolean hasDummy12;
 public boolean hasDummy12() {
 return hasDummy12;
 }
 public int getDummy12() {
-return Dummy12;
+return dummy12;
 }
 public void setDummy12(int Dummy12) {
-this.Dummy12 = Dummy12;
+this.dummy12 = Dummy12;
 this.hasDummy12 = true;
 }
-private int Dummy13;
+private int dummy13;
 private boolean hasDummy13;
 public boolean hasDummy13() {
 return hasDummy13;
 }
 public int getDummy13() {
-return Dummy13;
+return dummy13;
 }
 public void setDummy13(int Dummy13) {
-this.Dummy13 = Dummy13;
+this.dummy13 = Dummy13;
 this.hasDummy13 = true;
 }
-private int Dummy14;
+private int dummy14;
 private boolean hasDummy14;
 public boolean hasDummy14() {
 return hasDummy14;
 }
 public int getDummy14() {
-return Dummy14;
+return dummy14;
 }
 public void setDummy14(int Dummy14) {
-this.Dummy14 = Dummy14;
+this.dummy14 = Dummy14;
 this.hasDummy14 = true;
 }
-private int Dummy15;
+private int dummy15;
 private boolean hasDummy15;
 public boolean hasDummy15() {
 return hasDummy15;
 }
 public int getDummy15() {
-return Dummy15;
+return dummy15;
 }
 public void setDummy15(int Dummy15) {
-this.Dummy15 = Dummy15;
+this.dummy15 = Dummy15;
 this.hasDummy15 = true;
 }
-private int Dummy16;
+private int dummy16;
 private boolean hasDummy16;
 public boolean hasDummy16() {
 return hasDummy16;
 }
 public int getDummy16() {
-return Dummy16;
+return dummy16;
 }
 public void setDummy16(int Dummy16) {
-this.Dummy16 = Dummy16;
+this.dummy16 = Dummy16;
 this.hasDummy16 = true;
 }
-private int Dummy17;
+private int dummy17;
 private boolean hasDummy17;
 public boolean hasDummy17() {
 return hasDummy17;
 }
 public int getDummy17() {
-return Dummy17;
+return dummy17;
 }
 public void setDummy17(int Dummy17) {
-this.Dummy17 = Dummy17;
+this.dummy17 = Dummy17;
 this.hasDummy17 = true;
 }
-private int Dummy18;
+private int dummy18;
 private boolean hasDummy18;
 public boolean hasDummy18() {
 return hasDummy18;
 }
 public int getDummy18() {
-return Dummy18;
+return dummy18;
 }
 public void setDummy18(int Dummy18) {
-this.Dummy18 = Dummy18;
+this.dummy18 = Dummy18;
 this.hasDummy18 = true;
 }
-private int Dummy19;
+private int dummy19;
 private boolean hasDummy19;
 public boolean hasDummy19() {
 return hasDummy19;
 }
 public int getDummy19() {
-return Dummy19;
+return dummy19;
 }
 public void setDummy19(int Dummy19) {
-this.Dummy19 = Dummy19;
+this.dummy19 = Dummy19;
 this.hasDummy19 = true;
 }
-private int Dummy20;
+private int dummy20;
 private boolean hasDummy20;
 public boolean hasDummy20() {
 return hasDummy20;
 }
 public int getDummy20() {
-return Dummy20;
+return dummy20;
 }
 public void setDummy20(int Dummy20) {
-this.Dummy20 = Dummy20;
+this.dummy20 = Dummy20;
 this.hasDummy20 = true;
 }
-private int Dummy21;
+private int dummy21;
 private boolean hasDummy21;
 public boolean hasDummy21() {
 return hasDummy21;
 }
 public int getDummy21() {
-return Dummy21;
+return dummy21;
 }
 public void setDummy21(int Dummy21) {
-this.Dummy21 = Dummy21;
+this.dummy21 = Dummy21;
 this.hasDummy21 = true;
 }
-private int Dummy22;
+private int dummy22;
 private boolean hasDummy22;
 public boolean hasDummy22() {
 return hasDummy22;
 }
 public int getDummy22() {
-return Dummy22;
+return dummy22;
 }
 public void setDummy22(int Dummy22) {
-this.Dummy22 = Dummy22;
+this.dummy22 = Dummy22;
 this.hasDummy22 = true;
 }
-private int Dummy23;
+private int dummy23;
 private boolean hasDummy23;
 public boolean hasDummy23() {
 return hasDummy23;
 }
 public int getDummy23() {
-return Dummy23;
+return dummy23;
 }
 public void setDummy23(int Dummy23) {
-this.Dummy23 = Dummy23;
+this.dummy23 = Dummy23;
 this.hasDummy23 = true;
 }
-private int Dummy24;
+private int dummy24;
 private boolean hasDummy24;
 public boolean hasDummy24() {
 return hasDummy24;
 }
 public int getDummy24() {
-return Dummy24;
+return dummy24;
 }
 public void setDummy24(int Dummy24) {
-this.Dummy24 = Dummy24;
+this.dummy24 = Dummy24;
 this.hasDummy24 = true;
 }
-private int Dummy25;
+private int dummy25;
 private boolean hasDummy25;
 public boolean hasDummy25() {
 return hasDummy25;
 }
 public int getDummy25() {
-return Dummy25;
+return dummy25;
 }
 public void setDummy25(int Dummy25) {
-this.Dummy25 = Dummy25;
+this.dummy25 = Dummy25;
 this.hasDummy25 = true;
 }
-private int Dummy26;
+private int dummy26;
 private boolean hasDummy26;
 public boolean hasDummy26() {
 return hasDummy26;
 }
 public int getDummy26() {
-return Dummy26;
+return dummy26;
 }
 public void setDummy26(int Dummy26) {
-this.Dummy26 = Dummy26;
+this.dummy26 = Dummy26;
 this.hasDummy26 = true;
 }
-private int Dummy27;
+private int dummy27;
 private boolean hasDummy27;
 public boolean hasDummy27() {
 return hasDummy27;
 }
 public int getDummy27() {
-return Dummy27;
+return dummy27;
 }
 public void setDummy27(int Dummy27) {
-this.Dummy27 = Dummy27;
+this.dummy27 = Dummy27;
 this.hasDummy27 = true;
 }
-private int Dummy28;
+private int dummy28;
 private boolean hasDummy28;
 public boolean hasDummy28() {
 return hasDummy28;
 }
 public int getDummy28() {
-return Dummy28;
+return dummy28;
 }
 public void setDummy28(int Dummy28) {
-this.Dummy28 = Dummy28;
+this.dummy28 = Dummy28;
 this.hasDummy28 = true;
 }
-private int Dummy29;
+private int dummy29;
 private boolean hasDummy29;
 public boolean hasDummy29() {
 return hasDummy29;
 }
 public int getDummy29() {
-return Dummy29;
+return dummy29;
 }
 public void setDummy29(int Dummy29) {
-this.Dummy29 = Dummy29;
+this.dummy29 = Dummy29;
 this.hasDummy29 = true;
 }
-private int Dummy30;
+private int dummy30;
 private boolean hasDummy30;
 public boolean hasDummy30() {
 return hasDummy30;
 }
 public int getDummy30() {
-return Dummy30;
+return dummy30;
 }
 public void setDummy30(int Dummy30) {
-this.Dummy30 = Dummy30;
+this.dummy30 = Dummy30;
 this.hasDummy30 = true;
 }
-private int Dummy31;
+private int dummy31;
 private boolean hasDummy31;
 public boolean hasDummy31() {
 return hasDummy31;
 }
 public int getDummy31() {
-return Dummy31;
+return dummy31;
 }
 public void setDummy31(int Dummy31) {
-this.Dummy31 = Dummy31;
+this.dummy31 = Dummy31;
 this.hasDummy31 = true;
 }
-private int Dummy32;
+private int dummy32;
 private boolean hasDummy32;
 public boolean hasDummy32() {
 return hasDummy32;
 }
 public int getDummy32() {
-return Dummy32;
+return dummy32;
 }
 public void setDummy32(int Dummy32) {
-this.Dummy32 = Dummy32;
+this.dummy32 = Dummy32;
 this.hasDummy32 = true;
 }
-private int C;
+private int c;
 private boolean hasC;
 public boolean hasC() {
 return hasC;
 }
 public int getC() {
-return C;
+return c;
 }
 public void setC(int C) {
-this.C = C;
+this.c = C;
 this.hasC = true;
 }
 }
@@ -5230,40 +5230,40 @@ throw new IllegalArgumentException("Required field not initialized: c");
 }
 }
 public static class TestRequiredForeign {
-private protobuf_gcless_unittest.UnittestProto.TestRequired OptionalMessage;
+private protobuf_gcless_unittest.UnittestProto.TestRequired optionalMessage;
 private boolean hasOptionalMessage;
 public boolean hasOptionalMessage() {
 return hasOptionalMessage;
 }
 public protobuf_gcless_unittest.UnittestProto.TestRequired getOptionalMessage() {
-return OptionalMessage;
+return optionalMessage;
 }
 public void setOptionalMessage(protobuf_gcless_unittest.UnittestProto.TestRequired OptionalMessage) {
-this.OptionalMessage = OptionalMessage;
+this.optionalMessage = OptionalMessage;
 this.hasOptionalMessage = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> RepeatedMessage;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> repeatedMessage;
 private boolean hasRepeatedMessage;
 public boolean hasRepeatedMessage() {
 return hasRepeatedMessage;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> getRepeatedMessage() {
-return RepeatedMessage;
+return repeatedMessage;
 }
 public void setRepeatedMessage(java.util.List<protobuf_gcless_unittest.UnittestProto.TestRequired> RepeatedMessage) {
-this.RepeatedMessage = RepeatedMessage;
+this.repeatedMessage = RepeatedMessage;
 this.hasRepeatedMessage = true;
 }
-private int Dummy;
+private int dummy;
 private boolean hasDummy;
 public boolean hasDummy() {
 return hasDummy;
 }
 public int getDummy() {
-return Dummy;
+return dummy;
 }
 public void setDummy(int Dummy) {
-this.Dummy = Dummy;
+this.dummy = Dummy;
 this.hasDummy = true;
 }
 }
@@ -5475,16 +5475,16 @@ break;
 }
 }
 public static class TestForeignNested {
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage ForeignNested;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage foreignNested;
 private boolean hasForeignNested;
 public boolean hasForeignNested() {
 return hasForeignNested;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage getForeignNested() {
-return ForeignNested;
+return foreignNested;
 }
 public void setForeignNested(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage ForeignNested) {
-this.ForeignNested = ForeignNested;
+this.foreignNested = ForeignNested;
 this.hasForeignNested = true;
 }
 }
@@ -5892,28 +5892,28 @@ return message;
 }
 }
 public static class TestReallyLargeTagNumber {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
-private int Bb;
+private int bb;
 private boolean hasBb;
 public boolean hasBb() {
 return hasBb;
 }
 public int getBb() {
-return Bb;
+return bb;
 }
 public void setBb(int Bb) {
-this.Bb = Bb;
+this.bb = Bb;
 this.hasBb = true;
 }
 }
@@ -6059,28 +6059,28 @@ break;
 }
 }
 public static class TestRecursiveMessage {
-private protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage A;
+private protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage getA() {
-return A;
+return a;
 }
 public void setA(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
-private int I;
+private int i;
 private boolean hasI;
 public boolean hasI() {
 return hasI;
 }
 public int getI() {
-return I;
+return i;
 }
 public void setI(int I) {
-this.I = I;
+this.i = I;
 this.hasI = true;
 }
 }
@@ -6239,16 +6239,16 @@ break;
 }
 }
 public static class TestMutualRecursionA {
-private protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB Bb;
+private protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB bb;
 private boolean hasBb;
 public boolean hasBb() {
 return hasBb;
 }
 public protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB getBb() {
-return Bb;
+return bb;
 }
 public void setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB Bb) {
-this.Bb = Bb;
+this.bb = Bb;
 this.hasBb = true;
 }
 }
@@ -6386,28 +6386,28 @@ break;
 }
 }
 public static class TestMutualRecursionB {
-private protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA A;
+private protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA getA() {
-return A;
+return a;
 }
 public void setA(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
-private int OptionalInt32;
+private int optionalInt32;
 private boolean hasOptionalInt32;
 public boolean hasOptionalInt32() {
 return hasOptionalInt32;
 }
 public int getOptionalInt32() {
-return OptionalInt32;
+return optionalInt32;
 }
 public void setOptionalInt32(int OptionalInt32) {
-this.OptionalInt32 = OptionalInt32;
+this.optionalInt32 = OptionalInt32;
 this.hasOptionalInt32 = true;
 }
 }
@@ -6566,53 +6566,53 @@ break;
 }
 }
 public static class TestDupFieldNumber {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo Foo;
+private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo foo;
 private boolean hasFoo;
 public boolean hasFoo() {
 return hasFoo;
 }
 public protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo getFoo() {
-return Foo;
+return foo;
 }
 public void setFoo(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Foo Foo) {
-this.Foo = Foo;
+this.foo = Foo;
 this.hasFoo = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar Bar;
+private protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar bar;
 private boolean hasBar;
 public boolean hasBar() {
 return hasBar;
 }
 public protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar getBar() {
-return Bar;
+return bar;
 }
 public void setBar(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar Bar) {
-this.Bar = Bar;
+this.bar = Bar;
 this.hasBar = true;
 }
 public static class Foo {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
 }
@@ -6753,16 +6753,16 @@ break;
 }
 }
 public static class Bar {
-private int A;
+private int a;
 private boolean hasA;
 public boolean hasA() {
 return hasA;
 }
 public int getA() {
-return A;
+return a;
 }
 public void setA(int A) {
-this.A = A;
+this.a = A;
 this.hasA = true;
 }
 }
@@ -7098,41 +7098,41 @@ break;
 }
 }
 public static class TestNestedMessageHasBits {
-private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage OptionalNestedMessage;
+private protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage optionalNestedMessage;
 private boolean hasOptionalNestedMessage;
 public boolean hasOptionalNestedMessage() {
 return hasOptionalNestedMessage;
 }
 public protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage getOptionalNestedMessage() {
-return OptionalNestedMessage;
+return optionalNestedMessage;
 }
 public void setOptionalNestedMessage(protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage OptionalNestedMessage) {
-this.OptionalNestedMessage = OptionalNestedMessage;
+this.optionalNestedMessage = OptionalNestedMessage;
 this.hasOptionalNestedMessage = true;
 }
 public static class NestedMessage {
-private java.util.List<Integer> NestedmessageRepeatedInt32;
+private java.util.List<Integer> nestedmessageRepeatedInt32;
 private boolean hasNestedmessageRepeatedInt32;
 public boolean hasNestedmessageRepeatedInt32() {
 return hasNestedmessageRepeatedInt32;
 }
 public java.util.List<Integer> getNestedmessageRepeatedInt32() {
-return NestedmessageRepeatedInt32;
+return nestedmessageRepeatedInt32;
 }
 public void setNestedmessageRepeatedInt32(java.util.List<Integer> NestedmessageRepeatedInt32) {
-this.NestedmessageRepeatedInt32 = NestedmessageRepeatedInt32;
+this.nestedmessageRepeatedInt32 = NestedmessageRepeatedInt32;
 this.hasNestedmessageRepeatedInt32 = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> NestedmessageRepeatedForeignmessage;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> nestedmessageRepeatedForeignmessage;
 private boolean hasNestedmessageRepeatedForeignmessage;
 public boolean hasNestedmessageRepeatedForeignmessage() {
 return hasNestedmessageRepeatedForeignmessage;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> getNestedmessageRepeatedForeignmessage() {
-return NestedmessageRepeatedForeignmessage;
+return nestedmessageRepeatedForeignmessage;
 }
 public void setNestedmessageRepeatedForeignmessage(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> NestedmessageRepeatedForeignmessage) {
-this.NestedmessageRepeatedForeignmessage = NestedmessageRepeatedForeignmessage;
+this.nestedmessageRepeatedForeignmessage = NestedmessageRepeatedForeignmessage;
 this.hasNestedmessageRepeatedForeignmessage = true;
 }
 }
@@ -7460,148 +7460,148 @@ break;
 }
 }
 public static class TestCamelCaseFieldNames {
-private int PrimitiveField;
+private int primitiveField;
 private boolean hasPrimitiveField;
 public boolean hasPrimitiveField() {
 return hasPrimitiveField;
 }
 public int getPrimitiveField() {
-return PrimitiveField;
+return primitiveField;
 }
 public void setPrimitiveField(int PrimitiveField) {
-this.PrimitiveField = PrimitiveField;
+this.primitiveField = PrimitiveField;
 this.hasPrimitiveField = true;
 }
-private String StringField;
+private String stringField;
 private boolean hasStringField;
 public boolean hasStringField() {
 return hasStringField;
 }
 public String getStringField() {
-return StringField;
+return stringField;
 }
 public void setStringField(String StringField) {
-this.StringField = StringField;
+this.stringField = StringField;
 this.hasStringField = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignEnum EnumField;
+private protobuf_gcless_unittest.UnittestProto.ForeignEnum enumField;
 private boolean hasEnumField;
 public boolean hasEnumField() {
 return hasEnumField;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignEnum getEnumField() {
-return EnumField;
+return enumField;
 }
 public void setEnumField(protobuf_gcless_unittest.UnittestProto.ForeignEnum EnumField) {
-this.EnumField = EnumField;
+this.enumField = EnumField;
 this.hasEnumField = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignMessage MessageField;
+private protobuf_gcless_unittest.UnittestProto.ForeignMessage messageField;
 private boolean hasMessageField;
 public boolean hasMessageField() {
 return hasMessageField;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignMessage getMessageField() {
-return MessageField;
+return messageField;
 }
 public void setMessageField(protobuf_gcless_unittest.UnittestProto.ForeignMessage MessageField) {
-this.MessageField = MessageField;
+this.messageField = MessageField;
 this.hasMessageField = true;
 }
-private String StringPieceField;
+private String stringPieceField;
 private boolean hasStringPieceField;
 public boolean hasStringPieceField() {
 return hasStringPieceField;
 }
 public String getStringPieceField() {
-return StringPieceField;
+return stringPieceField;
 }
 public void setStringPieceField(String StringPieceField) {
-this.StringPieceField = StringPieceField;
+this.stringPieceField = StringPieceField;
 this.hasStringPieceField = true;
 }
-private String CordField;
+private String cordField;
 private boolean hasCordField;
 public boolean hasCordField() {
 return hasCordField;
 }
 public String getCordField() {
-return CordField;
+return cordField;
 }
 public void setCordField(String CordField) {
-this.CordField = CordField;
+this.cordField = CordField;
 this.hasCordField = true;
 }
-private java.util.List<Integer> RepeatedPrimitiveField;
+private java.util.List<Integer> repeatedPrimitiveField;
 private boolean hasRepeatedPrimitiveField;
 public boolean hasRepeatedPrimitiveField() {
 return hasRepeatedPrimitiveField;
 }
 public java.util.List<Integer> getRepeatedPrimitiveField() {
-return RepeatedPrimitiveField;
+return repeatedPrimitiveField;
 }
 public void setRepeatedPrimitiveField(java.util.List<Integer> RepeatedPrimitiveField) {
-this.RepeatedPrimitiveField = RepeatedPrimitiveField;
+this.repeatedPrimitiveField = RepeatedPrimitiveField;
 this.hasRepeatedPrimitiveField = true;
 }
-private java.util.List<String> RepeatedStringField;
+private java.util.List<String> repeatedStringField;
 private boolean hasRepeatedStringField;
 public boolean hasRepeatedStringField() {
 return hasRepeatedStringField;
 }
 public java.util.List<String> getRepeatedStringField() {
-return RepeatedStringField;
+return repeatedStringField;
 }
 public void setRepeatedStringField(java.util.List<String> RepeatedStringField) {
-this.RepeatedStringField = RepeatedStringField;
+this.repeatedStringField = RepeatedStringField;
 this.hasRepeatedStringField = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> RepeatedEnumField;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> repeatedEnumField;
 private boolean hasRepeatedEnumField;
 public boolean hasRepeatedEnumField() {
 return hasRepeatedEnumField;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> getRepeatedEnumField() {
-return RepeatedEnumField;
+return repeatedEnumField;
 }
 public void setRepeatedEnumField(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> RepeatedEnumField) {
-this.RepeatedEnumField = RepeatedEnumField;
+this.repeatedEnumField = RepeatedEnumField;
 this.hasRepeatedEnumField = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> RepeatedMessageField;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> repeatedMessageField;
 private boolean hasRepeatedMessageField;
 public boolean hasRepeatedMessageField() {
 return hasRepeatedMessageField;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> getRepeatedMessageField() {
-return RepeatedMessageField;
+return repeatedMessageField;
 }
 public void setRepeatedMessageField(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> RepeatedMessageField) {
-this.RepeatedMessageField = RepeatedMessageField;
+this.repeatedMessageField = RepeatedMessageField;
 this.hasRepeatedMessageField = true;
 }
-private java.util.List<String> RepeatedStringPieceField;
+private java.util.List<String> repeatedStringPieceField;
 private boolean hasRepeatedStringPieceField;
 public boolean hasRepeatedStringPieceField() {
 return hasRepeatedStringPieceField;
 }
 public java.util.List<String> getRepeatedStringPieceField() {
-return RepeatedStringPieceField;
+return repeatedStringPieceField;
 }
 public void setRepeatedStringPieceField(java.util.List<String> RepeatedStringPieceField) {
-this.RepeatedStringPieceField = RepeatedStringPieceField;
+this.repeatedStringPieceField = RepeatedStringPieceField;
 this.hasRepeatedStringPieceField = true;
 }
-private java.util.List<String> RepeatedCordField;
+private java.util.List<String> repeatedCordField;
 private boolean hasRepeatedCordField;
 public boolean hasRepeatedCordField() {
 return hasRepeatedCordField;
 }
 public java.util.List<String> getRepeatedCordField() {
-return RepeatedCordField;
+return repeatedCordField;
 }
 public void setRepeatedCordField(java.util.List<String> RepeatedCordField) {
-this.RepeatedCordField = RepeatedCordField;
+this.repeatedCordField = RepeatedCordField;
 this.hasRepeatedCordField = true;
 }
 }
@@ -8110,40 +8110,40 @@ break;
 }
 }
 public static class TestFieldOrderings {
-private String MyString;
+private String myString;
 private boolean hasMyString;
 public boolean hasMyString() {
 return hasMyString;
 }
 public String getMyString() {
-return MyString;
+return myString;
 }
 public void setMyString(String MyString) {
-this.MyString = MyString;
+this.myString = MyString;
 this.hasMyString = true;
 }
-private long MyInt;
+private long myInt;
 private boolean hasMyInt;
 public boolean hasMyInt() {
 return hasMyInt;
 }
 public long getMyInt() {
-return MyInt;
+return myInt;
 }
 public void setMyInt(long MyInt) {
-this.MyInt = MyInt;
+this.myInt = MyInt;
 this.hasMyInt = true;
 }
-private float MyFloat;
+private float myFloat;
 private boolean hasMyFloat;
 public boolean hasMyFloat() {
 return hasMyFloat;
 }
 public float getMyFloat() {
-return MyFloat;
+return myFloat;
 }
 public void setMyFloat(float MyFloat) {
-this.MyFloat = MyFloat;
+this.myFloat = MyFloat;
 this.hasMyFloat = true;
 }
 }
@@ -8314,232 +8314,232 @@ break;
 }
 }
 public static class TestExtremeDefaultValues {
-private byte[] EscapedBytes;
+private byte[] escapedBytes;
 private boolean hasEscapedBytes;
 public boolean hasEscapedBytes() {
 return hasEscapedBytes;
 }
 public byte[] getEscapedBytes() {
-return EscapedBytes;
+return escapedBytes;
 }
 public void setEscapedBytes(byte[] EscapedBytes) {
-this.EscapedBytes = EscapedBytes;
+this.escapedBytes = EscapedBytes;
 this.hasEscapedBytes = true;
 }
-private int LargeUint32;
+private int largeUint32;
 private boolean hasLargeUint32;
 public boolean hasLargeUint32() {
 return hasLargeUint32;
 }
 public int getLargeUint32() {
-return LargeUint32;
+return largeUint32;
 }
 public void setLargeUint32(int LargeUint32) {
-this.LargeUint32 = LargeUint32;
+this.largeUint32 = LargeUint32;
 this.hasLargeUint32 = true;
 }
-private long LargeUint64;
+private long largeUint64;
 private boolean hasLargeUint64;
 public boolean hasLargeUint64() {
 return hasLargeUint64;
 }
 public long getLargeUint64() {
-return LargeUint64;
+return largeUint64;
 }
 public void setLargeUint64(long LargeUint64) {
-this.LargeUint64 = LargeUint64;
+this.largeUint64 = LargeUint64;
 this.hasLargeUint64 = true;
 }
-private int SmallInt32;
+private int smallInt32;
 private boolean hasSmallInt32;
 public boolean hasSmallInt32() {
 return hasSmallInt32;
 }
 public int getSmallInt32() {
-return SmallInt32;
+return smallInt32;
 }
 public void setSmallInt32(int SmallInt32) {
-this.SmallInt32 = SmallInt32;
+this.smallInt32 = SmallInt32;
 this.hasSmallInt32 = true;
 }
-private long SmallInt64;
+private long smallInt64;
 private boolean hasSmallInt64;
 public boolean hasSmallInt64() {
 return hasSmallInt64;
 }
 public long getSmallInt64() {
-return SmallInt64;
+return smallInt64;
 }
 public void setSmallInt64(long SmallInt64) {
-this.SmallInt64 = SmallInt64;
+this.smallInt64 = SmallInt64;
 this.hasSmallInt64 = true;
 }
-private String Utf8String;
+private String utf8String;
 private boolean hasUtf8String;
 public boolean hasUtf8String() {
 return hasUtf8String;
 }
 public String getUtf8String() {
-return Utf8String;
+return utf8String;
 }
 public void setUtf8String(String Utf8String) {
-this.Utf8String = Utf8String;
+this.utf8String = Utf8String;
 this.hasUtf8String = true;
 }
-private float ZeroFloat;
+private float zeroFloat;
 private boolean hasZeroFloat;
 public boolean hasZeroFloat() {
 return hasZeroFloat;
 }
 public float getZeroFloat() {
-return ZeroFloat;
+return zeroFloat;
 }
 public void setZeroFloat(float ZeroFloat) {
-this.ZeroFloat = ZeroFloat;
+this.zeroFloat = ZeroFloat;
 this.hasZeroFloat = true;
 }
-private float OneFloat;
+private float oneFloat;
 private boolean hasOneFloat;
 public boolean hasOneFloat() {
 return hasOneFloat;
 }
 public float getOneFloat() {
-return OneFloat;
+return oneFloat;
 }
 public void setOneFloat(float OneFloat) {
-this.OneFloat = OneFloat;
+this.oneFloat = OneFloat;
 this.hasOneFloat = true;
 }
-private float SmallFloat;
+private float smallFloat;
 private boolean hasSmallFloat;
 public boolean hasSmallFloat() {
 return hasSmallFloat;
 }
 public float getSmallFloat() {
-return SmallFloat;
+return smallFloat;
 }
 public void setSmallFloat(float SmallFloat) {
-this.SmallFloat = SmallFloat;
+this.smallFloat = SmallFloat;
 this.hasSmallFloat = true;
 }
-private float NegativeOneFloat;
+private float negativeOneFloat;
 private boolean hasNegativeOneFloat;
 public boolean hasNegativeOneFloat() {
 return hasNegativeOneFloat;
 }
 public float getNegativeOneFloat() {
-return NegativeOneFloat;
+return negativeOneFloat;
 }
 public void setNegativeOneFloat(float NegativeOneFloat) {
-this.NegativeOneFloat = NegativeOneFloat;
+this.negativeOneFloat = NegativeOneFloat;
 this.hasNegativeOneFloat = true;
 }
-private float NegativeFloat;
+private float negativeFloat;
 private boolean hasNegativeFloat;
 public boolean hasNegativeFloat() {
 return hasNegativeFloat;
 }
 public float getNegativeFloat() {
-return NegativeFloat;
+return negativeFloat;
 }
 public void setNegativeFloat(float NegativeFloat) {
-this.NegativeFloat = NegativeFloat;
+this.negativeFloat = NegativeFloat;
 this.hasNegativeFloat = true;
 }
-private float LargeFloat;
+private float largeFloat;
 private boolean hasLargeFloat;
 public boolean hasLargeFloat() {
 return hasLargeFloat;
 }
 public float getLargeFloat() {
-return LargeFloat;
+return largeFloat;
 }
 public void setLargeFloat(float LargeFloat) {
-this.LargeFloat = LargeFloat;
+this.largeFloat = LargeFloat;
 this.hasLargeFloat = true;
 }
-private float SmallNegativeFloat;
+private float smallNegativeFloat;
 private boolean hasSmallNegativeFloat;
 public boolean hasSmallNegativeFloat() {
 return hasSmallNegativeFloat;
 }
 public float getSmallNegativeFloat() {
-return SmallNegativeFloat;
+return smallNegativeFloat;
 }
 public void setSmallNegativeFloat(float SmallNegativeFloat) {
-this.SmallNegativeFloat = SmallNegativeFloat;
+this.smallNegativeFloat = SmallNegativeFloat;
 this.hasSmallNegativeFloat = true;
 }
-private double InfDouble;
+private double infDouble;
 private boolean hasInfDouble;
 public boolean hasInfDouble() {
 return hasInfDouble;
 }
 public double getInfDouble() {
-return InfDouble;
+return infDouble;
 }
 public void setInfDouble(double InfDouble) {
-this.InfDouble = InfDouble;
+this.infDouble = InfDouble;
 this.hasInfDouble = true;
 }
-private double NegInfDouble;
+private double negInfDouble;
 private boolean hasNegInfDouble;
 public boolean hasNegInfDouble() {
 return hasNegInfDouble;
 }
 public double getNegInfDouble() {
-return NegInfDouble;
+return negInfDouble;
 }
 public void setNegInfDouble(double NegInfDouble) {
-this.NegInfDouble = NegInfDouble;
+this.negInfDouble = NegInfDouble;
 this.hasNegInfDouble = true;
 }
-private double NanDouble;
+private double nanDouble;
 private boolean hasNanDouble;
 public boolean hasNanDouble() {
 return hasNanDouble;
 }
 public double getNanDouble() {
-return NanDouble;
+return nanDouble;
 }
 public void setNanDouble(double NanDouble) {
-this.NanDouble = NanDouble;
+this.nanDouble = NanDouble;
 this.hasNanDouble = true;
 }
-private float InfFloat;
+private float infFloat;
 private boolean hasInfFloat;
 public boolean hasInfFloat() {
 return hasInfFloat;
 }
 public float getInfFloat() {
-return InfFloat;
+return infFloat;
 }
 public void setInfFloat(float InfFloat) {
-this.InfFloat = InfFloat;
+this.infFloat = InfFloat;
 this.hasInfFloat = true;
 }
-private float NegInfFloat;
+private float negInfFloat;
 private boolean hasNegInfFloat;
 public boolean hasNegInfFloat() {
 return hasNegInfFloat;
 }
 public float getNegInfFloat() {
-return NegInfFloat;
+return negInfFloat;
 }
 public void setNegInfFloat(float NegInfFloat) {
-this.NegInfFloat = NegInfFloat;
+this.negInfFloat = NegInfFloat;
 this.hasNegInfFloat = true;
 }
-private float NanFloat;
+private float nanFloat;
 private boolean hasNanFloat;
 public boolean hasNanFloat() {
 return hasNanFloat;
 }
 public float getNanFloat() {
-return NanFloat;
+return nanFloat;
 }
 public void setNanFloat(float NanFloat) {
-this.NanFloat = NanFloat;
+this.nanFloat = NanFloat;
 this.hasNanFloat = true;
 }
 }
@@ -9048,16 +9048,16 @@ break;
 }
 }
 public static class OneString {
-private String Data;
+private String data;
 private boolean hasData;
 public boolean hasData() {
 return hasData;
 }
 public String getData() {
-return Data;
+return data;
 }
 public void setData(String Data) {
-this.Data = Data;
+this.data = Data;
 this.hasData = true;
 }
 }
@@ -9186,16 +9186,16 @@ break;
 }
 }
 public static class OneBytes {
-private byte[] Data;
+private byte[] data;
 private boolean hasData;
 public boolean hasData() {
 return hasData;
 }
 public byte[] getData() {
-return Data;
+return data;
 }
 public void setData(byte[] Data) {
-this.Data = Data;
+this.data = Data;
 this.hasData = true;
 }
 }
@@ -9322,172 +9322,172 @@ break;
 }
 }
 public static class TestPackedTypes {
-private java.util.List<Integer> PackedInt32;
+private java.util.List<Integer> packedInt32;
 private boolean hasPackedInt32;
 public boolean hasPackedInt32() {
 return hasPackedInt32;
 }
 public java.util.List<Integer> getPackedInt32() {
-return PackedInt32;
+return packedInt32;
 }
 public void setPackedInt32(java.util.List<Integer> PackedInt32) {
-this.PackedInt32 = PackedInt32;
+this.packedInt32 = PackedInt32;
 this.hasPackedInt32 = true;
 }
-private java.util.List<Long> PackedInt64;
+private java.util.List<Long> packedInt64;
 private boolean hasPackedInt64;
 public boolean hasPackedInt64() {
 return hasPackedInt64;
 }
 public java.util.List<Long> getPackedInt64() {
-return PackedInt64;
+return packedInt64;
 }
 public void setPackedInt64(java.util.List<Long> PackedInt64) {
-this.PackedInt64 = PackedInt64;
+this.packedInt64 = PackedInt64;
 this.hasPackedInt64 = true;
 }
-private java.util.List<Integer> PackedUint32;
+private java.util.List<Integer> packedUint32;
 private boolean hasPackedUint32;
 public boolean hasPackedUint32() {
 return hasPackedUint32;
 }
 public java.util.List<Integer> getPackedUint32() {
-return PackedUint32;
+return packedUint32;
 }
 public void setPackedUint32(java.util.List<Integer> PackedUint32) {
-this.PackedUint32 = PackedUint32;
+this.packedUint32 = PackedUint32;
 this.hasPackedUint32 = true;
 }
-private java.util.List<Long> PackedUint64;
+private java.util.List<Long> packedUint64;
 private boolean hasPackedUint64;
 public boolean hasPackedUint64() {
 return hasPackedUint64;
 }
 public java.util.List<Long> getPackedUint64() {
-return PackedUint64;
+return packedUint64;
 }
 public void setPackedUint64(java.util.List<Long> PackedUint64) {
-this.PackedUint64 = PackedUint64;
+this.packedUint64 = PackedUint64;
 this.hasPackedUint64 = true;
 }
-private java.util.List<Integer> PackedSint32;
+private java.util.List<Integer> packedSint32;
 private boolean hasPackedSint32;
 public boolean hasPackedSint32() {
 return hasPackedSint32;
 }
 public java.util.List<Integer> getPackedSint32() {
-return PackedSint32;
+return packedSint32;
 }
 public void setPackedSint32(java.util.List<Integer> PackedSint32) {
-this.PackedSint32 = PackedSint32;
+this.packedSint32 = PackedSint32;
 this.hasPackedSint32 = true;
 }
-private java.util.List<Long> PackedSint64;
+private java.util.List<Long> packedSint64;
 private boolean hasPackedSint64;
 public boolean hasPackedSint64() {
 return hasPackedSint64;
 }
 public java.util.List<Long> getPackedSint64() {
-return PackedSint64;
+return packedSint64;
 }
 public void setPackedSint64(java.util.List<Long> PackedSint64) {
-this.PackedSint64 = PackedSint64;
+this.packedSint64 = PackedSint64;
 this.hasPackedSint64 = true;
 }
-private java.util.List<Integer> PackedFixed32;
+private java.util.List<Integer> packedFixed32;
 private boolean hasPackedFixed32;
 public boolean hasPackedFixed32() {
 return hasPackedFixed32;
 }
 public java.util.List<Integer> getPackedFixed32() {
-return PackedFixed32;
+return packedFixed32;
 }
 public void setPackedFixed32(java.util.List<Integer> PackedFixed32) {
-this.PackedFixed32 = PackedFixed32;
+this.packedFixed32 = PackedFixed32;
 this.hasPackedFixed32 = true;
 }
-private java.util.List<Long> PackedFixed64;
+private java.util.List<Long> packedFixed64;
 private boolean hasPackedFixed64;
 public boolean hasPackedFixed64() {
 return hasPackedFixed64;
 }
 public java.util.List<Long> getPackedFixed64() {
-return PackedFixed64;
+return packedFixed64;
 }
 public void setPackedFixed64(java.util.List<Long> PackedFixed64) {
-this.PackedFixed64 = PackedFixed64;
+this.packedFixed64 = PackedFixed64;
 this.hasPackedFixed64 = true;
 }
-private java.util.List<Integer> PackedSfixed32;
+private java.util.List<Integer> packedSfixed32;
 private boolean hasPackedSfixed32;
 public boolean hasPackedSfixed32() {
 return hasPackedSfixed32;
 }
 public java.util.List<Integer> getPackedSfixed32() {
-return PackedSfixed32;
+return packedSfixed32;
 }
 public void setPackedSfixed32(java.util.List<Integer> PackedSfixed32) {
-this.PackedSfixed32 = PackedSfixed32;
+this.packedSfixed32 = PackedSfixed32;
 this.hasPackedSfixed32 = true;
 }
-private java.util.List<Long> PackedSfixed64;
+private java.util.List<Long> packedSfixed64;
 private boolean hasPackedSfixed64;
 public boolean hasPackedSfixed64() {
 return hasPackedSfixed64;
 }
 public java.util.List<Long> getPackedSfixed64() {
-return PackedSfixed64;
+return packedSfixed64;
 }
 public void setPackedSfixed64(java.util.List<Long> PackedSfixed64) {
-this.PackedSfixed64 = PackedSfixed64;
+this.packedSfixed64 = PackedSfixed64;
 this.hasPackedSfixed64 = true;
 }
-private java.util.List<Float> PackedFloat;
+private java.util.List<Float> packedFloat;
 private boolean hasPackedFloat;
 public boolean hasPackedFloat() {
 return hasPackedFloat;
 }
 public java.util.List<Float> getPackedFloat() {
-return PackedFloat;
+return packedFloat;
 }
 public void setPackedFloat(java.util.List<Float> PackedFloat) {
-this.PackedFloat = PackedFloat;
+this.packedFloat = PackedFloat;
 this.hasPackedFloat = true;
 }
-private java.util.List<Double> PackedDouble;
+private java.util.List<Double> packedDouble;
 private boolean hasPackedDouble;
 public boolean hasPackedDouble() {
 return hasPackedDouble;
 }
 public java.util.List<Double> getPackedDouble() {
-return PackedDouble;
+return packedDouble;
 }
 public void setPackedDouble(java.util.List<Double> PackedDouble) {
-this.PackedDouble = PackedDouble;
+this.packedDouble = PackedDouble;
 this.hasPackedDouble = true;
 }
-private java.util.List<Boolean> PackedBool;
+private java.util.List<Boolean> packedBool;
 private boolean hasPackedBool;
 public boolean hasPackedBool() {
 return hasPackedBool;
 }
 public java.util.List<Boolean> getPackedBool() {
-return PackedBool;
+return packedBool;
 }
 public void setPackedBool(java.util.List<Boolean> PackedBool) {
-this.PackedBool = PackedBool;
+this.packedBool = PackedBool;
 this.hasPackedBool = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> PackedEnum;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> packedEnum;
 private boolean hasPackedEnum;
 public boolean hasPackedEnum() {
 return hasPackedEnum;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> getPackedEnum() {
-return PackedEnum;
+return packedEnum;
 }
 public void setPackedEnum(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> PackedEnum) {
-this.PackedEnum = PackedEnum;
+this.packedEnum = PackedEnum;
 this.hasPackedEnum = true;
 }
 }
@@ -10113,172 +10113,172 @@ break;
 }
 }
 public static class TestUnpackedTypes {
-private java.util.List<Integer> UnpackedInt32;
+private java.util.List<Integer> unpackedInt32;
 private boolean hasUnpackedInt32;
 public boolean hasUnpackedInt32() {
 return hasUnpackedInt32;
 }
 public java.util.List<Integer> getUnpackedInt32() {
-return UnpackedInt32;
+return unpackedInt32;
 }
 public void setUnpackedInt32(java.util.List<Integer> UnpackedInt32) {
-this.UnpackedInt32 = UnpackedInt32;
+this.unpackedInt32 = UnpackedInt32;
 this.hasUnpackedInt32 = true;
 }
-private java.util.List<Long> UnpackedInt64;
+private java.util.List<Long> unpackedInt64;
 private boolean hasUnpackedInt64;
 public boolean hasUnpackedInt64() {
 return hasUnpackedInt64;
 }
 public java.util.List<Long> getUnpackedInt64() {
-return UnpackedInt64;
+return unpackedInt64;
 }
 public void setUnpackedInt64(java.util.List<Long> UnpackedInt64) {
-this.UnpackedInt64 = UnpackedInt64;
+this.unpackedInt64 = UnpackedInt64;
 this.hasUnpackedInt64 = true;
 }
-private java.util.List<Integer> UnpackedUint32;
+private java.util.List<Integer> unpackedUint32;
 private boolean hasUnpackedUint32;
 public boolean hasUnpackedUint32() {
 return hasUnpackedUint32;
 }
 public java.util.List<Integer> getUnpackedUint32() {
-return UnpackedUint32;
+return unpackedUint32;
 }
 public void setUnpackedUint32(java.util.List<Integer> UnpackedUint32) {
-this.UnpackedUint32 = UnpackedUint32;
+this.unpackedUint32 = UnpackedUint32;
 this.hasUnpackedUint32 = true;
 }
-private java.util.List<Long> UnpackedUint64;
+private java.util.List<Long> unpackedUint64;
 private boolean hasUnpackedUint64;
 public boolean hasUnpackedUint64() {
 return hasUnpackedUint64;
 }
 public java.util.List<Long> getUnpackedUint64() {
-return UnpackedUint64;
+return unpackedUint64;
 }
 public void setUnpackedUint64(java.util.List<Long> UnpackedUint64) {
-this.UnpackedUint64 = UnpackedUint64;
+this.unpackedUint64 = UnpackedUint64;
 this.hasUnpackedUint64 = true;
 }
-private java.util.List<Integer> UnpackedSint32;
+private java.util.List<Integer> unpackedSint32;
 private boolean hasUnpackedSint32;
 public boolean hasUnpackedSint32() {
 return hasUnpackedSint32;
 }
 public java.util.List<Integer> getUnpackedSint32() {
-return UnpackedSint32;
+return unpackedSint32;
 }
 public void setUnpackedSint32(java.util.List<Integer> UnpackedSint32) {
-this.UnpackedSint32 = UnpackedSint32;
+this.unpackedSint32 = UnpackedSint32;
 this.hasUnpackedSint32 = true;
 }
-private java.util.List<Long> UnpackedSint64;
+private java.util.List<Long> unpackedSint64;
 private boolean hasUnpackedSint64;
 public boolean hasUnpackedSint64() {
 return hasUnpackedSint64;
 }
 public java.util.List<Long> getUnpackedSint64() {
-return UnpackedSint64;
+return unpackedSint64;
 }
 public void setUnpackedSint64(java.util.List<Long> UnpackedSint64) {
-this.UnpackedSint64 = UnpackedSint64;
+this.unpackedSint64 = UnpackedSint64;
 this.hasUnpackedSint64 = true;
 }
-private java.util.List<Integer> UnpackedFixed32;
+private java.util.List<Integer> unpackedFixed32;
 private boolean hasUnpackedFixed32;
 public boolean hasUnpackedFixed32() {
 return hasUnpackedFixed32;
 }
 public java.util.List<Integer> getUnpackedFixed32() {
-return UnpackedFixed32;
+return unpackedFixed32;
 }
 public void setUnpackedFixed32(java.util.List<Integer> UnpackedFixed32) {
-this.UnpackedFixed32 = UnpackedFixed32;
+this.unpackedFixed32 = UnpackedFixed32;
 this.hasUnpackedFixed32 = true;
 }
-private java.util.List<Long> UnpackedFixed64;
+private java.util.List<Long> unpackedFixed64;
 private boolean hasUnpackedFixed64;
 public boolean hasUnpackedFixed64() {
 return hasUnpackedFixed64;
 }
 public java.util.List<Long> getUnpackedFixed64() {
-return UnpackedFixed64;
+return unpackedFixed64;
 }
 public void setUnpackedFixed64(java.util.List<Long> UnpackedFixed64) {
-this.UnpackedFixed64 = UnpackedFixed64;
+this.unpackedFixed64 = UnpackedFixed64;
 this.hasUnpackedFixed64 = true;
 }
-private java.util.List<Integer> UnpackedSfixed32;
+private java.util.List<Integer> unpackedSfixed32;
 private boolean hasUnpackedSfixed32;
 public boolean hasUnpackedSfixed32() {
 return hasUnpackedSfixed32;
 }
 public java.util.List<Integer> getUnpackedSfixed32() {
-return UnpackedSfixed32;
+return unpackedSfixed32;
 }
 public void setUnpackedSfixed32(java.util.List<Integer> UnpackedSfixed32) {
-this.UnpackedSfixed32 = UnpackedSfixed32;
+this.unpackedSfixed32 = UnpackedSfixed32;
 this.hasUnpackedSfixed32 = true;
 }
-private java.util.List<Long> UnpackedSfixed64;
+private java.util.List<Long> unpackedSfixed64;
 private boolean hasUnpackedSfixed64;
 public boolean hasUnpackedSfixed64() {
 return hasUnpackedSfixed64;
 }
 public java.util.List<Long> getUnpackedSfixed64() {
-return UnpackedSfixed64;
+return unpackedSfixed64;
 }
 public void setUnpackedSfixed64(java.util.List<Long> UnpackedSfixed64) {
-this.UnpackedSfixed64 = UnpackedSfixed64;
+this.unpackedSfixed64 = UnpackedSfixed64;
 this.hasUnpackedSfixed64 = true;
 }
-private java.util.List<Float> UnpackedFloat;
+private java.util.List<Float> unpackedFloat;
 private boolean hasUnpackedFloat;
 public boolean hasUnpackedFloat() {
 return hasUnpackedFloat;
 }
 public java.util.List<Float> getUnpackedFloat() {
-return UnpackedFloat;
+return unpackedFloat;
 }
 public void setUnpackedFloat(java.util.List<Float> UnpackedFloat) {
-this.UnpackedFloat = UnpackedFloat;
+this.unpackedFloat = UnpackedFloat;
 this.hasUnpackedFloat = true;
 }
-private java.util.List<Double> UnpackedDouble;
+private java.util.List<Double> unpackedDouble;
 private boolean hasUnpackedDouble;
 public boolean hasUnpackedDouble() {
 return hasUnpackedDouble;
 }
 public java.util.List<Double> getUnpackedDouble() {
-return UnpackedDouble;
+return unpackedDouble;
 }
 public void setUnpackedDouble(java.util.List<Double> UnpackedDouble) {
-this.UnpackedDouble = UnpackedDouble;
+this.unpackedDouble = UnpackedDouble;
 this.hasUnpackedDouble = true;
 }
-private java.util.List<Boolean> UnpackedBool;
+private java.util.List<Boolean> unpackedBool;
 private boolean hasUnpackedBool;
 public boolean hasUnpackedBool() {
 return hasUnpackedBool;
 }
 public java.util.List<Boolean> getUnpackedBool() {
-return UnpackedBool;
+return unpackedBool;
 }
 public void setUnpackedBool(java.util.List<Boolean> UnpackedBool) {
-this.UnpackedBool = UnpackedBool;
+this.unpackedBool = UnpackedBool;
 this.hasUnpackedBool = true;
 }
-private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> UnpackedEnum;
+private java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> unpackedEnum;
 private boolean hasUnpackedEnum;
 public boolean hasUnpackedEnum() {
 return hasUnpackedEnum;
 }
 public java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> getUnpackedEnum() {
-return UnpackedEnum;
+return unpackedEnum;
 }
 public void setUnpackedEnum(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> UnpackedEnum) {
-this.UnpackedEnum = UnpackedEnum;
+this.unpackedEnum = UnpackedEnum;
 this.hasUnpackedEnum = true;
 }
 }
@@ -10994,101 +10994,101 @@ return message;
 }
 }
 public static class TestDynamicExtensions {
-private int ScalarExtension;
+private int scalarExtension;
 private boolean hasScalarExtension;
 public boolean hasScalarExtension() {
 return hasScalarExtension;
 }
 public int getScalarExtension() {
-return ScalarExtension;
+return scalarExtension;
 }
 public void setScalarExtension(int ScalarExtension) {
-this.ScalarExtension = ScalarExtension;
+this.scalarExtension = ScalarExtension;
 this.hasScalarExtension = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignEnum EnumExtension;
+private protobuf_gcless_unittest.UnittestProto.ForeignEnum enumExtension;
 private boolean hasEnumExtension;
 public boolean hasEnumExtension() {
 return hasEnumExtension;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignEnum getEnumExtension() {
-return EnumExtension;
+return enumExtension;
 }
 public void setEnumExtension(protobuf_gcless_unittest.UnittestProto.ForeignEnum EnumExtension) {
-this.EnumExtension = EnumExtension;
+this.enumExtension = EnumExtension;
 this.hasEnumExtension = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType DynamicEnumExtension;
+private protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType dynamicEnumExtension;
 private boolean hasDynamicEnumExtension;
 public boolean hasDynamicEnumExtension() {
 return hasDynamicEnumExtension;
 }
 public protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType getDynamicEnumExtension() {
-return DynamicEnumExtension;
+return dynamicEnumExtension;
 }
 public void setDynamicEnumExtension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicEnumType DynamicEnumExtension) {
-this.DynamicEnumExtension = DynamicEnumExtension;
+this.dynamicEnumExtension = DynamicEnumExtension;
 this.hasDynamicEnumExtension = true;
 }
-private protobuf_gcless_unittest.UnittestProto.ForeignMessage MessageExtension;
+private protobuf_gcless_unittest.UnittestProto.ForeignMessage messageExtension;
 private boolean hasMessageExtension;
 public boolean hasMessageExtension() {
 return hasMessageExtension;
 }
 public protobuf_gcless_unittest.UnittestProto.ForeignMessage getMessageExtension() {
-return MessageExtension;
+return messageExtension;
 }
 public void setMessageExtension(protobuf_gcless_unittest.UnittestProto.ForeignMessage MessageExtension) {
-this.MessageExtension = MessageExtension;
+this.messageExtension = MessageExtension;
 this.hasMessageExtension = true;
 }
-private protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType DynamicMessageExtension;
+private protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType dynamicMessageExtension;
 private boolean hasDynamicMessageExtension;
 public boolean hasDynamicMessageExtension() {
 return hasDynamicMessageExtension;
 }
 public protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType getDynamicMessageExtension() {
-return DynamicMessageExtension;
+return dynamicMessageExtension;
 }
 public void setDynamicMessageExtension(protobuf_gcless_unittest.UnittestProto.TestDynamicExtensions.DynamicMessageType DynamicMessageExtension) {
-this.DynamicMessageExtension = DynamicMessageExtension;
+this.dynamicMessageExtension = DynamicMessageExtension;
 this.hasDynamicMessageExtension = true;
 }
-private java.util.List<String> RepeatedExtension;
+private java.util.List<String> repeatedExtension;
 private boolean hasRepeatedExtension;
 public boolean hasRepeatedExtension() {
 return hasRepeatedExtension;
 }
 public java.util.List<String> getRepeatedExtension() {
-return RepeatedExtension;
+return repeatedExtension;
 }
 public void setRepeatedExtension(java.util.List<String> RepeatedExtension) {
-this.RepeatedExtension = RepeatedExtension;
+this.repeatedExtension = RepeatedExtension;
 this.hasRepeatedExtension = true;
 }
-private java.util.List<Integer> PackedExtension;
+private java.util.List<Integer> packedExtension;
 private boolean hasPackedExtension;
 public boolean hasPackedExtension() {
 return hasPackedExtension;
 }
 public java.util.List<Integer> getPackedExtension() {
-return PackedExtension;
+return packedExtension;
 }
 public void setPackedExtension(java.util.List<Integer> PackedExtension) {
-this.PackedExtension = PackedExtension;
+this.packedExtension = PackedExtension;
 this.hasPackedExtension = true;
 }
 public static class DynamicMessageType {
-private int DynamicField;
+private int dynamicField;
 private boolean hasDynamicField;
 public boolean hasDynamicField() {
 return hasDynamicField;
 }
 public int getDynamicField() {
-return DynamicField;
+return dynamicField;
 }
 public void setDynamicField(int DynamicField) {
-this.DynamicField = DynamicField;
+this.dynamicField = DynamicField;
 this.hasDynamicField = true;
 }
 }
@@ -11544,76 +11544,76 @@ break;
 }
 }
 public static class TestRepeatedScalarDifferentTagSizes {
-private java.util.List<Integer> RepeatedFixed32;
+private java.util.List<Integer> repeatedFixed32;
 private boolean hasRepeatedFixed32;
 public boolean hasRepeatedFixed32() {
 return hasRepeatedFixed32;
 }
 public java.util.List<Integer> getRepeatedFixed32() {
-return RepeatedFixed32;
+return repeatedFixed32;
 }
 public void setRepeatedFixed32(java.util.List<Integer> RepeatedFixed32) {
-this.RepeatedFixed32 = RepeatedFixed32;
+this.repeatedFixed32 = RepeatedFixed32;
 this.hasRepeatedFixed32 = true;
 }
-private java.util.List<Integer> RepeatedInt32;
+private java.util.List<Integer> repeatedInt32;
 private boolean hasRepeatedInt32;
 public boolean hasRepeatedInt32() {
 return hasRepeatedInt32;
 }
 public java.util.List<Integer> getRepeatedInt32() {
-return RepeatedInt32;
+return repeatedInt32;
 }
 public void setRepeatedInt32(java.util.List<Integer> RepeatedInt32) {
-this.RepeatedInt32 = RepeatedInt32;
+this.repeatedInt32 = RepeatedInt32;
 this.hasRepeatedInt32 = true;
 }
-private java.util.List<Long> RepeatedFixed64;
+private java.util.List<Long> repeatedFixed64;
 private boolean hasRepeatedFixed64;
 public boolean hasRepeatedFixed64() {
 return hasRepeatedFixed64;
 }
 public java.util.List<Long> getRepeatedFixed64() {
-return RepeatedFixed64;
+return repeatedFixed64;
 }
 public void setRepeatedFixed64(java.util.List<Long> RepeatedFixed64) {
-this.RepeatedFixed64 = RepeatedFixed64;
+this.repeatedFixed64 = RepeatedFixed64;
 this.hasRepeatedFixed64 = true;
 }
-private java.util.List<Long> RepeatedInt64;
+private java.util.List<Long> repeatedInt64;
 private boolean hasRepeatedInt64;
 public boolean hasRepeatedInt64() {
 return hasRepeatedInt64;
 }
 public java.util.List<Long> getRepeatedInt64() {
-return RepeatedInt64;
+return repeatedInt64;
 }
 public void setRepeatedInt64(java.util.List<Long> RepeatedInt64) {
-this.RepeatedInt64 = RepeatedInt64;
+this.repeatedInt64 = RepeatedInt64;
 this.hasRepeatedInt64 = true;
 }
-private java.util.List<Float> RepeatedFloat;
+private java.util.List<Float> repeatedFloat;
 private boolean hasRepeatedFloat;
 public boolean hasRepeatedFloat() {
 return hasRepeatedFloat;
 }
 public java.util.List<Float> getRepeatedFloat() {
-return RepeatedFloat;
+return repeatedFloat;
 }
 public void setRepeatedFloat(java.util.List<Float> RepeatedFloat) {
-this.RepeatedFloat = RepeatedFloat;
+this.repeatedFloat = RepeatedFloat;
 this.hasRepeatedFloat = true;
 }
-private java.util.List<Long> RepeatedUint64;
+private java.util.List<Long> repeatedUint64;
 private boolean hasRepeatedUint64;
 public boolean hasRepeatedUint64() {
 return hasRepeatedUint64;
 }
 public java.util.List<Long> getRepeatedUint64() {
-return RepeatedUint64;
+return repeatedUint64;
 }
 public void setRepeatedUint64(java.util.List<Long> RepeatedUint64) {
-this.RepeatedUint64 = RepeatedUint64;
+this.repeatedUint64 = RepeatedUint64;
 this.hasRepeatedUint64 = true;
 }
 }

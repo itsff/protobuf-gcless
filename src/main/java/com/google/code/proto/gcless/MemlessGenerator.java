@@ -774,7 +774,7 @@ public class MemlessGenerator {
 			result.append(" {\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
-				result.append("private " + javaType + " " + curField.getBeanName() + ";\n");
+				result.append("private " + javaType + " " + curField.getJavaFieldName() + ";\n");
 				if (config.isGenerateStaticFields()) {
 					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
 				}
@@ -783,10 +783,10 @@ public class MemlessGenerator {
 				result.append("return has" + curField.getBeanName() + ";\n");
 				result.append("}\n");
 				result.append("public " + javaType + " get" + curField.getBeanName() + "() {\n");
-				result.append("return " + curField.getBeanName() + ";\n");
+				result.append("return " + curField.getJavaFieldName() + ";\n");
 				result.append("}\n");
 				result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
-				result.append("this." + curField.getBeanName() + " = " + curField.getBeanName() + ";\n");
+				result.append("this." + curField.getJavaFieldName() + " = " + curField.getBeanName() + ";\n");
 				result.append("this.has" + curField.getBeanName() + " = true;\n");
 				if (config.isGenerateChaining()) {
 					result.append("return this;\n");
@@ -794,15 +794,15 @@ public class MemlessGenerator {
 				result.append("}\n");
 				if (config.isGenerateListHelpers() && curField.isListType()) {
 					result.append("public " + curField.getFullyClarifiedJavaType() + " get" + curField.getBeanName() + "(int index) {\n");
-					result.append("return this." + curField.getBeanName() + ".get(index);\n");
+					result.append("return this." + curField.getJavaFieldName() + ".get(index);\n");
 					result.append("}\n");
 
 					result.append("public int get" + curField.getBeanName() + "Count() {\n");
-					result.append("return this." + curField.getBeanName() + ".size();\n");
+					result.append("return this." + curField.getJavaFieldName() + ".size();\n");
 					result.append("}\n");
 
 					result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value) {\n");
-					result.append("this." + curField.getBeanName() + ".set(index, value);\n");
+					result.append("this." + curField.getJavaFieldName() + ".set(index, value);\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -810,7 +810,7 @@ public class MemlessGenerator {
 
 					result.append("public " + chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
 					initRepeatedFieldIfEmpty(result, curField);
-					result.append("this." + curField.getBeanName() + ".add(value);\n");
+					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -821,10 +821,10 @@ public class MemlessGenerator {
 					result.append("if (values instanceof java.util.Collection) {\n");
 					result.append("@SuppressWarnings(\"unsafe\") final\n");
 					result.append("java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + "> collection = (java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + ">) values;\n");
-					result.append("this." + curField.getBeanName() + ".addAll(collection);\n");
+					result.append("this." + curField.getJavaFieldName() + ".addAll(collection);\n");
 					result.append("} else {\n");
 					result.append("for (final " + curField.getFullyClarifiedJavaType() + " value : values) {\n");
-					result.append("this." + curField.getBeanName() + ".add(value);\n");
+					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
 					result.append("}\n}\n");
 					result.append("this.has" + curField.getBeanName() + " = true;\n");
 					if (config.isGenerateChaining()) {
@@ -834,7 +834,7 @@ public class MemlessGenerator {
 
 					result.append("public " + chainingReturn + " clear" + curField.getBeanName() + "() {\n");
 					result.append("this.has" + curField.getBeanName() + " = false;\n");
-					result.append("this." + curField.getBeanName() + " = null;\n");
+					result.append("this." + curField.getJavaFieldName() + " = null;\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -862,8 +862,8 @@ public class MemlessGenerator {
 					if (curField.isComplexType()) {
 						if( curField.isListType() ) {
 							result.append("a.append(\"[\");\n");
-							result.append("for( int i=0;i<" + curField.getBeanName() + ".size();i++ ) {\n");
-							result.append(curField.getFullyClarifiedJavaType() + " cur = " + curField.getBeanName() + ".get(i);\n");
+							result.append("for( int i=0;i<" + curField.getJavaFieldName() + ".size();i++ ) {\n");
+							result.append(curField.getFullyClarifiedJavaType() + " cur = " + curField.getJavaFieldName() + ".get(i);\n");
 							result.append("if( i != 0 ) {\n ");
 							result.append("a.append(\", \");\n");
 							result.append("}\n");
@@ -871,11 +871,11 @@ public class MemlessGenerator {
 							result.append("}\n");
 							result.append("a.append(\"]\");\n");
 						} else {
-							result.append("a.append(\" " + curField.getBeanName() + "=\");\n");
-							result.append(curField.getBeanName() + ".toString(a);\n");
+							result.append("a.append(\" " + curField.getJavaFieldName() + "=\");\n");
+							result.append(curField.getJavaFieldName() + ".toString(a);\n");
 						}
 					} else {
-						result.append("a.append(\" " + curField.getBeanName() + "=\" + " + curField.getBeanName() + ");\n");
+						result.append("a.append(\" " + curField.getJavaFieldName() + "=\" + " + curField.getJavaFieldName() + ");\n");
 					}
 				}
 				result.append("a.append(\"]\");\n");
@@ -896,8 +896,8 @@ public class MemlessGenerator {
 	}
 
 	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField) {
-		result.append("if( this." + curField.getBeanName() + " == null ) {\n");
-		result.append("this." + curField.getBeanName() + " = new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">();\n");
+		result.append("if( this." + curField.getJavaFieldName() + " == null ) {\n");
+		result.append("this." + curField.getJavaFieldName() + " = new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">();\n");
 		result.append("}\n");
 	}
 

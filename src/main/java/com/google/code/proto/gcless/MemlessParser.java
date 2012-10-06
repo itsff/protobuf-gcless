@@ -521,6 +521,7 @@ class MemlessParser {
 	private static void enrichField(ProtobufField curField, String prefix, String externalPackage, List<ProtobufMessage> allMessages, List<ProtobufEnum> allEnums) throws Exception {
 		curField.setBeanName(convertNameToJavabean(curField.getName()));
 		curField.setStreamBeanType(convertNameToJavabean(curField.getType()));
+		curField.setJavaFieldName(convertBeanNameToJavaFieldName(curField.getBeanName()));
 
 		String javaType = getJavaType(curField);
 		if (javaType != null) {
@@ -660,6 +661,18 @@ class MemlessParser {
 			if (curPart.length() > 1) {
 				result.append(curPart.substring(1));
 			}
+		}
+		return result.toString();
+	}
+	
+	static String convertBeanNameToJavaFieldName(String beanName) {
+		if (beanName == null || beanName.length() == 0) {
+			return "";
+		}
+		StringBuilder result = new StringBuilder();
+		result.append(Character.toLowerCase(beanName.charAt(0)));
+		if( beanName.length() > 1 ) {
+			result.append(beanName.substring(1));
 		}
 		return result.toString();
 	}

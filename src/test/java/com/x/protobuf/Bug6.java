@@ -5,47 +5,47 @@ import java.io.IOException;
 public final class Bug6 {
 private Bug6() {}
 public static class A {
-private java.util.List<String> Entry;
+private java.util.List<String> entry;
 private boolean hasEntry;
 public boolean hasEntry() {
 return hasEntry;
 }
 public java.util.List<String> getEntry() {
-return Entry;
+return entry;
 }
 public A setEntry(java.util.List<String> Entry) {
-this.Entry = Entry;
+this.entry = Entry;
 this.hasEntry = true;
 return this;
 }
 public String getEntry(int index) {
-return this.Entry.get(index);
+return this.entry.get(index);
 }
 public int getEntryCount() {
-return this.Entry.size();
+return this.entry.size();
 }
 public A setEntry(int index, String value) {
-this.Entry.set(index, value);
+this.entry.set(index, value);
 return this;
 }
 public A addEntry(String value) {
-if( this.Entry == null ) {
-this.Entry = new java.util.ArrayList<String>();
+if( this.entry == null ) {
+this.entry = new java.util.ArrayList<String>();
 }
-this.Entry.add(value);
+this.entry.add(value);
 return this;
 }
 public A addAllEntry(java.lang.Iterable<? extends String> values) {
-if( this.Entry == null ) {
-this.Entry = new java.util.ArrayList<String>();
+if( this.entry == null ) {
+this.entry = new java.util.ArrayList<String>();
 }
 if (values instanceof java.util.Collection) {
 @SuppressWarnings("unsafe") final
 java.util.Collection<? extends String> collection = (java.util.Collection<? extends String>) values;
-this.Entry.addAll(collection);
+this.entry.addAll(collection);
 } else {
 for (final String value : values) {
-this.Entry.add(value);
+this.entry.add(value);
 }
 }
 this.hasEntry = true;
@@ -53,19 +53,19 @@ return this;
 }
 public A clearEntry() {
 this.hasEntry = false;
-this.Entry = null;
+this.entry = null;
 return this;
 }
-private int Entry2;
+private int entry2;
 private boolean hasEntry2;
 public boolean hasEntry2() {
 return hasEntry2;
 }
 public int getEntry2() {
-return Entry2;
+return entry2;
 }
 public A setEntry2(int Entry2) {
-this.Entry2 = Entry2;
+this.entry2 = Entry2;
 this.hasEntry2 = true;
 return this;
 }
@@ -174,6 +174,9 @@ public static com.x.protobuf.Bug6.A parseFrom(java.io.InputStream is) throws jav
 com.x.protobuf.Bug6.A message = new com.x.protobuf.Bug6.A();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -202,6 +205,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {

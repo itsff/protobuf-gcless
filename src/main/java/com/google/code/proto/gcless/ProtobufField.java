@@ -4,6 +4,7 @@ class ProtobufField {
 
 	private String name;
 	private String beanName;
+	private String javaFieldName;
 	private String type;
 	private String streamBeanType;
 	private String fullyClarifiedJavaType;
@@ -48,10 +49,18 @@ class ProtobufField {
 		this.complexType = complexType;
 	}
 
+	public String getJavaFieldName() {
+		return javaFieldName;
+	}
+	
+	public void setJavaFieldName(String javaFieldName) {
+		this.javaFieldName = javaFieldName;
+	}
+	
 	public String getBeanName() {
 		return beanName;
 	}
-
+	
 	public void setBeanName(String beanName) {
 		this.beanName = beanName;
 	}

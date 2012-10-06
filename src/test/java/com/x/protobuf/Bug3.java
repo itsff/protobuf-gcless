@@ -5,17 +5,17 @@ import java.io.IOException;
 public final class Bug3 {
 private Bug3() {}
 public static class B {
-private String IdString;
+private String idString;
 public static final int ID_STRING_FIELD_NUMBER = 1;
 private boolean hasIdString;
 public boolean hasIdString() {
 return hasIdString;
 }
 public String getIdString() {
-return IdString;
+return idString;
 }
 public void setIdString(String IdString) {
-this.IdString = IdString;
+this.idString = IdString;
 this.hasIdString = true;
 }
 }
@@ -98,6 +98,9 @@ public static com.x.protobuf.Bug3.B parseFrom(java.io.InputStream is) throws jav
 com.x.protobuf.Bug3.B message = new com.x.protobuf.Bug3.B();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -120,6 +123,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -138,17 +144,17 @@ break;
 }
 }
 public static class A {
-private com.x.protobuf.Bug3.B Entry;
+private com.x.protobuf.Bug3.B entry;
 public static final int ENTRY_FIELD_NUMBER = 32904;
 private boolean hasEntry;
 public boolean hasEntry() {
 return hasEntry;
 }
 public com.x.protobuf.Bug3.B getEntry() {
-return Entry;
+return entry;
 }
 public void setEntry(com.x.protobuf.Bug3.B Entry) {
-this.Entry = Entry;
+this.entry = Entry;
 this.hasEntry = true;
 }
 }
@@ -238,6 +244,9 @@ public static com.x.protobuf.Bug3.A parseFrom(java.io.InputStream is) throws jav
 com.x.protobuf.Bug3.A message = new com.x.protobuf.Bug3.A();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -261,6 +270,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {

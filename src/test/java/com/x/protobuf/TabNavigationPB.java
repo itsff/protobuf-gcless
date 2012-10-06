@@ -5,28 +5,28 @@ import java.io.IOException;
 public final class TabNavigationPB {
 private TabNavigationPB() {}
 public static class TabNavigation {
-private String State;
+private String state;
 private boolean hasState;
 public boolean hasState() {
 return hasState;
 }
 public String getState() {
-return State;
+return state;
 }
 public void setState(String State) {
-this.State = State;
+this.state = State;
 this.hasState = true;
 }
-private com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition PageTransition;
+private com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition pageTransition;
 private boolean hasPageTransition;
 public boolean hasPageTransition() {
 return hasPageTransition;
 }
 public com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition getPageTransition() {
-return PageTransition;
+return pageTransition;
 }
 public void setPageTransition(com.x.protobuf.SyncEnumsPB.SyncEnums.PageTransition PageTransition) {
-this.PageTransition = PageTransition;
+this.pageTransition = PageTransition;
 this.hasPageTransition = true;
 }
 }
@@ -124,6 +124,9 @@ public static com.x.protobuf.TabNavigationPB.TabNavigation parseFrom(java.io.Inp
 com.x.protobuf.TabNavigationPB.TabNavigation message = new com.x.protobuf.TabNavigationPB.TabNavigation();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -149,6 +152,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {

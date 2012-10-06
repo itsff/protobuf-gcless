@@ -148,6 +148,9 @@ throw new IOException("Factory create invalid message for type: com.x.protobuf.B
 }
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -182,6 +185,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {

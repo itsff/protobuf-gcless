@@ -5,28 +5,28 @@ import java.io.IOException;
 public final class Bug10 {
 private Bug10() {}
 public static class A {
-private java.util.List<com.x.protobuf.Bug10.B> Entry;
+private java.util.List<com.x.protobuf.Bug10.B> entry;
 private boolean hasEntry;
 public boolean hasEntry() {
 return hasEntry;
 }
 public java.util.List<com.x.protobuf.Bug10.B> getEntry() {
-return Entry;
+return entry;
 }
 public void setEntry(java.util.List<com.x.protobuf.Bug10.B> Entry) {
-this.Entry = Entry;
+this.entry = Entry;
 this.hasEntry = true;
 }
-private int Entry2;
+private int entry2;
 private boolean hasEntry2;
 public boolean hasEntry2() {
 return hasEntry2;
 }
 public int getEntry2() {
-return Entry2;
+return entry2;
 }
 public void setEntry2(int Entry2) {
-this.Entry2 = Entry2;
+this.entry2 = Entry2;
 this.hasEntry2 = true;
 }
 @Override
@@ -42,8 +42,8 @@ throw new RuntimeException("Unable toString", e);
 public void toString(java.lang.Appendable a) throws java.io.IOException {
 a.append("A [");
 a.append("[");
-for( int i=0;i<Entry.size();i++ ) {
-com.x.protobuf.Bug10.B cur = Entry.get(i);
+for( int i=0;i<entry.size();i++ ) {
+com.x.protobuf.Bug10.B cur = entry.get(i);
 if( i != 0 ) {
  a.append(", ");
 }
@@ -51,7 +51,7 @@ cur.toString(a);
 }
 a.append("]");
 a.append(",");
-a.append(" Entry2=" + Entry2);
+a.append(" entry2=" + entry2);
 a.append("]");
 }
 }
@@ -229,16 +229,16 @@ break;
 }
 }
 public static class B {
-private String Val;
+private String val;
 private boolean hasVal;
 public boolean hasVal() {
 return hasVal;
 }
 public String getVal() {
-return Val;
+return val;
 }
 public void setVal(String Val) {
-this.Val = Val;
+this.val = Val;
 this.hasVal = true;
 }
 @Override
@@ -253,7 +253,7 @@ throw new RuntimeException("Unable toString", e);
 }
 public void toString(java.lang.Appendable a) throws java.io.IOException {
 a.append("B [");
-a.append(" Val=" + Val);
+a.append(" val=" + val);
 a.append("]");
 }
 }

@@ -5,97 +5,97 @@ import java.io.IOException;
 public final class Bug5 {
 private Bug5() {}
 public static class A {
-private java.util.List<String> Entry;
+private java.util.List<String> entry;
 private boolean hasEntry;
 public boolean hasEntry() {
 return hasEntry;
 }
 public java.util.List<String> getEntry() {
-return Entry;
+return entry;
 }
 public void setEntry(java.util.List<String> Entry) {
-this.Entry = Entry;
+this.entry = Entry;
 this.hasEntry = true;
 }
 public String getEntry(int index) {
-return this.Entry.get(index);
+return this.entry.get(index);
 }
 public int getEntryCount() {
-return this.Entry.size();
+return this.entry.size();
 }
 public void setEntry(int index, String value) {
-this.Entry.set(index, value);
+this.entry.set(index, value);
 }
 public void addEntry(String value) {
-if( this.Entry == null ) {
-this.Entry = new java.util.ArrayList<String>();
+if( this.entry == null ) {
+this.entry = new java.util.ArrayList<String>();
 }
-this.Entry.add(value);
+this.entry.add(value);
 }
 public void addAllEntry(java.lang.Iterable<? extends String> values) {
-if( this.Entry == null ) {
-this.Entry = new java.util.ArrayList<String>();
+if( this.entry == null ) {
+this.entry = new java.util.ArrayList<String>();
 }
 if (values instanceof java.util.Collection) {
 @SuppressWarnings("unsafe") final
 java.util.Collection<? extends String> collection = (java.util.Collection<? extends String>) values;
-this.Entry.addAll(collection);
+this.entry.addAll(collection);
 } else {
 for (final String value : values) {
-this.Entry.add(value);
+this.entry.add(value);
 }
 }
 this.hasEntry = true;
 }
 public void clearEntry() {
 this.hasEntry = false;
-this.Entry = null;
+this.entry = null;
 }
-private java.util.List<Integer> Entry2;
+private java.util.List<Integer> entry2;
 private boolean hasEntry2;
 public boolean hasEntry2() {
 return hasEntry2;
 }
 public java.util.List<Integer> getEntry2() {
-return Entry2;
+return entry2;
 }
 public void setEntry2(java.util.List<Integer> Entry2) {
-this.Entry2 = Entry2;
+this.entry2 = Entry2;
 this.hasEntry2 = true;
 }
 public Integer getEntry2(int index) {
-return this.Entry2.get(index);
+return this.entry2.get(index);
 }
 public int getEntry2Count() {
-return this.Entry2.size();
+return this.entry2.size();
 }
 public void setEntry2(int index, Integer value) {
-this.Entry2.set(index, value);
+this.entry2.set(index, value);
 }
 public void addEntry2(Integer value) {
-if( this.Entry2 == null ) {
-this.Entry2 = new java.util.ArrayList<Integer>();
+if( this.entry2 == null ) {
+this.entry2 = new java.util.ArrayList<Integer>();
 }
-this.Entry2.add(value);
+this.entry2.add(value);
 }
 public void addAllEntry2(java.lang.Iterable<? extends Integer> values) {
-if( this.Entry2 == null ) {
-this.Entry2 = new java.util.ArrayList<Integer>();
+if( this.entry2 == null ) {
+this.entry2 = new java.util.ArrayList<Integer>();
 }
 if (values instanceof java.util.Collection) {
 @SuppressWarnings("unsafe") final
 java.util.Collection<? extends Integer> collection = (java.util.Collection<? extends Integer>) values;
-this.Entry2.addAll(collection);
+this.entry2.addAll(collection);
 } else {
 for (final Integer value : values) {
-this.Entry2.add(value);
+this.entry2.add(value);
 }
 }
 this.hasEntry2 = true;
 }
 public void clearEntry2() {
 this.hasEntry2 = false;
-this.Entry2 = null;
+this.entry2 = null;
 }
 }
 public static class ASerializer {
@@ -212,6 +212,9 @@ public static com.x.protobuf.Bug5.A parseFrom(java.io.InputStream is) throws jav
 com.x.protobuf.Bug5.A message = new com.x.protobuf.Bug5.A();
 CurrentCursor cursor = new CurrentCursor();
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
@@ -243,6 +246,9 @@ CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
 while(true) {
+if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
+return message;
+}
 int varint = ProtobufInputStream.readRawVarint32(is, cursor);
 int tag = ProtobufInputStream.getTagFieldNumber(varint);
 if (ProtobufInputStream.isAtEnd(cursor)) {
