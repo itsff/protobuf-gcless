@@ -24,7 +24,7 @@ public class Bug10Test {
 		Bug10.A pojo = new Bug10.A();
 		pojo.setEntry2(2);
 		pojo.setEntry(entry);
-		assertEquals("A [[B [ Val=value1], B [ Val=value2]], Entry2=2]", pojo.toString());
+		assertEquals("A [[B [ val=value1], B [ val=value2]], entry2=2]", pojo.toString());
 	}
 
 }

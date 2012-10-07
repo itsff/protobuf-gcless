@@ -143,44 +143,17 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(byte[] data) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 2: 
-message.setUrl(ProtobufInputStream.readString(data,cursor));
-break;
-case 3: 
-message.setTitle(ProtobufInputStream.readString(data,cursor));
-break;
-case 4: 
-if( message.getSnippets() == null || message.getSnippets().isEmpty()) {
-message.setSnippets(new java.util.ArrayList<String>());
-}
-message.getSnippets().add(ProtobufInputStream.readString(data,cursor));
-break;
-}
-}
+return parseFrom(data, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(data, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -213,46 +186,17 @@ break;
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(java.io.InputStream is) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 2: 
-message.setUrl(ProtobufInputStream.readString(is,cursor));
-break;
-case 3: 
-message.setTitle(ProtobufInputStream.readString(is,cursor));
-break;
-case 4: 
-if( message.getSnippets() == null || message.getSnippets().isEmpty()) {
-message.setSnippets(new java.util.ArrayList<String>());
-}
-message.getSnippets().add(ProtobufInputStream.readString(is,cursor));
-break;
-}
-}
+return parseFrom(is, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(is, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Result parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Result message = new com.x.protobuf.Bug7.SearchResponse.Result();
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;
@@ -340,35 +284,17 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(byte[] data) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 1: 
-message.setTest(ProtobufInputStream.readString(data,cursor));
-break;
-}
-}
+return parseFrom(data, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(data, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -392,37 +318,17 @@ break;
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(java.io.InputStream is) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 1: 
-message.setTest(ProtobufInputStream.readString(is,cursor));
-break;
-}
-}
+return parseFrom(is, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(is, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Test parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Test message = new com.x.protobuf.Bug7.SearchResponse.Test();
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;
@@ -495,35 +401,17 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(byte[] data) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 1: 
-message.setTest(ProtobufInputStream.readInt32(data,cursor));
-break;
-}
-}
+return parseFrom(data, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(data, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -547,37 +435,17 @@ break;
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(java.io.InputStream is) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-int wireType = varint & ProtobufInputStream.TAG_TYPE_MASK;
-if (wireType == ProtobufInputStream.WIRETYPE_GROUP_END) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 1: 
-message.setTest(ProtobufInputStream.readInt32(is,cursor));
-break;
-}
-}
+return parseFrom(is, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(is, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse.Test2 parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse.Test2 message = new com.x.protobuf.Bug7.SearchResponse.Test2();
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;
@@ -681,49 +549,17 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse parseFrom(byte[] data) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 1: 
-if( message.getResult() == null || message.getResult().isEmpty()) {
-message.setResult(new java.util.ArrayList<com.x.protobuf.Bug7.SearchResponse.Result>());
-}
-com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.ResultSerializer.serialize(tempResult).length);
-message.getResult().add(tempResult);
-ProtobufInputStream.readTag(data,cursor);
-break;
-case 2: 
-com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-message.setTest(tempTest);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.TestSerializer.serialize(tempTest).length);
-ProtobufInputStream.readTag(data,cursor);
-break;
-case 3: 
-com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-message.setTest2(tempTest2);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.Test2Serializer.serialize(tempTest2).length);
-ProtobufInputStream.readTag(data,cursor);
-break;
-}
-}
+return parseFrom(data, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(data, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -740,66 +576,32 @@ case 1:
 if( message.getResult() == null || message.getResult().isEmpty()) {
 message.setResult(new java.util.ArrayList<com.x.protobuf.Bug7.SearchResponse.Result>());
 }
-com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.ResultSerializer.serialize(tempResult).length);
+com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(data, cursor);
 message.getResult().add(tempResult);
-ProtobufInputStream.readTag(data,cursor);
 break;
 case 2: 
-com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(data, cursor);
 message.setTest(tempTest);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.TestSerializer.serialize(tempTest).length);
-ProtobufInputStream.readTag(data,cursor);
 break;
 case 3: 
-com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(data, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(data, cursor);
 message.setTest2(tempTest2);
-cursor.addToPosition(com.x.protobuf.Bug7.SearchResponse.Test2Serializer.serialize(tempTest2).length);
-ProtobufInputStream.readTag(data,cursor);
 break;
 }
 }
 }
 public static com.x.protobuf.Bug7.SearchResponse parseFrom(java.io.InputStream is) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 1: 
-if( message.getResult() == null || message.getResult().isEmpty()) {
-message.setResult(new java.util.ArrayList<com.x.protobuf.Bug7.SearchResponse.Result>());
-}
-com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-message.getResult().add(tempResult);
-break;
-case 2: 
-com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-message.setTest(tempTest);
-break;
-case 3: 
-com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
-message.setTest2(tempTest2);
-break;
-}
-}
+return parseFrom(is, cursor);
 }
 public static com.x.protobuf.Bug7.SearchResponse parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(is, cursor);
+}
+public static com.x.protobuf.Bug7.SearchResponse parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
+com.x.protobuf.Bug7.SearchResponse message = new com.x.protobuf.Bug7.SearchResponse();
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;
@@ -818,15 +620,15 @@ return message;
 if( message.getResult() == null || message.getResult().isEmpty()) {
 message.setResult(new java.util.ArrayList<com.x.protobuf.Bug7.SearchResponse.Result>());
 }
-com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+com.x.protobuf.Bug7.SearchResponse.Result tempResult = com.x.protobuf.Bug7.SearchResponse.ResultSerializer.parseFrom(is, cursor);
 message.getResult().add(tempResult);
 break;
 case 2: 
-com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+com.x.protobuf.Bug7.SearchResponse.Test tempTest = com.x.protobuf.Bug7.SearchResponse.TestSerializer.parseFrom(is, cursor);
 message.setTest(tempTest);
 break;
 case 3: 
-com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(is, cursor.getCurrentPosition(), Integer.MAX_VALUE);
+com.x.protobuf.Bug7.SearchResponse.Test2 tempTest2 = com.x.protobuf.Bug7.SearchResponse.Test2Serializer.parseFrom(is, cursor);
 message.setTest2(tempTest2);
 break;
 }

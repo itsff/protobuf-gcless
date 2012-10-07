@@ -73,46 +73,20 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, byte[] data) throws java.io.IOException {
+CurrentCursor cursor = new CurrentCursor();
+return parseFrom(factory, data, cursor);
+}
+public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, byte[] data, int offset, int length) throws java.io.IOException {
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+return parseFrom(factory, data, cursor);
+}
+public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, byte[] data, CurrentCursor cursor) throws java.io.IOException {
 com.x.protobuf.Bug5Interface.A message = (com.x.protobuf.Bug5Interface.A)factory.create("com.x.protobuf.Bug5Interface.A");
 if( message == null ) { 
 throw new IOException("Factory create invalid message for type: com.x.protobuf.Bug5Interface.A");
 }
-CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 32904: 
-if( message.getEntry() == null || message.getEntry().isEmpty()) {
-message.setEntry(new java.util.ArrayList<String>());
-}
-message.getEntry().add(ProtobufInputStream.readString(data,cursor));
-break;
-case 32902: 
-if( message.getEntry2() == null || message.getEntry2().isEmpty()) {
-message.setEntry2(new java.util.ArrayList<Integer>());
-}
-message.getEntry2().add(ProtobufInputStream.readInt32(data,cursor));
-break;
-}
-}
-}
-public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, byte[] data, int offset, int length) throws java.io.IOException {
-com.x.protobuf.Bug5Interface.A message = (com.x.protobuf.Bug5Interface.A)factory.create("com.x.protobuf.Bug5Interface.A");
-if( message == null) { 
-throw new IOException("Factory create invalid message for type: com.x.protobuf.Bug5Interface.A");
-}
-CurrentCursor cursor = new CurrentCursor();
-cursor.addToPosition(offset);
-cursor.setProcessUpToPosition(offset + length);
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -142,48 +116,20 @@ break;
 }
 /** Beware! All subsequent messages in stream will be consumed until end of stream (default protobuf behaivour).
   **/public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, java.io.InputStream is) throws java.io.IOException {
-com.x.protobuf.Bug5Interface.A message = (com.x.protobuf.Bug5Interface.A)factory.create("com.x.protobuf.Bug5Interface.A");
-if( message == null) { 
-throw new IOException("Factory create invalid message for type: com.x.protobuf.Bug5Interface.A");
-}
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 32904: 
-if( message.getEntry() == null || message.getEntry().isEmpty()) {
-message.setEntry(new java.util.ArrayList<String>());
-}
-message.getEntry().add(ProtobufInputStream.readString(is,cursor));
-break;
-case 32902: 
-if( message.getEntry2() == null || message.getEntry2().isEmpty()) {
-message.setEntry2(new java.util.ArrayList<Integer>());
-}
-message.getEntry2().add(ProtobufInputStream.readInt32(is,cursor));
-break;
-}
-}
+return parseFrom(factory, is, cursor);
 }
 public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, java.io.InputStream is, int offset, int length) throws java.io.IOException {
+CurrentCursor cursor = new CurrentCursor();
+cursor.addToPosition(offset);
+cursor.setProcessUpToPosition(offset + length);
+return parseFrom(factory, is, cursor);
+}
+public static com.x.protobuf.Bug5Interface.A parseFrom(MessageFactory factory, java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
 com.x.protobuf.Bug5Interface.A message = (com.x.protobuf.Bug5Interface.A)factory.create("com.x.protobuf.Bug5Interface.A");
 if( message == null ) { 
 throw new IOException("Factory create invalid message for type: com.x.protobuf.Bug5Interface.A");
 }
-CurrentCursor cursor = new CurrentCursor();
-cursor.addToPosition(offset);
-cursor.setProcessUpToPosition(offset + length);
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;

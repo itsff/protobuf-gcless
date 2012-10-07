@@ -11,9 +11,33 @@ import static org.junit.Assert.assertNotNull;
 
 import com.x.protobuf.Bug7;
 import com.x.protobuf.Bug7Google;
+import com.x.protobuf.Bug7U;
 
 public class Issue7SerializationTest {
 
+	@Test
+	public void testDeserializeOldFromNew() throws Exception {
+		Bug7U.NewMessage.NewTest tNew = new Bug7U.NewMessage.NewTest();
+		tNew.setTest("test");
+		tNew.setValue("value");
+		Bug7U.NewMessage message = new Bug7U.NewMessage();
+		message.setValue("test");
+		message.setNewtest(tNew);
+		
+		byte[] data = Bug7U.NewMessageSerializer.serialize(message);
+		Bug7U.OldMessage old = Bug7U.OldMessageSerializer.parseFrom(data);
+
+		assertEquals(message.getValue(), old.getValue());
+		assertEquals(message.getNewtest().getTest(), old.getOldtest().getTest());
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		Bug7U.NewMessageSerializer.serialize(message, baos);
+		old = Bug7U.OldMessageSerializer.parseFrom(new ByteArrayInputStream(baos.toByteArray()));
+		
+		assertEquals(message.getValue(), old.getValue());
+		assertEquals(message.getNewtest().getTest(), old.getOldtest().getTest());
+	}
+	
 	@Test
 	public void testSerializeDeserialize() throws Exception {
 		Bug7.SearchResponse message = getMessage();

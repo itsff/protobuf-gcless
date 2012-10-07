@@ -29,31 +29,17 @@ throw new RuntimeException("Serializing to a byte array threw an IOException (sh
 }
 }
 public static protobuf_gcless_import.ImportMessage parseFrom(byte[] data) throws java.io.IOException {
-protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if (ProtobufInputStream.isAtEnd(data, cursor)) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(data, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, data, cursor);
- break;
-case 1: 
-message.setD(ProtobufInputStream.readInt32(data,cursor));
-break;
-}
-}
+return parseFrom(data, cursor);
 }
 public static protobuf_gcless_import.ImportMessage parseFrom(byte[] data, int offset, int length) throws java.io.IOException {
-protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(data, cursor);
+}
+public static protobuf_gcless_import.ImportMessage parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException {
+protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 while(true) {
 if (ProtobufInputStream.isAtEnd(data, cursor)) {
 return message;
@@ -73,33 +59,17 @@ break;
 }
 }
 public static protobuf_gcless_import.ImportMessage parseFrom(java.io.InputStream is) throws java.io.IOException {
-protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
-while(true) {
-if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
-return message;
-}
-int varint = ProtobufInputStream.readRawVarint32(is, cursor);
-int tag = ProtobufInputStream.getTagFieldNumber(varint);
-if (ProtobufInputStream.isAtEnd(cursor)) {
-return message;
-}
-switch(tag) {
-case 0: 
-return message;
- default: 
- ProtobufInputStream.skipUnknown(varint, is, cursor);
- break;case 1: 
-message.setD(ProtobufInputStream.readInt32(is,cursor));
-break;
-}
-}
+return parseFrom(is, cursor);
 }
 public static protobuf_gcless_import.ImportMessage parseFrom(java.io.InputStream is, int offset, int length) throws java.io.IOException {
-protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 CurrentCursor cursor = new CurrentCursor();
 cursor.addToPosition(offset);
 cursor.setProcessUpToPosition(offset + length);
+return parseFrom(is, cursor);
+}
+public static protobuf_gcless_import.ImportMessage parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException {
+protobuf_gcless_import.ImportMessage message = new protobuf_gcless_import.ImportMessage();
 while(true) {
 if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 return message;
