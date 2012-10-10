@@ -39,20 +39,20 @@ return builder.toString();
 throw new RuntimeException("Unable toString", e);
 }
 }
-public void toString(java.lang.Appendable a) throws java.io.IOException {
-a.append("A [");
-a.append("[");
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("A [");
+a_.append("[");
 for( int i=0;i<entry.size();i++ ) {
 com.x.protobuf.Bug10.B cur = entry.get(i);
 if( i != 0 ) {
- a.append(", ");
+ a_.append(", ");
 }
-cur.toString(a);
+cur.toString(a_);
 }
-a.append("]");
-a.append(",");
-a.append(" entry2=" + entry2);
-a.append("]");
+a_.append("]");
+a_.append(",");
+a_.append(" entry2=" + entry2);
+a_.append("]");
 }
 }
 public static class ASerializer {
@@ -207,10 +207,10 @@ return builder.toString();
 throw new RuntimeException("Unable toString", e);
 }
 }
-public void toString(java.lang.Appendable a) throws java.io.IOException {
-a.append("B [");
-a.append(" val=" + val);
-a.append("]");
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("B [");
+a_.append(" val=" + val);
+a_.append("]");
 }
 }
 public static class BSerializer {

@@ -467,7 +467,7 @@ public class MemlessGenerator {
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
 		result.append("cursor.addToPosition(offset);\n");
 		result.append("cursor.setProcessUpToPosition(offset + length);\n");
-		if( interfaceBased ) {
+		if (interfaceBased) {
 			result.append("return parseFrom(factory, data, cursor);\n");
 		} else {
 			result.append("return parseFrom(data, cursor);\n");
@@ -482,7 +482,7 @@ public class MemlessGenerator {
 			result.append("public static " + fullMessageType + " parseFrom(byte[] data) throws java.io.IOException {\n");
 		}
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
-		if( interfaceBased ) {
+		if (interfaceBased) {
 			result.append("return parseFrom(factory, data, cursor);\n");
 		} else {
 			result.append("return parseFrom(data, cursor);\n");
@@ -536,12 +536,10 @@ public class MemlessGenerator {
 						result.append("if( message.get" + curField.getBeanName() + "() == null || message.get" + curField.getBeanName() + "().isEmpty()) {\n");
 						result.append("message.set" + curField.getBeanName() + "(new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">());\n");
 						result.append("}\n");
-						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
-								+ "data, cursor);\n");
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor);\n");
 						result.append("message.get" + curField.getBeanName() + "().add(temp" + curField.getBeanName() + ");\n");
 					} else {
-						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory
-								+ "data, cursor);\n");
+						result.append(curField.getFullyClarifiedJavaType() + " temp" + curField.getBeanName() + " = " + curField.getFullyClarifiedJavaType() + "Serializer.parseFrom(" + factory + "data, cursor);\n");
 						result.append("message.set" + curField.getBeanName() + "(temp" + curField.getBeanName() + ");\n");
 					}
 				} else if (curField.getNature().equals("repeated")) {
@@ -585,11 +583,11 @@ public class MemlessGenerator {
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
 		result.append("cursor.addToPosition(offset);\n");
 		result.append("cursor.setProcessUpToPosition(offset + length);\n");
-		if( interfaceBased ) {
+		if (interfaceBased) {
 			result.append("return parseFrom(factory, is, cursor);\n");
 		} else {
 			result.append("return parseFrom(is, cursor);\n");
-		}		
+		}
 		result.append("}\n");
 	}
 
@@ -602,11 +600,11 @@ public class MemlessGenerator {
 			result.append("public static " + fullMessageType + " parseFrom(java.io.InputStream is) throws java.io.IOException {\n");
 		}
 		result.append("CurrentCursor cursor = new CurrentCursor();\n");
-		if( interfaceBased ) {
+		if (interfaceBased) {
 			result.append("return parseFrom(factory, is, cursor);\n");
 		} else {
 			result.append("return parseFrom(is, cursor);\n");
-		}		
+		}
 		result.append("}\n");
 	}
 
@@ -840,7 +838,6 @@ public class MemlessGenerator {
 					result.append("for (final " + curField.getFullyClarifiedJavaType() + " value : values) {\n");
 					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
 					result.append("}\n}\n");
-					result.append("this.has" + curField.getBeanName() + " = true;\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -866,33 +863,40 @@ public class MemlessGenerator {
 				result.append("throw new RuntimeException(\"Unable toString\", e);\n");
 				result.append("}\n");
 				result.append("}\n");
-				result.append("public void toString(java.lang.Appendable a) throws java.io.IOException {\n");
-				result.append("a.append(\"" + curMessage.getName() + " [\");\n");
+				result.append("public void toString(java.lang.Appendable a_) throws java.io.IOException {\n");
+				result.append("a_.append(\"" + curMessage.getName() + " [\");\n");
 				for (int i = 0; i < curMessage.getFields().size(); i++) {
 					ProtobufField curField = curMessage.getFields().get(i);
 					if (i != 0) {
-						result.append("a.append(\",\");\n");
+						result.append("a_.append(\",\");\n");
 					}
 					if (curField.isComplexType()) {
 						if (curField.isListType()) {
-							result.append("a.append(\"[\");\n");
+							result.append("a_.append(\"[\");\n");
 							result.append("for( int i=0;i<" + curField.getJavaFieldName() + ".size();i++ ) {\n");
 							result.append(curField.getFullyClarifiedJavaType() + " cur = " + curField.getJavaFieldName() + ".get(i);\n");
 							result.append("if( i != 0 ) {\n ");
-							result.append("a.append(\", \");\n");
+							result.append("a_.append(\", \");\n");
 							result.append("}\n");
-							result.append("cur.toString(a);\n");
+							if( curField.isEnumType() ) {
+								result.append("a_.append(cur.toString());\n");
+							} else {
+								result.append("cur.toString(a_);\n");
+							}
 							result.append("}\n");
-							result.append("a.append(\"]\");\n");
+							result.append("a_.append(\"]\");\n");
+						} else if (curField.isEnumType()) {
+							result.append("a_.append(\" " + curField.getJavaFieldName() + "=\");\n");
+							result.append("a_.append(" + curField.getJavaFieldName() + ".toString());\n");
 						} else {
-							result.append("a.append(\" " + curField.getJavaFieldName() + "=\");\n");
-							result.append(curField.getJavaFieldName() + ".toString(a);\n");
+							result.append("a_.append(\" " + curField.getJavaFieldName() + "=\");\n");
+							result.append(curField.getJavaFieldName() + ".toString(a_);\n");
 						}
 					} else {
-						result.append("a.append(\" " + curField.getJavaFieldName() + "=\" + " + curField.getJavaFieldName() + ");\n");
+						result.append("a_.append(\" " + curField.getJavaFieldName() + "=\" + " + curField.getJavaFieldName() + ");\n");
 					}
 				}
-				result.append("a.append(\"]\");\n");
+				result.append("a_.append(\"]\");\n");
 				result.append("}\n");
 			}
 		}
@@ -912,6 +916,7 @@ public class MemlessGenerator {
 	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField) {
 		result.append("if( this." + curField.getJavaFieldName() + " == null ) {\n");
 		result.append("this." + curField.getJavaFieldName() + " = new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">();\n");
+		result.append("this.has" + curField.getBeanName() + " = true;\n");
 		result.append("}\n");
 	}
 

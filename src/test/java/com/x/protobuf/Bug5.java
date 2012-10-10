@@ -29,12 +29,14 @@ this.entry.set(index, value);
 public void addEntry(String value) {
 if( this.entry == null ) {
 this.entry = new java.util.ArrayList<String>();
+this.hasEntry = true;
 }
 this.entry.add(value);
 }
 public void addAllEntry(java.lang.Iterable<? extends String> values) {
 if( this.entry == null ) {
 this.entry = new java.util.ArrayList<String>();
+this.hasEntry = true;
 }
 if (values instanceof java.util.Collection) {
 @SuppressWarnings("unsafe") final
@@ -45,7 +47,6 @@ for (final String value : values) {
 this.entry.add(value);
 }
 }
-this.hasEntry = true;
 }
 public void clearEntry() {
 this.hasEntry = false;
@@ -75,12 +76,14 @@ this.entry2.set(index, value);
 public void addEntry2(Integer value) {
 if( this.entry2 == null ) {
 this.entry2 = new java.util.ArrayList<Integer>();
+this.hasEntry2 = true;
 }
 this.entry2.add(value);
 }
 public void addAllEntry2(java.lang.Iterable<? extends Integer> values) {
 if( this.entry2 == null ) {
 this.entry2 = new java.util.ArrayList<Integer>();
+this.hasEntry2 = true;
 }
 if (values instanceof java.util.Collection) {
 @SuppressWarnings("unsafe") final
@@ -91,7 +94,6 @@ for (final Integer value : values) {
 this.entry2.add(value);
 }
 }
-this.hasEntry2 = true;
 }
 public void clearEntry2() {
 this.hasEntry2 = false;

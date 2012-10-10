@@ -895,6 +895,221 @@ public void setDefaultCord(String DefaultCord) {
 this.defaultCord = DefaultCord;
 this.hasDefaultCord = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestAllTypes [");
+a_.append(" optionalInt32=" + optionalInt32);
+a_.append(",");
+a_.append(" optionalInt64=" + optionalInt64);
+a_.append(",");
+a_.append(" optionalUint32=" + optionalUint32);
+a_.append(",");
+a_.append(" optionalUint64=" + optionalUint64);
+a_.append(",");
+a_.append(" optionalSint32=" + optionalSint32);
+a_.append(",");
+a_.append(" optionalSint64=" + optionalSint64);
+a_.append(",");
+a_.append(" optionalFixed32=" + optionalFixed32);
+a_.append(",");
+a_.append(" optionalFixed64=" + optionalFixed64);
+a_.append(",");
+a_.append(" optionalSfixed32=" + optionalSfixed32);
+a_.append(",");
+a_.append(" optionalSfixed64=" + optionalSfixed64);
+a_.append(",");
+a_.append(" optionalFloat=" + optionalFloat);
+a_.append(",");
+a_.append(" optionalDouble=" + optionalDouble);
+a_.append(",");
+a_.append(" optionalBool=" + optionalBool);
+a_.append(",");
+a_.append(" optionalString=" + optionalString);
+a_.append(",");
+a_.append(" optionalBytes=" + optionalBytes);
+a_.append(",");
+a_.append(" optionalgroup=");
+optionalgroup.toString(a_);
+a_.append(",");
+a_.append(" optionalNestedMessage=");
+optionalNestedMessage.toString(a_);
+a_.append(",");
+a_.append(" optionalForeignMessage=");
+optionalForeignMessage.toString(a_);
+a_.append(",");
+a_.append(" optionalImportMessage=");
+optionalImportMessage.toString(a_);
+a_.append(",");
+a_.append(" optionalNestedEnum=");
+a_.append(optionalNestedEnum.toString());
+a_.append(",");
+a_.append(" optionalForeignEnum=");
+a_.append(optionalForeignEnum.toString());
+a_.append(",");
+a_.append(" optionalImportEnum=");
+a_.append(optionalImportEnum.toString());
+a_.append(",");
+a_.append(" optionalStringPiece=" + optionalStringPiece);
+a_.append(",");
+a_.append(" optionalCord=" + optionalCord);
+a_.append(",");
+a_.append(" repeatedInt32=" + repeatedInt32);
+a_.append(",");
+a_.append(" repeatedInt64=" + repeatedInt64);
+a_.append(",");
+a_.append(" repeatedUint32=" + repeatedUint32);
+a_.append(",");
+a_.append(" repeatedUint64=" + repeatedUint64);
+a_.append(",");
+a_.append(" repeatedSint32=" + repeatedSint32);
+a_.append(",");
+a_.append(" repeatedSint64=" + repeatedSint64);
+a_.append(",");
+a_.append(" repeatedFixed32=" + repeatedFixed32);
+a_.append(",");
+a_.append(" repeatedFixed64=" + repeatedFixed64);
+a_.append(",");
+a_.append(" repeatedSfixed32=" + repeatedSfixed32);
+a_.append(",");
+a_.append(" repeatedSfixed64=" + repeatedSfixed64);
+a_.append(",");
+a_.append(" repeatedFloat=" + repeatedFloat);
+a_.append(",");
+a_.append(" repeatedDouble=" + repeatedDouble);
+a_.append(",");
+a_.append(" repeatedBool=" + repeatedBool);
+a_.append(",");
+a_.append(" repeatedString=" + repeatedString);
+a_.append(",");
+a_.append(" repeatedBytes=" + repeatedBytes);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedgroup.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.RepeatedGroup cur = repeatedgroup.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedNestedMessage.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedMessage cur = repeatedNestedMessage.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedForeignMessage.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignMessage cur = repeatedForeignMessage.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedImportMessage.size();i++ ) {
+protobuf_gcless_import.ImportMessage cur = repeatedImportMessage.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedNestedEnum.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.TestAllTypes.NestedEnum cur = repeatedNestedEnum.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedForeignEnum.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignEnum cur = repeatedForeignEnum.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedImportEnum.size();i++ ) {
+protobuf_gcless_import.ImportEnum cur = repeatedImportEnum.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append(",");
+a_.append(" repeatedStringPiece=" + repeatedStringPiece);
+a_.append(",");
+a_.append(" repeatedCord=" + repeatedCord);
+a_.append(",");
+a_.append(" defaultInt32=" + defaultInt32);
+a_.append(",");
+a_.append(" defaultInt64=" + defaultInt64);
+a_.append(",");
+a_.append(" defaultUint32=" + defaultUint32);
+a_.append(",");
+a_.append(" defaultUint64=" + defaultUint64);
+a_.append(",");
+a_.append(" defaultSint32=" + defaultSint32);
+a_.append(",");
+a_.append(" defaultSint64=" + defaultSint64);
+a_.append(",");
+a_.append(" defaultFixed32=" + defaultFixed32);
+a_.append(",");
+a_.append(" defaultFixed64=" + defaultFixed64);
+a_.append(",");
+a_.append(" defaultSfixed32=" + defaultSfixed32);
+a_.append(",");
+a_.append(" defaultSfixed64=" + defaultSfixed64);
+a_.append(",");
+a_.append(" defaultFloat=" + defaultFloat);
+a_.append(",");
+a_.append(" defaultDouble=" + defaultDouble);
+a_.append(",");
+a_.append(" defaultBool=" + defaultBool);
+a_.append(",");
+a_.append(" defaultString=" + defaultString);
+a_.append(",");
+a_.append(" defaultBytes=" + defaultBytes);
+a_.append(",");
+a_.append(" defaultNestedEnum=");
+a_.append(defaultNestedEnum.toString());
+a_.append(",");
+a_.append(" defaultForeignEnum=");
+a_.append(defaultForeignEnum.toString());
+a_.append(",");
+a_.append(" defaultImportEnum=");
+a_.append(defaultImportEnum.toString());
+a_.append(",");
+a_.append(" defaultStringPiece=" + defaultStringPiece);
+a_.append(",");
+a_.append(" defaultCord=" + defaultCord);
+a_.append("]");
+}
 public static class NestedMessage {
 private int bb;
 private boolean hasBb;
@@ -907,6 +1122,21 @@ return bb;
 public void setBb(int Bb) {
 this.bb = Bb;
 this.hasBb = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("NestedMessage [");
+a_.append(" bb=" + bb);
+a_.append("]");
 }
 }
 public static class NestedMessageSerializer {
@@ -1011,6 +1241,21 @@ return a;
 public void setA(int A) {
 this.a = A;
 this.hasA = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("OptionalGroup [");
+a_.append(" a=" + a);
+a_.append("]");
 }
 }
 public static class OptionalGroupSerializer {
@@ -1123,6 +1368,21 @@ return a;
 public void setA(int A) {
 this.a = A;
 this.hasA = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("RepeatedGroup [");
+a_.append(" a=" + a);
+a_.append("]");
 }
 }
 public static class RepeatedGroupSerializer {
@@ -2732,6 +2992,21 @@ public void setDeprecatedInt32(int DeprecatedInt32) {
 this.deprecatedInt32 = DeprecatedInt32;
 this.hasDeprecatedInt32 = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestDeprecatedFields [");
+a_.append(" deprecatedInt32=" + deprecatedInt32);
+a_.append("]");
+}
 }
 public static class TestDeprecatedFieldsSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestDeprecatedFields message) {
@@ -2836,6 +3111,21 @@ public void setC(int C) {
 this.c = C;
 this.hasC = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("ForeignMessage [");
+a_.append(" c=" + c);
+a_.append("]");
+}
 }
 public static class ForeignMessageSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.ForeignMessage message) {
@@ -2928,6 +3218,20 @@ break;
 }
 }
 public static class TestAllExtensions {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestAllExtensions [");
+a_.append("]");
+}
 }
 public static class TestAllExtensionsSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestAllExtensions message) {
@@ -3005,6 +3309,21 @@ return test;
 public void setTest(String Test) {
 this.test = Test;
 this.hasTest = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestNestedExtension [");
+a_.append(" test=" + test);
+a_.append("]");
 }
 }
 public static class TestNestedExtensionSerializer {
@@ -3521,6 +3840,98 @@ return c;
 public void setC(int C) {
 this.c = C;
 this.hasC = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestRequired [");
+a_.append(" a=" + a);
+a_.append(",");
+a_.append(" dummy2=" + dummy2);
+a_.append(",");
+a_.append(" b=" + b);
+a_.append(",");
+a_.append(" single=");
+single.toString(a_);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<multi.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.TestRequired cur = multi.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append(" dummy4=" + dummy4);
+a_.append(",");
+a_.append(" dummy5=" + dummy5);
+a_.append(",");
+a_.append(" dummy6=" + dummy6);
+a_.append(",");
+a_.append(" dummy7=" + dummy7);
+a_.append(",");
+a_.append(" dummy8=" + dummy8);
+a_.append(",");
+a_.append(" dummy9=" + dummy9);
+a_.append(",");
+a_.append(" dummy10=" + dummy10);
+a_.append(",");
+a_.append(" dummy11=" + dummy11);
+a_.append(",");
+a_.append(" dummy12=" + dummy12);
+a_.append(",");
+a_.append(" dummy13=" + dummy13);
+a_.append(",");
+a_.append(" dummy14=" + dummy14);
+a_.append(",");
+a_.append(" dummy15=" + dummy15);
+a_.append(",");
+a_.append(" dummy16=" + dummy16);
+a_.append(",");
+a_.append(" dummy17=" + dummy17);
+a_.append(",");
+a_.append(" dummy18=" + dummy18);
+a_.append(",");
+a_.append(" dummy19=" + dummy19);
+a_.append(",");
+a_.append(" dummy20=" + dummy20);
+a_.append(",");
+a_.append(" dummy21=" + dummy21);
+a_.append(",");
+a_.append(" dummy22=" + dummy22);
+a_.append(",");
+a_.append(" dummy23=" + dummy23);
+a_.append(",");
+a_.append(" dummy24=" + dummy24);
+a_.append(",");
+a_.append(" dummy25=" + dummy25);
+a_.append(",");
+a_.append(" dummy26=" + dummy26);
+a_.append(",");
+a_.append(" dummy27=" + dummy27);
+a_.append(",");
+a_.append(" dummy28=" + dummy28);
+a_.append(",");
+a_.append(" dummy29=" + dummy29);
+a_.append(",");
+a_.append(" dummy30=" + dummy30);
+a_.append(",");
+a_.append(" dummy31=" + dummy31);
+a_.append(",");
+a_.append(" dummy32=" + dummy32);
+a_.append(",");
+a_.append(" c=" + c);
+a_.append("]");
 }
 }
 public static class TestRequiredSerializer {
@@ -4208,6 +4619,34 @@ public void setDummy(int Dummy) {
 this.dummy = Dummy;
 this.hasDummy = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestRequiredForeign [");
+a_.append(" optionalMessage=");
+optionalMessage.toString(a_);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedMessage.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.TestRequired cur = repeatedMessage.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append(" dummy=" + dummy);
+a_.append("]");
+}
 }
 public static class TestRequiredForeignSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestRequiredForeign message) {
@@ -4377,6 +4816,22 @@ public void setForeignNested(protobuf_gcless_unittest.UnittestProto.TestAllTypes
 this.foreignNested = ForeignNested;
 this.hasForeignNested = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestForeignNested [");
+a_.append(" foreignNested=");
+foreignNested.toString(a_);
+a_.append("]");
+}
 }
 public static class TestForeignNestedSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestForeignNested message) {
@@ -4480,6 +4935,20 @@ break;
 }
 }
 public static class TestEmptyMessage {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestEmptyMessage [");
+a_.append("]");
+}
 }
 public static class TestEmptyMessageSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestEmptyMessage message) {
@@ -4546,6 +5015,20 @@ return message;
 }
 }
 public static class TestEmptyMessageWithExtensions {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestEmptyMessageWithExtensions [");
+a_.append("]");
+}
 }
 public static class TestEmptyMessageWithExtensionsSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestEmptyMessageWithExtensions message) {
@@ -4612,6 +5095,20 @@ return message;
 }
 }
 public static class TestMultipleExtensionRanges {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestMultipleExtensionRanges [");
+a_.append("]");
+}
 }
 public static class TestMultipleExtensionRangesSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestMultipleExtensionRanges message) {
@@ -4701,6 +5198,23 @@ return bb;
 public void setBb(int Bb) {
 this.bb = Bb;
 this.hasBb = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestReallyLargeTagNumber [");
+a_.append(" a=" + a);
+a_.append(",");
+a_.append(" bb=" + bb);
+a_.append("]");
 }
 }
 public static class TestReallyLargeTagNumberSerializer {
@@ -4833,6 +5347,24 @@ public void setI(int I) {
 this.i = I;
 this.hasI = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestRecursiveMessage [");
+a_.append(" a=");
+a.toString(a_);
+a_.append(",");
+a_.append(" i=" + i);
+a_.append("]");
+}
 }
 public static class TestRecursiveMessageSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestRecursiveMessage message) {
@@ -4963,6 +5495,22 @@ public void setBb(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionB Bb
 this.bb = Bb;
 this.hasBb = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestMutualRecursionA [");
+a_.append(" bb=");
+bb.toString(a_);
+a_.append("]");
+}
 }
 public static class TestMutualRecursionASerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestMutualRecursionA message) {
@@ -5089,6 +5637,24 @@ return optionalInt32;
 public void setOptionalInt32(int OptionalInt32) {
 this.optionalInt32 = OptionalInt32;
 this.hasOptionalInt32 = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestMutualRecursionB [");
+a_.append(" a=");
+a.toString(a_);
+a_.append(",");
+a_.append(" optionalInt32=" + optionalInt32);
+a_.append("]");
 }
 }
 public static class TestMutualRecursionBSerializer {
@@ -5244,6 +5810,27 @@ public void setBar(protobuf_gcless_unittest.UnittestProto.TestDupFieldNumber.Bar
 this.bar = Bar;
 this.hasBar = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestDupFieldNumber [");
+a_.append(" a=" + a);
+a_.append(",");
+a_.append(" foo=");
+foo.toString(a_);
+a_.append(",");
+a_.append(" bar=");
+bar.toString(a_);
+a_.append("]");
+}
 public static class Foo {
 private int a;
 private boolean hasA;
@@ -5256,6 +5843,21 @@ return a;
 public void setA(int A) {
 this.a = A;
 this.hasA = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("Foo [");
+a_.append(" a=" + a);
+a_.append("]");
 }
 }
 public static class FooSerializer {
@@ -5368,6 +5970,21 @@ return a;
 public void setA(int A) {
 this.a = A;
 this.hasA = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("Bar [");
+a_.append(" a=" + a);
+a_.append("]");
 }
 }
 public static class BarSerializer {
@@ -5622,6 +6239,22 @@ public void setOptionalNestedMessage(protobuf_gcless_unittest.UnittestProto.Test
 this.optionalNestedMessage = OptionalNestedMessage;
 this.hasOptionalNestedMessage = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestNestedMessageHasBits [");
+a_.append(" optionalNestedMessage=");
+optionalNestedMessage.toString(a_);
+a_.append("]");
+}
 public static class NestedMessage {
 private java.util.List<Integer> nestedmessageRepeatedInt32;
 private boolean hasNestedmessageRepeatedInt32;
@@ -5646,6 +6279,31 @@ return nestedmessageRepeatedForeignmessage;
 public void setNestedmessageRepeatedForeignmessage(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignMessage> NestedmessageRepeatedForeignmessage) {
 this.nestedmessageRepeatedForeignmessage = NestedmessageRepeatedForeignmessage;
 this.hasNestedmessageRepeatedForeignmessage = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("NestedMessage [");
+a_.append(" nestedmessageRepeatedInt32=" + nestedmessageRepeatedInt32);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<nestedmessageRepeatedForeignmessage.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignMessage cur = nestedmessageRepeatedForeignmessage.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append("]");
 }
 }
 public static class NestedMessageSerializer {
@@ -6033,6 +6691,61 @@ return repeatedCordField;
 public void setRepeatedCordField(java.util.List<String> RepeatedCordField) {
 this.repeatedCordField = RepeatedCordField;
 this.hasRepeatedCordField = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestCamelCaseFieldNames [");
+a_.append(" primitiveField=" + primitiveField);
+a_.append(",");
+a_.append(" stringField=" + stringField);
+a_.append(",");
+a_.append(" enumField=");
+a_.append(enumField.toString());
+a_.append(",");
+a_.append(" messageField=");
+messageField.toString(a_);
+a_.append(",");
+a_.append(" stringPieceField=" + stringPieceField);
+a_.append(",");
+a_.append(" cordField=" + cordField);
+a_.append(",");
+a_.append(" repeatedPrimitiveField=" + repeatedPrimitiveField);
+a_.append(",");
+a_.append(" repeatedStringField=" + repeatedStringField);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedEnumField.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignEnum cur = repeatedEnumField.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append(",");
+a_.append("[");
+for( int i=0;i<repeatedMessageField.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignMessage cur = repeatedMessageField.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+cur.toString(a_);
+}
+a_.append("]");
+a_.append(",");
+a_.append(" repeatedStringPieceField=" + repeatedStringPieceField);
+a_.append(",");
+a_.append(" repeatedCordField=" + repeatedCordField);
+a_.append("]");
 }
 }
 public static class TestCamelCaseFieldNamesSerializer {
@@ -6440,6 +7153,25 @@ public void setMyFloat(float MyFloat) {
 this.myFloat = MyFloat;
 this.hasMyFloat = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestFieldOrderings [");
+a_.append(" myString=" + myString);
+a_.append(",");
+a_.append(" myInt=" + myInt);
+a_.append(",");
+a_.append(" myFloat=" + myFloat);
+a_.append("]");
+}
 }
 public static class TestFieldOrderingsSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestFieldOrderings message) {
@@ -6793,6 +7525,57 @@ return nanFloat;
 public void setNanFloat(float NanFloat) {
 this.nanFloat = NanFloat;
 this.hasNanFloat = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestExtremeDefaultValues [");
+a_.append(" escapedBytes=" + escapedBytes);
+a_.append(",");
+a_.append(" largeUint32=" + largeUint32);
+a_.append(",");
+a_.append(" largeUint64=" + largeUint64);
+a_.append(",");
+a_.append(" smallInt32=" + smallInt32);
+a_.append(",");
+a_.append(" smallInt64=" + smallInt64);
+a_.append(",");
+a_.append(" utf8String=" + utf8String);
+a_.append(",");
+a_.append(" zeroFloat=" + zeroFloat);
+a_.append(",");
+a_.append(" oneFloat=" + oneFloat);
+a_.append(",");
+a_.append(" smallFloat=" + smallFloat);
+a_.append(",");
+a_.append(" negativeOneFloat=" + negativeOneFloat);
+a_.append(",");
+a_.append(" negativeFloat=" + negativeFloat);
+a_.append(",");
+a_.append(" largeFloat=" + largeFloat);
+a_.append(",");
+a_.append(" smallNegativeFloat=" + smallNegativeFloat);
+a_.append(",");
+a_.append(" infDouble=" + infDouble);
+a_.append(",");
+a_.append(" negInfDouble=" + negInfDouble);
+a_.append(",");
+a_.append(" nanDouble=" + nanDouble);
+a_.append(",");
+a_.append(" infFloat=" + infFloat);
+a_.append(",");
+a_.append(" negInfFloat=" + negInfFloat);
+a_.append(",");
+a_.append(" nanFloat=" + nanFloat);
+a_.append("]");
 }
 }
 public static class TestExtremeDefaultValuesSerializer {
@@ -7174,6 +7957,21 @@ public void setData(String Data) {
 this.data = Data;
 this.hasData = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("OneString [");
+a_.append(" data=" + data);
+a_.append("]");
+}
 }
 public static class OneStringSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.OneString message) {
@@ -7281,6 +8079,21 @@ return data;
 public void setData(byte[] Data) {
 this.data = Data;
 this.hasData = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("OneBytes [");
+a_.append(" data=" + data);
+a_.append("]");
 }
 }
 public static class OneBytesSerializer {
@@ -7543,6 +8356,55 @@ return packedEnum;
 public void setPackedEnum(java.util.List<protobuf_gcless_unittest.UnittestProto.ForeignEnum> PackedEnum) {
 this.packedEnum = PackedEnum;
 this.hasPackedEnum = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestPackedTypes [");
+a_.append(" packedInt32=" + packedInt32);
+a_.append(",");
+a_.append(" packedInt64=" + packedInt64);
+a_.append(",");
+a_.append(" packedUint32=" + packedUint32);
+a_.append(",");
+a_.append(" packedUint64=" + packedUint64);
+a_.append(",");
+a_.append(" packedSint32=" + packedSint32);
+a_.append(",");
+a_.append(" packedSint64=" + packedSint64);
+a_.append(",");
+a_.append(" packedFixed32=" + packedFixed32);
+a_.append(",");
+a_.append(" packedFixed64=" + packedFixed64);
+a_.append(",");
+a_.append(" packedSfixed32=" + packedSfixed32);
+a_.append(",");
+a_.append(" packedSfixed64=" + packedSfixed64);
+a_.append(",");
+a_.append(" packedFloat=" + packedFloat);
+a_.append(",");
+a_.append(" packedDouble=" + packedDouble);
+a_.append(",");
+a_.append(" packedBool=" + packedBool);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<packedEnum.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignEnum cur = packedEnum.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append("]");
 }
 }
 public static class TestPackedTypesSerializer {
@@ -8143,6 +9005,55 @@ public void setUnpackedEnum(java.util.List<protobuf_gcless_unittest.UnittestProt
 this.unpackedEnum = UnpackedEnum;
 this.hasUnpackedEnum = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestUnpackedTypes [");
+a_.append(" unpackedInt32=" + unpackedInt32);
+a_.append(",");
+a_.append(" unpackedInt64=" + unpackedInt64);
+a_.append(",");
+a_.append(" unpackedUint32=" + unpackedUint32);
+a_.append(",");
+a_.append(" unpackedUint64=" + unpackedUint64);
+a_.append(",");
+a_.append(" unpackedSint32=" + unpackedSint32);
+a_.append(",");
+a_.append(" unpackedSint64=" + unpackedSint64);
+a_.append(",");
+a_.append(" unpackedFixed32=" + unpackedFixed32);
+a_.append(",");
+a_.append(" unpackedFixed64=" + unpackedFixed64);
+a_.append(",");
+a_.append(" unpackedSfixed32=" + unpackedSfixed32);
+a_.append(",");
+a_.append(" unpackedSfixed64=" + unpackedSfixed64);
+a_.append(",");
+a_.append(" unpackedFloat=" + unpackedFloat);
+a_.append(",");
+a_.append(" unpackedDouble=" + unpackedDouble);
+a_.append(",");
+a_.append(" unpackedBool=" + unpackedBool);
+a_.append(",");
+a_.append("[");
+for( int i=0;i<unpackedEnum.size();i++ ) {
+protobuf_gcless_unittest.UnittestProto.ForeignEnum cur = unpackedEnum.get(i);
+if( i != 0 ) {
+ a_.append(", ");
+}
+a_.append(cur.toString());
+}
+a_.append("]");
+a_.append("]");
+}
 }
 public static class TestUnpackedTypesSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestUnpackedTypes message) {
@@ -8574,6 +9485,20 @@ break;
 }
 }
 public static class TestPackedExtensions {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestPackedExtensions [");
+a_.append("]");
+}
 }
 public static class TestPackedExtensionsSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestPackedExtensions message) {
@@ -8724,6 +9649,37 @@ public void setPackedExtension(java.util.List<Integer> PackedExtension) {
 this.packedExtension = PackedExtension;
 this.hasPackedExtension = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestDynamicExtensions [");
+a_.append(" scalarExtension=" + scalarExtension);
+a_.append(",");
+a_.append(" enumExtension=");
+a_.append(enumExtension.toString());
+a_.append(",");
+a_.append(" dynamicEnumExtension=");
+a_.append(dynamicEnumExtension.toString());
+a_.append(",");
+a_.append(" messageExtension=");
+messageExtension.toString(a_);
+a_.append(",");
+a_.append(" dynamicMessageExtension=");
+dynamicMessageExtension.toString(a_);
+a_.append(",");
+a_.append(" repeatedExtension=" + repeatedExtension);
+a_.append(",");
+a_.append(" packedExtension=" + packedExtension);
+a_.append("]");
+}
 public static class DynamicMessageType {
 private int dynamicField;
 private boolean hasDynamicField;
@@ -8736,6 +9692,21 @@ return dynamicField;
 public void setDynamicField(int DynamicField) {
 this.dynamicField = DynamicField;
 this.hasDynamicField = true;
+}
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("DynamicMessageType [");
+a_.append(" dynamicField=" + dynamicField);
+a_.append("]");
 }
 }
 public static class DynamicMessageTypeSerializer {
@@ -9150,6 +10121,31 @@ public void setRepeatedUint64(java.util.List<Long> RepeatedUint64) {
 this.repeatedUint64 = RepeatedUint64;
 this.hasRepeatedUint64 = true;
 }
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("TestRepeatedScalarDifferentTagSizes [");
+a_.append(" repeatedFixed32=" + repeatedFixed32);
+a_.append(",");
+a_.append(" repeatedInt32=" + repeatedInt32);
+a_.append(",");
+a_.append(" repeatedFixed64=" + repeatedFixed64);
+a_.append(",");
+a_.append(" repeatedInt64=" + repeatedInt64);
+a_.append(",");
+a_.append(" repeatedFloat=" + repeatedFloat);
+a_.append(",");
+a_.append(" repeatedUint64=" + repeatedUint64);
+a_.append("]");
+}
 }
 public static class TestRepeatedScalarDifferentTagSizesSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.TestRepeatedScalarDifferentTagSizes message) {
@@ -9377,6 +10373,20 @@ break;
 }
 }
 public static class FooRequest {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("FooRequest [");
+a_.append("]");
+}
 }
 public static class FooRequestSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.FooRequest message) {
@@ -9443,6 +10453,20 @@ return message;
 }
 }
 public static class FooResponse {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("FooResponse [");
+a_.append("]");
+}
 }
 public static class FooResponseSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.FooResponse message) {
@@ -9509,6 +10533,20 @@ return message;
 }
 }
 public static class BarRequest {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("BarRequest [");
+a_.append("]");
+}
 }
 public static class BarRequestSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.BarRequest message) {
@@ -9575,6 +10613,20 @@ return message;
 }
 }
 public static class BarResponse {
+@Override
+public String toString() {
+java.lang.StringBuilder builder = new java.lang.StringBuilder();
+try {
+toString(builder);
+return builder.toString();
+} catch (java.io.IOException e) {
+throw new RuntimeException("Unable toString", e);
+}
+}
+public void toString(java.lang.Appendable a_) throws java.io.IOException {
+a_.append("BarResponse [");
+a_.append("]");
+}
 }
 public static class BarResponseSerializer {
 public static byte[] serialize(protobuf_gcless_unittest.UnittestProto.BarResponse message) {
