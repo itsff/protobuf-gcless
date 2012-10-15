@@ -608,8 +608,14 @@ final public class ProtobufInputStream {
 			throw new IOException("Invalid buffer size");
 		}
 		byte[] bytes = new byte[size];
-		int bytesRead = is.read(bytes, 0, size);
-		if( bytesRead != size ) {
+		int totalRead = 0;
+		int remainedToRead = size;
+		int bytesRead = -1;
+		while( (bytesRead = is.read(bytes, totalRead, Math.min(remainedToRead, size))) != -1 && remainedToRead != 0 ) {
+			totalRead += bytesRead;
+			remainedToRead = size - totalRead;
+		}
+		if( totalRead != size ) {
 			throw new IOException("invalid amount of bytes read. Expected: " + size + " read: " + bytesRead);
 		}
 		cursor.addToPosition(size);
