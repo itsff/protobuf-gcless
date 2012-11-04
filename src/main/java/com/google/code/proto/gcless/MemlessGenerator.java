@@ -496,7 +496,7 @@ public class MemlessGenerator {
 			result.append("public static " + fullMessageType + " parseFrom(MessageFactory factory, byte[] data, CurrentCursor cursor) throws java.io.IOException {\n");
 			result.append(fullMessageType + " message = (" + curMessage.getFullyClarifiedJavaName() + ")factory.create(\"" + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("if( message == null ) { \n");
-			result.append("throw new IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
+			result.append("throw new java.io.IOException(\"Factory create invalid message for type: " + curMessage.getFullyClarifiedJavaName() + "\");\n");
 			result.append("}\n");
 			factory = "factory, ";
 		} else {
