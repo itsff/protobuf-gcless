@@ -28,7 +28,7 @@ public class MemlessGenerator {
 
 		File output = new File(args[0]);
 		if (!output.exists()) {
-			System.out.println("<output-path> " + output.getAbsolutePath() + " doesnt exist");
+			System.out.println("<output-path> " + output.getAbsolutePath() + " doesn't exist");
 			return;
 		}
 		if (!output.isDirectory()) {
@@ -123,9 +123,14 @@ public class MemlessGenerator {
 				}
 			}
 		}
-		copy("ProtobufOutputStream.java", output, parser.getPackageName());
-		copy("ProtobufInputStream.java", output, parser.getPackageName());
-		copy("CurrentCursor.java", output, parser.getPackageName());
+
+
+        if (config.isGenerateSerializer()) {
+            copy("ProtobufOutputStream.java", output, parser.getPackageName());
+            copy("ProtobufInputStream.java", output, parser.getPackageName());
+            copy("CurrentCursor.java", output, parser.getPackageName());
+        }
+
 		if (config.isInterfaceBased()) {
 			copy("MessageFactory.java", output, parser.getPackageName());
 		}
@@ -165,26 +170,30 @@ public class MemlessGenerator {
 
 	private static String generateSerializer(ProtobufMessage curMessage, String outerClassName, GeneratorConfiguration config) {
 		StringBuilder result = new StringBuilder();
-		String fullMessageType = curMessage.getFullyClarifiedJavaName();
-		if (outerClassName == null) {
-			result.append("public final class ");
-		} else {
-			result.append("public static class ");
-		}
-		result.append(curMessage.getName());
-		result.append("Serializer {\n");
-		createSerializeToBytes(curMessage, result, fullMessageType);
-		createSerializeToStream(curMessage, result, fullMessageType);
-		createParseFromBytes(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		createParseFromBytesWithLimit(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		createParseFromBytesCursor(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		createParseFromStream(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		createParseFromStreamWithLength(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		createParseFromStreamCursor(curMessage, config.isInterfaceBased(), result, fullMessageType);
-		if (hasRequired(curMessage)) {
-			createAssertInitialized(curMessage, result, fullMessageType);
-		}
-		result.append("}\n");
+
+        if (config.isGenerateSerializer())
+        {
+            String fullMessageType = curMessage.getFullyClarifiedJavaName();
+            if (outerClassName == null) {
+                result.append("public final class ");
+            } else {
+                result.append("public static class ");
+            }
+            result.append(curMessage.getName());
+            result.append("Serializer {\n");
+            createSerializeToBytes(curMessage, result, fullMessageType);
+            createSerializeToStream(curMessage, result, fullMessageType);
+            createParseFromBytes(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            createParseFromBytesWithLimit(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            createParseFromBytesCursor(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            createParseFromStream(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            createParseFromStreamWithLength(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            createParseFromStreamCursor(curMessage, config.isInterfaceBased(), result, fullMessageType);
+            if (hasRequired(curMessage)) {
+                createAssertInitialized(curMessage, result, fullMessageType);
+            }
+            result.append("}\n");
+        }
 		return result.toString();
 	}
 
@@ -782,20 +791,28 @@ public class MemlessGenerator {
 			result.append(" {\n");
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
+
+                generateGsonAnnotation(result, curField, config);
 				result.append("private " + javaType + " " + curField.getJavaFieldName() + ";\n");
 				if (config.isGenerateStaticFields()) {
 					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
 				}
-				result.append("private boolean has" + curField.getBeanName() + ";\n");
-				result.append("public boolean has" + curField.getBeanName() + "() {\n");
-				result.append("return has" + curField.getBeanName() + ";\n");
-				result.append("}\n");
+
+                if (isBasicType(javaType))
+                {
+                    result.append("private boolean has" + curField.getBeanName() + ";\n");
+                    result.append("public boolean has" + curField.getBeanName() + "() {\n");
+                    result.append("return this.has" + curField.getBeanName() + ";\n");
+                    result.append("}\n");
+                }
 				result.append("public " + javaType + " get" + curField.getBeanName() + "() {\n");
-				result.append("return " + curField.getJavaFieldName() + ";\n");
+				result.append("return this." + curField.getJavaFieldName() + ";\n");
 				result.append("}\n");
 				result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
 				result.append("this." + curField.getJavaFieldName() + " = " + curField.getBeanName() + ";\n");
-				result.append("this.has" + curField.getBeanName() + " = true;\n");
+                if (isBasicType(javaType)) {
+				    result.append("this.has" + curField.getBeanName() + " = true;\n");
+                }
 				if (config.isGenerateChaining()) {
 					result.append("return this;\n");
 				}
@@ -840,7 +857,7 @@ public class MemlessGenerator {
 					result.append("}\n");
 
 					result.append("public " + chainingReturn + " clear" + curField.getBeanName() + "() {\n");
-					result.append("this.has" + curField.getBeanName() + " = false;\n");
+					//result.append("this.has" + curField.getBeanName() + " = false;\n");
 					result.append("this." + curField.getJavaFieldName() + " = null;\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
@@ -908,6 +925,26 @@ public class MemlessGenerator {
 		result.append("}\n");
 		return result.toString();
 	}
+
+    private static void generateGsonAnnotation(StringBuilder result, ProtobufField curField, GeneratorConfiguration config)
+    {
+        if (config.isGenerateGsonAnnotations())
+        {
+            result.append("@com.google.gson.annotations.SerializedName(\"");
+            result.append(curField.getName());
+            result.append("\")\n");
+        }
+    }
+
+    private static boolean isBasicType(String javaType)
+    {
+        return  javaType.equals("int") ||
+                javaType.equals("boolean") ||
+                javaType.equals("long") ||
+                javaType.equals("float") ||
+                javaType.equals("double");
+
+    }
 
 	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField) {
 		result.append("if( this." + curField.getJavaFieldName() + " == null ) {\n");

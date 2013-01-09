@@ -180,6 +180,7 @@ class MemlessParser {
 		int intendtion = 0;
 		while ((curToken = getNextIgnoreNewLine()) != null) {
 			curToken = curToken.trim();
+
 			if (curToken.equals(Tokens.BRACE_START)) {
 				intendtion++;
 				continue;
@@ -217,8 +218,11 @@ class MemlessParser {
 				}
 				curField.setType(type);
 				String name = getNextNotEmpty();
+                if (name != null)   { name = name.trim(); }
+                if (name.isEmpty()) { continue; }
+
 				if (name == null || !Tokens.isIdentifier(name)) {
-					throw new Exception("Invalid field name: " + name);
+					throw new Exception("Invalid field name: '" + name + "'");
 				}
 				curField.setName(name);
 				consume("=");
@@ -313,7 +317,7 @@ class MemlessParser {
 		}
 		throw new Exception("Incomplete message: " + parentMessage);
 	}
-	
+
 	private void processGroup(ProtobufField curField, ProtobufMessage parentMessage) throws Exception {
 		curField.setGroup(true);
 		String groupName = getNextNotEmpty();
@@ -342,6 +346,15 @@ class MemlessParser {
 		String curToken = null;
 		int intendtion = 0;
 		while ((curToken = getNextIgnoreNewLine()) != null) {
+
+            curToken = curToken.trim();
+            if (curToken.startsWith("//") || curToken.startsWith("/*") || curToken.isEmpty())
+            {
+                continue;
+            }
+
+
+
 			if (curToken.equals(Tokens.BRACE_START)) {
 				intendtion++;
 				continue;
@@ -354,7 +367,7 @@ class MemlessParser {
 				continue;
 			}
 			if (!Tokens.isIdentifier(curToken)) {
-				throw new Exception("Invalid enum name: " + curToken);
+				throw new Exception("Invalid enum name: '" + curToken + "'. curEnum=" + pEnum.getName());
 			}
 			EnumValue curValue = new EnumValue();
 			curValue.setName(curToken);
@@ -501,6 +514,11 @@ class MemlessParser {
 		String curToken = null;
 		do {
 			curToken = getNext();
+
+            if (curToken != null) {
+                curToken = curToken.trim();
+            }
+
 		} while (curToken != null && curToken.length() == 0);
 		return curToken;
 	}
@@ -586,6 +604,12 @@ class MemlessParser {
 			}
 		}
 
+
+        if (externalPackage != null)
+        {
+            System.out.println(externalPackage);
+        }
+
 		curField.setFullyClarifiedJavaType(curField.getType());
 		throw new Exception("unknown field type: " + type);
 	}
@@ -664,7 +688,7 @@ class MemlessParser {
 		}
 		return result.toString();
 	}
-	
+
 	static String convertBeanNameToJavaFieldName(String beanName) {
 		if (beanName == null || beanName.length() == 0) {
 			return "";
@@ -677,30 +701,36 @@ class MemlessParser {
 		return result.toString();
 	}
 
+
+
 	private static String getJavaType(ProtobufField curField) {
+
+        if (curField.getType().equals("Uuid")) {
+            return "java.utils.UUID";
+        }
 		if (curField.getType().equals("int32") || curField.getType().equals("uint32") || curField.getType().equals("sint32") || curField.getType().equals("fixed32") || curField.getType().equals("sfixed32")) {
-			if (curField.getNature().equals("repeated")) {
+			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Integer";
 			} else {
 				return "int";
 			}
 		}
 		if (curField.getType().equals("int64") || curField.getType().equals("uint64") || curField.getType().equals("sint64") || curField.getType().equals("fixed64") || curField.getType().equals("sfixed64")) {
-			if (curField.getNature().equals("repeated")) {
+			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Long";
 			} else {
 				return "long";
 			}
 		}
 		if (curField.getType().equals("double")) {
-			if (curField.getNature().equals("repeated")) {
+			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Double";
 			} else {
 				return "double";
 			}
 		}
 		if (curField.getType().equals("bool")) {
-			if (curField.getNature().equals("repeated")) {
+			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Boolean";
 			} else {
 				return "boolean";
@@ -713,7 +743,7 @@ class MemlessParser {
 			return "byte[]";
 		}
 		if (curField.getType().equals("float")) {
-			if (curField.getNature().equals("repeated")) {
+			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Float";
 			} else {
 				return "float";
