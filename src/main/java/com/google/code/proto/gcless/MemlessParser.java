@@ -706,7 +706,7 @@ class MemlessParser {
 	private static String getJavaType(ProtobufField curField) {
 
         if (curField.getType().equals("Uuid")) {
-            return "java.utils.UUID";
+            return "java.util.UUID";
         }
 		if (curField.getType().equals("int32") || curField.getType().equals("uint32") || curField.getType().equals("sint32") || curField.getType().equals("fixed32") || curField.getType().equals("sfixed32")) {
 			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
@@ -715,6 +715,9 @@ class MemlessParser {
 				return "int";
 			}
 		}
+        if (curField.getType().equals("uint64")) {
+            return "java.math.BigInteger";
+        }
 		if (curField.getType().equals("int64") || curField.getType().equals("uint64") || curField.getType().equals("sint64") || curField.getType().equals("fixed64") || curField.getType().equals("sfixed64")) {
 			if (curField.getNature().equals("repeated") || curField.getNature().equals("optional")) {
 				return "Long";
