@@ -1,20 +1,7 @@
 package com.google.code.proto.gcless;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class MemlessGenerator {
 
@@ -36,26 +23,32 @@ public class MemlessGenerator {
 			return;
 		}
 
+
+
+        GsonEnumHelper enumHelper = new GsonEnumHelper();
+
 		for (int i = 1; i < args.length; i++) {
 			try {
-				process(output, args[i]);
+				process(output, args[i], enumHelper);
 			} catch (Exception e) {
 				System.out.println("unable to process: " + args[i]);
 				e.printStackTrace();
 			}
 		}
+
+        System.out.println(enumHelper.toString());
 	}
 
-	private static void process(File output, String filename) throws Exception {
+    private static void process(File output, String filename, GsonEnumHelper enumHelper) throws Exception {
 		MemlessParser parser = new MemlessParser();
 		parser.process(filename);
-		process(output, parser);
+		process(output, parser, enumHelper);
 		for (MemlessParser cur : parser.getImportedParsers()) {
-			process(output, cur);
+			process(output, cur, enumHelper);
 		}
 	}
 
-	private static void process(File output, MemlessParser parser) throws IOException, Exception {
+	private static void process(File output, MemlessParser parser, GsonEnumHelper enumHelper) throws IOException, Exception {
 		String packageName = parser.getPackageName();
 		if (packageName != null) {
 			output = createPackage(output, packageName);
@@ -74,7 +67,7 @@ public class MemlessGenerator {
 		}
 
 		for (ProtobufEnum curEnum : parser.getEnums()) {
-			String curEnumData = generateEnum(curEnum);
+			String curEnumData = generateEnum(curEnum, enumHelper);
 			if (parser.getOuterClassName() != null) {
 				w.append(curEnumData);
 			} else {
@@ -84,12 +77,14 @@ public class MemlessGenerator {
 				enumWriter.flush();
 				enumWriter.close();
 			}
+
+            enumHelper.addEnum(curEnum);
 		}
 
 		GeneratorConfiguration config = new GeneratorConfiguration(System.getProperties());
 
 		for (ProtobufMessage curMessage : parser.getMessages()) {
-			String curMessageData = generateMessage(curMessage, parser.getOuterClassName(), config);
+			String curMessageData = generateMessage(curMessage, parser.getOuterClassName(), config, enumHelper);
 			String serializerData = generateSerializer(curMessage, parser.getOuterClassName(), config);
 
 			if (parser.getOuterClassName() != null) {
@@ -733,7 +728,7 @@ public class MemlessGenerator {
 
 	}
 
-	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, GeneratorConfiguration config) {
+	private static String generateMessage(ProtobufMessage curMessage, String outerClassName, GeneratorConfiguration config, GsonEnumHelper enumHelper) {
 		String chainingReturn = "void";
 		if (config.isGenerateChaining()) {
 			chainingReturn = curMessage.getName();
@@ -793,7 +788,7 @@ public class MemlessGenerator {
 				String javaType = constructType(curField, curMessage);
 
                 generateGsonAnnotation(result, curField, config);
-				result.append("private " + javaType + " " + curField.getJavaFieldName() + ";\n");
+				result.append("private " + javaType + " __" + curField.getJavaFieldName() + ";\n");
 				if (config.isGenerateStaticFields()) {
 					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
 				}
@@ -806,10 +801,10 @@ public class MemlessGenerator {
                     result.append("}\n");
                 }
 				result.append("public " + javaType + " get" + curField.getBeanName() + "() {\n");
-				result.append("return this." + curField.getJavaFieldName() + ";\n");
+				result.append("return this.__" + curField.getJavaFieldName() + ";\n");
 				result.append("}\n");
 				result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(" + javaType + " " + curField.getBeanName() + ") {\n");
-				result.append("this." + curField.getJavaFieldName() + " = " + curField.getBeanName() + ";\n");
+				result.append("this.__" + curField.getJavaFieldName() + " = " + curField.getBeanName() + ";\n");
                 if (isBasicType(javaType)) {
 				    result.append("this.has" + curField.getBeanName() + " = true;\n");
                 }
@@ -819,15 +814,15 @@ public class MemlessGenerator {
 				result.append("}\n");
 				if (config.isGenerateListHelpers() && curField.isListType()) {
 					result.append("public " + curField.getFullyClarifiedJavaType() + " get" + curField.getBeanName() + "(int index) {\n");
-					result.append("return this." + curField.getJavaFieldName() + ".get(index);\n");
+					result.append("return this.__" + curField.getJavaFieldName() + ".get(index);\n");
 					result.append("}\n");
 
 					result.append("public int get" + curField.getBeanName() + "Count() {\n");
-					result.append("return this." + curField.getJavaFieldName() + ".size();\n");
+					result.append("return this.__" + curField.getJavaFieldName() + ".size();\n");
 					result.append("}\n");
 
 					result.append("public " + chainingReturn + " set" + curField.getBeanName() + "(int index, " + curField.getFullyClarifiedJavaType() + " value) {\n");
-					result.append("this." + curField.getJavaFieldName() + ".set(index, value);\n");
+					result.append("this.__" + curField.getJavaFieldName() + ".set(index, value);\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -835,7 +830,7 @@ public class MemlessGenerator {
 
 					result.append("public " + chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
 					initRepeatedFieldIfEmpty(result, curField);
-					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
+					result.append("this.__" + curField.getJavaFieldName() + ".add(value);\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -846,10 +841,10 @@ public class MemlessGenerator {
 					result.append("if (values instanceof java.util.Collection) {\n");
 					result.append("@SuppressWarnings(\"unsafe\") final\n");
 					result.append("java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + "> collection = (java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + ">) values;\n");
-					result.append("this." + curField.getJavaFieldName() + ".addAll(collection);\n");
+					result.append("this.__" + curField.getJavaFieldName() + ".addAll(collection);\n");
 					result.append("} else {\n");
 					result.append("for (final " + curField.getFullyClarifiedJavaType() + " value : values) {\n");
-					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
+					result.append("this.__" + curField.getJavaFieldName() + ".add(value);\n");
 					result.append("}\n}\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
@@ -858,7 +853,7 @@ public class MemlessGenerator {
 
 					result.append("public " + chainingReturn + " clear" + curField.getBeanName() + "() {\n");
 					//result.append("this.has" + curField.getBeanName() + " = false;\n");
-					result.append("this." + curField.getJavaFieldName() + " = null;\n");
+					result.append("this.__" + curField.getJavaFieldName() + " = null;\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
 					}
@@ -915,12 +910,12 @@ public class MemlessGenerator {
 		}
 
 		for (ProtobufMessage innerMessage : curMessage.getNestedMessages()) {
-			result.append(generateMessage(innerMessage, outerClassName, config));
+			result.append(generateMessage(innerMessage, outerClassName, config, enumHelper));
 			String serializerData = generateSerializer(innerMessage, outerClassName, config);
 			result.append(serializerData);
 		}
 		for (ProtobufEnum curEnum : curMessage.getEnums()) {
-			result.append(generateEnum(curEnum));
+			result.append(generateEnum(curEnum, enumHelper));
 		}
 		result.append("}\n");
 		return result.toString();
@@ -953,11 +948,11 @@ public class MemlessGenerator {
 		result.append("}\n");
 	}
 
-	private static String generateEnum(ProtobufEnum pEnum) {
+	private static String generateEnum(ProtobufEnum pEnum, GsonEnumHelper enumHelper) {
 		StringBuilder result = new StringBuilder();
 		result.append("public enum ");
 		result.append(pEnum.getName());
-		result.append(" {\n");
+		result.append(" implements com.tradingtechnologies.messaging.AbstractEnum {\n");
 		Map<Long, EnumValue> added = new HashMap<Long, EnumValue>();
 		List<EnumValue> duplicate = new ArrayList<EnumValue>();
 		for (EnumValue curValue : pEnum.getValues()) {
@@ -996,7 +991,22 @@ public class MemlessGenerator {
 		}
 		result.append("default: return null;\n}\n}\nprivate ");
 		result.append(pEnum.getName());
-		result.append("(int value) {\nthis.value = value;\n}\nprivate int value;\npublic int getValue() {\nreturn value;\n}\n}\n\n");
+        result.append("(int value) {\nthis.value = value;\n}\nprivate int value;\n");
+
+        result.append("private ");
+        result.append(pEnum.getName());
+        result.append("() {} \n\n");
+
+        result.append("@Override\n");
+        result.append("public int getValue() {\n" +
+                              "return value;\n" +
+                              "}\n" +
+                              "\n");
+
+        result.append("}\n\n");
+
+        enumHelper.addEnum(pEnum);
+
 		return result.toString();
 	}
 

@@ -89,7 +89,7 @@ class MemlessParser {
 					javaPackageName = javaPackageName.replaceAll("\"", "");
 					continue;
 				}
-				System.out.println("option \"" + optionType + "\" is not supported");
+				System.out.println("// option \"" + optionType + "\" is not supported");
 				consumeTillMessage(";");
 				continue;
 			}
