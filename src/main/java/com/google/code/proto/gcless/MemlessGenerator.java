@@ -792,7 +792,7 @@ public class MemlessGenerator {
 			for (ProtobufField curField : curMessage.getFields()) {
 				String javaType = constructType(curField, curMessage);
 
-                generateGsonAnnotation(result, curField, config);
+                generateOptionAnnotation(result, curField, config);
 				result.append("private " + javaType + " " + curField.getJavaFieldName() + ";\n");
 				if (config.isGenerateStaticFields()) {
 					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
@@ -926,14 +926,20 @@ public class MemlessGenerator {
 		return result.toString();
 	}
 
-    private static void generateGsonAnnotation(StringBuilder result, ProtobufField curField, GeneratorConfiguration config)
+    private static void generateOptionAnnotation(StringBuilder result, ProtobufField curField, GeneratorConfiguration config)
     {
-        if (config.isGenerateGsonAnnotations())
-        {
-            result.append("@com.google.gson.annotations.SerializedName(\"");
-            result.append(curField.getName());
-            result.append("\")\n");
-        }
+    	for (Map.Entry<String, String> option : curField.getOptions().entrySet())
+    	{
+    		String optionMapping = config.getOptionMapping(option.getKey());
+    		if (null != optionMapping)
+    		{
+    			result.append("@");
+    			result.append(optionMapping);
+    			result.append("(");
+    			result.append(option.getValue());
+                result.append(")\n");
+    		}
+    	}
     }
 
     private static boolean isBasicType(String javaType)

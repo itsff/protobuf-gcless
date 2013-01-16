@@ -25,6 +25,8 @@ class Tokens {
 	static final String OPTION = "option";
 	static final String IMPORT_TOKEN = "import";
 	static final String JAVA_OUTER_CLASSNAME = "java_outer_classname";
+	static final String OPEN_PARENTHESIS = "(";
+	static final String CLOSE_PARENTHESIS = ")";
 
 	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[a-zA-Z_]+");
 	private static final Set<String> FIELD_TYPES = new HashSet<String>();

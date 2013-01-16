@@ -1,5 +1,7 @@
 package com.google.code.proto.gcless;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 final class GeneratorConfiguration {
@@ -12,8 +14,11 @@ final class GeneratorConfiguration {
 	private final boolean generateToString;
     private final boolean generateGsonAnnotations;
     private final boolean generateSerializer;
+    private Map<String, String> optionMapping;
 
 	GeneratorConfiguration(Properties props) {
+		optionMapping = new HashMap<String, String>();
+		
 		String interfaceBased = props.getProperty("interface.based");
         this.interfaceBased = interfaceBased != null && interfaceBased.equals("true");
 
@@ -41,6 +46,16 @@ final class GeneratorConfiguration {
 
         String generateSerializer = props.getProperty("generate.serializer");
         this.generateSerializer = generateSerializer != null && generateSerializer.equals("true");
+        
+        for (String propertyName : props.stringPropertyNames())
+        {
+        	if (propertyName.startsWith("option.map."))
+        	{
+        		String optionName = propertyName.substring("option.map.".length());
+        		String optionValue = props.getProperty(propertyName);
+        		optionMapping.put(optionName, optionValue);
+        	}
+        }
 	}
 
 	public boolean isGenerateToString() {
@@ -73,5 +88,9 @@ final class GeneratorConfiguration {
 
     public boolean isGenerateSerializer() {
         return generateSerializer;
+    }
+    
+    public String getOptionMapping(String key) {
+    	return optionMapping.get(key);
     }
 }

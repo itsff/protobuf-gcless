@@ -37,6 +37,8 @@ class MemlessParser {
 		file = file.replaceAll("\\{", " { ");
 		file = file.replaceAll("\\}", " } ");
 		file = file.replaceAll(" {2,}", " ");
+		file = file.replaceAll("\\(", " ( ");
+		file = file.replaceAll("\\)", " ) ");
 		tokens = file.split("[ \n\r]");
 
 		String curToken = null;
@@ -399,6 +401,16 @@ class MemlessParser {
 				continue;
 			}
 			if (curToken.equals(",")) {
+				continue;
+			}
+			if (curToken.equals(Tokens.OPEN_PARENTHESIS)) {
+				String optionName = getNextNotEmpty();
+				consume(Tokens.CLOSE_PARENTHESIS);
+				consume("=");
+				String optionValue = getNextNotEmpty();
+				if ((null != optionName) && (null != optionValue)) {
+					fields.setOption(optionName, optionValue);
+				}
 				continue;
 			}
 			if (curToken.equals(Tokens.DEPRECATED)) {

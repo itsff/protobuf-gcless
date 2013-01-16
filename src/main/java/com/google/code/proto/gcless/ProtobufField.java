@@ -1,5 +1,8 @@
 package com.google.code.proto.gcless;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class ProtobufField {
 
 	private String name;
@@ -16,6 +19,11 @@ class ProtobufField {
 	private boolean isPacked;
 	private boolean isEnumType;
 	private boolean group;
+	private Map<String, String> options;
+	
+	public ProtobufField() {
+		options = new HashMap<String, String>();
+	}
 	
 	public boolean isGroup() {
 		return group;
@@ -127,6 +135,14 @@ class ProtobufField {
 
 	public void setDefaults(String defaults) {
 		this.defaults = defaults;
+	}
+
+	public void setOption(String option, String value) {
+		this.options.put(option, value);
+	}
+	
+	public Map<String, String> getOptions() {
+		return this.options;
 	}
 	
 	@Override
