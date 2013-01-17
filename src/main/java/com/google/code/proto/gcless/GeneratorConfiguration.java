@@ -9,11 +9,14 @@ final class GeneratorConfiguration {
 	private final boolean generateListHelpers;
 	private final boolean generateChaining;
 	private final String messageExtendsClass;
+    private final String enumImplementsInterface;
+    private final String gsonHelperPackage;
 	private final boolean generateToString;
     private final boolean generateGsonAnnotations;
     private final boolean generateSerializer;
 
-	GeneratorConfiguration(Properties props) {
+	GeneratorConfiguration(Properties props) throws Exception
+    {
 		String interfaceBased = props.getProperty("interface.based");
         this.interfaceBased = interfaceBased != null && interfaceBased.equals("true");
 
@@ -31,7 +34,8 @@ final class GeneratorConfiguration {
         this.generateChaining = generateChaining != null && generateChaining.equals("true");
 
         this.messageExtendsClass = props.getProperty("message.extends.class");
-
+        this.enumImplementsInterface = props.getProperty("enum.implements.interface");
+        this.gsonHelperPackage = props.getProperty("gson.helper.package");
 
         String generateToStringStr = props.getProperty("generate.tostring");
         this.generateToString = generateToStringStr != null && generateToStringStr.equals("true");
@@ -41,6 +45,15 @@ final class GeneratorConfiguration {
 
         String generateSerializer = props.getProperty("generate.serializer");
         this.generateSerializer = generateSerializer != null && generateSerializer.equals("true");
+
+        if (this.gsonHelperPackage != null && !this.gsonHelperPackage.isEmpty())
+        {
+            // Esure user specified enum base interface
+            if ((this.enumImplementsInterface != null && this.enumImplementsInterface.isEmpty()) || this.enumImplementsInterface == null)
+            {
+                throw new Exception("You must specify enum interface with gson helper");
+            }
+        }
 	}
 
 	public boolean isGenerateToString() {
@@ -73,5 +86,15 @@ final class GeneratorConfiguration {
 
     public boolean isGenerateSerializer() {
         return generateSerializer;
+    }
+
+    public String getEnumImplementsInterface()
+    {
+        return enumImplementsInterface;
+    }
+
+    public String getGsonHelperPackage()
+    {
+        return gsonHelperPackage;
     }
 }

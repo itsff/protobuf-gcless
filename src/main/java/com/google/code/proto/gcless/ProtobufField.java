@@ -1,5 +1,7 @@
 package com.google.code.proto.gcless;
 
+import org.apache.axis2.util.JavaUtils;
+
 class ProtobufField {
 
 	private String name;
@@ -16,15 +18,15 @@ class ProtobufField {
 	private boolean isPacked;
 	private boolean isEnumType;
 	private boolean group;
-	
+
 	public boolean isGroup() {
 		return group;
 	}
-	
+
 	public void setGroup(boolean group) {
 		this.group = group;
 	}
-	
+
 	public boolean isEnumType() {
 		return isEnumType;
 	}
@@ -52,15 +54,15 @@ class ProtobufField {
 	public String getJavaFieldName() {
 		return javaFieldName;
 	}
-	
+
 	public void setJavaFieldName(String javaFieldName) {
-		this.javaFieldName = javaFieldName;
+		this.javaFieldName = JavaUtils.makeNonJavaKeyword(javaFieldName);
 	}
-	
+
 	public String getBeanName() {
 		return beanName;
 	}
-	
+
 	public void setBeanName(String beanName) {
 		this.beanName = beanName;
 	}
@@ -128,7 +130,7 @@ class ProtobufField {
 	public void setDefaults(String defaults) {
 		this.defaults = defaults;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ProtobufField [name=" + name + ", beanName=" + beanName + ", type=" + type + ", streamBeanType=" + streamBeanType + ", fullyClarifiedJavaType=" + fullyClarifiedJavaType + ", complexType=" + complexType + ", nature=" + nature

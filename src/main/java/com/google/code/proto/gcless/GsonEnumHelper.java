@@ -5,7 +5,14 @@ import java.util.Set;
 
 class GsonEnumHelper
 {
+    final String packageName;
+
     Set<String> enums = new HashSet<String>();
+
+    public GsonEnumHelper(String packageName)
+    {
+        this.packageName = packageName;
+    }
 
     public void addEnum(String fullyQualifiedJavaTypeName)
     {
@@ -17,13 +24,13 @@ class GsonEnumHelper
         this.addEnum(anEnum.getFullyClarifiedJavaName());
     }
 
-    private static StringBuilder initEnumConvStringBuilder()
+    private static StringBuilder initEnumConvStringBuilder(String packageName)
     {
         StringBuilder stringBuilder = new StringBuilder();
 
 
         stringBuilder.append(
-                 "package com.tradingtechnologies.messaging;\n\n" +
+                 "package " + packageName + ";\n\n" +
                  "\n" +
                  "public final class GsonHelper {\n" +
                  "\n" +
@@ -53,7 +60,7 @@ class GsonEnumHelper
     @Override
     public String toString()
     {
-        StringBuilder sb = initEnumConvStringBuilder();
+        StringBuilder sb = initEnumConvStringBuilder(this.packageName);
 
         for(String e : this.enums)
         {
