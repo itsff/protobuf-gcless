@@ -11,12 +11,15 @@ final class GeneratorConfiguration {
 	private final boolean generateListHelpers;
 	private final boolean generateChaining;
 	private final String messageExtendsClass;
+    private final String enumImplementsInterface;
+    private final String gsonHelperPackage;
+    private final String gsonEnumAdapter;
 	private final boolean generateToString;
-    private final boolean generateGsonAnnotations;
     private final boolean generateSerializer;
     private Map<String, String> optionMapping;
 
-	GeneratorConfiguration(Properties props) {
+	GeneratorConfiguration(Properties props) throws Exception
+    {
 		optionMapping = new HashMap<String, String>();
 		
 		String interfaceBased = props.getProperty("interface.based");
@@ -36,13 +39,12 @@ final class GeneratorConfiguration {
         this.generateChaining = generateChaining != null && generateChaining.equals("true");
 
         this.messageExtendsClass = props.getProperty("message.extends.class");
-
+        this.enumImplementsInterface = props.getProperty("enum.implements.interface");
+        this.gsonHelperPackage = props.getProperty("gson.helper.package");
+        this.gsonEnumAdapter = props.getProperty("gson.enum.adapter");
 
         String generateToStringStr = props.getProperty("generate.tostring");
         this.generateToString = generateToStringStr != null && generateToStringStr.equals("true");
-
-        String generateGson = props.getProperty("generate.gson");
-        this.generateGsonAnnotations = generateGson != null && generateGson.equals("true");
 
         String generateSerializer = props.getProperty("generate.serializer");
         this.generateSerializer = generateSerializer != null && generateSerializer.equals("true");
@@ -56,7 +58,26 @@ final class GeneratorConfiguration {
         		optionMapping.put(optionName, optionValue);
         	}
         }
+
+        if (isNonEmpty(this.gsonHelperPackage))
+        {
+            // Esure user specified enum base interface
+            if (!isNonEmpty(this.enumImplementsInterface))
+            {
+                throw new Exception("You must specify enum.implements.interface with gson helper");
+            }
+
+            if (!isNonEmpty(this.gsonEnumAdapter))
+            {
+                throw new Exception("You must specify gson.enum.adapter with gson helper");
+            }
+        }
 	}
+
+    static boolean isNonEmpty(String str)
+    {
+        return str != null && !str.isEmpty();
+    }
 
 	public boolean isGenerateToString() {
 		return generateToString;
@@ -82,15 +103,26 @@ final class GeneratorConfiguration {
 		return generateStaticFields;
 	}
 
-    public boolean isGenerateGsonAnnotations() {
-        return generateGsonAnnotations;
-    }
-
     public boolean isGenerateSerializer() {
         return generateSerializer;
     }
     
     public String getOptionMapping(String key) {
     	return optionMapping.get(key);
+    }
+
+    public String getEnumImplementsInterface()
+    {
+        return enumImplementsInterface;
+    }
+
+    public String getGsonHelperPackage()
+    {
+        return gsonHelperPackage;
+    }
+
+    public String getGsonEnumAdapter()
+    {
+        return gsonEnumAdapter;
     }
 }

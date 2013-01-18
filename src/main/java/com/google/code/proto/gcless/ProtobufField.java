@@ -2,6 +2,7 @@ package com.google.code.proto.gcless;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.axis2.util.JavaUtils;
 
 class ProtobufField {
 
@@ -19,20 +20,21 @@ class ProtobufField {
 	private boolean isPacked;
 	private boolean isEnumType;
 	private boolean group;
+
 	private Map<String, String> options;
 	
 	public ProtobufField() {
 		options = new HashMap<String, String>();
 	}
-	
+
 	public boolean isGroup() {
 		return group;
 	}
-	
+
 	public void setGroup(boolean group) {
 		this.group = group;
 	}
-	
+
 	public boolean isEnumType() {
 		return isEnumType;
 	}
@@ -60,15 +62,22 @@ class ProtobufField {
 	public String getJavaFieldName() {
 		return javaFieldName;
 	}
-	
+
 	public void setJavaFieldName(String javaFieldName) {
-		this.javaFieldName = javaFieldName;
+        if (JavaUtils.isJavaKeyword(javaFieldName))
+        {
+		    this.javaFieldName = JavaUtils.makeNonJavaKeyword(javaFieldName);
+        }
+        else
+        {
+            this.javaFieldName = javaFieldName;
+        }
 	}
-	
+
 	public String getBeanName() {
 		return beanName;
 	}
-	
+
 	public void setBeanName(String beanName) {
 		this.beanName = beanName;
 	}

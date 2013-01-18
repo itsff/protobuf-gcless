@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/pom.xml" line="40" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f1146e0-72ad-4b02-b325-6e02648c850a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GsonEnumHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java" afterPath="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    </list>
+    <ignored path="protobuf-gcless.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358053041582" ignored="false" />
+    <file path="/GeneratorConfiguration.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357721747204" ignored="false" />
+    <file path="/MemlessGenerator.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358360686421" ignored="false" />
+    <file path="/MemlessParser.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357755474007" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/OrderManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170138642" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/MainActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239389" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/simpleapp/src/com/tradingtechnologies/SimpleApp/SimpleAppMain.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358247941595" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/AndroidManifest.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765308953" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/SessionFactory.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060853122" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/res/layout/login.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239390" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/MarketGridRowAdapter.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239390" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/SelectInstrumentActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174265338" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/Deserializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366276136" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/SideMenuItem.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239390" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/BaseActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239390" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/res/layout/select_instrument_row.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357762239390" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/res/layout/market_grid.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765942928" ignored="false" />
+    <file path="/market_grid.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765939015" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/MarketGridActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357763851293" ignored="false" />
+    <file path="/MarketGridActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357763436233" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/MarketGridFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174231907" ignored="false" />
+    <file path="/MarketGridFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174231534" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/BasicInstrumentInfoProtoSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358173072478" ignored="false" />
+    <file path="/BasicInstrumentInfoProtoSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358173644734" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/res/layout/place_order.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765828060" ignored="false" />
+    <file path="/place_order.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765488929" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/res/values/strings.xml" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1357765957420" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/NewOrderSingleProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/project.properties" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358054113094" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/messaging/AbstractMessage.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358054151813" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/Connection.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358058574189" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/RequestIdExtractor.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358054249629" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/DataSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165523264" ignored="false" />
+    <file path="/DataSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165523264" ignored="false" />
+    <file path="/Connection.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358058567196" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/RequestManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358059066787" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/WebSocketConnection.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358176323913" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/BaseConnection.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358054510036" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/BaseDataSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165550697" ignored="false" />
+    <file path="/Deserializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366274768" ignored="false" />
+    <file path="/BaseDataSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358055732962" ignored="false" />
+    <file path="/WebSocketConnection.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358176321556" ignored="false" />
+    <file path="/SessionFactory.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060781045" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/connection/ResponseHandler.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358058574189" ignored="false" />
+    <file path="/RequestManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358059064900" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/Order.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358059449960" ignored="false" />
+    <file path="/Order.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358059440441" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/OrderManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358059473583" ignored="false" />
+    <file path="/OrderManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170133419" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/OrderHelpers.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060396483" ignored="false" />
+    <file path="/OrderHelpers.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060071275" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/AuthenticatedUser.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060227763" ignored="false" />
+    <file path="/AuthenticatedUser.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358060217062" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/MarketManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358176519139" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/google/protobuf/DescriptorProtos.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="/DescriptorProtos.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165063049" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java/com/tradingtechnologies/messaging/edgeserver/RawByteMessages.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165391346" ignored="false" />
+    <file path="/RawByteMessages.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165390191" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/AccountManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165957003" ignored="false" />
+    <file path="/AccountManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165940817" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/AccountManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165855841" ignored="false" />
+    <file path="/AccountManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358165854751" ignored="false" />
+    <file path="/MarketManagerImpl.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170290005" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/SharedMarketSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170298814" ignored="false" />
+    <file path="/SharedMarketSubscription.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170296748" ignored="false" />
+    <file path="/MarketData.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170325959" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/MarketData.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358176519139" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/OrderTicketFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174253018" ignored="false" />
+    <file path="/OrderTicketFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174252618" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/Utils.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358170507427" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/OrderBookFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358173667183" ignored="false" />
+    <file path="/OrderBookFragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358173666879" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/BasicInstrumentInfoJsonSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366968677" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/NexTrader/src/com/tradingtechnologies/nextrader/BasicInstrumentInfoFileSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174234455" ignored="false" />
+    <file path="/BasicInstrumentInfoFileSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174201139" ignored="false" />
+    <file path="/SelectInstrumentActivity.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174261418" ignored="false" />
+    <file path="$PROJECT_DIR$/../jtrader/src/OrderBookManager.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358174333402" ignored="false" />
+    <file path="/fragment.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366636895" ignored="false" />
+    <file path="/a.dummy" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358176529434" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/edgeserver/EdgeServerMessagesProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358363630591" ignored="false" />
+    <file path="/EdgeServerMessagesProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358363618762" ignored="false" />
+    <file path="/AuthToken.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358177219131" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/client.java/api/src/com/tradingtechnologies/session/AuthToken.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358177219611" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/HeaderProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="/SimpleAppMain.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358247940716" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/simpleapp/src/com/tradingtechnologies/SimpleApp/PdsProtoReflector.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358248840428" ignored="false" />
+    <file path="/PdsProtoReflector.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358248825620" ignored="false" />
+    <file path="/AbstractEnum.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358356575468" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/ComponentsProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/ExecutionReportProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/OrderCancelReplaceRequestProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/OrderCancelRequestProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/ledger/PositionRequestProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/OrderStatusRequestProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="/GsonEnumHelper.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358359347629" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java/com/tradingtechnologies/messaging/GsonAbstractEnumAdapter.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358365719318" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java/com/tradingtechnologies/messaging/AbstractEnum.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358359547282" ignored="false" />
+    <file path="/GsonAbstractEnumAdapter.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358365694211" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/SubscriptionStatusProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/GsonHelper.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366087649" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/UuidProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/DecimalProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/WireProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="/GsonHelper.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366071589" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/algoserver/AlgoParametersProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/algoserver/AlgoServerEnumsProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530601" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/ExchangeLinkLoginProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/pds/ChecksumMsgProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="$PROJECT_DIR$/../debesys/all_messages/java_gen/com/tradingtechnologies/messaging/order/enums/EnumsProto.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358361530602" ignored="false" />
+    <file path="/BasicInstrumentInfoJsonSerializer.java" changelist="0f1146e0-72ad-4b02-b325-6e02648c850a" time="1358366950659" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="Commander">
+    <leftPanel />
+    <rightPanel />
+    <splitter proportion="0.5" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="protobuf-gcless" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="MemlessParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="39" selection-start="3266" selection-end="3266" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="method#loadFile#0;class#MemlessParser#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tokens.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/Tokens.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="42" selection-start="641" selection-end="659" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="90" column="0" selection-start="2404" selection-end="2404" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemlessGenerator.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="91" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.83935016">
+              <folding>
+                <element signature="method#generateSerializer#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createSerializeToBytes#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createAssertInitialized#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createSerializeToStream#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromBytesWithLimit#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromBytes#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromBytesCursor#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromStreamWithLength#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromStream#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#createParseFromStreamCursor#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#generateDefaultMessageImpl#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#isBasicType#0;class#MemlessGenerator#0" expanded="false" />
+                <element signature="method#initRepeatedFieldIfEmpty#0;class#MemlessGenerator#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GsonEnumHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GsonEnumHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="0" selection-start="1671" selection-end="1671" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#146#154#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneratorConfiguration.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GeneratorConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="72" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProtobufField.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/ProtobufField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="26" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="expandStates">
+      <map>
+        <entry key="protobuf-gcless" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GeneratorConfiguration.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tradingtechnologies/messaging/AbstractEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GsonEnumHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="createModuleGroups" value="true" />
+        <option name="importAutomatically" value="true" />
+        <option name="lookForNested" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="protobuf-gcless" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="protobuf-gcless" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="protobuf-gcless" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1007" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code.proto.gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protobuf-gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcless" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless" />
+    <property name="project.structure.proportion" value="0.15000002" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.side.proportion" value="0.18850267" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.google.code.proto.gcless" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <list size="0" />
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f1146e0-72ad-4b02-b325-6e02648c850a" name="Default" comment="" />
+      <created>1357713502088</created>
+      <updated>1357713502088</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1920" height="1007" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08751334" sideWeight="0.67080045" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39956957" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17022412" sideWeight="0.67080045" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32919955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="579" column="33" selection-start="18442" selection-end="18442" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#loadFile#0;class#MemlessParser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="810" column="36" selection-start="42559" selection-end="42559" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#generateSerializer#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createSerializeToBytes#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createAssertInitialized#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createSerializeToStream#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytesWithLimit#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytes#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytesCursor#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStreamWithLength#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStream#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStreamCursor#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#generateDefaultMessageImpl#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#isBasicType#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#initRepeatedFieldIfEmpty#0;class#MemlessGenerator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/ProtobufField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="18" selection-start="1652" selection-end="1652" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/ProtobufField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="26" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/Tokens.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="42" selection-start="641" selection-end="659" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="0" selection-start="2404" selection-end="2404" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/ProtobufInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MessageFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="17" selection-start="56" selection-end="56" vertical-scroll-proportion="0.034924332">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home/src.zip!/java/util/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1006" column="54" selection-start="40766" selection-end="40766" vertical-scroll-proportion="0.2069378">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/ProtobufOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="658" selection-end="658" vertical-scroll-proportion="0.31431898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="39" selection-start="3266" selection-end="3266" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#loadFile#0;class#MemlessParser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GeneratorConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="72" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/GsonEnumHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1671" selection-end="1671" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#146#154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/google/code/proto/gcless/MemlessGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="91" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.83935016">
+          <folding>
+            <element signature="method#generateSerializer#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createSerializeToBytes#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createAssertInitialized#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createSerializeToStream#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytesWithLimit#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytes#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromBytesCursor#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStreamWithLength#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStream#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#createParseFromStreamCursor#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#generateDefaultMessageImpl#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#isBasicType#0;class#MemlessGenerator#0" expanded="false" />
+            <element signature="method#initRepeatedFieldIfEmpty#0;class#MemlessGenerator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>protobuf-gcless</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.18850267" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.google.protobuf:protobuf-java:2.3.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.18850267" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+
