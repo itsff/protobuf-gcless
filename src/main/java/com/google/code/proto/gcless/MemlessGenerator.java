@@ -40,10 +40,13 @@ public class MemlessGenerator {
 			}
 		}
 
-        Path enumDest = packageToPath(output.getAbsolutePath(), config.getGsonHelperPackage());
-        Files.write(
-                new File(enumDest.toFile(), "GsonHelper.java").toPath(),
-                enumHelper.toString().getBytes("UTF-8"));
+        if (config.getGsonHelperPackage() != null)
+        {
+            Path enumDest = packageToPath(output.getAbsolutePath(), config.getGsonHelperPackage());
+            Files.write(
+                    new File(enumDest.toFile(), "GsonHelper.java").toPath(),
+                    enumHelper.toString().getBytes("UTF-8"));
+        }
 	}
 
     private static Path packageToPath(String base, String packageName)
