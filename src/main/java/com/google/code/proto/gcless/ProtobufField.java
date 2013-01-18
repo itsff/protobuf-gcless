@@ -56,7 +56,14 @@ class ProtobufField {
 	}
 
 	public void setJavaFieldName(String javaFieldName) {
-		this.javaFieldName = JavaUtils.makeNonJavaKeyword(javaFieldName);
+        if (JavaUtils.isJavaKeyword(javaFieldName))
+        {
+		    this.javaFieldName = JavaUtils.makeNonJavaKeyword(javaFieldName);
+        }
+        else
+        {
+            this.javaFieldName = javaFieldName;
+        }
 	}
 
 	public String getBeanName() {

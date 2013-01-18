@@ -6,12 +6,14 @@ import java.util.Set;
 class GsonEnumHelper
 {
     final String packageName;
+    final String enumAdapter;
 
     Set<String> enums = new HashSet<String>();
 
-    public GsonEnumHelper(String packageName)
+    public GsonEnumHelper(String packageName, String enumAdapter)
     {
         this.packageName = packageName;
+        this.enumAdapter = enumAdapter;
     }
 
     public void addEnum(String fullyQualifiedJavaTypeName)
@@ -42,17 +44,20 @@ class GsonEnumHelper
                  "}\n\n" +
                  "static com.google.gson.GsonBuilder createBuilder() {\n" +
                  "    com.google.gson.GsonBuilder builder = new com.google.gson.GsonBuilder();\n" +
-                 "    builder\n");
+                 "    builder\n" +
+                 "       .excludeFieldsWithoutExposeAnnotation()\n" +
+                 "       .excludeFieldsWithModifiers(java.lang.reflect.Modifier.STATIC)\n"
+        );
 
 
         return stringBuilder;
     }
 
-    private static void genGsonEnumConvCode(String anEnum, StringBuilder enumConvStringBuilder)
+    private void genGsonEnumConvCode(String anEnum, StringBuilder enumConvStringBuilder)
     {
         enumConvStringBuilder.append("\t.registerTypeAdapter(");
         enumConvStringBuilder.append(anEnum);
-        enumConvStringBuilder.append(".class, new GsonAbstractEnumAdapter<");
+        enumConvStringBuilder.append(".class, new " + this.enumAdapter + "<");
         enumConvStringBuilder.append(anEnum);
         enumConvStringBuilder.append(">())\n");
     }

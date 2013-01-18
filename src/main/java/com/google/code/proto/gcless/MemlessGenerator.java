@@ -1,6 +1,9 @@
 package com.google.code.proto.gcless;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class MemlessGenerator {
@@ -25,7 +28,7 @@ public class MemlessGenerator {
 		}
 
         GeneratorConfiguration config = new GeneratorConfiguration(System.getProperties());
-        GsonEnumHelper enumHelper = new GsonEnumHelper(config.getGsonHelperPackage());
+        GsonEnumHelper enumHelper = new GsonEnumHelper(config.getGsonHelperPackage(), config.getGsonEnumAdapter());
 
 
 		for (int i = 1; i < args.length; i++) {
@@ -37,8 +40,18 @@ public class MemlessGenerator {
 			}
 		}
 
-        System.out.println(enumHelper.toString());
+        Path enumDest = packageToPath(output.getAbsolutePath(), config.getGsonHelperPackage());
+        Files.write(
+                new File(enumDest.toFile(), "GsonHelper.java").toPath(),
+                enumHelper.toString().getBytes("UTF-8"));
 	}
+
+    private static Path packageToPath(String base, String packageName)
+    {
+        String packagePath = packageName.replace(".", "/");
+        Path result = FileSystems.getDefault().getPath(base, packagePath);
+        return result;
+    }
 
     private static void process(File output, String filename, GsonEnumHelper enumHelper, GeneratorConfiguration config) throws Exception {
 		MemlessParser parser = new MemlessParser();
@@ -790,6 +803,7 @@ public class MemlessGenerator {
 
                 generateGsonAnnotation(result, curField, config);
 				result.append("private " + javaType + " " + curField.getJavaFieldName() + ";\n");
+
 				if (config.isGenerateStaticFields()) {
 					result.append("public static final int " + curField.getName().toUpperCase(Locale.UK) + "_FIELD_NUMBER = " + curField.getTag() + ";\n");
 				}
@@ -924,11 +938,9 @@ public class MemlessGenerator {
 
     private static void generateGsonAnnotation(StringBuilder result, ProtobufField curField, GeneratorConfiguration config)
     {
-        if (config.isGenerateGsonAnnotations())
+        if (config.getGsonHelperPackage() != null)
         {
-            result.append("@com.google.gson.annotations.SerializedName(\"");
-            result.append(curField.getName());
-            result.append("\")\n");
+            result.append("@com.google.gson.annotations.Expose\n");
         }
     }
 
