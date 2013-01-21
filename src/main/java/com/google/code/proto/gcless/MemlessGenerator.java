@@ -1,9 +1,6 @@
 package com.google.code.proto.gcless;
 
 import java.io.*;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class MemlessGenerator {
@@ -42,19 +39,13 @@ public class MemlessGenerator {
 
         if (config.getGsonHelperPackage() != null)
         {
-            Path enumDest = packageToPath(output.getAbsolutePath(), config.getGsonHelperPackage());
-            Files.write(
-                    new File(enumDest.toFile(), "GsonHelper.java").toPath(),
-                    enumHelper.toString().getBytes("UTF-8"));
+            File enumDest = createPackage(output, config.getGsonHelperPackage());
+    		BufferedWriter w = new BufferedWriter(new FileWriter(new File(enumDest, "GsonHelper.java")));
+    		w.append(enumHelper.toString());
+			w.flush();
+			w.close();
         }
 	}
-
-    private static Path packageToPath(String base, String packageName)
-    {
-        String packagePath = packageName.replace(".", "/");
-        Path result = FileSystems.getDefault().getPath(base, packagePath);
-        return result;
-    }
 
     private static void process(File output, String filename, GsonEnumHelper enumHelper, GeneratorConfiguration config) throws Exception {
 		MemlessParser parser = new MemlessParser();
