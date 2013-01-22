@@ -158,7 +158,7 @@ class MemlessParser {
 	private static void appendJavaPackageName(ProtobufMessage message, String name) {
 		message.setFullyClarifiedJavaName(name + "." + message.getFullyClarifiedJavaName());
 		for (ProtobufMessage curMessage : message.getNestedMessages()) {
-			appendJavaPackageName(curMessage, getParent(message.getFullyClarifiedJavaName()));
+			appendJavaPackageName(curMessage, name);
 		}
 
 		for (ProtobufEnum curEnum : message.getEnums()) {
