@@ -964,7 +964,10 @@ public class MemlessGenerator {
 	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField) {
 		result.append("if( this." + curField.getJavaFieldName() + " == null ) {\n");
 		result.append("this." + curField.getJavaFieldName() + " = new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">();\n");
-		result.append("this.has" + curField.getBeanName() + " = true;\n");
+		if (isBasicType(curField.getType()))
+		{
+			result.append("this.has" + curField.getBeanName() + " = true;\n");
+		}
 		result.append("}\n");
 	}
 
