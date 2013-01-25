@@ -11,7 +11,7 @@ public class GenerateSerializationTest {
 	public static void main(String[] args) throws Exception {
 
 		MemlessParser parser = new MemlessParser();
-		parser.process("src/test/resources/unittest.proto");
+		parser.process("src/test/resources/unittest.proto", null);
 		List<ProtobufMessage> messages = parser.getMessages();
 
 		ProtobufMessage message = getMessage("TestAllTypes", messages);

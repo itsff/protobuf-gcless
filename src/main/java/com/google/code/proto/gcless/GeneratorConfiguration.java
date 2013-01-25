@@ -16,6 +16,7 @@ final class GeneratorConfiguration {
     private final String gsonEnumAdapter;
 	private final boolean generateToString;
     private final boolean generateSerializer;
+    private final String packageSuffix;
     private Map<String, String> optionMapping;
 
 	GeneratorConfiguration(Properties props) throws Exception
@@ -42,6 +43,7 @@ final class GeneratorConfiguration {
         this.enumImplementsInterface = props.getProperty("enum.implements.interface");
         this.gsonHelperPackage = props.getProperty("gson.helper.package");
         this.gsonEnumAdapter = props.getProperty("gson.enum.adapter");
+        this.packageSuffix = props.getProperty("generate.package.suffix");
 
         String generateToStringStr = props.getProperty("generate.tostring");
         this.generateToString = generateToStringStr != null && generateToStringStr.equals("true");
@@ -61,7 +63,7 @@ final class GeneratorConfiguration {
 
         if (isNonEmpty(this.gsonHelperPackage))
         {
-            // Esure user specified enum base interface
+            // Ensure user specified enum base interface
             if (!isNonEmpty(this.enumImplementsInterface))
             {
                 throw new Exception("You must specify enum.implements.interface with gson helper");
@@ -124,5 +126,10 @@ final class GeneratorConfiguration {
     public String getGsonEnumAdapter()
     {
         return gsonEnumAdapter;
+    }
+    
+    public String getPackageSuffix()
+    {
+    	return packageSuffix;
     }
 }

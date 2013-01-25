@@ -49,7 +49,7 @@ public class MemlessGenerator {
 
     private static void process(File output, String filename, GsonEnumHelper enumHelper, GeneratorConfiguration config) throws Exception {
 		MemlessParser parser = new MemlessParser();
-		parser.process(filename);
+		parser.process(filename, config.getPackageSuffix());
 		process(output, parser, enumHelper, config);
 		for (MemlessParser cur : parser.getImportedParsers()) {
 			process(output, cur, enumHelper, config);

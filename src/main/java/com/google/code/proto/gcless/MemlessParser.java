@@ -27,7 +27,7 @@ class MemlessParser {
 	private int curIndex = 0;
 	private String[] tokens;
 
-	void process(String filename) throws Exception {
+	void process(String filename, String packageSuffix) throws Exception {
 		String file = loadFile(filename);
 		file = file.replaceAll(";", " ; ");
 		file = file.replaceAll("\\[", " [ ");
@@ -88,6 +88,9 @@ class MemlessParser {
 				if (optionType != null && optionType.equals(Tokens.JAVA_PACKAGE)) {
 					consume("=");
 					javaPackageName = getNextIgnoreNewLine();
+					if (null != packageSuffix) {
+						javaPackageName += packageSuffix;
+					}
 					javaPackageName = javaPackageName.replaceAll("\"", "");
 					continue;
 				}
@@ -103,7 +106,7 @@ class MemlessParser {
 				}
 				importFile = importFile.replaceAll("\"", "");
 				MemlessParser parser = new MemlessParser();
-				parser.process(importFile);
+				parser.process(importFile, packageSuffix);
 				importedParsers.add(parser);
 				importedParsers.addAll(parser.getImportedParsers());
 				importedMessages.addAll(parser.getMessages());
