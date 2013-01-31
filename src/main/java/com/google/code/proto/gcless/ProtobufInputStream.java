@@ -2,6 +2,8 @@ package com.google.code.proto.gcless;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.util.UUID;
 
 final public class ProtobufInputStream {
 
@@ -284,8 +286,12 @@ final public class ProtobufInputStream {
 		//do nothing
 	}
 
-	public static long readUint64(byte[] data, CurrentCursor cursor) throws IOException {
-		return readRawVarint64(data, cursor);
+	public static UUID readUuid(byte[] data, CurrentCursor cursor) throws IOException {
+		return new UUID(0, 0);
+	}
+	
+	public static BigInteger readUint64(byte[] data, CurrentCursor cursor) throws IOException {
+		return BigInteger.valueOf(readRawVarint64(data, cursor));
 	}
 
 	public static int readSint32(byte[] data, CurrentCursor cursor) throws IOException {
@@ -491,8 +497,12 @@ final public class ProtobufInputStream {
 		return result;
 	}
 
-	public static long readUint64(InputStream is, CurrentCursor cursor) throws IOException {
-		long result = readRawVarint64(is, cursor);
+	public static UUID readUuid(InputStream is, CurrentCursor cursor) throws IOException {
+		return new UUID(0, 0);
+	}
+
+	public static BigInteger readUint64(InputStream is, CurrentCursor cursor) throws IOException {
+		BigInteger result = BigInteger.valueOf(readRawVarint64(is, cursor));
 		if( cursor.isEndOfStreamReached() ) {
 			throw new IOException("unexpected end of stream. malformed Uint64");
 		}

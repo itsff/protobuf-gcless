@@ -3,7 +3,9 @@ package com.google.code.proto.gcless;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.UUID;
 
 final public class ProtobufOutputStream {
 
@@ -64,7 +66,7 @@ final public class ProtobufOutputStream {
 		return result;
 	}
 
-	public static int writeRepeatedUint64(final int fieldNumber, final List<Long> value, byte[] buffer, int currentPosition) {
+	public static int writeRepeatedUint64(final int fieldNumber, final List<BigInteger> value, byte[] buffer, int currentPosition) {
 		if (value.isEmpty()) {
 			return currentPosition;
 		}
@@ -199,14 +201,21 @@ final public class ProtobufOutputStream {
 		writeFloatNoTag(value, os);
 	}
 	
-	public static int writeUint64(final int fieldNumber, final long value, byte[] buffer, int position) {
-		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
-		return writeUint64NoTag(value, buffer, result);
+	public static int writeUuid(final int fieldNumber, final UUID value, byte[] buffer, int position) {
+		return 0;
 	}
 
-	public static void writeUint64(final int fieldNumber, final long value, OutputStream os) throws IOException {
+	public static void writeUuid(final int fieldNumber, final UUID value, OutputStream os) throws IOException {
+	}
+
+	public static int writeUint64(final int fieldNumber, final BigInteger value, byte[] buffer, int position) {
+		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
+		return writeUint64NoTag(value.longValue(), buffer, result);
+	}
+
+	public static void writeUint64(final int fieldNumber, final BigInteger value, OutputStream os) throws IOException {
 		writeTag(fieldNumber, WIRETYPE_VARINT, os);
-		writeUint64NoTag(value, os);
+		writeUint64NoTag(value.longValue(), os);
 	}
 
 	public static int writeInt64(final int fieldNumber, final long value, byte[] buffer, int position) {
@@ -660,7 +669,11 @@ final public class ProtobufOutputStream {
 		return 5;
 	}
 
-	public static int computeUint64Size(final int fieldNumber, final long value) {
+	public static int computeUuidSize(final int fieldNumber, final UUID value) {
+		return computeTagSize(fieldNumber) + computeUuidSizeNoTag(value);
+	}
+
+	public static int computeUint64Size(final int fieldNumber, final BigInteger value) {
 		return computeTagSize(fieldNumber) + computeUint64SizeNoTag(value);
 	}
 
@@ -720,8 +733,13 @@ final public class ProtobufOutputStream {
 		return LITTLE_ENDIAN_32_SIZE;
 	}
 
-	public static int computeUint64SizeNoTag(final long value) {
-		return computeRawVarint64Size(value);
+	public static int computeUint64SizeNoTag(final BigInteger value) {
+		return computeRawVarint64Size(value.longValue());
+	}
+
+	public static int computeUuidSizeNoTag(final UUID value) {
+		return computeRawVarint64Size(value.getLeastSignificantBits()) +
+				computeRawVarint64Size(value.getMostSignificantBits());
 	}
 
 	public static int computeInt64SizeNoTag(final long value) {

@@ -67,6 +67,16 @@ public class MemlessGenerator {
 			w = new BufferedWriter(new FileWriter(new File(output, parser.getOuterClassName() + ".java")));
 			w.append(HEADER);
 			appendPackage(w, parser.getPackageName());
+			if (config.isGenerateSerializer())
+			{
+				w.append("import com.google.code.proto.gcless.CurrentCursor;\n");
+				w.append("import com.google.code.proto.gcless.ProtobufInputStream;\n");
+				w.append("import com.google.code.proto.gcless.ProtobufOutputStream;\n");
+			}
+			if (config.isInterfaceBased()) {
+				w.append("import com.google.code.proto.gcless.MessageFactory;\n");
+			}
+			w.append("\n");
 			w.append("public final class ");
 			w.append(parser.getOuterClassName());
 			w.append(" {\nprivate ");
@@ -125,17 +135,6 @@ public class MemlessGenerator {
 					generateDefaultMessageImpl(curMessage, output, parser.getPackageName());
 				}
 			}
-		}
-
-
-        if (config.isGenerateSerializer()) {
-            copy("ProtobufOutputStream.java", output, parser.getPackageName());
-            copy("ProtobufInputStream.java", output, parser.getPackageName());
-            copy("CurrentCursor.java", output, parser.getPackageName());
-        }
-
-		if (config.isInterfaceBased()) {
-			copy("MessageFactory.java", output, parser.getPackageName());
 		}
 	}
 
@@ -214,7 +213,12 @@ public class MemlessGenerator {
 				if (curField.isEnumType()) {
 					if (curField.getNature().equals("repeated")) {
 						result.append("byte[] " + curField.getName() + "Buffer = null;\n");
-						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+						if (isBasicType(constructType(curField, curMessage))) {
+							result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+						}
+						else {
+							result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+						}
 						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
 						result.append("ProtobufOutputStream.writeEnum(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().get(i).getValue(), baos);\n");
@@ -222,7 +226,12 @@ public class MemlessGenerator {
 						result.append(curField.getName() + "Buffer = baos.toByteArray();\n");
 						result.append("totalSize += " + curField.getName() + "Buffer.length;\n");
 					} else {
-						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+						if (isBasicType(constructType(curField, curMessage))) {
+							result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+						}
+						else {
+							result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+						}
 						result.append("totalSize += ProtobufOutputStream.computeEnumSize(" + curField.getTag() + ", message.get" + curField.getBeanName() + "().getValue());\n");
 					}
 					result.append("}\n");
@@ -230,7 +239,12 @@ public class MemlessGenerator {
 				}
 				if (curField.isComplexType()) {
 					result.append("byte[] " + curField.getName() + "Buffer = null;\n");
-					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					if (isBasicType(constructType(curField, curMessage))) {
+						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					}
+					else {
+						result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+					}
 					if (curField.getNature().equals("repeated")) {
 						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
@@ -265,7 +279,12 @@ public class MemlessGenerator {
 				}
 				if (curField.getType().equals("string")) {
 					result.append("byte[] " + curField.getName() + "Buffer = null;\n");
-					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					if (isBasicType(constructType(curField, curMessage))) {
+						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					}
+					else {
+						result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+					}
 					if (curField.getNature().equals("repeated")) {
 						result.append("java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();\n");
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
@@ -284,7 +303,12 @@ public class MemlessGenerator {
 				}
 
 				if (curField.getNature().equals("repeated")) {
-					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					if (isBasicType(constructType(curField, curMessage))) {
+						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					}
+					else {
+						result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+					}
 					if (curField.getType().equals("bytes")) {
 						result.append("totalSize += ProtobufOutputStream.computeBytesSize(" + curField.getTag() + ", message.get" + curField.getBeanName() + "());\n");
 					} else {
@@ -294,7 +318,12 @@ public class MemlessGenerator {
 					}
 					result.append("}\n");
 				} else {
-					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					if (isBasicType(constructType(curField, curMessage))) {
+						result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+					}
+					else {
+						result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+					}
 					result.append("totalSize += ");
 					if (curField.getType().equals("bytes")) {
 						result.append("message.get" + curField.getBeanName() + "().length;\n");
@@ -308,7 +337,12 @@ public class MemlessGenerator {
 			}
 			result.append("final byte[] result = new byte[totalSize];\nint position = 0;\n");
 			for (ProtobufField curField : curMessage.getFields()) {
-				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+				if (isBasicType(constructType(curField, curMessage))) {
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+				}
+				else {
+					result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+				}
 				if (curField.getType().equals("string")) {
 					if (curField.getNature().equals("repeated")) {
 						result.append("position = ProtobufOutputStream.writeRawBytes(" + curField.getName() + "Buffer, result, position);\n");
@@ -367,7 +401,12 @@ public class MemlessGenerator {
 		result.append(" message) {\n");
 		for (ProtobufField curField : curMessage.getFields()) {
 			if (curField.getNature().equals("required")) {
-				result.append("if( !message.has" + curField.getBeanName() + "()) {\n");
+				if (isBasicType(constructType(curField, curMessage))) {
+					result.append("if (!message.has" + curField.getBeanName() + "()) {\n");
+				}
+				else {
+					result.append("if (message.get" + curField.getBeanName() + "() == null) {\n");
+				}
 				result.append("throw new IllegalArgumentException(\"Required field not initialized: ");
 				result.append(curField.getName());
 				result.append("\");\n}\n");
@@ -387,7 +426,12 @@ public class MemlessGenerator {
 			}
 
 			for (ProtobufField curField : curMessage.getFields()) {
-				result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+				if (isBasicType(constructType(curField, curMessage))) {
+					result.append("if (message.has" + curField.getBeanName() + "()) {\n");
+				}
+				else {
+					result.append("if (message.get" + curField.getBeanName() + "() != null) {\n");
+				}
 				if (curField.getType().equals("string")) {
 					if (curField.getNature().equals("repeated")) {
 						result.append("for( int i=0;i<message.get" + curField.getBeanName() + "().size();i++) {\n");
