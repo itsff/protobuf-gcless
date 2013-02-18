@@ -173,7 +173,7 @@ final public class ProtobufOutputStream {
 		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, output, currentPosition);
 		return writeDoubleNoTag(value, output, result);
 	}
-	
+
 	public static void writeDouble(final int fieldNumber, final double value, OutputStream os) throws IOException {
 		writeTag(fieldNumber, WIRETYPE_FIXED64,os);
 		writeDoubleNoTag(value, os);
@@ -200,12 +200,19 @@ final public class ProtobufOutputStream {
 		writeTag(fieldNumber, WIRETYPE_FIXED32, os);
 		writeFloatNoTag(value, os);
 	}
-	
+
 	public static int writeUuid(final int fieldNumber, final UUID value, byte[] buffer, int position) {
+        int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
 		return 0;
 	}
 
 	public static void writeUuid(final int fieldNumber, final UUID value, OutputStream os) throws IOException {
+
+        // Here we are actually going to write a sub-message.
+
+
+
+
 	}
 
 	public static int writeUint64(final int fieldNumber, final BigInteger value, byte[] buffer, int position) {
@@ -262,7 +269,7 @@ final public class ProtobufOutputStream {
 		int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
 		return writeBoolNoTag(value, buffer, result);
 	}
-	
+
 	public static void writeBool(final int fieldNumber, final boolean value, OutputStream os) throws IOException {
 		writeTag(fieldNumber, WIRETYPE_VARINT, os);
 		writeBoolNoTag(value, os);
@@ -292,7 +299,7 @@ final public class ProtobufOutputStream {
 		result = writeRawBytes(value, buffer, result);
 		return result;
 	}
-	
+
 	public static void writeBytes(final int fieldNumber, final byte[] value, OutputStream os) throws IOException {
 		writeTag(fieldNumber, WIRETYPE_LENGTH_DELIMITED, os);
 		writeRawVarint32(value.length, os);
@@ -330,7 +337,7 @@ final public class ProtobufOutputStream {
 		int result = writeTag(fieldNumber, WIRETYPE_FIXED64, buffer, position);
 		return writeSfixed64NoTag(value, buffer, result);
 	}
-	
+
 	public static void writeSfixed64(final int fieldNumber, final long value, OutputStream os) throws IOException {
 		writeTag(fieldNumber, WIRETYPE_FIXED64, os);
 		writeSfixed64NoTag(value, os);
@@ -359,7 +366,7 @@ final public class ProtobufOutputStream {
 	public static int writeDoubleNoTag(final double value, byte[] buffer, int position) {
 		return writeRawLittleEndian64(Double.doubleToRawLongBits(value), buffer, position);
 	}
-	
+
 	public static void writeDoubleNoTag(final double value, OutputStream os) throws IOException {
 		writeRawLittleEndian64(Double.doubleToRawLongBits(value), os);
 	}
@@ -367,7 +374,7 @@ final public class ProtobufOutputStream {
 	public static int writeFloatNoTag(final float value, byte[] buffer, int position) {
 		return writeRawLittleEndian32(Float.floatToRawIntBits(value), buffer, position);
 	}
-	
+
 	public static void writeFloatNoTag(final float value, OutputStream os) throws IOException {
 		writeRawLittleEndian32(Float.floatToRawIntBits(value), os);
 	}
@@ -425,7 +432,7 @@ final public class ProtobufOutputStream {
 	public static int writeBoolNoTag(final boolean value, byte[] buffer, int position) {
 		return writeRawByte(value ? 1 : 0, buffer, position);
 	}
-	
+
 	public static void writeBoolNoTag(final boolean value, OutputStream os) throws IOException {
 		writeRawByte(value ? 1 : 0, os);
 	}
@@ -442,7 +449,7 @@ final public class ProtobufOutputStream {
 	public static int writeRawBytes(final byte[] value, byte[] buffer, int position) {
 		return writeRawBytes(value, 0, value.length, buffer, position);
 	}
-	
+
 	public static void writeRawBytes(final byte[] value, OutputStream os) throws IOException {
 		writeRawBytes(value, 0, value.length, os);
 	}
@@ -453,7 +460,7 @@ final public class ProtobufOutputStream {
 		}
 		return position + length;
 	}
-	
+
 	public static void writeRawBytes(final byte[] value, int offset, int length, OutputStream os) throws IOException {
 		os.write(value, offset, length);
 	}
@@ -481,7 +488,7 @@ final public class ProtobufOutputStream {
 	public static void writeSfixed64NoTag(final long value, OutputStream os) throws IOException {
 		writeRawLittleEndian64(value, os);
 	}
-	
+
 	public static int writeSint32NoTag(final int value, byte[] buffer, int position) {
 		return writeRawVarint32(encodeZigZag32(value), buffer, position);
 	}
@@ -670,7 +677,11 @@ final public class ProtobufOutputStream {
 	}
 
 	public static int computeUuidSize(final int fieldNumber, final UUID value) {
-		return computeTagSize(fieldNumber) + computeUuidSizeNoTag(value);
+
+        // TODO: Implement me!
+
+
+        return computeTagSize(fieldNumber) + computeUuidSizeNoTag(value);
 	}
 
 	public static int computeUint64Size(final int fieldNumber, final BigInteger value) {
@@ -738,6 +749,9 @@ final public class ProtobufOutputStream {
 	}
 
 	public static int computeUuidSizeNoTag(final UUID value) {
+
+        // TODO: Implement me!
+
 		return computeRawVarint64Size(value.getLeastSignificantBits()) +
 				computeRawVarint64Size(value.getMostSignificantBits());
 	}
@@ -821,7 +835,7 @@ final public class ProtobufOutputStream {
 	public static int computeSint64SizeNoTag(final long value) {
 		return computeRawVarint64Size(encodeZigZag64(value));
 	}
-	
+
 	private ProtobufOutputStream() {
 		//do nothing
 	}

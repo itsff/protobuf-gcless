@@ -54,7 +54,7 @@ final public class ProtobufInputStream {
 			}
 		}
 	}
-	
+
 	public static int readEnum(byte[] data, CurrentCursor cursor) throws IOException {
 		return readRawVarint32(data, cursor);
 	}
@@ -63,12 +63,12 @@ final public class ProtobufInputStream {
 		final int size = readRawVarint32(data, cursor);
 		return readRawBytes(size, data, cursor);
 	}
-	
+
 	private static void skipBytes(byte[] data, CurrentCursor cursor) throws IOException {
 		final int size = readRawVarint32(data, cursor);
 		skipRawBytes(size, cursor);
 	}
-	
+
 	private static void skipRawBytes(final int size, CurrentCursor cursor) throws IOException {
 		if (size < 0) {
 			throw new IOException("Invalid buffer size");
@@ -93,7 +93,7 @@ final public class ProtobufInputStream {
 		}
 		return lastTag;
 	}
-	
+
 	public static int readTag(InputStream is, CurrentCursor cursor) throws IOException {
 		if( cursor.getCurrentPosition() == cursor.getProcessUpToPosition() ) {
 			return 0;
@@ -170,7 +170,7 @@ final public class ProtobufInputStream {
 		}
 		return result;
 	}
-	
+
 	public static int readRawVarint32(InputStream is, CurrentCursor currentPosition) throws IOException {
 		byte tmp = readRawByte(is, currentPosition);
 		if( currentPosition.isEndOfStreamReached() ) {
@@ -206,8 +206,8 @@ final public class ProtobufInputStream {
 			}
 		}
 		return result;
-	}	
-	
+	}
+
 	public static int readRawVarint32(InputStream is) throws IOException {
 		byte tmp = readRawByte(is);
 		if (tmp >= 0) {
@@ -247,7 +247,7 @@ final public class ProtobufInputStream {
 		currentPosition.addToPosition(1);
 		return result;
 	}
-	
+
 	public static byte readRawByte(InputStream is, CurrentCursor currentPosition) throws IOException {
 		int result = is.read();
 		if( result == -1 ) {
@@ -256,8 +256,8 @@ final public class ProtobufInputStream {
 			currentPosition.addToPosition(1);
 		}
 		return (byte)result;
-	}	
-	
+	}
+
 	public static byte readRawByte(InputStream is) throws IOException {
 		return (byte)is.read();
 	}
@@ -287,9 +287,9 @@ final public class ProtobufInputStream {
 	}
 
 	public static UUID readUuid(byte[] data, CurrentCursor cursor) throws IOException {
-		return new UUID(0, 0);
+		return UuidSerializer.parseFrom(data, cursor);
 	}
-	
+
 	public static BigInteger readUint64(byte[] data, CurrentCursor cursor) throws IOException {
 		return BigInteger.valueOf(readRawVarint64(data, cursor));
 	}
@@ -413,7 +413,7 @@ final public class ProtobufInputStream {
 			}
 		}
 	}
-	
+
 	private static void skipBytes(InputStream is, CurrentCursor cursor) throws IOException {
 		final int size = readRawVarint32(is, cursor);
 		skipBytes(size, is, cursor);
@@ -422,7 +422,7 @@ final public class ProtobufInputStream {
 	private static void skipInt64(InputStream is, CurrentCursor cursor) throws IOException {
 		skipRawVarint64(is, cursor);
 	}
-	
+
 	private static void skipRawVarint64(InputStream is, CurrentCursor cursor) throws IOException {
 		int shift = 0;
 		while (shift < 64) {
@@ -442,7 +442,7 @@ final public class ProtobufInputStream {
 	private static void skipRawLittleEndian64(InputStream is, CurrentCursor cursor) throws IOException {
 		skipBytes(8, is, cursor);
 	}
-	
+
 	private static void skipBytes(int count, InputStream is, CurrentCursor cursor) throws IOException {
 		long actualSkipped = is.skip(count);
 		if( actualSkipped != 0 && actualSkipped != count ) {
@@ -450,11 +450,11 @@ final public class ProtobufInputStream {
 		}
 		cursor.addToPosition(count);
 	}
-	
+
 	private static void skipFixed32(InputStream is, CurrentCursor cursor) throws IOException {
 		skipRawLittleEndian32(is, cursor);
 	}
-	
+
 	private static void skipRawLittleEndian32(InputStream is, CurrentCursor cursor) throws IOException {
 		skipBytes(4, is, cursor);
 	}
@@ -498,7 +498,7 @@ final public class ProtobufInputStream {
 	}
 
 	public static UUID readUuid(InputStream is, CurrentCursor cursor) throws IOException {
-		return new UUID(0, 0);
+		return UuidSerializer.parseFrom(is, cursor);
 	}
 
 	public static BigInteger readUint64(InputStream is, CurrentCursor cursor) throws IOException {
@@ -612,7 +612,7 @@ final public class ProtobufInputStream {
 		}
 		return result;
 	}
-	
+
 	private static byte[] readRawBytes(final int size, InputStream is, CurrentCursor cursor) throws IOException {
 		if (size < 0) {
 			throw new IOException("Invalid buffer size");
@@ -651,5 +651,111 @@ final public class ProtobufInputStream {
 		}
 		return result;
 	}
+
+    static class UuidSerializer
+    {
+        public static byte[] serialize(UUID uuid)
+        {
+            try
+            {
+                int totalSize = 0;
+                totalSize += ProtobufOutputStream.computeFixed64Size(1, uuid.getLeastSignificantBits());
+                totalSize += ProtobufOutputStream.computeFixed64Size(2, uuid.getMostSignificantBits() );
+
+                final byte[] result = new byte[totalSize];
+                int position = 0;
+
+
+                position = ProtobufOutputStream.writeFixed64(1, uuid.getLeastSignificantBits(), result, position);
+                position = ProtobufOutputStream.writeFixed64(2, uuid.getMostSignificantBits() , result, position);
+
+                ProtobufOutputStream.checkNoSpaceLeft(result, position);
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public static void serialize(UUID uuid, java.io.OutputStream os)
+        {
+            try
+            {
+                ProtobufOutputStream.writeFixed64(1, uuid.getLeastSignificantBits(), os);
+                ProtobufOutputStream.writeFixed64(2, uuid.getMostSignificantBits() , os);
+            }
+            catch (java.io.IOException e)
+            {
+                throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+            }
+        }
+
+        public static UUID parseFrom(byte[] data, CurrentCursor cursor) throws java.io.IOException
+        {
+            UUID uuid = new UUID(0, 0);
+            long lo = 0;
+            long hi = 0;
+
+            while (true)
+            {
+                if (ProtobufInputStream.isAtEnd(data, cursor))
+                {
+                    return uuid;
+                }
+                int varint = ProtobufInputStream.readRawVarint32(data, cursor);
+                int tag = ProtobufInputStream.getTagFieldNumber(varint);
+                switch (tag)
+                {
+                    case 0:
+                        return new UUID(lo, hi);
+                    default:
+                        ProtobufInputStream.skipUnknown(varint, data, cursor);
+                        break;
+                    case 1:
+                        lo = ProtobufInputStream.readFixed64(data, cursor);
+                        break;
+                    case 2:
+                        hi = ProtobufInputStream.readFixed64(data, cursor);
+                        break;
+                }
+            }
+        }
+
+        public static UUID parseFrom(java.io.InputStream is, CurrentCursor cursor) throws java.io.IOException
+        {
+            UUID uuid = new UUID(0, 0);
+            long lo = 0;
+            long hi = 0;
+
+            while (true)
+            {
+                if (cursor.getCurrentPosition() == cursor.getProcessUpToPosition())
+                {
+                    return uuid;
+                }
+                int varint = ProtobufInputStream.readRawVarint32(is, cursor);
+                int tag = ProtobufInputStream.getTagFieldNumber(varint);
+                if (ProtobufInputStream.isAtEnd(cursor))
+                {
+                    return uuid;
+                }
+                switch (tag)
+                {
+                    case 0:
+                        return new UUID(lo, hi);
+                    default:
+                        ProtobufInputStream.skipUnknown(varint, is, cursor);
+                        break;
+                    case 1:
+                        lo = ProtobufInputStream.readFixed64(is, cursor);
+                        break;
+                    case 2:
+                        hi = ProtobufInputStream.readFixed64(is, cursor);
+                        break;
+                }
+            }
+        }
+    }
 
 }
