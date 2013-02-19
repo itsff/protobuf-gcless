@@ -201,18 +201,15 @@ final public class ProtobufOutputStream {
 		writeFloatNoTag(value, os);
 	}
 
-	public static int writeUuid(final int fieldNumber, final UUID value, byte[] buffer, int position) {
-        int result = writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
-		return 0;
+	public static int writeUuid(final int fieldNumber, final UUID value, byte[] buffer, int position) throws IOException {
+        final byte[] curMessageData = ProtobufInputStream.UuidSerializer.serialize(value);
+        ProtobufOutputStream.writeTag(fieldNumber, WIRETYPE_VARINT, buffer, position);
+        return ProtobufOutputStream.writeRawBytes(curMessageData, buffer, position);
 	}
 
 	public static void writeUuid(final int fieldNumber, final UUID value, OutputStream os) throws IOException {
-
-        // Here we are actually going to write a sub-message.
-
-
-
-
+        writeTag(fieldNumber, WIRETYPE_VARINT, os);
+        ProtobufInputStream.UuidSerializer.serialize(value, os);
 	}
 
 	public static int writeUint64(final int fieldNumber, final BigInteger value, byte[] buffer, int position) {
@@ -678,10 +675,7 @@ final public class ProtobufOutputStream {
 
 	public static int computeUuidSize(final int fieldNumber, final UUID value) {
 
-        // TODO: Implement me!
-
-
-        return computeTagSize(fieldNumber) + computeUuidSizeNoTag(value);
+        return computeTagSize(fieldNumber) + ProtobufInputStream.UuidSerializer.computeUuidSize(value);
 	}
 
 	public static int computeUint64Size(final int fieldNumber, final BigInteger value) {
@@ -750,10 +744,7 @@ final public class ProtobufOutputStream {
 
 	public static int computeUuidSizeNoTag(final UUID value) {
 
-        // TODO: Implement me!
-
-		return computeRawVarint64Size(value.getLeastSignificantBits()) +
-				computeRawVarint64Size(value.getMostSignificantBits());
+        return ProtobufInputStream.UuidSerializer.computeUuidSize(value);
 	}
 
 	public static int computeInt64SizeNoTag(final long value) {

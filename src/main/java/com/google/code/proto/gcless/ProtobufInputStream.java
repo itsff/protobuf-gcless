@@ -658,9 +658,7 @@ final public class ProtobufInputStream {
         {
             try
             {
-                int totalSize = 0;
-                totalSize += ProtobufOutputStream.computeFixed64Size(1, uuid.getLeastSignificantBits());
-                totalSize += ProtobufOutputStream.computeFixed64Size(2, uuid.getMostSignificantBits() );
+                int totalSize = computeUuidSize(uuid);
 
                 final byte[] result = new byte[totalSize];
                 int position = 0;
@@ -755,6 +753,13 @@ final public class ProtobufInputStream {
                         break;
                 }
             }
+        }
+
+        public static int computeUuidSize(UUID uuid) {
+            int totalSize = 0;
+            totalSize += ProtobufOutputStream.computeFixed64Size(1, uuid.getLeastSignificantBits());
+            totalSize += ProtobufOutputStream.computeFixed64Size(2, uuid.getMostSignificantBits() );
+            return totalSize;
         }
     }
 
