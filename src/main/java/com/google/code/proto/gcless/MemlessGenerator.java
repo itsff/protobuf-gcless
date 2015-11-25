@@ -882,7 +882,7 @@ public class MemlessGenerator {
 					result.append("}\n");
 
 					result.append("public " + chainingReturn + " add" + curField.getBeanName() + "(" + curField.getFullyClarifiedJavaType() + " value) {\n");
-					initRepeatedFieldIfEmpty(result, curField);
+					initRepeatedFieldIfEmpty(result, curField, javaType);
 					result.append("this." + curField.getJavaFieldName() + ".add(value);\n");
 					if (config.isGenerateChaining()) {
 						result.append("return this;\n");
@@ -890,7 +890,7 @@ public class MemlessGenerator {
 					result.append("}\n");
 
 					result.append("public " + chainingReturn + " addAll" + curField.getBeanName() + "(java.lang.Iterable<? extends " + curField.getFullyClarifiedJavaType() + "> values) {\n");
-					initRepeatedFieldIfEmpty(result, curField);
+					initRepeatedFieldIfEmpty(result, curField, javaType);
 					result.append("if (values instanceof java.util.Collection) {\n");
 					result.append("@SuppressWarnings(\"unsafe\") final\n");
 					result.append("java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + "> collection = (java.util.Collection<? extends " + curField.getFullyClarifiedJavaType() + ">) values;\n");
@@ -1005,10 +1005,10 @@ public class MemlessGenerator {
 
     }
 
-	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField) {
+	private static void initRepeatedFieldIfEmpty(StringBuilder result, ProtobufField curField, String javaType) {
 		result.append("if( this." + curField.getJavaFieldName() + " == null ) {\n");
 		result.append("this." + curField.getJavaFieldName() + " = new java.util.ArrayList<" + curField.getFullyClarifiedJavaType() + ">();\n");
-		if (isBasicType(curField.getType()))
+		if (isBasicType(javaType))
 		{
 			result.append("this.has" + curField.getBeanName() + " = true;\n");
 		}
